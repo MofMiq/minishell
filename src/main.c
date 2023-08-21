@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/21 17:03:10 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/21 18:03:39 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	main(int argc, char **argv, char **env)
 			break ;
 		}
 		add_history(input);
-		printf("Efectivamente has ingresado: %s\n", input);
 	}
 	free(input);
 	clear_history();
