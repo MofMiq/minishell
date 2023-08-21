@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:54:01 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/21 13:39:49 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/21 17:14:49 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	ft_echo(int argc, char **argv)
 		printf("\n");
 	return (0);
 }
-
+/*
 int	main(int argc, char **argv)
 {
 	if (argc >= 3 && strcmp(argv[1], "echo") == 0)
@@ -87,3 +87,4 @@ int	main(int argc, char **argv)
 		printf("Errorsito");
 	return (0);
 }
+*/
