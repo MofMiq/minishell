@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:54:01 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/22 13:17:59 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:33:30 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,23 +61,20 @@ void	ft_echo(char **args)
 	int	flag;
 
 	i = 1;
-	flag = 0;
+	flag = 1;
 	j = 1;
-	if (ft_strcmp(args[0], "echo") == 0)
+	if (args[j][0] == '-' && args[j] != NULL)
 	{
-		if (args[j][0] == '-' && args[j] != NULL)
+		while (args[j][i] == 'n' && args[j][i] != '\0')
 		{
-			while (args[j][i] == 'n' && args[j][i] != '\0')
-			{
-				i++;
+			i++;
+			flag = 0;
+			if (args[j][i] != '\0')
 				flag = 1;
-				if (args[j][i] != '\0')
-					flag = 0;
-			}
-			j++;
 		}
-		ft_print_echo(args, j);
+		j++;
 	}
-	if (flag == 0)
+	ft_print_echo(args, j);
+	if (flag == 1)
 		printf("\n");
 }
