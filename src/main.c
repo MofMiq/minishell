@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/21 18:03:39 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:29:48 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 int	main(int argc, char **argv, char **env)
 {
 	char	*input;
+	t_data	*data;
 
 	(void)argc;
 	(void)argv;
-	(void)env;
+	data = (t_data *)malloc(sizeof(t_data));
 	using_history();
 	printf("Ctrl+D para salir.\n");
+	data->env = ft_copy_env(env);
+	//ft_print_list(data->env);
 	while (1)
 	{
 		input = readline("PutaShell> ");

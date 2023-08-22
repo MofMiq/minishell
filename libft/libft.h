@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 10:33:34 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/12 17:00:28 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/22 13:55:28 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lmap(t_list *l, void *(*f)(void *), void (*d)(void *));
 void				ft_list_foreach(t_list *begin_list, void (*f)(void *));
 void				ft_list_remove_if(t_list **begin, void *d_r, int (*cmp)());
+void				ft_free_double_pointer(char **ptr);
 
 //bits
 void				print_bits(unsigned char octet);

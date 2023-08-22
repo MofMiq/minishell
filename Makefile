@@ -6,13 +6,13 @@
 #    By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/21 16:22:32 by marirodr          #+#    #+#              #
-#    Updated: 2023/08/21 17:35:13 by marirodr         ###   ########.fr        #
+#    Updated: 2023/08/22 15:53:11 by marirodr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= minishell
 
-CC 			= gcc
+CC 			= gcc -g
 
 CFLAGS 	= -Wall -Wextra -Werror
 
@@ -20,7 +20,7 @@ RLINE		= -I/Users/$(USER)/.brew/opt/readline/include -L/Users/$(USER)/.brew/opt/
 
 LIBFT		= libft/libft.a
 
-SRC			= src/main.c \
+SRC			= src/main.c src/list_utils.c \
 
 OBJ			= $(SRC:.c=.o)
 
