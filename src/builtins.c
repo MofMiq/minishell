@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:43:04 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/22 13:53:19 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/22 17:51:01 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,16 @@ int	ft_is_builtin(char **args)
 		return (3);
 	if (ft_strcmp(args[0], "export") == 0)
 		return (4);
-	if (ft_strcmp(args[0], "env") == 0)
+	if (ft_strcmp(args[0], "unset") == 0)
 		return (5);
-	if (ft_strcmp(args[0], "exit") == 0)
+	if (ft_strcmp(args[0], "env") == 0)
 		return (6);
+	if (ft_strcmp(args[0], "exit") == 0)
+		return (7);
 	return (0);
 }
 
-void	ft_do_builtins(char **args)
+void	ft_do_builtins(char **args, t_data *data)
 {
 	int	b;
 
@@ -42,8 +44,10 @@ void	ft_do_builtins(char **args)
 		printf("pwd surmano\n");
 	else if (b == 4)
 		printf("exportame esta\n");
+	else if (b == 6)
+		ft_env(data->env, args);
 	else if (b == 5)
 		printf("envidioso tu cochino");
-	else if (b == 6)
+	else if (b == 7)
 		printf("HAZ CTRL-D VAGO");
 }

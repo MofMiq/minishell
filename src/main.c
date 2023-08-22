@@ -6,40 +6,52 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/22 16:47:49 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/22 18:27:44 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
+//Meter bucle en otra función
+
+t_data	*ft_init_data(char **env)
+{
+	t_data	*data;
+
+	data = (t_data *)malloc(sizeof(t_data));
+	data->env = ft_copy_env(env);
+	data->input = NULL;
+	data->args = NULL;
+	return (data);
+}
+
 int	main(int argc, char **argv, char **env)
 {
-	char	*input;
+//	char	*input;
+//	char	**args;
 	t_data	*data;
-	char	**args;
 
 	(void)argc;
 	(void)argv;
-	data = (t_data *)malloc(sizeof(t_data));
+//	data = (t_data *)malloc(sizeof(t_data));
 	using_history();
+//	data->env = ft_copy_env(env);
+	data = ft_init_data(env);
 	printf("Ctrl+D para salir.\n");
-	data->env = ft_copy_env(env);
-	//ft_print_list(data->env);
 	while (1)
 	{
-		input = readline("PutaShell> ");
-		if (input == NULL)
+		data->input = readline("PutaShell> ");
+		if (data->input == NULL)
 		{
 			printf("Eres un cuadro, CHAO\n");
 			break ;
 		}
-		add_history(input);
-		args = ft_split(input, ' '); 
-		if (ft_is_builtin(args))
-			ft_do_builtins(args);
-	//	printf("Efectivamente has ingresado: %s\n", input);
+		add_history(data->input);
+		data->args = ft_split(data->input, ' '); 
+		if (ft_is_builtin(data->args))
+			ft_do_builtins(data->args, data);
 	}
-	free(input);
+	free(data->input);
 	clear_history();
 	return (0);
 }
