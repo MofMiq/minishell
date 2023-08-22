@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/22 13:22:31 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/22 13:56:09 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,8 @@ int		ft_is_space(char c);
 void	epur_str(char *str);
 void	ft_print_echo(char **args, int pos);
 void	ft_echo(char **args);
+
+int		ft_is_builtin(char **args);
+void	ft_do_builtins(char **args);
 
 #endif

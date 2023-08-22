@@ -6,7 +6,7 @@
 #    By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/21 16:22:32 by marirodr          #+#    #+#              #
-#    Updated: 2023/08/22 12:21:01 by begarijo         ###   ########.fr        #
+#    Updated: 2023/08/22 13:55:27 by begarijo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ LIBFT		= libft/libft.a
 
 SRC			= src/main.c \
 			  src/echo.c \
+			  src/builtins.c \
 
 OBJ			= $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/22 11:43:30 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/22 13:56:00 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int	main(int argc, char **argv, char **env)
 		}
 		add_history(input);
 		args = ft_split(input, ' '); 
-		ft_echo(args);
+		if (ft_is_builtin(args))
+			ft_do_builtins(args);
 	//	printf("Efectivamente has ingresado: %s\n", input);
 	}
 	free(input);
