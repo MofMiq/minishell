@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/22 18:01:11 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/22 18:28:26 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,7 @@ void	ft_do_builtins(char **args, t_data *data);
 //main.c
 
 t_data	*ft_init_data(char **env);
+
+// crear otro archivo pa builtins
 
 #endif

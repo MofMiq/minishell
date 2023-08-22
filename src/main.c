@@ -6,11 +6,13 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/22 17:51:04 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/22 18:27:44 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+//Meter bucle en otra función
 
 t_data	*ft_init_data(char **env)
 {

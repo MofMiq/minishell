@@ -6,11 +6,13 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:54:01 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/22 16:33:30 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/22 18:28:02 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+//En principio todo ok
 
 int	ft_is_space(char c)
 {
