@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/22 16:29:48 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:47:49 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int argc, char **argv, char **env)
 {
 	char	*input;
 	t_data	*data;
+	char	**args;
 
 	(void)argc;
 	(void)argv;
@@ -33,6 +34,10 @@ int	main(int argc, char **argv, char **env)
 			break ;
 		}
 		add_history(input);
+		args = ft_split(input, ' '); 
+		if (ft_is_builtin(args))
+			ft_do_builtins(args);
+	//	printf("Efectivamente has ingresado: %s\n", input);
 	}
 	free(input);
 	clear_history();

@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:54:01 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/21 13:39:49 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/22 13:17:59 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
-#include <unistd.h>
+#include "../inc/minishell.h"
 
 int	ft_is_space(char c)
 {
@@ -42,48 +40,44 @@ void	epur_str(char *str)
 	}
 }
 
-void	ft_is_last_arg(char **argv, int pos)
+void	ft_print_echo(char **args, int pos)
 {
 	int	i;
 
 	i = 0;
-	while (argv[pos + i] != NULL)
+	while (args[pos + i] != NULL)
 	{
-		epur_str(argv[pos + i]);
-		if (argv[pos + i + 1] != NULL)
+		epur_str(args[pos + i]);
+		if (args[pos + i + 1] != NULL)
 			write(1, " ", 1);
 		i++;
 	}
 }
 
-int	ft_echo(int argc, char **argv)
+void	ft_echo(char **args)
 {
 	int	i;
+	int	j;
 	int	flag;
 
-	i = 0;
+	i = 1;
 	flag = 0;
-	if (argc == 3 && strcmp(argv[2], "-n") == 0)
-		printf("pocos args");
-	else if (argc == 3 && strcmp(argv[2], "-n") != 0)
-		epur_str(argv[2]);
-	else if (argc > 3 && strcmp(argv[2], "-n") == 0)
-		ft_is_last_arg(argv, 3);
-	else if (argc > 3 && strcmp(argv[2], "-n") != 0)
+	j = 1;
+	if (ft_strcmp(args[0], "echo") == 0)
 	{
-		ft_is_last_arg(argv, 2);
-		flag = 1;
+		if (args[j][0] == '-' && args[j] != NULL)
+		{
+			while (args[j][i] == 'n' && args[j][i] != '\0')
+			{
+				i++;
+				flag = 1;
+				if (args[j][i] != '\0')
+					flag = 0;
+			}
+			j++;
+		}
+		ft_print_echo(args, j);
 	}
-	if (flag == 1)
+	if (flag == 0)
 		printf("\n");
-	return (0);
-}
-
-int	main(int argc, char **argv)
-{
-	if (argc >= 3 && strcmp(argv[1], "echo") == 0)
-		ft_echo(argc, argv);
-	else if (argc < 3)
-		printf("Errorsito");
-	return (0);
 }

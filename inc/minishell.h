@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/22 16:25:55 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:46:53 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,14 @@ t_elist	*ft_last_node(t_elist *node);
 t_elist	*ft_add_back(t_elist **env, t_elist *new);
 t_elist	*ft_copy_env(char **env);
 void	ft_print_list(t_elist *env);
+
+int		ft_is_space(char c);
+void	epur_str(char *str);
+void	ft_print_echo(char **args, int pos);
+void	ft_echo(char **args);
+
+int		ft_is_builtin(char **args);
+void	ft_do_builtins(char **args);
+
 
 #endif
