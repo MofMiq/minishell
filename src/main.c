@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/22 18:27:44 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/23 10:05:49 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,11 @@ t_data	*ft_init_data(char **env)
 
 int	main(int argc, char **argv, char **env)
 {
-//	char	*input;
-//	char	**args;
 	t_data	*data;
 
 	(void)argc;
 	(void)argv;
-//	data = (t_data *)malloc(sizeof(t_data));
 	using_history();
-//	data->env = ft_copy_env(env);
 	data = ft_init_data(env);
 	printf("Ctrl+D para salir.\n");
 	while (1)
@@ -47,7 +43,7 @@ int	main(int argc, char **argv, char **env)
 			break ;
 		}
 		add_history(data->input);
-		data->args = ft_split(data->input, ' '); 
+		data->args = ft_split(data->input, ' ');
 		if (ft_is_builtin(data->args))
 			ft_do_builtins(data->args, data);
 	}

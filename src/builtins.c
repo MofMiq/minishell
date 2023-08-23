@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:43:04 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/22 17:51:01 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/23 10:05:33 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ void	ft_do_builtins(char **args, t_data *data)
 		printf("pwd surmano\n");
 	else if (b == 4)
 		printf("exportame esta\n");
-	else if (b == 6)
-		ft_env(data->env, args);
 	else if (b == 5)
 		printf("envidioso tu cochino");
+	else if (b == 6)
+		ft_env(data->env, args);
 	else if (b == 7)
 		printf("HAZ CTRL-D VAGO");
 }
