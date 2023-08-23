@@ -39,9 +39,9 @@ void	ft_do_builtins(char **args, t_data *data)
 	if (b == 1)
 		ft_echo(args);
 	else if (b == 2)
-		printf("cd su primo \n");
+		ft_cd(data);
 	else if (b == 3)
-		printf("pwd surmano\n");
+		ft_pwd(data);
 	else if (b == 4)
 		ft_export(data);
 	else if (b == 5)

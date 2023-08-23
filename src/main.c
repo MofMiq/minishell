@@ -23,6 +23,7 @@ t_data	*ft_init_data(char **env)
 	data->input = NULL;
 	data->args = NULL;
 	data->bool_exp = 0;
+	data->argc = 0;
 	return (data);
 }
 
@@ -45,6 +46,8 @@ int	main(int argc, char **argv, char **env)
 		}
 		add_history(data->input);
 		data->args = ft_split(data->input, ' ');
+		data->argc = ft_double_pointer_len(data->args);
+		printf("Argc: %d\n", data->argc);
 		if (ft_is_builtin(data->args))
 		{
 			ft_do_builtins(data->args, data);

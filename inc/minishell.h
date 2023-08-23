@@ -34,6 +34,7 @@ typedef struct s_data
 	char	*input;
 	char	**args;
 	int		bool_exp;
+	int		argc;
 	t_elist	*env;
 }	t_data;
 
@@ -43,6 +44,10 @@ t_elist	*ft_new_node(char **splited);
 t_elist	*ft_last_node(t_elist *node);
 t_elist	*ft_add_back(t_elist **env, t_elist *new);
 t_elist	*ft_copy_env(char **env);
+
+//utils.c
+
+int		ft_double_pointer_len(char **args);
 
 //echo.c
 
@@ -59,6 +64,11 @@ void	ft_do_builtins(char **args, t_data *data);
 //main.c
 
 t_data	*ft_init_data(char **env);
+
+//cd.c
+
+void	ft_cd(t_data *data);
+void	ft_pwd(t_data *data);
 
 // crear otro archivo pa builtins
 

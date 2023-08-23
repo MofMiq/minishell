@@ -6,7 +6,7 @@
 #    By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/21 16:22:32 by marirodr          #+#    #+#              #
-#    Updated: 2023/08/22 16:46:42 by marirodr         ###   ########.fr        #
+#    Updated: 2023/08/23 10:57:46 by begarijo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ SRC			= src/main.c \
 			  src/builtins.c \
 			  src/list_utils.c \
 			  src/env_builtins.c \
+			  src/cd.c \
+			  src/utils.c \
 
 OBJ			= $(SRC:.c=.o)
 
