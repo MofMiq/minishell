@@ -45,7 +45,7 @@ void	ft_do_builtins(t_data *data)
 	else if (b == 4)
 		ft_export(data);
 	else if (b == 5)
-		printf("unseteame esta\n");
+		ft_unset(data->env, data);
 	else if (b == 6)
 		ft_env(data, data->args);
 	else if (b == 7)
