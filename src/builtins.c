@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:43:04 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/23 10:05:33 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/23 12:16:57 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,20 @@ void	ft_do_builtins(char **args, t_data *data)
 	if (b == 1)
 		ft_echo(args);
 	else if (b == 2)
-		printf("cd su primo \n");
+		ft_cd(data);
 	else if (b == 3)
-		printf("pwd surmano\n");
+		ft_pwd(data);
 	else if (b == 4)
 		printf("exportame esta\n");
 	else if (b == 5)
 		printf("envidioso tu cochino");
 	else if (b == 6)
-		ft_env(data->env, args);
+	{
+		if (data->argc > 1)
+			printf("FATALISIMO");
+		else
+			ft_env(data->env, args);
+	}
 	else if (b == 7)
 		printf("HAZ CTRL-D VAGO");
 }
