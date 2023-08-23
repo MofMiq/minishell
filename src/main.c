@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/08/23 12:24:25 by marirodr         ###   ########.fr       */
-=======
-/*   Updated: 2023/08/23 12:31:50 by begarijo         ###   ########.fr       */
->>>>>>> 6b30b977f13327ad2e77b01c272ad07198e4f5c6
+/*   Updated: 2023/08/23 18:26:38 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +29,7 @@ t_data	*ft_init_data(char **env)
 
 void	ft_start_minishell(t_data *data)
 {
-	while(1)
+	while (1)
 	{
 		data->input = readline("PutaShell> ");
 		if (data->input == NULL)
@@ -44,12 +40,8 @@ void	ft_start_minishell(t_data *data)
 		add_history(data->input);
 		data->args = ft_split(data->input, ' ');
 		data->argc = ft_double_pointer_len(data->args);
-<<<<<<< HEAD
-		printf("Argc: %d\n", data->argc); //borrar en un futuro
-=======
->>>>>>> 6b30b977f13327ad2e77b01c272ad07198e4f5c6
-		if (ft_is_builtin(data->args))
-			ft_do_builtins(data->args, data);
+		if (ft_is_builtin(data))
+			ft_do_builtins(data);
 	}
 }
 

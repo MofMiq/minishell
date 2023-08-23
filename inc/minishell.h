@@ -6,11 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/08/23 18:11:28 by marirodr         ###   ########.fr       */
-=======
-/*   Updated: 2023/08/23 16:14:17 by begarijo         ###   ########.fr       */
->>>>>>> 6b30b977f13327ad2e77b01c272ad07198e4f5c6
+/*   Updated: 2023/08/23 18:33:03 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +54,13 @@ t_elist	*ft_list_cmp(t_data *data, char *var_env);
 
 int		ft_is_space(char c);
 void	epur_str(char *str);
-void	ft_print_echo(char **args, int pos);
-void	ft_echo(char **args);
+void	ft_print_echo(t_data *data, int pos);
+void	ft_echo(t_data *data);
 
 //builtins.c
 
-int		ft_is_builtin(char **args);
-void	ft_do_builtins(char **args, t_data *data);
+int		ft_is_builtin(t_data *data);
+void	ft_do_builtins(t_data *data);
 
 //main.c
 

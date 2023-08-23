@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:54:01 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/22 18:28:02 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/23 18:33:05 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,28 +35,31 @@ void	epur_str(char *str)
 			write(1, &str[i], 1);
 			i++;
 		}
-		while (ft_is_space(str[i]) && ft_is_space(str[i + 1]) && str[i + 1] != '\0')
+		while (ft_is_space(str[i]) && (ft_is_space(str[i + 1]) || str[i + 1] != '\0'))
 			i++;
 		if (ft_is_space(str[i]) && str[i + 1] != '\0')
 			write(1, " ", 1);
 	}
 }
 
-void	ft_print_echo(char **args, int pos)
+void	ft_print_echo(t_data *data, int pos)
 {
 	int	i;
 
 	i = 0;
-	while (args[pos + i] != NULL)
+	while (data->args[pos + i] != NULL)
 	{
-		epur_str(args[pos + i]);
-		if (args[pos + i + 1] != NULL)
+		epur_str(data->args[pos + i]);
+		if (data->args[pos + i + 1] != NULL)
 			write(1, " ", 1);
 		i++;
 	}
 }
 
-void	ft_echo(char **args)
+/*Arreglar echo, si hago echo -n -nk hola, no me coge el 2º arg
+* A lo mejor algo con data->argc??? s*/
+
+void	ft_echo(t_data *data)
 {
 	int	i;
 	int	j;
@@ -65,18 +68,18 @@ void	ft_echo(char **args)
 	i = 1;
 	flag = 1;
 	j = 1;
-	if (args[j][0] == '-' && args[j] != NULL)
+	if (data->args[j] != NULL && data->args[j][0] == '-')
 	{
-		while (args[j][i] == 'n' && args[j][i] != '\0')
+		while (data->args[j][i] == 'n')
 		{
 			i++;
 			flag = 0;
-			if (args[j][i] != '\0')
+			if (data->args[j][i] != 'n' && data->args[j][i] != '\0')
 				flag = 1;
 		}
 		j++;
 	}
-	ft_print_echo(args, j);
+	ft_print_echo(data, j);
 	if (flag == 1)
 		printf("\n");
 }
