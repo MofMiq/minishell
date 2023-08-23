@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 12:38:14 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/22 18:05:25 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/23 10:14:45 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,4 @@ t_elist	*ft_copy_env(char **env)
 	}
 	ft_free_double_pointer(splited);
 	return (elist);
-}
-
-void	ft_env(t_elist *env, char **args)
-{
-	if (args[1] == NULL)
-	{
-		while (env)
-		{
-			printf("%s=%s\n", env->name, env->def);
-			env = env->next;
-		}
-	}
-//	else
-//		perror("env");
-//	ARREGLEMOS ESTO PORFIS
 }

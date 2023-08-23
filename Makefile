@@ -24,6 +24,7 @@ SRC			= src/main.c \
 			  src/echo.c \
 			  src/builtins.c \
 			  src/list_utils.c \
+			  src/env_builtins.c \
 			  src/cd.c \
 			  src/utils.c \
 

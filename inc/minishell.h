@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/23 12:14:02 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/23 10:59:49 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_data
 {
 	char	*input;
 	char	**args;
+	int		bool_exp;
 	int		argc;
 	t_elist	*env;
 }	t_data;
@@ -43,7 +44,6 @@ t_elist	*ft_new_node(char **splited);
 t_elist	*ft_last_node(t_elist *node);
 t_elist	*ft_add_back(t_elist **env, t_elist *new);
 t_elist	*ft_copy_env(char **env);
-void	ft_env(t_elist *env, char **args);
 
 //utils.c
 
@@ -71,5 +71,11 @@ void	ft_cd(t_data *data);
 void	ft_pwd(t_data *data);
 
 // crear otro archivo pa builtins
+
+//env_builtins.c
+
+//void	ft_env(t_elist *env, char **args);
+void	ft_env(t_data *data, char **args);
+void	ft_export(t_data *data);
 
 #endif
