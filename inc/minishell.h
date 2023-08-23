@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/23 10:59:49 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/23 16:14:17 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_elist	*ft_copy_env(char **env);
 //utils.c
 
 int		ft_double_pointer_len(char **args);
+t_elist	*ft_list_cmp(t_data *data, char *var_env);
 
 //echo.c
 
@@ -64,6 +65,7 @@ void	ft_do_builtins(char **args, t_data *data);
 //main.c
 
 t_data	*ft_init_data(char **env);
+void	ft_start_minishell(t_data *data);
 
 //cd.c
 
