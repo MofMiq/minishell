@@ -6,7 +6,11 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2023/08/23 12:24:25 by marirodr         ###   ########.fr       */
+=======
 /*   Updated: 2023/08/23 12:31:50 by begarijo         ###   ########.fr       */
+>>>>>>> 6b30b977f13327ad2e77b01c272ad07198e4f5c6
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +44,10 @@ void	ft_start_minishell(t_data *data)
 		add_history(data->input);
 		data->args = ft_split(data->input, ' ');
 		data->argc = ft_double_pointer_len(data->args);
+<<<<<<< HEAD
+		printf("Argc: %d\n", data->argc); //borrar en un futuro
+=======
+>>>>>>> 6b30b977f13327ad2e77b01c272ad07198e4f5c6
 		if (ft_is_builtin(data->args))
 			ft_do_builtins(data->args, data);
 	}

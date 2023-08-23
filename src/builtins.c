@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:43:04 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/23 11:31:26 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/23 18:11:34 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_do_builtins(char **args, t_data *data)
 	else if (b == 4)
 		ft_export(data);
 	else if (b == 5)
-		printf("unseteame esta\n");
+		ft_unset(data->env, data);
 	else if (b == 6)
 		ft_env(data, args);
 	else if (b == 7)

@@ -6,7 +6,11 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2023/08/23 18:11:28 by marirodr         ###   ########.fr       */
+=======
 /*   Updated: 2023/08/23 16:14:17 by begarijo         ###   ########.fr       */
+>>>>>>> 6b30b977f13327ad2e77b01c272ad07198e4f5c6
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +83,6 @@ void	ft_pwd(t_data *data);
 //void	ft_env(t_elist *env, char **args);
 void	ft_env(t_data *data, char **args);
 void	ft_export(t_data *data);
+void	ft_unset(t_elist *env, t_data *data);
 
 #endif
