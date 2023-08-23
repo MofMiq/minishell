@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:25:39 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/23 12:07:51 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/23 16:15:09 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,25 @@
 
 void	ft_cd(t_data *data)
 {
-	char	*cwd;
 	char	*nwd;
 
-	if (ft_double_pointer_len(data->args) > 2)
-		printf("Muchos argumentos\n");
-	cwd = getcwd(NULL, 0);
-	printf("\nPrimero estas aquí: %s\n", cwd);
-	chdir(data->args[1]);
-	nwd = getcwd(NULL, 0);
-	printf("\nSe supone que te mueves aquí??: %s\n", nwd);
+	if (chdir(data->args[1]) == 0 && data->argc == 2)
+	{
+		nwd = getcwd(NULL, 0);
+		data->env = ft_list_cmp(data, "PWD");
+		if (data->env != NULL)
+		{
+			free(data->env->def);
+			data->env->def = ft_strdup(nwd);
+		}
+	}
+	if (data->argc > 2)
+	{
+		printf("cd: too many args\n");
+		return ;
+	}
+	else
+		perror("cd");
 }
 
 void	ft_pwd(t_data *data)
@@ -31,7 +40,7 @@ void	ft_pwd(t_data *data)
 	char	*cwd;
 
 	if (ft_double_pointer_len(data->args) > 1)
-		printf("Muchos args\n");
+		printf("pwd: too many args\n");
 	cwd = getcwd(NULL, 0);
 	if (cwd == NULL)
 		perror("pwd");
