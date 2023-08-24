@@ -6,13 +6,13 @@
 #    By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/21 16:22:32 by marirodr          #+#    #+#              #
-#    Updated: 2023/08/23 10:57:46 by begarijo         ###   ########.fr        #
+#    Updated: 2023/08/24 10:18:19 by marirodr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= minishell
 
-CC 			= gcc -g
+CC 			= gcc -g #quitar -g
 
 CFLAGS 	= -Wall -Wextra -Werror
 
