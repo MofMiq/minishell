@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/23 18:33:03 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/24 11:09:03 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct s_data
 
 t_elist	*ft_new_node(char **splited);
 t_elist	*ft_last_node(t_elist *node);
+t_elist	*ft_penultimate_node(t_elist *lst);
+t_elist	*ft_first_node(t_elist *node);
 t_elist	*ft_add_back(t_elist **env, t_elist *new);
 t_elist	*ft_copy_env(char **env);
 
@@ -76,7 +78,6 @@ void	ft_pwd(t_data *data);
 
 //env_builtins.c
 
-//void	ft_env(t_elist *env, char **args);
 void	ft_env(t_data *data, char **args);
 void	ft_export(t_data *data);
 void	ft_unset(t_elist *env, t_data *data);

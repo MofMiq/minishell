@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/23 18:24:14 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/24 11:24:51 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	ft_export(t_data *data)
 
 void	ft_unset(t_elist *env, t_data *data)
 {
-	//poner en funcionamiento env->prev
 	t_elist	*curr;
 	t_elist	*prev;
 	int		i;
@@ -89,34 +88,34 @@ void	ft_unset(t_elist *env, t_data *data)
 	}
 }
 
-/*void	ft_unset(t_data *data)
+/*void	ft_unset(t_elist *env, t_data *data)
 {
+	//poner en funcionamiento env->prev
 	t_elist	*curr;
-	t_elist	*head;
-	int	i;
+	t_elist	*prev;
+	int		i;
 
-	if (data->env == NULL)
-		return ;
 	if (data->argc > 1)
 	{
-		curr = data->env;
-		head = data->env;
-		i = 0;
-		while (data->args[i] && curr)
+		i = 1;
+		while (data->args[i] != NULL)
 		{
-			if ((ft_strcmp(data->env->name, data->args[i])) != 0)
+			prev = NULL;
+			curr = env;
+			while (curr)
 			{
+				if (ft_strcmp(curr->name, data->args[i]) == 0)
+				{
+					if (prev == NULL)
+						env = curr->next;
+					else
+						prev->next = curr->next;
+					free(curr);
+				}
+				prev = curr;
 				curr = curr->next;
-				data->env = curr;
 			}
-			else
-			{
-				data->env = data->env->prev;
-				data->env->next = curr->next;
-				free(curr);
-				i++;
-				data->env = head;
-			}
+			i++;
 		}
 	}
 }*/

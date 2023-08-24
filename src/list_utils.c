@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 12:38:14 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/23 13:46:50 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/24 11:26:36 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_elist	*ft_new_node(char **splited)
 	node->name = ft_strdup(splited[0]);
 	node->def = ft_strdup(splited[1]);
 	node->next = NULL;
+	node->prev = NULL;
 	return (node);
 }
 
@@ -35,6 +36,20 @@ t_elist	*ft_last_node(t_elist *node)
 	return (node);
 }
 
+t_elist	*ft_penultimate_node(t_elist *lst)
+{
+	while (lst->next->next != NULL)
+		lst = lst->next;
+	return (lst);
+}
+
+t_elist	*ft_first_node(t_elist *node)
+{
+	while (node && node->prev != NULL)
+		node = node->prev;
+	return (node);
+}
+
 t_elist	*ft_add_back(t_elist **env, t_elist *new)
 {
 	if (!new)
@@ -42,7 +57,11 @@ t_elist	*ft_add_back(t_elist **env, t_elist *new)
 	if (*env == NULL)
 		*env = new;
 	else
+	{
 		ft_last_node(*env)->next = new;
+		if ((*env)->prev == NULL)
+			new->prev = ft_penultimate_node(*env);
+	}
 	return (*env);
 }
 
