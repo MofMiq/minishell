@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/24 11:24:51 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/24 16:44:14 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	ft_env(t_data *data, char **args)
 void	ft_export(t_data *data)
 {
 	char	**splited;
+	//t_elist	*tmp;
 
 	if (data->argc == 1)
 	{
@@ -52,15 +53,19 @@ void	ft_export(t_data *data)
 		{
 			//cuidado ""
 			splited = ft_split(data->args[1], '=');
-			ft_add_back(&data->env, ft_new_node(splited));
+			/*if ((ft_strcmp(data->env->name, splited[0])) == 0)
+			{
+				
+			}
+			else*/
+				ft_add_back(&data->env, ft_new_node(splited));
 		}
 	}
 }
 
-void	ft_unset(t_elist *env, t_data *data)
+void	ft_unset(t_elist **env, t_data *data)
 {
 	t_elist	*curr;
-	t_elist	*prev;
 	int		i;
 
 	if (data->argc > 1)
@@ -68,54 +73,51 @@ void	ft_unset(t_elist *env, t_data *data)
 		i = 1;
 		while (data->args[i] != NULL)
 		{
-			prev = NULL;
-			curr = env;
-			while (curr)
-			{
-				if (ft_strcmp(curr->name, data->args[i]) == 0)
-				{
-					if (prev == NULL)
-						env = curr->next;
-					else
-						prev->next = curr->next;
-					free(curr);
-				}
-				prev = curr;
-				curr = curr->next;
-			}
+			curr = *env;
+			ft_remove_if(curr, data->args[i], env);
 			i++;
 		}
 	}
 }
 
-/*void	ft_unset(t_elist *env, t_data *data)
+void	ft_remove_if(t_elist *curr, char *str, t_elist **env)
 {
-	//poner en funcionamiento env->prev
-	t_elist	*curr;
-	t_elist	*prev;
-	int		i;
-
-	if (data->argc > 1)
+	while (curr)
 	{
-		i = 1;
-		while (data->args[i] != NULL)
+		if (ft_strcmp(curr->name, str) == 0)
 		{
-			prev = NULL;
-			curr = env;
-			while (curr)
+			if (curr->prev == NULL)
 			{
-				if (ft_strcmp(curr->name, data->args[i]) == 0)
-				{
-					if (prev == NULL)
-						env = curr->next;
-					else
-						prev->next = curr->next;
-					free(curr);
-				}
-				prev = curr;
-				curr = curr->next;
+				*env = curr->next;
+				if (*env)
+					(*env)->prev = NULL;
 			}
-			i++;
+			else
+			{
+				curr->prev->next = curr->next;
+				if (curr->next)
+					curr->next->prev = curr->prev;
+			}
+			free(curr);
 		}
+		curr = curr->next;
 	}
-}*/
+}
+
+t_elist	*ft_copy_env(char **env)
+{
+	int		i;
+	char	**splited;
+	t_elist	*elist;
+
+	i = 0;
+	elist = NULL;
+	while (env[i])
+	{
+		splited = ft_split(env[i], '=');
+		ft_add_back(&elist, ft_new_node(splited));
+		i++;
+	}
+	ft_free_double_pointer(splited);
+	return (elist);
+}

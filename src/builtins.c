@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:43:04 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/23 18:29:28 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/24 15:21:56 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_do_builtins(t_data *data)
 	else if (b == 4)
 		ft_export(data);
 	else if (b == 5)
-		ft_unset(data->env, data);
+		ft_unset(&data->env, data);
 	else if (b == 6)
 		ft_env(data, data->args);
 	else if (b == 7)

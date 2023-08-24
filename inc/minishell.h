@@ -21,6 +21,9 @@
 # include <readline/history.h>
 # include "../libft/libft.h"
 
+# define BLUE "\033[0;96m"
+# define END "\033[0m"
+
 typedef struct s_elist
 {
 	char			*name;
@@ -45,7 +48,6 @@ t_elist	*ft_last_node(t_elist *node);
 t_elist	*ft_penultimate_node(t_elist *lst);
 t_elist	*ft_first_node(t_elist *node);
 t_elist	*ft_add_back(t_elist **env, t_elist *new);
-t_elist	*ft_copy_env(char **env);
 
 //utils.c
 
@@ -82,6 +84,8 @@ void	ft_pwd(t_data *data);
 
 void	ft_env(t_data *data, char **args);
 void	ft_export(t_data *data);
-void	ft_unset(t_elist *env, t_data *data);
+void	ft_remove_if(t_elist *curr, char *str, t_elist **env);
+void	ft_unset(t_elist **env, t_data *data);
+t_elist	*ft_copy_env(char **env);
 
 #endif

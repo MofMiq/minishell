@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:51:25 by begarijo          #+#    #+#             */
 /*   Updated: 2023/08/24 17:57:25 by begarijo         ###   ########.fr       */
@@ -23,6 +23,8 @@ int	ft_double_pointer_len(char **args)
 }
 
 t_elist	*ft_search_node(t_data *data, char *var_env)
+//hacer otra fucnion booleana que sea de comparacion
+t_elist	*ft_list_cmp(t_data *data, char *var_env) //cambiar el nombre ft_update node
 {
 	t_elist	*tmp;
 
