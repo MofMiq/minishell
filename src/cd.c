@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:25:39 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/23 16:15:09 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/24 17:57:23 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,8 @@ void	ft_cd(t_data *data)
 	if (chdir(data->args[1]) == 0 && data->argc == 2)
 	{
 		nwd = getcwd(NULL, 0);
-		data->env = ft_list_cmp(data, "PWD");
-		if (data->env != NULL)
-		{
-			free(data->env->def);
-			data->env->def = ft_strdup(nwd);
-		}
+		if (ft_list_cmp(data, "PWD") == 0)
+			ft_update_list(data, nwd, "PWD");
 	}
 	if (data->argc > 2)
 	{

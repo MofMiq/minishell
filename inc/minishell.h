@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/24 15:50:21 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/24 17:57:06 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ t_elist	*ft_add_back(t_elist **env, t_elist *new);
 //utils.c
 
 int		ft_double_pointer_len(char **args);
-t_elist	*ft_list_cmp(t_data *data, char *var_env);
+t_elist	*ft_search_node(t_data *data, char *var_env);
+int		ft_list_cmp(t_data *data, char *var_env);
+void	ft_update_list(t_data *data, char *new_def, char *var_env);
 
 //echo.c
 
