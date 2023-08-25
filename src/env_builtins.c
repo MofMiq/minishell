@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/24 16:44:14 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/25 10:49:33 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,27 +80,28 @@ void	ft_unset(t_elist **env, t_data *data)
 	}
 }
 
-void	ft_remove_if(t_elist *curr, char *str, t_elist **env)
+void	ft_exit(t_data *data)
 {
-	while (curr)
+	int	i;
+
+	i = 0;
+	if ((ft_strcmp(data->args[0], "exit")) == 0)
 	{
-		if (ft_strcmp(curr->name, str) == 0)
+		if (data->args[1])
 		{
-			if (curr->prev == NULL)
+			if (ft_atoi(data->args[1]) != 0)
 			{
-				*env = curr->next;
-				if (*env)
-					(*env)->prev = NULL;
+				printf("%s\n", data->args[0]);
+				exit(EXIT_FAILURE);
 			}
-			else
+			if (!ft_isdigit(data->args[1][0]))
 			{
-				curr->prev->next = curr->next;
-				if (curr->next)
-					curr->next->prev = curr->prev;
+				printf("bash: %s: %s: numeric argument is required\n", data->args[0], data->args[1]); //hacer funcion adecuada a perror
+				exit(EXIT_FAILURE);
 			}
-			free(curr);
 		}
-		curr = curr->next;
+		printf("%s\n", data->args[0]);
+		exit(EXIT_SUCCESS);
 	}
 }
 
