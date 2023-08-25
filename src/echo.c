@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:54:01 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/24 18:26:01 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/25 12:33:03 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,32 +59,45 @@ void	ft_print_echo(t_data *data, int pos)
 /*Arreglar echo, si hago echo -n -nk hola, no me coge el 2º arg
 * A lo mejor algo con data->argc??? s*/
 
-void	ft_echo(t_data *data)
+int	ft_is_flag(char *str)
 {
 	int	i;
-	int	j;
-	int	flag;
-	int	k;
 
 	i = 1;
-	flag = 0;
-	j = 1;
-	k = 1;
-	if (data->args[j] != NULL && data->args[j][0] == '-')
+	while (str[i] && str[0] == '-')
 	{
-		while (data->args[j][i] == 'n' && data->args[j][0] == '-')
+		while (str[i] == 'n' && str[i] != '\0')
 		{
 			i++;
-			flag = 1;
-			if (data->args[j][i] != 'n' && data->args[j][i] != '\0')
-				flag = 0;
+			if (str[i - 1] == 'n' && str[i] == '\0')
+				return (1);
 		}
-		if (flag == 1)
-			k += 1;
-		j++;
-		i = 1;
+		return (0);
 	}
-	ft_print_echo(data, k);
+	return (0);
+}
+
+void	ft_echo(t_data *data)
+{
+	int	flag;
+	int	j;
+	int	p;
+
+	flag = 0;
+	j = 1;
+	p = j;
+	while (ft_is_flag(data->args[1]))
+	{
+		flag = 1;
+		if (ft_is_flag(data->args[j]) && ft_is_flag(data->args[j + 1]))
+			p = j++;
+		else if (ft_is_flag(data->args[j]) && !ft_is_flag(data->args[j + 1]))
+		{
+			p = j + 1;
+			break ;
+		}
+	}
+	ft_print_echo(data, p);
 	if (flag == 0)
 		printf("\n");
 }
