@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:54:01 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/23 18:33:05 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/24 18:26:01 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,22 +64,28 @@ void	ft_echo(t_data *data)
 	int	i;
 	int	j;
 	int	flag;
+	int	k;
 
 	i = 1;
-	flag = 1;
+	flag = 0;
 	j = 1;
+	k = 1;
 	if (data->args[j] != NULL && data->args[j][0] == '-')
 	{
-		while (data->args[j][i] == 'n')
+		while (data->args[j][i] == 'n' && data->args[j][0] == '-')
 		{
 			i++;
-			flag = 0;
+			flag = 1;
 			if (data->args[j][i] != 'n' && data->args[j][i] != '\0')
-				flag = 1;
+				flag = 0;
 		}
+		if (flag == 1)
+			k += 1;
 		j++;
+		i = 1;
 	}
-	ft_print_echo(data, j);
-	if (flag == 1)
+	ft_print_echo(data, k);
+	if (flag == 0)
 		printf("\n");
 }
+
