@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/24 17:57:06 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/25 10:16:11 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int		ft_double_pointer_len(char **args);
 t_elist	*ft_search_node(t_data *data, char *var_env);
 int		ft_list_cmp(t_data *data, char *var_env);
 void	ft_update_list(t_data *data, char *new_def, char *var_env);
+void	ft_remove_if(t_elist *curr, char *str, t_elist **env);
 
 //echo.c
 
@@ -84,8 +85,8 @@ void	ft_pwd(t_data *data);
 
 void	ft_env(t_data *data, char **args);
 void	ft_export(t_data *data);
-void	ft_remove_if(t_elist *curr, char *str, t_elist **env);
 void	ft_unset(t_elist **env, t_data *data);
 t_elist	*ft_copy_env(char **env);
+void	ft_exit(t_data *data);
 
 #endif
