@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/24 19:06:51 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/25 12:22:45 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_start_minishell(t_data *data)
 
 int	main(int argc, char **argv, char **env)
 {
-	//atexit(ft_leaks); buscar leaks
+	//atexit(ft_leaks); //buscar leaks
 	t_data	*data;
 
 	(void)argc;
