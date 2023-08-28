@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/25 10:16:11 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/25 14:01:10 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,10 @@ void	ft_export(t_data *data);
 void	ft_unset(t_elist **env, t_data *data);
 t_elist	*ft_copy_env(char **env);
 void	ft_exit(t_data *data);
+
+//free.c
+
+void	ft_free_list(t_elist *lst);
+void	ft_free_all(t_data *data);
 
 #endif
