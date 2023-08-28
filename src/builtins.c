@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:43:04 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/25 10:18:53 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/28 11:01:23 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,5 @@ void	ft_do_builtins(t_data *data)
 	else if (b == 6)
 		ft_env(data, data->args);
 	else if (b == 7)
-		ft_exit(data);
+		ft_miniexit(data);
 }

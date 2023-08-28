@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 12:38:14 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/24 15:50:32 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/28 11:22:03 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ t_elist	*ft_new_node(char **splited)
 		exit(EXIT_FAILURE);
 	}
 	node->name = ft_strdup(splited[0]);
+	//printf("new node->name: %s\n", splited[0]);
 	node->def = ft_strdup(splited[1]);
+	//printf("new node->>def: %s\n", splited[1]);
 	node->next = NULL;
 	node->prev = NULL;
 	return (node);

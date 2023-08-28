@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/25 14:44:04 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/28 11:12:05 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ t_data	*ft_init_data(char **env)
 {
 	t_data	*data;
 
+	(void)env;
 	data = (t_data *)malloc(sizeof(t_data));
 	data->env = ft_copy_env(env);
 	data->input = NULL;
@@ -45,7 +46,7 @@ void	ft_start_minishell(t_data *data)
 			data->argc = ft_double_pointer_len(data->args);
 			if (ft_is_builtin(data))
 				ft_do_builtins(data);
-			ft_free_double_pointer(data->args);
+			ft_free_double_pointer(data->args); //testear, podría dar algunos problemas???
 			free(data->input);
 		}
 	}
