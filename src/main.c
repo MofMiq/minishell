@@ -16,6 +16,7 @@ t_data	*ft_init_data(char **env)
 {
 	t_data	*data;
 
+	(void)env;
 	data = (t_data *)malloc(sizeof(t_data));
 	data->env = ft_copy_env(env);
 	ft_init_env(data);
@@ -46,7 +47,7 @@ void	ft_start_minishell(t_data *data)
 			data->argc = ft_double_pointer_len(data->args);
 			if (ft_is_builtin(data))
 				ft_do_builtins(data);
-			ft_free_double_pointer(data->args);
+			ft_free_double_pointer(data->args); //testear, podría dar algunos problemas???
 			free(data->input);
 		}
 	}
