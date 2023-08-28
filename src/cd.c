@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:25:39 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/25 13:23:21 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/28 13:00:44 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	ft_oldpwd(t_data *data, char *owd, char *nwd)
 	{
 		if (ft_list_cmp(data, "OLDPWD") == 0)
 			ft_update_list(data, owd, "OLDPWD");
+		else if (ft_list_cmp(data, "OLDPWD") != 0)
 	}
 }
 
