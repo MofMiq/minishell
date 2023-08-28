@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:51:25 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/25 13:04:21 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/25 14:10:08 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ t_elist	*ft_search_node(t_data *data, char *var_env)
 	data->env = tmp;
 	return (tmp);
 }
+
+/*0 hay coincidencia; 1 no la hay*/
 
 int	ft_list_cmp(t_data *data, char *var_env)
 {
