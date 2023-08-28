@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
 /*   Updated: 2023/08/28 19:43:52 by marirodr         ###   ########.fr       */
@@ -95,5 +95,9 @@ void	ft_miniexit(t_data *data);
 
 void	ft_free_list(t_elist *lst);
 void	ft_free_all(t_data *data);
+
+//init.c
+
+void	ft_init_env(t_data *data);
 
 #endif

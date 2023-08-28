@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
 /*   Updated: 2023/08/28 18:38:34 by marirodr         ###   ########.fr       */
@@ -19,6 +19,7 @@ t_data	*ft_init_data(char **env)
 	(void)env;
 	data = (t_data *)malloc(sizeof(t_data));
 	data->env = ft_copy_env(env);
+	ft_init_env(data);
 	data->input = NULL;
 	data->args = NULL;
 	data->bool_exp = 0;
