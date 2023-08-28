@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/25 10:16:11 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/25 13:18:51 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	ft_start_minishell(t_data *data);
 
 void	ft_cd(t_data *data);
 void	ft_pwd(t_data *data);
+void	ft_oldpwd(t_data *data, char *owd, char *nwd);
 
 // crear otro archivo pa builtins
 
