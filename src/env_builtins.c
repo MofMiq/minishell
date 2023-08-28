@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/25 10:49:33 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/25 14:17:51 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	ft_env(t_data *data, char **args)
 void	ft_export(t_data *data)
 {
 	char	**splited;
-	//t_elist	*tmp;
 
 	if (data->argc == 1)
 	{
@@ -53,12 +52,11 @@ void	ft_export(t_data *data)
 		{
 			//cuidado ""
 			splited = ft_split(data->args[1], '=');
-			/*if ((ft_strcmp(data->env->name, splited[0])) == 0)
-			{
-				
-			}
-			else*/
+			if ((ft_list_cmp(data, splited[0])) == 0)
+				ft_update_list(data, splited[1], splited[0]);
+			else
 				ft_add_back(&data->env, ft_new_node(splited));
+			ft_free_double_pointer(splited);
 		}
 	}
 }
@@ -92,15 +90,18 @@ void	ft_exit(t_data *data)
 			if (ft_atoi(data->args[1]) != 0)
 			{
 				printf("%s\n", data->args[0]);
+				//ft_free_all(data);
 				exit(EXIT_FAILURE);
 			}
 			if (!ft_isdigit(data->args[1][0]))
 			{
 				printf("bash: %s: %s: numeric argument is required\n", data->args[0], data->args[1]); //hacer funcion adecuada a perror
+				//ft_free_all(data);
 				exit(EXIT_FAILURE);
 			}
 		}
 		printf("%s\n", data->args[0]);
+		//ft_free_all(data);
 		exit(EXIT_SUCCESS);
 	}
 }
