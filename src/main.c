@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/28 11:12:05 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/28 18:38:34 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_leaks(void)
 
 int	main(int argc, char **argv, char **env)
 {
-	//atexit(ft_leaks); //buscar leaks
+	atexit(ft_leaks); //buscar leaks
 	t_data	*data;
 
 	(void)argc;
