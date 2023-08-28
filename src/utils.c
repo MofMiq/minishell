@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:51:25 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/25 10:14:02 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/25 13:04:21 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,27 @@ void	ft_update_list(t_data *data, char *new_def, char *var_env)
 	}
 	data->env = ft_first_node(data->env);
 }
-/*Funciones para compara y sustituir y comparar si o no*/
+
+void	ft_remove_if(t_elist *curr, char *str, t_elist **env)
+{
+	while (curr)
+	{
+		if (ft_strcmp(curr->name, str) == 0)
+		{
+			if (curr->prev == NULL)
+			{
+				*env = curr->next;
+				if (*env)
+					(*env)->prev = NULL;
+			}
+			else
+			{
+				curr->prev->next = curr->next;
+				if (curr->next)
+					curr->next->prev = curr->prev;
+			}
+			free(curr);
+		}
+		curr = curr->next;
+	}
+}
