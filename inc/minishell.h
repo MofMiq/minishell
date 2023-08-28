@@ -78,6 +78,7 @@ void	ft_start_minishell(t_data *data);
 
 void	ft_cd(t_data *data);
 void	ft_pwd(t_data *data);
+void	ft_oldpwd(t_data *data, char *owd, char *nwd);
 
 // crear otro archivo pa builtins
 
