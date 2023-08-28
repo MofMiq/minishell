@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:25:39 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/28 16:17:34 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:49:08 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,15 @@ void	ft_pwd(t_data *data)
 
 void	ft_oldpwd(t_data *data, char *owd, char *nwd)
 {
+	char	**double_old;
+
+	double_old = ft_split(ft_strjoin("OLDPWD=", owd), '=');
 	if (ft_strcmp(owd, nwd) != 0)
 	{
 		if (ft_list_cmp(data->env, "OLDPWD") == 0)
 			ft_update_list(data->env, owd, "OLDPWD");
+		else if (ft_list_cmp(data->env, "OLDPWD") != 0)
+			ft_add_back(&data->env, ft_new_node(double_old));
 	}
 }
 
