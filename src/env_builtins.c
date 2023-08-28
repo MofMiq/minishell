@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/25 14:17:51 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:15:50 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	ft_export(t_data *data)
 		{
 			//cuidado ""
 			splited = ft_split(data->args[1], '=');
-			if ((ft_list_cmp(data, splited[0])) == 0)
-				ft_update_list(data, splited[1], splited[0]);
+			if ((ft_list_cmp(data->env, splited[0])) == 0)
+				ft_update_list(data->env, splited[1], splited[0]);
 			else
 				ft_add_back(&data->env, ft_new_node(splited));
 			ft_free_double_pointer(splited);
@@ -78,7 +78,7 @@ void	ft_unset(t_elist **env, t_data *data)
 	}
 }
 
-void	ft_exit(t_data *data)
+void	ft_miniexit(t_data *data)
 {
 	int	i;
 
@@ -90,18 +90,18 @@ void	ft_exit(t_data *data)
 			if (ft_atoi(data->args[1]) != 0)
 			{
 				printf("%s\n", data->args[0]);
-				//ft_free_all(data);
+				ft_free_all(data);
 				exit(EXIT_FAILURE);
 			}
 			if (!ft_isdigit(data->args[1][0]))
 			{
 				printf("bash: %s: %s: numeric argument is required\n", data->args[0], data->args[1]); //hacer funcion adecuada a perror
-				//ft_free_all(data);
+				ft_free_all(data);
 				exit(EXIT_FAILURE);
 			}
 		}
 		printf("%s\n", data->args[0]);
-		//ft_free_all(data);
+		ft_free_all(data);
 		exit(EXIT_SUCCESS);
 	}
 }
@@ -111,13 +111,23 @@ t_elist	*ft_copy_env(char **env)
 	int		i;
 	char	**splited;
 	t_elist	*elist;
+	//char	*colors;
 
 	i = 0;
 	elist = NULL;
 	while (env[i])
 	{
 		splited = ft_split(env[i], '=');
+		//printf("hola? [%d]%s\n", i, env[i]);
+		/*if (ft_strncmp(env[i], "LS_COLORS", 9) == 0)
+		{
+			printf("funciona esto???\n");
+			colors = ft_strtrim(env[i], "LS_COLORS=");
+			printf("colors: %s\n", colors);
+		}*/
 		ft_add_back(&elist, ft_new_node(splited));
+		/*if ((ft_list_cmp(elist, "LS_COLORS")) == 0)
+			ft_update_list(, colors, "LS_COLORS");*/
 		i++;
 	}
 	ft_free_double_pointer(splited);

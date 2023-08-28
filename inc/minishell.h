@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/25 14:01:10 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:12:01 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/libft.h"
+// # include "../memory-leaks-master/include/memory_leaks.h"
 
 # define BLUE "\033[0;96m"
 # define END "\033[0m"
@@ -52,9 +53,9 @@ t_elist	*ft_add_back(t_elist **env, t_elist *new);
 //utils.c
 
 int		ft_double_pointer_len(char **args);
-t_elist	*ft_search_node(t_data *data, char *var_env);
-int		ft_list_cmp(t_data *data, char *var_env);
-void	ft_update_list(t_data *data, char *new_def, char *var_env);
+t_elist	*ft_search_node(t_elist *elist, char *var_env);
+int		ft_list_cmp(t_elist *elist, char *var_env);
+void	ft_update_list(t_elist *elist, char *new_def, char *var_env);
 void	ft_remove_if(t_elist *curr, char *str, t_elist **env);
 
 //echo.c
@@ -88,7 +89,7 @@ void	ft_env(t_data *data, char **args);
 void	ft_export(t_data *data);
 void	ft_unset(t_elist **env, t_data *data);
 t_elist	*ft_copy_env(char **env);
-void	ft_exit(t_data *data);
+void	ft_miniexit(t_data *data);
 
 //free.c
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:25:39 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/25 13:23:21 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:17:34 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	ft_cd(t_data *data)
 	if (chdir(data->args[1]) == 0 && data->argc == 2)
 	{
 		nwd = getcwd(NULL, 0);
-		if (ft_list_cmp(data, "PWD") == 0)
-			ft_update_list(data, nwd, "PWD");
+		if (ft_list_cmp(data->env, "PWD") == 0)
+			ft_update_list(data->env, nwd, "PWD");
 		ft_oldpwd(data, owd, nwd);
 	}
 	else if (data->argc > 2)
@@ -51,8 +51,8 @@ void	ft_oldpwd(t_data *data, char *owd, char *nwd)
 {
 	if (ft_strcmp(owd, nwd) != 0)
 	{
-		if (ft_list_cmp(data, "OLDPWD") == 0)
-			ft_update_list(data, owd, "OLDPWD");
+		if (ft_list_cmp(data->env, "OLDPWD") == 0)
+			ft_update_list(data->env, owd, "OLDPWD");
 	}
 }
 

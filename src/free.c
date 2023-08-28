@@ -6,38 +6,38 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 12:26:52 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/25 14:39:36 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/28 10:55:17 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-// void	ft_free_list(t_elist *lst)
-// {
-// 	t_elist	*tmp;
-
-// 	while (lst)
-// 	{
-// 		tmp = lst->next;
-// 		free(lst->name);
-// 		printf("%s\n", lst->name);
-// 		free(lst->def);
-// 		printf("%s\n", lst->def);
-// 		free(lst);
-// 		lst = tmp;
-// 	}
-// }
-
 void	ft_free_list(t_elist *lst)
 {
+	t_elist	*tmp;
+
 	while (lst)
 	{
+		tmp = lst->next;
 		free(lst->name);
+		//printf("%s\n", lst->name);
 		free(lst->def);
+		//printf("%s\n", lst->def);
 		free(lst);
-		ft_free_list(lst->next);
+		lst = tmp;
 	}
 }
+
+// void	ft_free_list(t_elist *lst)
+// {
+// 	while (lst)
+// 	{
+// 		free(lst->name);
+// 		free(lst->def);
+// 		free(lst);
+// 		ft_free_list(lst->next);
+// 	}
+// }
 
 void	ft_free_all(t_data *data)
 {
