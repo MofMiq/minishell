@@ -6,13 +6,15 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 17:13:22 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/29 15:32:47 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:05:22 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*Like ft_split but only with one equal.*/
+/*Allocates (with malloc(3)) and returns an array of strings obtained by 
+splitting ’s’ using the character ’c’ as a delimiter. The array must be
+ended by a NULL pointer.*/
 
 /*int i;     count 's'
 int count; coutn 'words'
@@ -71,6 +73,14 @@ static int	mini_count_len(char *s, int *i, char c)
 	int q;        //count to 'write' 'words' (count of *)
 	char *word;   // where 'words' are gonna be allocated*/
 
+int	ft_aux_write(int q, char *s, int *i)
+{
+	q++;
+	if (ft_is_equal(s[*i]))
+		*i = *i + 1;
+	return (q);
+}
+
 static int	mini_w_word(char *s, char **p, int *i, char c)
 {
 	int		wordsize;
@@ -93,12 +103,13 @@ static int	mini_w_word(char *s, char **p, int *i, char c)
 		}
 		word[k] = '\0';
 		p[q] = word;
-		q++;
+		q = ft_aux_write(q, s, i);
 		wordsize = ft_strlen(&s[*i]);
 	}
 	p[q] = NULL;
 	return (0);
 }
+
 	//int i;      //nº od 'words'
 	//char **str; //where substr is gonna be allocated.
 	//int j;      //count for an error
@@ -138,20 +149,25 @@ char	**ft_mini_split(char const *s, char c)
 	system("leaks -q a.out");
 }
 
-int	main(void)
+int main(void)
 {
 	atexit(ft_leaks);
 	int		i;
 	char	*str1;
 	char	*str2;
+	char	*str3;
 	char	**split1;
 	char	**split2;
+	char	**split3;
 
 	i = 0;
 	str1 = "PAGER=less";
-	str2 = "LS_COLORS=di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34";
+	str2 = "ABC=def=ghi=jkl";
+	str3 = "LS_COLORS=di=1;36:ln=35:so=32:pi=33:ex=31:bd=34
+	;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43";
 	split1 = ft_mini_split(str1, '=');
 	split2 = ft_mini_split(str2, '=');
+	split3 = ft_mini_split(str3, '=');
 	while (split1[i])
 	{
 		printf("split1: %s\n", split1[i]);
@@ -163,6 +179,13 @@ int	main(void)
 		printf("split2: %s\n", split2[i]);
 		i++;
 	}
+	i = 0;
+	while (split3[i])
+	{
+		printf("split: %s\n", split3[i]);
+		i++;
+	}
 	ft_free_double_pointer(split1);
 	ft_free_double_pointer(split2);
+	ft_free_double_pointer(split3);
 }*/
