@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/29 15:26:07 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/29 18:59:08 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/libft.h"
@@ -39,6 +40,7 @@ typedef struct s_data
 	char	**args;
 	int		bool_exp;
 	int		argc;
+	int		*sig;
 	t_elist	*env;
 }	t_data;
 
@@ -102,6 +104,10 @@ void	ft_init_env(t_elist *elist);
 
 //signals.c
 
-void	ft_sig_handler(int sig);
+//void	ft_sig_handler(int sig);
+void	ft_init_sig(void);
+void	ft_restart_input(int sig);
+void	ft_ignore_sigquit(void);
+//void	ft_which(void);
 
 #endif
