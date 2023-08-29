@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   list_utils_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:51:25 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/29 10:34:08 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:11:17 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_update_list(t_elist *elist, char *new_def, char *var_env)
 	elist = ft_first_node(elist);
 }
 
-void	ft_remove_if(t_elist *curr, char *str, t_elist **env) //cuidado aqui por leaks????
+void	ft_remove_if(t_elist *curr, char *str, t_elist **env)
 {
 	while (curr)
 	{
@@ -83,6 +83,8 @@ void	ft_remove_if(t_elist *curr, char *str, t_elist **env) //cuidado aqui por le
 				if (curr->next)
 					curr->next->prev = curr->prev;
 			}
+			free(curr->def);
+			free(curr->name);
 			free(curr);
 		}
 		curr = curr->next;
