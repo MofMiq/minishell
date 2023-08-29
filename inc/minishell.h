@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/28 19:43:52 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/29 15:26:07 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,9 @@ void	ft_free_all(t_data *data);
 //init.c
 
 void	ft_init_env(t_elist *elist);
+
+//signals.c
+
+void	ft_sig_handler(int sig);
 
 #endif

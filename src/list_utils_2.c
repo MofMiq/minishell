@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:51:25 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/28 17:44:49 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/29 10:34:08 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ t_elist	*ft_search_node(t_elist *elist, char *var_env)
 	elist = tmp;
 	return (tmp);
 }
-
-/*0 hay coincidencia; 1 no la hay*/
 
 int	ft_list_cmp(t_elist *elist, char *var_env)
 {
