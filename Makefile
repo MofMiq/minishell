@@ -6,7 +6,7 @@
 #    By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/21 16:22:32 by marirodr          #+#    #+#              #
-#    Updated: 2023/08/29 15:27:24 by begarijo         ###   ########.fr        #
+#    Updated: 2023/08/29 16:06:28 by begarijo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,11 @@ NAME		= minishell
 
 CC 			= gcc -g #quitar -g
 
-CFLAGS 	= -Wall -Wextra -Werror
+CFLAGS 		= -Wall -Wextra -Werror
 
-RLINE		= -I/Users/$(USER)/.brew/opt/readline/include -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
+INC			= -I/Users/$(USER)/.brew/opt/readline/include 
+
+RLINE		= -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
 
 LIBFT		= libft/libft.a
 
@@ -43,11 +45,11 @@ all:	$(NAME)
 
 $(NAME): $(OBJ)
 	@make -s -C libft
-	$(CC) $(CFLAGS) $(LIBFT) $(RLINE) $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS) $(LIBFT) $(RLINE) $(INC) $(OBJ) -o $(NAME)
 	@echo "$(GREEN)Minishell ready$(END)"
 
 .c.o:
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 clean:
 	@$(RM) $(OBJ)

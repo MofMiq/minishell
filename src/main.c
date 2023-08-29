@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/29 15:28:23 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/29 18:59:18 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ void	ft_start_minishell(t_data *data)
 	t_elist	*tmp;
 
 	tmp = data->env;
-	signal(SIGINT, ft_sig_handler);
+//	signal(SIGINT, ft_sig_handler);
+//	signal(SIGQUIT, ft_sig_handler);
 	while (1)
 	{
+		ft_init_sig();
 		data->input = readline("\x1b[96mPutaShell> \x1b[0m");
 		if (data->input == NULL)
 		{

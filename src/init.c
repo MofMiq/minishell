@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:10:56 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/29 10:36:54 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:42:56 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_data	*ft_init_data(char **env)
 	data->args = NULL;
 	data->bool_exp = 0;
 	data->argc = 0;
+	data->sig = 0;
+	ft_init_sig();
 	return (data);
 }
 
