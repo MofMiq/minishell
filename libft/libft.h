@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 10:33:34 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/28 11:05:54 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/29 15:29:40 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,9 @@ int					ft_strlen_gnl(char *s);
 char				*ft_strchr_gnl(char *s, int c);
 void				*ft_calloc_gnl(size_t count, size_t size);
 char				*ft_strjoin_gnl(char *s1, char *s2);
+
+//minishell
+int					mini_count_word(char const *s, char c);
+char				**ft_mini_split(char const *s, char c);
 
 #endif
