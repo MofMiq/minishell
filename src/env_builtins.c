@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/28 16:23:37 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/28 19:45:39 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,26 +109,29 @@ void	ft_miniexit(t_data *data)
 t_elist	*ft_copy_env(char **env)
 {
 	int		i;
-	char	**splited;
+	char	**splited = NULL;
 	t_elist	*elist;
-	//char	*colors;
+	char	*colors;
 
 	i = 0;
 	elist = NULL;
 	while (env[i])
 	{
 		splited = ft_split(env[i], '=');
-		//printf("hola? [%d]%s\n", i, env[i]);
-		/*if (ft_strncmp(env[i], "LS_COLORS", 9) == 0)
+		if (ft_strncmp(env[i], "LS_COLORS", 9) == 0)
 		{
-			printf("funciona esto???\n");
 			colors = ft_strtrim(env[i], "LS_COLORS=");
-			printf("colors: %s\n", colors);
-		}*/
-		ft_add_back(&elist, ft_new_node(splited));
+			ft_free_double_pointer(splited);
+			splited[0] = "LS_COLORS";
+			splited[1] = colors;
+			ft_add_back(&elist, ft_new_node(splited));
+		}
+		else
+			ft_add_back(&elist, ft_new_node(splited));
 		/*if ((ft_list_cmp(elist, "LS_COLORS")) == 0)
-			ft_update_list(, colors, "LS_COLORS");*/
+			ft_update_list(elist, colors, "LS_COLORS");*/
 		i++;
+		//exit(0);
 	}
 	ft_free_double_pointer(splited);
 	return (elist);
