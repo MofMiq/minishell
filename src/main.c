@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/28 12:15:59 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/28 17:52:28 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_data	*ft_init_data(char **env)
 	(void)env;
 	data = (t_data *)malloc(sizeof(t_data));
 	data->env = ft_copy_env(env);
-	ft_init_env(data);
+	ft_init_env(data->env);
 	data->input = NULL;
 	data->args = NULL;
 	data->bool_exp = 0;
