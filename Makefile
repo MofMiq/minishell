@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+         #
+#    By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/21 16:22:32 by marirodr          #+#    #+#              #
-#    Updated: 2023/08/28 11:16:25 by begarijo         ###   ########.fr        #
+#    Updated: 2023/08/29 15:27:24 by begarijo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,12 @@ SRC			= src/main.c \
 			  src/echo.c \
 			  src/builtins.c \
 			  src/list_utils.c \
+			  src/list_utils_2.c \
 			  src/env_builtins.c \
 			  src/cd.c \
-			  src/utils.c \
 			  src/free.c \
 			  src/init.c \
+			  src/signals.c \
 
 OBJ			= $(SRC:.c=.o)
 
