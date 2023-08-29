@@ -19,7 +19,7 @@ t_data	*ft_init_data(char **env)
 	(void)env;
 	data = (t_data *)malloc(sizeof(t_data));
 	data->env = ft_copy_env(env);
-	ft_init_env(data);
+	ft_init_env(data->env);
 	data->input = NULL;
 	data->args = NULL;
 	data->bool_exp = 0;

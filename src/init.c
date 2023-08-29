@@ -6,24 +6,24 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:10:56 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/28 12:27:10 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/28 17:54:56 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	ft_init_env(t_data *data)
+void	ft_init_env(t_elist *elist)
 {
 	t_elist	*tmp;
 
-	tmp = data->env;
-	while (data->env)
+	tmp = elist;
+	while (elist)
 	{
-		if (ft_list_cmp(data, "OLDPWD") == 0)
-			ft_remove_if(data->env, "OLDPWD", &data->env);
-		if (ft_list_cmp(data, "ZSH") == 0)
-			ft_remove_if(data->env, "ZSH", &data->env);
-		data->env = data->env->next;
+		if (ft_list_cmp(elist, "ZSH") == 0)
+			ft_remove_if(elist, "ZSH", &elist);
+		if (ft_list_cmp(elist, "OLDPWD") == 0)
+			ft_remove_if(elist, "OLDPWD", &elist);
+		elist = elist->next;
 	}
-	data->env = tmp;
+	elist = tmp;
 }

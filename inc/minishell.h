@@ -98,6 +98,6 @@ void	ft_free_all(t_data *data);
 
 //init.c
 
-void	ft_init_env(t_data *data);
+void	ft_init_env(t_elist *elist);
 
 #endif
