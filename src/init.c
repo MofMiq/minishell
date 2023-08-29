@@ -12,18 +12,37 @@
 
 #include "../inc/minishell.h"
 
-void	ft_init_env(t_data *data)
+t_data	*ft_init_data(char **env)
+{
+	t_data	*data;
+
+	(void)env;
+	data = (t_data *)malloc(sizeof(t_data));
+	data->env = ft_copy_env(env);
+	ft_init_env(data->env);
+	data->input = NULL;
+	data->args = NULL;
+	data->bool_exp = 0;
+	data->argc = 0;
+	return (data);
+}
+
+void	ft_init_env(t_elist *elist)
 {
 	t_elist	*tmp;
 
-	tmp = data->env;
-	while (data->env)
+	tmp = elist;
+	while (elist)
 	{
-		if (ft_list_cmp(data, "OLDPWD") == 0)
-			ft_remove_if(data->env, "OLDPWD", &data->env);
-		if (ft_list_cmp(data, "ZSH") == 0)
-			ft_remove_if(data->env, "ZSH", &data->env);
-		data->env = data->env->next;
+		if (ft_list_cmp(elist, "ZSH") == 0)
+			ft_remove_if(elist, "ZSH", &elist);
+		if (ft_list_cmp(elist, "OLDPWD") == 0)
+			ft_remove_if(elist, "OLDPWD", &elist);
+		if (ft_list_cmp(elist, "SHELL") == 0)
+			ft_update_list(elist, "minishell", "SHELL");
+		if (ft_list_cmp(elist, "_") == 0)
+			ft_update_list(elist, "./minishell", "_");
+		elist = elist->next;
 	}
-	data->env = tmp;
+	elist = tmp;
 }

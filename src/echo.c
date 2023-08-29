@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:54:01 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/25 12:33:03 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/29 10:16:39 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	epur_str(char *str)
 			write(1, &str[i], 1);
 			i++;
 		}
-		while (ft_is_space(str[i]) && (ft_is_space(str[i + 1]) || str[i + 1] != '\0'))
+		while (ft_is_space(str[i]) && (ft_is_space(str[i + 1])
+				|| str[i + 1] != '\0'))
 			i++;
 		if (ft_is_space(str[i]) && str[i + 1] != '\0')
 			write(1, " ", 1);
@@ -101,4 +102,3 @@ void	ft_echo(t_data *data)
 	if (flag == 0)
 		printf("\n");
 }
-
