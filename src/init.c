@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:10:56 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/29 15:40:52 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/30 16:53:21 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_data	*ft_init_data(char **env)
 	data->args = NULL;
 	data->bool_exp = 0;
 	data->argc = 0;
+	data->sig = 0;
+	ft_init_sig();
 	return (data);
 }
 

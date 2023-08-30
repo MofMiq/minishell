@@ -5,19 +5,58 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 11:05:18 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/29 15:45:14 by marirodr         ###   ########.fr       */
+/*   Created: 2023/08/29 16:18:06 by begarijo          #+#    #+#             */
+/*   Updated: 2023/08/30 12:48:19 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	ft_sig_handler(int sig)
+void	ft_init_sig(void)
 {
-	signal(sig, SIG_IGN);
-	printf("Has hecho CTRL + C????\n");
-	//rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-	exit (0);
+	struct sigaction	sig;
+
+	ft_ignore_sigquit();
+//	ft_memset(&sig, 0, sizeof(sig));
+	sig.sa_handler = &ft_restart_input;
+	sigaction(SIGINT, &sig, NULL);
 }
+
+void	ft_restart_input(int sig)
+{
+	(void)sig;
+	printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 1);
+	rl_redisplay();
+}
+
+/*
+void	ft_getter(int i, t_data *data)
+{
+	static int	active;
+
+	active = i;
+	data->sig = &active;
+}
+
+int	ft_setter(t_data *data)
+{
+	int	active;
+
+	active = *(data->sig);
+	return (active);
+}
+*/
+
+void	ft_ignore_sigquit(void)
+{
+	struct sigaction	sigq;
+	
+	//ft_memset(&sigq, 0, sizeof(sigq));
+	sigq.sa_handler = SIG_IGN;
+	sigaction(SIGQUIT, &sigq, NULL);
+}
+
+
+/*No entiendo muy bien como va esto, hacer pruebas cambiando cosas*/

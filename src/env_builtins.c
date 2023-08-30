@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/30 17:14:10 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:23:20 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,7 @@ void	ft_miniexit(t_data *data)
 			}
 			if (!ft_isdigit(data->args[1][0]))
 			{
-				printf("bash: %s: %s: numeric argument is required\n", data->args[0], data->args[1]); //hacer funcion adecuada a perror
-				ft_free_all(data);
+				printf("bash: %s: %s: numeric argument is required\n", data->args[0], data->args[1]);
 				exit(EXIT_FAILURE);
 			}
 		}
