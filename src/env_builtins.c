@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/29 17:07:15 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:14:10 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	ft_env(t_data *data, char **args)
 	{
 		//perror("env");
 		printf("%s: %s: No such file or directory\n", args[0], args[1]);
-		//liberar memorira
 	}
 	data->env = tmp;
 }
@@ -106,18 +105,6 @@ void	ft_miniexit(t_data *data)
 	}
 }
 
-		/*if (ft_strncmp(env[i], "LS_COLORS", 9) == 0)
-		{
-			colors = ft_strtrim(env[i], "LS_COLORS=");
-			ft_free_double_pointer(splited);
-			splited[0] = "LS_COLORS";
-			splited[1] = colors;
-			ft_add_back(&elist, ft_new_node(splited));
-		}
-		else*/
-		/*if ((ft_list_cmp(elist, "LS_COLORS")) == 0)
-			ft_update_list(elist, colors, "LS_COLORS");*/
-
 t_elist	*ft_copy_env(char **env)
 {
 	int		i;
@@ -131,7 +118,7 @@ t_elist	*ft_copy_env(char **env)
 		splited = ft_mini_split(env[i], '=');
 		ft_add_back(&elist, ft_new_node(splited));
 		i++;
+		ft_free_double_pointer(splited);
 	}
-	ft_free_double_pointer(splited);
 	return (elist);
 }
