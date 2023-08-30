@@ -6,7 +6,7 @@
 #    By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/21 16:22:32 by marirodr          #+#    #+#              #
-#    Updated: 2023/08/30 13:36:24 by begarijo         ###   ########.fr        #
+#    Updated: 2023/08/30 18:21:35 by begarijo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC			= src/main.c \
 			  src/builtins.c \
 			  src/list_utils.c \
 			  src/list_utils_2.c \
+			  src/echo_utils.c \
 			  src/env_builtins.c \
 			  src/cd.c \
 			  src/free.c \
