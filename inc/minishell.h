@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/30 18:37:34 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:14:08 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <termios.h>
 # include "../libft/libft.h"
 // # include "../memory-leaks-master/include/memory_leaks.h"
 

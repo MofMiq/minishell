@@ -5,6 +5,8 @@
         "iterator": "c",
         "string": "c",
         "string_view": "c",
-        "vector": "c"
+        "vector": "c",
+        "readline.h": "c",
+        "history.h": "c"
     }
 }
