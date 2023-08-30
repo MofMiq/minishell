@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:18:06 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/30 12:48:19 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:12:10 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include <termios.h>
 
 void	ft_init_sig(void)
 {
 	struct sigaction	sig;
 
 	ft_ignore_sigquit();
-//	ft_memset(&sig, 0, sizeof(sig));
+	ft_memset(&sig, 0, sizeof(sig));
 	sig.sa_handler = &ft_restart_input;
 	sigaction(SIGINT, &sig, NULL);
 }
@@ -25,38 +26,36 @@ void	ft_init_sig(void)
 void	ft_restart_input(int sig)
 {
 	(void)sig;
-	printf("\n");
+	printf("\nHas hecho CTRL + C\n");
+	rl_replace_line("", 0);
 	rl_on_new_line();
-	rl_replace_line("", 1);
 	rl_redisplay();
 }
-
-/*
-void	ft_getter(int i, t_data *data)
-{
-	static int	active;
-
-	active = i;
-	data->sig = &active;
-}
-
-int	ft_setter(t_data *data)
-{
-	int	active;
-
-	active = *(data->sig);
-	return (active);
-}
-*/
 
 void	ft_ignore_sigquit(void)
 {
 	struct sigaction	sigq;
-	
-	//ft_memset(&sigq, 0, sizeof(sigq));
+
+	ft_memset(&sigq, 0, sizeof(sigq));
 	sigq.sa_handler = SIG_IGN;
+	sigemptyset(&sigq.sa_mask);
+	sigq.sa_flags = 0;
 	sigaction(SIGQUIT, &sigq, NULL);
 }
 
+// void	ft_init_sig(int sig)
+// {
+// 	struct termios	input;
 
-/*No entiendo muy bien como va esto, hacer pruebas cambiando cosas*/
+// 	if (sig == SIGINT)
+// 	{
+// 		printf("\n");
+// 		rl_replace_line("", 0);
+// 		rl_on_new_line();
+// 		rl_redisplay();
+// 		signal(SIGINT, ft_init_sig);
+// 	}
+// 	tcgetattr(STDIN_FILENO, &input);
+// 	//input.c_lflag &= ~ECHOCTL;
+// 	tcsetattr(STDIN_FILENO, TCSANOW, &input);
+// }
