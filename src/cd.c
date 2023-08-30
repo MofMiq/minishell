@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:25:39 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/29 10:38:39 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:05:10 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_cd(t_data *data)
 		if (ft_list_cmp(data->env, "PWD") == 0)
 			ft_update_list(data->env, nwd, "PWD");
 		ft_oldpwd(data, owd, nwd);
+		free(nwd);
 	}
 	else if (data->argc > 2)
 	{
@@ -32,6 +33,7 @@ void	ft_cd(t_data *data)
 	}
 	else
 		perror("cd");
+	free(owd);
 }
 
 void	ft_pwd(t_data *data)
@@ -45,13 +47,16 @@ void	ft_pwd(t_data *data)
 		perror("pwd");
 	else
 		printf("%s\n", cwd);
+	free(cwd);
 }
 
 void	ft_oldpwd(t_data *data, char *owd, char *nwd)
 {
 	char	**old;
+	char	*join;
 
-	old = ft_split(ft_strjoin("OLDPWD=", owd), '=');
+	join = ft_strjoin("OLDPWD=", owd);
+	old = ft_split(join, '=');
 	if (ft_strcmp(owd, nwd) != 0)
 	{
 		if (ft_list_cmp(data->env, "OLDPWD") == 0)
@@ -59,6 +64,7 @@ void	ft_oldpwd(t_data *data, char *owd, char *nwd)
 		else if (ft_list_cmp(data->env, "OLDPWD") != 0)
 			ft_add_back(&data->env, ft_new_node(old));
 	}
+	free(join);
 	ft_free_double_pointer(old);
 }
 
