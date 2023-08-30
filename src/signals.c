@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:18:06 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/29 19:05:30 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:48:19 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_init_sig(void)
 	struct sigaction	sig;
 
 	ft_ignore_sigquit();
-	ft_memset(&sig, 0, sizeof(sig));
+//	ft_memset(&sig, 0, sizeof(sig));
 	sig.sa_handler = &ft_restart_input;
 	sigaction(SIGINT, &sig, NULL);
 }
@@ -53,8 +53,7 @@ void	ft_ignore_sigquit(void)
 {
 	struct sigaction	sigq;
 	
-	printf("Aquí llegas?\n");
-	ft_memset(&sigq, 0, sizeof(sigq));
+	//ft_memset(&sigq, 0, sizeof(sigq));
 	sigq.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &sigq, NULL);
 }
