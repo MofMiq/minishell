@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/30 16:53:54 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:14:08 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <termios.h>
 # include "../libft/libft.h"
 // # include "../memory-leaks-master/include/memory_leaks.h"
 
@@ -52,7 +53,7 @@ t_elist	*ft_penultimate_node(t_elist *lst);
 t_elist	*ft_first_node(t_elist *node);
 t_elist	*ft_add_back(t_elist **env, t_elist *new);
 
-//utils.c
+//list_utils2.c
 
 int		ft_double_pointer_len(char **args);
 t_elist	*ft_search_node(t_elist *elist, char *var_env);
@@ -60,11 +61,17 @@ int		ft_list_cmp(t_elist *elist, char *var_env);
 void	ft_update_list(t_elist *elist, char *new_def, char *var_env);
 void	ft_remove_if(t_elist *curr, char *str, t_elist **env);
 
-//echo.c
+//echo_utils.c
 
 int		ft_is_space(char c);
 void	epur_str(char *str);
 void	ft_print_echo(t_data *data, int pos);
+int		ft_is_flag(char *str);
+int		ft_check_argc(t_data *data);
+
+//echo.c
+
+int		ft_find_pos(t_data *data);
 void	ft_echo(t_data *data);
 
 //builtins.c
