@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:43:04 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/31 13:00:26 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:29:25 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_do_builtins(t_data *data)
 	else if (b == 2)
 		ft_cd(data);
 	else if (b == 3)
-		ft_pwd(data);
+		ft_pwd();
 	else if (b == 4)
 		ft_export(data);
 	else if (b == 5)
