@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:43:04 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/30 17:56:49 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:00:26 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	ft_is_builtin(t_data *data)
 		return (6);
 	if (ft_strcmp(data->args[0], "exit") == 0)
 		return (7);
+	if (ft_strcmp(data->args[0], "./minishell") == 0)
+		return (8);
 	return (0);
 }
 
@@ -50,4 +52,6 @@ void	ft_do_builtins(t_data *data)
 		ft_env(data, data->args);
 	else if (b == 7)
 		ft_miniexit(data);
+	else if (b == 8)
+		ft_childprocess(data);
 }
