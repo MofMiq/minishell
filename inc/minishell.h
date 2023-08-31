@@ -98,9 +98,11 @@ void	ft_cmp_and_update(t_data *data, char *var_emv);
 
 void	ft_env(t_data *data, char **args);
 void	ft_export(t_data *data);
-void	ft_unset(t_elist **env, t_data *data);
+void	ft_unset(t_elist **env, t_elist **exp, t_data *data);
 t_elist	*ft_copy_env(char **env);
 void	ft_miniexit(t_data *data);
+void	ft_print_list(t_elist *env, t_elist *exp, int i);
+void	ft_export_list(t_elist **exp_lst, char *var_name);
 
 //free.c
 
