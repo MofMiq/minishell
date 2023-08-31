@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_builtins.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/31 16:44:50 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:42:34 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,12 @@ void	ft_env(t_data *data, char **args)
 	data->env = tmp;
 }
 
-t_elist	*ft_export_list(char *name)
+void	ft_export_list(t_elist **exp_lst, char *var_name)
 {
-	t_elist	*tmp;
-
-	tmp = ft_add_back(&tmp, ft_new_node(&name));
-	printf("export:%s\n", tmp->name);
-	printf("export:%s\n", tmp->def);
-	//tmp = ft_first_node(tmp);
-	return (tmp);
+	ft_add_back(exp_lst, ft_new_node(&var_name));
+	//printf("export:%s\n", exp_lst->name);
+	//printf("export:%s\n", exp_lst->def);
+	//exp_lst = ft_first_node(exp_lst);
 }
 
 void	ft_print_exp_list(t_elist *lst)
@@ -54,7 +51,6 @@ void	ft_print_exp_list(t_elist *lst)
 	{
 		printf("print:%s\n", lst->name);
 		printf("print:%s\n", lst->def);
-		//printf("print:%s\n", lst->prev->name);
 		lst = lst->next;
 	}
 }
@@ -86,11 +82,10 @@ void	ft_export(t_data *data)
 			}
 			else
 			{
-				printf("jajnt\n");
-				data->exp = ft_export_list(data->args[i]);
-				ft_print_exp_list(data->exp);
-				// data->exp = ft_first_node(data->exp);
+				ft_export_list(&data->exp, data->args[i]);
+				data->exp = ft_first_node(data->exp);
 				//printf("desde env_builting%s\n", data->exp->name);
+				ft_print_exp_list(data->exp);
 			}
 			i++;
 		}
