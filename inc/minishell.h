@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/31 13:13:24 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:29:16 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ void	ft_start_minishell(t_data *data);
 //cd.c
 
 void	ft_cd(t_data *data);
-void	ft_pwd(t_data *data);
+void	ft_change_dir(t_data *data, char *owd);
+void	ft_pwd(void);
 void	ft_oldpwd(t_data *data, char *owd, char *nwd);
 
 // crear otro archivo pa builtins
