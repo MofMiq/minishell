@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/31 16:42:34 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/31 18:26:13 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	ft_export(t_data *data)
 		{
 			if (ft_strchr(data->args[i], '='))
 			{
+				// ft_cmp_and_update(data, data->args[i]);
 				splited = ft_split(data->args[i], '=');
 				if ((ft_list_cmp(data->env, splited[0])) == 0)
 					ft_update_list(data->env, splited[1], splited[0]);

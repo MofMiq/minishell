@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:54:01 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/30 18:39:42 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/31 18:24:16 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ void	ft_echo(t_data *data)
 	{
 		flag = ft_find_pos(data);
 		if (flag == 0)
+			printf("\n");
+	}
+	else
+	{
+		flag = ft_check_argc(data);
+		if (flag == 2)
 			printf("\n");
 	}
 }
