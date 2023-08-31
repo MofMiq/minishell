@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/30 19:14:08 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:13:24 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_data
 	int		bool_exp;
 	int		argc;
 	int		*sig;
+	int		child;
 	t_elist	*env;
 }	t_data;
 
@@ -116,5 +117,9 @@ void	ft_init_sig(void);
 void	ft_restart_input(int sig);
 void	ft_ignore_sigquit(void);
 //void	ft_which(void);
+
+//fork.c
+
+void	ft_childprocess(t_data *data);
 
 #endif

@@ -6,12 +6,11 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:18:06 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/30 19:12:10 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:35:27 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-#include <termios.h>
 
 void	ft_init_sig(void)
 {
