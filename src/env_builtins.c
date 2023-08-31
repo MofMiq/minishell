@@ -151,5 +151,6 @@ t_elist	*ft_copy_env(char **env)
 		i++;
 		ft_free_double_pointer(splited);
 	}
+	printf("en copy env: %s\n", elist->name);
 	return (elist);
 }
