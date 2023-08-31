@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_builtins.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/31 16:42:34 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/31 18:39:57 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,45 @@
 
 void	ft_env(t_data *data, char **args)
 {
-	t_elist	*tmp;
-
-	tmp = data->env;
 	if (data->argc == 1)
-	{
-		while (data->env)
-		{
-			if (data->bool_exp == 1)
-				printf("declare -x %s=\"%s\"\n", data->env->name, data->env->def);
-			else
-				printf("%s=%s\n", data->env->name, data->env->def);
-			data->env = data->env->next;
-		}
-	}
+		ft_print_list(data->env, NULL, 1);
 	else
 	{
 		//perror("env");
 		printf("%s: %s: No such file or directory\n", args[0], args[1]);
 	}
-	data->env = tmp;
 }
 
 void	ft_export_list(t_elist **exp_lst, char *var_name)
 {
 	ft_add_back(exp_lst, ft_new_node(&var_name));
-	//printf("export:%s\n", exp_lst->name);
-	//printf("export:%s\n", exp_lst->def);
-	//exp_lst = ft_first_node(exp_lst);
 }
 
-void	ft_print_exp_list(t_elist *lst)
+void	ft_print_list(t_elist *env, t_elist *exp, int i)
 {
-	printf("hola???\n");
-	while (lst)
+	t_elist	*tmp;
+	t_elist	*aux;
+
+	tmp = env;
+	aux = exp;
+	while (env)
 	{
-		printf("print:%s\n", lst->name);
-		printf("print:%s\n", lst->def);
-		lst = lst->next;
+		if (i == 1)
+			printf("%s=%s\n", env->name, env->def);
+		else if (i == 2)
+			printf("declare -x %s=\"%s\"\n", env->name, env->def);
+		env = env->next;
 	}
+	env = tmp;
+	if (i == 2)
+	{
+		while (exp)
+		{
+			printf("declare -x %s\n", exp->name);
+			exp = exp->next;
+		}
+	}
+	exp = aux;
 }
 
 void	ft_export(t_data *data)
@@ -61,12 +61,9 @@ void	ft_export(t_data *data)
 	int		i;
 
 	i = 1;
+	// data->bool_exp ya no sirve para nada
 	if (data->argc == 1)
-	{
-		data->bool_exp = 1;
-		ft_env(data, data->args);
-		data->bool_exp = 0;
-	}
+		ft_print_list(data->env, data->exp, 2);
 	else
 	{
 		while (data->args[i])
@@ -83,18 +80,17 @@ void	ft_export(t_data *data)
 			else
 			{
 				ft_export_list(&data->exp, data->args[i]);
-				data->exp = ft_first_node(data->exp);
-				//printf("desde env_builting%s\n", data->exp->name);
-				ft_print_exp_list(data->exp);
+				//data->exp = ft_first_node(data->exp); no hace nada ajaja
 			}
 			i++;
 		}
 	}
 }
 
-void	ft_unset(t_elist **env, t_data *data)
+void	ft_unset(t_elist **env, t_elist **exp, t_data *data)
 {
 	t_elist	*curr;
+	t_elist	*curr2;
 	int		i;
 
 	if (data->argc > 1)
@@ -103,7 +99,9 @@ void	ft_unset(t_elist **env, t_data *data)
 		while (data->args[i] != NULL)
 		{
 			curr = *env;
+			curr2 = *exp;
 			ft_remove_if(curr, data->args[i], env);
+			ft_remove_if(curr2, data->args[i], exp);
 			i++;
 		}
 	}
@@ -151,6 +149,5 @@ t_elist	*ft_copy_env(char **env)
 		i++;
 		ft_free_double_pointer(splited);
 	}
-	printf("en copy env: %s\n", elist->name);
 	return (elist);
 }

@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/31 15:29:16 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/31 18:24:11 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,11 @@ void	ft_oldpwd(t_data *data, char *owd, char *nwd);
 
 void	ft_env(t_data *data, char **args);
 void	ft_export(t_data *data);
-void	ft_unset(t_elist **env, t_data *data);
+void	ft_unset(t_elist **env, t_elist **exp, t_data *data);
 t_elist	*ft_copy_env(char **env);
 void	ft_miniexit(t_data *data);
+void	ft_print_list(t_elist *env, t_elist *exp, int i);
+void	ft_export_list(t_elist **exp_lst, char *var_name);
 
 //free.c
 

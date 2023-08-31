@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:51:25 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/29 17:11:17 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/31 18:23:59 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ void	ft_remove_if(t_elist *curr, char *str, t_elist **env)
 				if (curr->next)
 					curr->next->prev = curr->prev;
 			}
-			free(curr->def);
+			if (curr->def != NULL)
+				free(curr->def);
 			free(curr->name);
 			free(curr);
 		}
