@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
 /*   Updated: 2023/08/31 15:29:16 by begarijo         ###   ########.fr       */
@@ -44,6 +44,7 @@ typedef struct s_data
 	int		*sig;
 	int		child;
 	t_elist	*env;
+	t_elist	*exp;
 }	t_data;
 
 //list_utils.c

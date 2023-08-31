@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/31 13:51:59 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:52:08 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_leaks(void)
 
 int	main(int argc, char **argv, char **env)
 {
-	atexit(ft_leaks); //buscar leaks
+	atexit(ft_leaks);
 	t_data	*data;
 
 	(void)argc;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:10:56 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/30 19:06:04 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/31 11:21:09 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_data	*ft_init_data(char **env)
 	data = (t_data *)malloc(sizeof(t_data));
 	data->env = ft_copy_env(env);
 	ft_init_env(data->env);
+	data->exp = NULL;
 	data->input = NULL;
 	data->args = NULL;
 	data->bool_exp = 0;
