@@ -6,42 +6,39 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:25:39 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/30 17:05:10 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:35:18 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	ft_cd(t_data *data)
+void	ft_change_dir(t_data *data, char *owd)
 {
 	char	*nwd;
+
+	nwd = getcwd(NULL, 0);
+	if (ft_list_cmp(data->env, "PWD") == 0)
+		ft_update_list(data->env, nwd, "PWD");
+	ft_oldpwd(data, owd, nwd);
+	free(nwd);
+}
+
+void	ft_cd(t_data *data)
+{
 	char	*owd;
 
 	owd = getcwd(NULL, 0);
-	if (chdir(data->args[1]) == 0 && data->argc == 2)
-	{
-		nwd = getcwd(NULL, 0);
-		if (ft_list_cmp(data->env, "PWD") == 0)
-			ft_update_list(data->env, nwd, "PWD");
-		ft_oldpwd(data, owd, nwd);
-		free(nwd);
-	}
-	else if (data->argc > 2)
-	{
-		printf("cd: too many args\n");
-		return ;
-	}
+	if (chdir(data->args[1]) == 0 && data->argc >= 2)
+		ft_change_dir(data, owd);
 	else
 		perror("cd");
 	free(owd);
 }
 
-void	ft_pwd(t_data *data)
+void	ft_pwd(void)
 {
 	char	*cwd;
 
-	if (ft_double_pointer_len(data->args) > 1)
-		printf("pwd: too many args\n");
 	cwd = getcwd(NULL, 0);
 	if (cwd == NULL)
 		perror("pwd");
@@ -55,10 +52,12 @@ void	ft_oldpwd(t_data *data, char *owd, char *nwd)
 	char	**old;
 	char	*join;
 
-	join = ft_strjoin("OLDPWD=", owd);
-	old = ft_split(join, '=');
+	old = NULL;
+	join = NULL;
 	if (ft_strcmp(owd, nwd) != 0)
 	{
+		join = ft_strjoin("OLDPWD=", owd);
+		old = ft_split(join, '=');
 		if (ft_list_cmp(data->env, "OLDPWD") == 0)
 			ft_update_list(data->env, owd, "OLDPWD");
 		else if (ft_list_cmp(data->env, "OLDPWD") != 0)

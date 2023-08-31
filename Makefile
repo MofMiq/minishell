@@ -6,7 +6,7 @@
 #    By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/21 16:22:32 by marirodr          #+#    #+#              #
-#    Updated: 2023/08/30 18:21:35 by begarijo         ###   ########.fr        #
+#    Updated: 2023/08/31 13:13:47 by begarijo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC			= src/main.c \
 			  src/free.c \
 			  src/init.c \
 			  src/signals.c \
+			  src/fork.c \
 
 OBJ			= $(SRC:.c=.o)
 

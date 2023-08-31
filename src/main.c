@@ -32,7 +32,7 @@ void	ft_start_minishell(t_data *data)
 			data->argc = ft_double_pointer_len(data->args);
 			if (ft_is_builtin(data))
 				ft_do_builtins(data);
-			ft_free_double_pointer(data->args); //testear, podría dar algunos problemas???
+			ft_free_double_pointer(data->args);
 			free(data->input);
 		}
 	}

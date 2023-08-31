@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/31 11:20:02 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:29:16 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_data
 	int		bool_exp;
 	int		argc;
 	int		*sig;
+	int		child;
 	t_elist	*env;
 	t_elist	*exp;
 }	t_data;
@@ -88,7 +89,8 @@ void	ft_start_minishell(t_data *data);
 //cd.c
 
 void	ft_cd(t_data *data);
-void	ft_pwd(t_data *data);
+void	ft_change_dir(t_data *data, char *owd);
+void	ft_pwd(void);
 void	ft_oldpwd(t_data *data, char *owd, char *nwd);
 
 // crear otro archivo pa builtins
@@ -117,5 +119,9 @@ void	ft_init_sig(void);
 void	ft_restart_input(int sig);
 void	ft_ignore_sigquit(void);
 //void	ft_which(void);
+
+//fork.c
+
+void	ft_childprocess(t_data *data);
 
 #endif
