@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:25:39 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/31 15:35:18 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/31 18:24:25 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,35 @@ void	ft_pwd(void)
 
 void	ft_oldpwd(t_data *data, char *owd, char *nwd)
 {
-	char	**old;
+	//char	**old;
 	char	*join;
 
-	old = NULL;
+	//old = NULL;
 	join = NULL;
 	if (ft_strcmp(owd, nwd) != 0)
 	{
 		join = ft_strjoin("OLDPWD=", owd);
-		old = ft_split(join, '=');
-		if (ft_list_cmp(data->env, "OLDPWD") == 0)
-			ft_update_list(data->env, owd, "OLDPWD");
-		else if (ft_list_cmp(data->env, "OLDPWD") != 0)
-			ft_add_back(&data->env, ft_new_node(old));
+		ft_cmp_and_update(data, join);
+		// old = ft_split(join, '=');
+		// if (ft_list_cmp(data->env, "OLDPWD") == 0)
+		// 	ft_update_list(data->env, owd, "OLDPWD");
+		// else if (ft_list_cmp(data->env, "OLDPWD") != 0)
+		// 	ft_add_back(&data->env, ft_new_node(old));
+		free(join);
 	}
-	free(join);
-	ft_free_double_pointer(old);
+	//ft_free_double_pointer(old);
+}
+
+void	ft_cmp_and_update(t_data *data, char *var_env)
+{
+	char	**splitted;
+
+	splitted = ft_split(var_env, '=');
+	if (ft_list_cmp(data->env, splitted[0]) == 0)
+		ft_update_list(data->env, splitted[1], splitted[0]);
+	else if (ft_list_cmp(data->env, splitted[0]) != 0)
+		ft_add_back(&data->env, ft_new_node(splitted));
+	ft_free_double_pointer(splitted);
 }
 
 //El PATH sale como /Users/begarijo.. etc.

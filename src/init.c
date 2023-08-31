@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:10:56 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/31 11:21:09 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/31 18:32:24 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_data	*ft_init_data(char **env)
 	data->args = NULL;
 	data->bool_exp = 0;
 	data->argc = 0;
-	data->sig = 0;
+	//data->env->child = 1;
 	ft_init_sig();
 	return (data);
 }
@@ -45,6 +45,8 @@ void	ft_init_env(t_elist *elist)
 			ft_update_list(elist, "minishell", "SHELL");
 		if (ft_list_cmp(elist, "_") == 0)
 			ft_update_list(elist, "./minishell", "_");
+		// if (ft_list_cmp(elist, "SHLVL") == 0)
+			//ft_update_list(elist, elist->child, "SHLVL");
 		elist = elist->next;
 	}
 	elist = tmp;

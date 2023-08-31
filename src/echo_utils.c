@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:13:55 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/30 18:31:16 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/31 18:20:07 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,12 @@ void	epur_str(char *str)
 
 void	ft_print_echo(t_data *data, int pos)
 {
-	int	i;
-
-	i = 0;
-	while (data->args[pos + i] != NULL)
+	while (data->args[pos] != NULL)
 	{
-		epur_str(data->args[pos + i]);
-		if (data->args[pos + i + 1] != NULL)
+		epur_str(data->args[pos]);
+		if (data->args[pos + 1] != NULL)
 			write(1, " ", 1);
-		i++;
+		pos++;
 	}
 }
 
@@ -75,15 +72,15 @@ int	ft_is_flag(char *str)
 
 int	ft_check_argc(t_data *data)
 {
+	int	i;
+
+	i = 1;
 	if (data->argc <= 2)
 	{
 		if (data->argc == 1)
-			printf("\n");
+			i = 2;
 		else if (data->argc == 2 && ft_is_flag(data->args[1]))
-			printf("");
-		else
-			return (1);
-		return (0);
+			i = 3;
 	}
-	return (1);
+	return (i);
 }

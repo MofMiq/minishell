@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/31 18:24:11 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/31 18:33:25 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_elist
 {
 	char			*name;
 	char			*def;
+//	int				child;
 	struct s_elist	*prev;
 	struct s_elist	*next;
 }	t_elist;
@@ -41,8 +42,6 @@ typedef struct s_data
 	char	**args;
 	int		bool_exp;
 	int		argc;
-	int		*sig;
-	int		child;
 	t_elist	*env;
 	t_elist	*exp;
 }	t_data;
@@ -83,7 +82,6 @@ void	ft_do_builtins(t_data *data);
 
 //main.c
 
-t_data	*ft_init_data(char **env);
 void	ft_start_minishell(t_data *data);
 
 //cd.c
@@ -92,6 +90,7 @@ void	ft_cd(t_data *data);
 void	ft_change_dir(t_data *data, char *owd);
 void	ft_pwd(void);
 void	ft_oldpwd(t_data *data, char *owd, char *nwd);
+void	ft_cmp_and_update(t_data *data, char *var_emv);
 
 // crear otro archivo pa builtins
 
@@ -112,17 +111,17 @@ void	ft_free_all(t_data *data);
 
 //init.c
 
+t_data	*ft_init_data(char **env);
 void	ft_init_env(t_elist *elist);
 
 //signals.c
 
-//void	ft_sig_handler(int sig);
 void	ft_init_sig(void);
 void	ft_restart_input(int sig);
 void	ft_ignore_sigquit(void);
-//void	ft_which(void);
 
 //fork.c
+//Unido con signals??
 
 void	ft_childprocess(t_data *data);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/31 15:52:08 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/31 18:33:35 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	main(int argc, char **argv, char **env)
 	using_history();
 	data = ft_init_data(env);
 	ft_start_minishell(data);
+	printf("si te sales imprimes????\n");
 	ft_free_all(data);
 	free(data);
 	return (0);
