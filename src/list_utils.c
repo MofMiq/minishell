@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 12:38:14 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/30 12:05:18 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:43:24 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,20 @@ t_elist	*ft_new_node(char **splited)
 		perror("Allocation problem\n");
 		exit(EXIT_FAILURE);
 	}
+	//printf("new node----splited[0]: %s\n", splited[0]);
 	node->name = ft_strdup(splited[0]);
-	//printf("new node->name: %s\n", splited[0]);
-	node->def = ft_strdup(splited[1]);
-	//printf("new node->>def: %s\n", splited[1]);
+	//printf("new node----splited[1]: %s\n", splited[1]);
+	if (splited[1])
+	{
+		node->def = ft_strdup(splited[1]);
+		//printf("new node->def: %s\n", node->name);
+	}
+	else
+	{
+		node->def = NULL;
+		//printf("ft_new_node--------NO DEFFF\n");
+		//printf("new node->def: %s\n", node->def);
+	}
 	node->next = NULL;
 	node->prev = NULL;
 	return (node);
@@ -47,6 +57,7 @@ t_elist	*ft_penultimate_node(t_elist *lst)
 
 t_elist	*ft_first_node(t_elist *node)
 {
+	printf("hola desde fisrt node\n");
 	while (node && node->prev != NULL)
 		node = node->prev;
 	return (node);

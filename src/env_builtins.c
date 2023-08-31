@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/30 19:33:49 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:54:53 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void	ft_env(t_data *data, char **args)
 		while (data->env)
 		{
 			if (data->bool_exp == 1)
-				printf("declare -x ");
-			printf("%s=%s\n", data->env->name, data->env->def);
+				printf("declare -x %s=\"%s\"\n", data->env->name, data->env->def);
+			else
+				printf("%s=%s\n", data->env->name, data->env->def);
 			data->env = data->env->next;
 		}
 	}
@@ -35,27 +36,59 @@ void	ft_env(t_data *data, char **args)
 	data->env = tmp;
 }
 
+void	ft_export_list(t_elist *exp_lst, char *name)
+{
+	ft_add_back(&exp_lst, ft_new_node(&name));
+	//printf("export:%s\n", exp_lst->name);
+	//printf("export:%s\n", exp_lst->def);
+	exp_lst = ft_first_node(exp_lst);
+	while (exp_lst)
+	{
+		printf("print:%s\n", exp_lst->name);
+		printf("print:%s\n", exp_lst->def);
+		exp_lst = exp_lst->next;
+	}
+}
+
+void	ft_print_exp_list(t_elist *lst)
+{
+	(void)lst;
+	printf("hola???\n");
+}
+
 void	ft_export(t_data *data)
 {
 	char	**splited;
+	int		i;
 
+	i = 1;
 	if (data->argc == 1)
 	{
 		data->bool_exp = 1;
-		ft_env(data, data->args); //comillas para export
+		ft_env(data, data->args);
 		data->bool_exp = 0;
 	}
 	else
 	{
-		if (ft_strchr(data->args[1], '='))
+		while (data->args[i])
 		{
-			//cuidado ""
-			splited = ft_split(data->args[1], '=');
-			if ((ft_list_cmp(data->env, splited[0])) == 0)
-				ft_update_list(data->env, splited[1], splited[0]);
+			if (ft_strchr(data->args[i], '='))
+			{
+				splited = ft_split(data->args[i], '=');
+				if ((ft_list_cmp(data->env, splited[0])) == 0)
+					ft_update_list(data->env, splited[1], splited[0]);
+				else
+					ft_add_back(&data->env, ft_new_node(splited));
+				ft_free_double_pointer(splited);
+			}
 			else
-				ft_add_back(&data->env, ft_new_node(splited));
-			ft_free_double_pointer(splited);
+			{
+				ft_export_list(data->exp, data->args[i]);
+				// data->exp = ft_first_node(data->exp);
+				printf("desde env_builting%s\n", data->exp->name);
+				//ft_print_exp_list(data->exp);
+			}
+			i++;
 		}
 	}
 }
