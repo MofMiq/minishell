@@ -6,11 +6,13 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/31 18:39:57 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/01 10:04:23 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+//Reordenar este archivo, +5 funciones
 
 void	ft_env(t_data *data, char **args)
 {
