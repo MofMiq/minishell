@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:10:56 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/31 18:32:24 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/09/01 10:44:00 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_data	*ft_init_data(char **env)
 	data->exp = NULL;
 	data->input = NULL;
 	data->args = NULL;
-	data->bool_exp = 0;
+	//data->bool_exp = 0;
 	data->argc = 0;
 	//data->env->child = 1;
 	ft_init_sig();
