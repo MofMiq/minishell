@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:25:39 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/31 18:24:25 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/09/01 16:58:17 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_oldpwd(t_data *data, char *owd, char *nwd)
 	if (ft_strcmp(owd, nwd) != 0)
 	{
 		join = ft_strjoin("OLDPWD=", owd);
-		ft_cmp_and_update(data, join);
+		ft_cmp_and_update(data->env, join, 1);
 		// old = ft_split(join, '=');
 		// if (ft_list_cmp(data->env, "OLDPWD") == 0)
 		// 	ft_update_list(data->env, owd, "OLDPWD");
@@ -68,16 +68,29 @@ void	ft_oldpwd(t_data *data, char *owd, char *nwd)
 	//ft_free_double_pointer(old);
 }
 
-void	ft_cmp_and_update(t_data *data, char *var_env)
+void	ft_cmp_and_update(t_elist *lst, char *var_env, int i)
 {
 	char	**splitted;
+	//t_elist	*tmp;
 
-	splitted = ft_split(var_env, '=');
-	if (ft_list_cmp(data->env, splitted[0]) == 0)
-		ft_update_list(data->env, splitted[1], splitted[0]);
-	else if (ft_list_cmp(data->env, splitted[0]) != 0)
-		ft_add_back(&data->env, ft_new_node(splitted));
-	ft_free_double_pointer(splitted);
+	if (i == 1)
+	{
+		splitted = ft_split(var_env, '=');
+		if (ft_list_cmp(lst, splitted[0]) == 0)
+			ft_update_list(lst, splitted[1], splitted[0]);
+		else if (ft_list_cmp(lst, splitted[0]) != 0)
+			ft_add_back(&lst, ft_new_node(splitted));
+		ft_free_double_pointer(splitted);
+	}
+	// else if (i == 2)
+	// {
+	// 	tmp = lst;
+	// 	printf("en ft_cmp_and_update->tmp: %s / %s\n", tmp->name, tmp->def);
+	// 	splitted = ft_mini_split(var_env, '=');
+	// 	printf("en ft_cmp_and_update->splitted: [0]%s / [1]%s\n", splitted[0], splitted[1]);
+	// 	ft_remove_if(tmp, splitted[0], &lst);
+	// 	ft_free_double_pointer(splitted);
+	// }
 }
 
 //El PATH sale como /Users/begarijo.. etc.
