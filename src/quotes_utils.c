@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 16:59:13 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/04 17:05:45 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/04 19:17:28 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ char	*ft_ignore_quotes(char *str)
 			c++;
 		}
 	}
-	printf("ft_ignore_quotes: copy: %s\n", copy);
 	free(str);
 	return (copy);
 }
