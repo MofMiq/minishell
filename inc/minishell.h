@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/04 17:02:18 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/04 19:38:00 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,10 @@ void	ft_print_list(t_elist *env, t_elist *exp, int i);
 //env_builtins.c
 
 void	ft_env(t_data *data, char **args);
+int	ft_check_name(char *name);
 void	ft_export(t_data *data);
 void	ft_unset(t_elist **env, t_elist **exp, t_data *data);
 void	ft_miniexit(t_data *data);
-int		ft_is_quote(char c);
-char	*ft_ignore_quotes(char *str);
 
 //echo_utils.c
 

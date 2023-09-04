@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/04 14:56:28 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/04 19:38:07 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,36 @@ void	ft_env(t_data *data, char **args)
 	}
 }
 
+/*Belen no te asustes por este mamotraco de funcion, funciona perfe pero se
+me ha tragantado a la hora de intentar acortarla*/
+
+int	ft_check_name(char *name)
+{
+	int		i;
+	char	**split;
+
+	i = 0;
+	split = ft_mini_split(name, '=');
+	while (split[0][i] != '\0')
+	{
+		if ((ft_isalpha(split[0][0]) == 0))
+		{
+			printf("bash: export: %s: not a valid identifer\n", name); //perror("export");
+			ft_free_double_pointer(split);
+			return (0);
+		}
+		else if (ft_isalnum(split[0][i]) == 0)
+		{
+			printf("bash: export: %s: not a valid identifer\n", name);
+			ft_free_double_pointer(split);
+			return (0);
+		}
+		i++;
+	}
+	ft_free_double_pointer(split);
+	return (1);
+}
+
 void	ft_export(t_data *data)
 {
 	int		i;
@@ -34,7 +64,7 @@ void	ft_export(t_data *data)
 		ft_print_list(data->env, data->exp, 2);
 	else
 	{
-		while (data->args[i])
+		while (data->args[i] && ft_check_name(data->args[i]) == 1)
 		{
 			if (ft_strchr(data->args[i], '='))
 			{
