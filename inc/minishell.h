@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/04 11:31:18 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/04 17:02:18 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,21 @@ int		ft_list_cmp(t_elist *elist, char *var_env);
 void	ft_update_list(t_elist *elist, char *new_def, char *var_env);
 void	ft_remove_if(t_elist *curr, char *str, t_elist **env);
 
+//list_utils_3.c
+
+void	ft_export_list(t_elist **exp_lst, char *var_name);
+t_elist	*ft_copy_env(char **env);
+void	ft_print_list(t_elist *env, t_elist *exp, int i);
+
+//env_builtins.c
+
+void	ft_env(t_data *data, char **args);
+void	ft_export(t_data *data);
+void	ft_unset(t_elist **env, t_elist **exp, t_data *data);
+void	ft_miniexit(t_data *data);
+int		ft_is_quote(char c);
+char	*ft_ignore_quotes(char *str);
+
 //echo_utils.c
 
 int		ft_is_space(char c);
@@ -90,19 +105,7 @@ void	ft_cd(t_data *data);
 void	ft_change_dir(t_data *data, char *owd);
 void	ft_pwd(void);
 void	ft_oldpwd(t_data *data, char *owd, char *nwd);
-void	ft_cmp_and_update(t_data *data, char *var_env, int i); //he cambiado el parametro a lista porque he pensado que vendria mejor y al final no se yo, mirar con belen
-
-// crear otro archivo pa builtins
-
-//env_builtins.c
-
-void	ft_env(t_data *data, char **args);
-void	ft_export(t_data *data);
-void	ft_unset(t_elist **env, t_elist **exp, t_data *data);
-t_elist	*ft_copy_env(char **env);
-void	ft_miniexit(t_data *data);
-void	ft_print_list(t_elist *env, t_elist *exp, int i);
-void	ft_export_list(t_elist **exp_lst, char *var_name);
+void	ft_cmp_and_update(t_data *data, char *var_env, int i);
 
 //free.c
 
@@ -124,5 +127,10 @@ void	ft_ignore_sigquit(void);
 //Unido con signals??
 
 void	ft_childprocess(t_data *data);
+
+//quotes_utils.c
+int		ft_is_quote(char c);
+int		ft_there_is_quote(char *str);
+char	*ft_ignore_quotes(char *str);
 
 #endif

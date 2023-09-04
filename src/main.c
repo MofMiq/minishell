@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/31 18:33:35 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/09/04 17:00:07 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ void	ft_start_minishell(t_data *data)
 		if (data->input[0] != '\0')
 		{
 			add_history(data->input);
+			if (ft_there_is_quote(data->input) != (int)ft_strlen(data->input))
+				data->input = ft_ignore_quotes(data->input);
+			printf("en ft_start_minishell: data->input: %s\n", data->input);
 			data->args = ft_split(data->input, ' ');
 			data->argc = ft_double_pointer_len(data->args);
 			if (ft_is_builtin(data))

@@ -1,0 +1,18 @@
+Para Belen:
+    quotes_utils.c: No te asustes Belen, no me he metido ultra a full con tema comillas. mirando
+el export me dado cuenta de que si las dobles comillas estan bien puestas, las
+ignora completamente y se guardan tal cual, por lo que he hecho unas funciones 
+simples para detectar y quitar las comillas del data->input. sé que están raras
+y a lo mejor en un futuro hay que modificarlas pero para ir cerrando cosillas
+de los builtins
+
+    cd.c: le he puesto una boleana ha esta funcion para adaptarla a las dos
+listas: 1 es para cuando realmente necesitamos hacer actualizar una
+lista (la funcion origina de la funcion); 2 es para cuando necesitamos
+borrar de la lista de export. he tenido que hacerlos asi porque tuve
+problemas intentando reutilizar el unset para esto (creo que con los
+parametros que le pasamos y tal).
+
+    line 85: por que usar aqui el split y no el mini_split, por las pruebas con env y export me viene mejor
+el mini_split, no se si se joderia mucho el OLDPWD con el mini_split??
+

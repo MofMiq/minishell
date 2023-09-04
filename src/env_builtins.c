@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/04 12:36:53 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/04 14:56:28 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,38 +23,6 @@ void	ft_env(t_data *data, char **args)
 		//perror("env");
 		printf("%s: %s: No such file or directory\n", args[0], args[1]);
 	}
-}
-
-void	ft_export_list(t_elist **exp_lst, char *var_name)
-{
-	ft_add_back(exp_lst, ft_new_node(&var_name));
-}
-
-void	ft_print_list(t_elist *env, t_elist *exp, int i)
-{
-	t_elist	*tmp;
-	t_elist	*aux;
-
-	tmp = env;
-	aux = exp;
-	while (env)
-	{
-		if (i == 1)
-			printf("%s=%s\n", env->name, env->def);
-		else if (i == 2)
-			printf("declare -x %s=\"%s\"\n", env->name, env->def);
-		env = env->next;
-	}
-	env = tmp;
-	if (i == 2)
-	{
-		while (exp)
-		{
-			printf("declare -x %s\n", exp->name);
-			exp = exp->next;
-		}
-	}
-	exp = aux;
 }
 
 void	ft_export(t_data *data)
@@ -130,22 +98,4 @@ void	ft_miniexit(t_data *data)
 		ft_free_all(data);
 		exit(EXIT_SUCCESS);
 	}
-}
-
-t_elist	*ft_copy_env(char **env)
-{
-	int		i;
-	char	**splited;
-	t_elist	*elist;
-
-	i = 0;
-	elist = NULL;
-	while (env[i])
-	{
-		splited = ft_mini_split(env[i], '=');
-		ft_add_back(&elist, ft_new_node(splited));
-		i++;
-		ft_free_double_pointer(splited);
-	}
-	return (elist);
 }
