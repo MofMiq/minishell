@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/01 16:23:32 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/04 11:31:18 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	ft_cd(t_data *data);
 void	ft_change_dir(t_data *data, char *owd);
 void	ft_pwd(void);
 void	ft_oldpwd(t_data *data, char *owd, char *nwd);
-void	ft_cmp_and_update(t_elist *lst, char *var_emv, int i); //he cambiado el parametro a lista porque he pensado que vendria mejor y al final no se yo, mirar con belen
+void	ft_cmp_and_update(t_data *data, char *var_env, int i); //he cambiado el parametro a lista porque he pensado que vendria mejor y al final no se yo, mirar con belen
 
 // crear otro archivo pa builtins
 
