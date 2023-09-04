@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/01 17:00:28 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/04 12:36:53 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,7 @@ void	ft_print_list(t_elist *env, t_elist *exp, int i)
 
 void	ft_export(t_data *data)
 {
-	char	**splited;
 	int		i;
-	t_elist	*tmp;
 
 	i = 1;
 	if (data->argc == 1)
@@ -73,19 +71,9 @@ void	ft_export(t_data *data)
 			if (ft_strchr(data->args[i], '='))
 			{
 				if (data->exp)
-				{
 					if (ft_list_cmp(data->exp, data->args[i]))
-					//probando el tuneo este
-						//ft_cmp_and_update(data->exp, data->args[i], 2);
-					//est movie de abajo funca
-					{
-						tmp = data->exp;
-						splited = ft_mini_split(data->args[i], '=');
-						ft_remove_if(tmp, splited[0], &data->exp);
-						ft_free_double_pointer(splited);
-					}
-				}
-				ft_cmp_and_update(data->env, data->args[i], 1);
+						ft_cmp_and_update(data, data->args[i], 2);
+				ft_cmp_and_update(data, data->args[i], 1);
 			}
 			else
 			{
@@ -108,7 +96,6 @@ void	ft_unset(t_elist **env, t_elist **exp, t_data *data)
 		i = 1;
 		while (data->args[i] != NULL)
 		{
-			//printf("unset: data->args[i]: %s\n", data->args[i]);
 			curr = *env;
 			curr2 = *exp;
 			ft_remove_if(curr, data->args[i], env);
