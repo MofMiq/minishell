@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:43:04 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/01 10:40:52 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/05 15:08:41 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	ft_is_builtin(t_data *data)
 {
-	if (ft_strcmp(data->args[0], "echo") == 0)
+	if ((ft_strcmp(data->args[0], "echo") == 0)
+		|| (ft_strcmp(data->args[0], "\"echo\"") == 0)) //esta movie la he echo para caso de que nos pasen el builtin entre comilla ("echo") y simplemente funciones auqnue no del todo correcto
 		return (1);
 	if (ft_strcmp(data->args[0], "cd") == 0)
 		return (2);

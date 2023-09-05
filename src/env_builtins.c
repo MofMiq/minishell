@@ -6,22 +6,23 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/04 19:38:07 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/05 17:03:18 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-//Reordenar este archivo, +5 funciones
-
 void	ft_env(t_data *data, char **args)
 {
+	(void)args;
 	if (data->argc == 1)
 		ft_print_list(data->env, NULL, 1);
 	else
 	{
-		//perror("env");
-		printf("%s: %s: No such file or directory\n", args[0], args[1]);
+		if (chdir(data->args[1]) == 0)
+			printf("%s: %s: %s\n", args[0], args[1], strerror(EACCES));
+		else
+			printf("%s: %s: %s\n", args[0], args[1], strerror(ENOENT));
 	}
 }
 
@@ -37,6 +38,11 @@ int	ft_check_name(char *name)
 	split = ft_mini_split(name, '=');
 	while (split[0][i] != '\0')
 	{
+		// if (split[0][0] == '$')
+		// {
+		// 	printf("toy aqui!!!!!\n");
+		// 	break ;
+		// }
 		if ((ft_isalpha(split[0][0]) == 0))
 		{
 			printf("bash: export: %s: not a valid identifer\n", name); //perror("export");
