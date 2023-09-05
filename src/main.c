@@ -6,11 +6,19 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/04 19:16:25 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/05 17:11:48 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+			//Debugeo de mierdas
+			// int i = 0;
+			// while (data->args[i])
+			// {
+			// 	ft_printf("en ft_start_minishell: %s\n", data->args[i]);
+			// 	i++;
+			// }
 
 void	ft_start_minishell(t_data *data)
 {
@@ -29,9 +37,23 @@ void	ft_start_minishell(t_data *data)
 		{
 			add_history(data->input);
 			if (ft_there_is_quote(data->input) != (int)ft_strlen(data->input))
-				data->input = ft_ignore_quotes(data->input);
+				data->input = ft_ignore_quotes(data->input); //aplicar esto aqui rompe el echo de belen, no se si algo mas
 			data->args = ft_split(data->input, ' ');
+			//Debugeo de mierdas
+			int i = 0;
+			while (data->args[i])
+			{
+				printf("en ft_start_minishell: %s\n", data->args[i]);
+				i++;
+			}
 			data->argc = ft_double_pointer_len(data->args);
+			ft_find_dollar(data->args, data->env);
+			i = 0;
+			while (data->args[i])
+			{
+				printf("en ft_start_minishell despues de $: %s\n", data->args[i]);
+				i++;
+			}
 			if (ft_is_builtin(data))
 				ft_do_builtins(data);
 			ft_free_double_pointer(data->args);
@@ -39,6 +61,7 @@ void	ft_start_minishell(t_data *data)
 		}
 	}
 }
+//printf("ft_start_minishell: data->args: %s / %s\n", data->args[0], data->args[1]);
 
 void	ft_leaks(void)
 {

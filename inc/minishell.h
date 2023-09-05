@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/04 19:38:00 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/05 15:47:06 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <termios.h>
+# include <sys/errno.h>
 # include "../libft/libft.h"
 // # include "../memory-leaks-master/include/memory_leaks.h"
 
@@ -71,7 +72,7 @@ void	ft_print_list(t_elist *env, t_elist *exp, int i);
 //env_builtins.c
 
 void	ft_env(t_data *data, char **args);
-int	ft_check_name(char *name);
+int		ft_check_name(char *name);
 void	ft_export(t_data *data);
 void	ft_unset(t_elist **env, t_elist **exp, t_data *data);
 void	ft_miniexit(t_data *data);
@@ -131,5 +132,8 @@ void	ft_childprocess(t_data *data);
 int		ft_is_quote(char c);
 int		ft_there_is_quote(char *str);
 char	*ft_ignore_quotes(char *str);
+
+//expand_env.c
+void	ft_find_dollar(char **args, t_elist *env);
 
 #endif

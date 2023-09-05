@@ -6,7 +6,7 @@
 #    By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/21 16:22:32 by marirodr          #+#    #+#              #
-#    Updated: 2023/09/04 17:00:25 by marirodr         ###   ########.fr        #
+#    Updated: 2023/09/05 10:57:33 by marirodr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRC			= src/main.c \
 			  src/signals.c \
 			  src/fork.c \
 			  src/quotes_utils.c \
+			  src/expand_env.c \
 
 OBJ			= $(SRC:.c=.o)
 

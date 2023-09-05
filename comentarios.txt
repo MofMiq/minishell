@@ -16,3 +16,11 @@ parametros que le pasamos y tal).
     line 85: por que usar aqui el split y no el mini_split, por las pruebas con env y export me viene mejor
 el mini_split, no se si se joderia mucho el OLDPWD con el mini_split??
 
+    echo.c: Belen una duda al hacer el echo has controlado este tipo de casos: si el te ponen echo "ho     la", el output
+es /ho     la/ (el slash no sale es para que se vea bien). sin embargo el output de nuestro echo es /ho la/.
+es decir, lo saca como si fueran dos argumentos, ignorando las comillas. este comentario es para saber si
+esto lo habias contemplado ya o no, para saber si me he cargado algo por el camino.
+
+    builtins.c:
+    line 18 -> es un parche ahora mismo
+    
