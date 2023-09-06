@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:25:39 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/04 12:50:42 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/06 10:12:05 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	ft_cmp_and_update(t_data *data, char *var_env, int i)
 	{
 		tmp = data->exp;
 		splitted = ft_mini_split(var_env, '=');
-		printf("splted[0]: %s splited[1]: %s\n", splitted[0], splitted[1]);
+		printf("en ft_cmp_and_update: splted[0]: %s splited[1]: %s\n", splitted[0], splitted[1]);
 		ft_remove_if(tmp, splitted[0], &data->exp);
 		ft_free_double_pointer(splitted);
 	}
