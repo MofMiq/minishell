@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/05 15:47:06 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/06 11:50:59 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,9 @@ int		ft_there_is_quote(char *str);
 char	*ft_ignore_quotes(char *str);
 
 //expand_env.c
-void	ft_find_dollar(char **args, t_elist *env);
+void	ft_find_dollar(char **args, t_data *data);
+int		ft_where_equal(char *str);
+char	*ft_dollar_and_equal(char *str, t_elist *lst, char *arg);
+char	*ft_equal_and_dollar(char *str, t_elist *lst, char *arg);
 
 #endif

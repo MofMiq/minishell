@@ -6,23 +6,99 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 10:47:40 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/05 17:41:20 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/06 13:33:38 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-/*esto esta en fase testeo, no hasgas mucho caso*/
+/*este archivo es para las variables de entorno, funciona pero con pinzas y
+probablemente con errores inesperados.
+va ha haber que repensarlo y cambiarlo segun el parseo*/
 
-void	ft_find_dollar(char **args, t_elist *env)
+char	*ft_dollar_and_equal(char *str, t_elist *lst, char *arg)
+{
+	char	**split;
+	char	*tmp;
+	char	*tmp2;
+	char	*tmp3;
+	t_elist	*aux;
+
+	split = ft_mini_split(str, '=');
+	str = split[0];
+	tmp = ft_strjoin("=", split[1]);
+	if (ft_list_cmp(lst, str) == 0)
+	{
+		aux = ft_search_node(lst, str);
+		free(arg);
+		tmp2 = ft_strdup(aux->def);
+		tmp3 = ft_strjoin(tmp2, tmp);
+		arg = tmp3;
+		free(tmp2);
+	}
+	free(tmp);
+	ft_free_double_pointer(split);
+	return (arg);
+}
+
+char	*ft_equal_and_dollar(char *str, t_elist *lst, char *arg)
+{
+	char	**split;
+	char	*tmp;
+	char	*tmp2;
+	char	*tmp3;
+	t_elist	*aux;
+
+	split = ft_mini_split(str, '=');
+	str = split[1];
+	str++;
+	tmp = ft_strjoin(split[0], "=");
+	if (ft_list_cmp(lst, str) == 0)
+	{
+		aux = ft_search_node(lst, str);
+		free(arg);
+		tmp2 = ft_strdup(aux->def);
+		tmp3 = ft_strjoin(tmp, tmp2);
+		arg = tmp3;
+		free(tmp2);
+	}
+	free(tmp);
+	ft_free_double_pointer(split);
+	return (arg);
+}
+
+int	ft_where_equal(char *str)
+{
+	int	i;
+	int	d;
+	int	e;
+
+	i = 0;
+	d = 0;
+	e = 0;
+	if (ft_strchr(str, '='))
+	{
+		while (str[i])
+		{
+			if (str[i] == '$')
+				d = i;
+			else if (str[i] == '=')
+				e = i;
+			i++;
+		}
+		if (d < e)
+			return (1);
+		else if (e < d)
+			return (2);
+	}
+	return (0);
+}
+
+void	ft_find_dollar(char **args, t_data *data)
 {
 	int			i;
 	char		*tmp;
-	char		*tmp2;
-	char		*tmp3;
-	char		*tmp4;
 	t_elist		*aux;
-	char		**split;
 
 	i = 0;
 	while (args[i])
@@ -32,31 +108,13 @@ void	ft_find_dollar(char **args, t_elist *env)
 			tmp = ft_strchr(args[i], '$');
 			tmp++;
 			printf("en ft_find_dolar: tmp: %s\n", tmp);
-			if (ft_strchr(args[i], '='))
+			if (ft_where_equal(args[i]) == 1/* && ft_strncmp(args[i], "export", 6)*/)
+				args[i] = ft_dollar_and_equal(tmp, data->env, args[i]);
+			else if (ft_where_equal(args[i]) == 2/* && ft_strncmp(args[i], "export", 6)*/)
+				args[i] = ft_equal_and_dollar(args[i], data->env, args[i]);
+			else if (!ft_where_equal(args[i]) && !ft_list_cmp(data->env, tmp))
 			{
-				split = ft_mini_split(tmp, '=');
-				tmp = split[0];
-				tmp2 = ft_strjoin("=", split[1]);
-				printf("en ft_find_dolar despues split: tmp: %s\n", tmp);
-				printf("en ft_find_dolar despues split: tmp2: %s\n", tmp2);
-				if (ft_list_cmp(env, /*++*/tmp) == 0)
-				{
-					aux = ft_search_node(env, tmp);
-					free(args[i]);
-					tmp3 = ft_strdup(aux->def);
-					printf("en ft_find_dolar: tmp3: %s\n", tmp3);
-					tmp4 = ft_strjoin(tmp3, tmp2);
-					printf("en ft_find_dolar: tmp4: %s\n", tmp4);
-					args[i] = tmp3;
-				}
-				//free(tmp3);
-				free(tmp2);
-				free(tmp4);
-				ft_free_double_pointer(split);
-			}
-			else if (ft_list_cmp(env, /*++*/tmp) == 0)
-			{
-				aux = ft_search_node(env, tmp);
+				aux = ft_search_node(data->env, tmp);
 				free(args[i]);
 				args[i] = ft_strdup(aux->def);
 			}

@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/05 17:03:18 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/06 12:11:42 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,13 @@ int	ft_check_name(char *name)
 	split = ft_mini_split(name, '=');
 	while (split[0][i] != '\0')
 	{
-		// if (split[0][0] == '$')
-		// {
-		// 	printf("toy aqui!!!!!\n");
-		// 	break ;
-		// }
 		if ((ft_isalpha(split[0][0]) == 0))
 		{
 			printf("bash: export: %s: not a valid identifer\n", name); //perror("export");
 			ft_free_double_pointer(split);
 			return (0);
 		}
-		else if (ft_isalnum(split[0][i]) == 0)
+		else if (ft_isalnum(split[0][i]) == 0/*||split[0][i] == "_"*/) //probar _
 		{
 			printf("bash: export: %s: not a valid identifer\n", name);
 			ft_free_double_pointer(split);

@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/05 17:11:48 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/06 10:41:02 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_start_minishell(t_data *data)
 				i++;
 			}
 			data->argc = ft_double_pointer_len(data->args);
-			ft_find_dollar(data->args, data->env);
+			ft_find_dollar(data->args, data);
 			i = 0;
 			while (data->args[i])
 			{
