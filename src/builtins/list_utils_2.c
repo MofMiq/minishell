@@ -6,11 +6,11 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:51:25 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/01 15:14:16 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/07 10:14:51 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 int	ft_double_pointer_len(char **args)
 {

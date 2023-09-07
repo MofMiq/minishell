@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/06 11:50:59 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/07 16:52:50 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,20 @@
 # define BLUE "\033[0;96m"
 # define END "\033[0m"
 
+# define BUILTIN	1
+# define NO_QUOTES	2
+# define S_QUOTES	3
+# define D_QUOTES	4
+
+typedef struct s_token
+{
+	char			*str;
+	int				type;
+//	int				child;
+	struct s_token	*prev;
+	struct s_token	*next;
+}	t_token;
+
 typedef struct s_elist
 {
 	char			*name;
@@ -45,6 +59,7 @@ typedef struct s_data
 	int		argc;
 	t_elist	*env;
 	t_elist	*exp;
+	t_token	*token;
 }	t_data;
 
 //list_utils.c
@@ -110,11 +125,12 @@ void	ft_cmp_and_update(t_data *data, char *var_env, int i);
 //free.c
 
 void	ft_free_list(t_elist *lst);
+void	ft_free_token(t_token *lst);
 void	ft_free_all(t_data *data);
 
 //init.c
 
-t_data	*ft_init_data(char **env);
+t_data	*ft_init_data(char **env, char **argv);
 void	ft_init_env(t_elist *elist);
 
 //signals.c
@@ -138,5 +154,14 @@ void	ft_find_dollar(char **args, t_data *data);
 int		ft_where_equal(char *str);
 char	*ft_dollar_and_equal(char *str, t_elist *lst, char *arg);
 char	*ft_equal_and_dollar(char *str, t_elist *lst, char *arg);
+
+//parser.c
+t_token	*ft_new_token(char *input, int i, int start);
+t_token	*ft_last_token(t_token *token);
+t_token	*ft_penultimate_token(t_token *token);
+t_token	*ft_add_token(t_token **token, t_token *new);
+t_token	*ft_divide_input(t_data *data);
+void	ft_init_parse(t_data *data);
+t_token	*ft_assign_type(t_data *data);
 
 #endif

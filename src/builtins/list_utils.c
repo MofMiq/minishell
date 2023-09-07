@@ -6,11 +6,11 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 12:38:14 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/31 16:44:30 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/07 10:13:00 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 t_elist	*ft_new_node(char **splited)
 {

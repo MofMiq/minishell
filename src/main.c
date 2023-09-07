@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/06 10:41:02 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/07 16:29:55 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,14 @@
 			// 	ft_printf("en ft_start_minishell: %s\n", data->args[i]);
 			// 	i++;
 			// }
+			// esta parte la quito ahora mismo para evitar mierdas, despues de parseo adaptamos
+			// if (ft_there_is_quote(data->input) != (int)ft_strlen(data->input))
+			// 	data->input = ft_ignore_quotes(data->input); //aplicar esto aqui rompe el echo de belen, no se si algo mas
+			// ft_find_dollar(data->args, data);
 
 void	ft_start_minishell(t_data *data)
 {
-	t_elist	*tmp;
+	t_elist	*tmp; //este tmp nos sigue sirviendo??
 
 	tmp = data->env;
 	while (1)
@@ -36,27 +40,16 @@ void	ft_start_minishell(t_data *data)
 		if (data->input[0] != '\0')
 		{
 			add_history(data->input);
-			if (ft_there_is_quote(data->input) != (int)ft_strlen(data->input))
-				data->input = ft_ignore_quotes(data->input); //aplicar esto aqui rompe el echo de belen, no se si algo mas
-			data->args = ft_split(data->input, ' ');
-			//Debugeo de mierdas
-			int i = 0;
-			while (data->args[i])
-			{
-				printf("en ft_start_minishell: %s\n", data->args[i]);
-				i++;
-			}
-			data->argc = ft_double_pointer_len(data->args);
-			ft_find_dollar(data->args, data);
-			i = 0;
-			while (data->args[i])
-			{
-				printf("en ft_start_minishell despues de $: %s\n", data->args[i]);
-				i++;
-			}
-			if (ft_is_builtin(data))
+			//printf("IMPRIMIENDO EL INPUT QUE TENGO QUE PARSEAR: %s", data->input);
+			ft_init_parse(data);
+			//data->args = ft_split(data->input, ' ');
+			//data->argc = ft_double_pointer_len(data->args);
+			//para que no pete comento
+			/*if (ft_is_builtin(data))
 				ft_do_builtins(data);
-			ft_free_double_pointer(data->args);
+			ft_free_double_pointer(data->args);*/
+			ft_free_token(data->token);
+			data->token = NULL;
 			free(data->input);
 		}
 	}
@@ -76,7 +69,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	using_history();
-	data = ft_init_data(env);
+	data = ft_init_data(env, argv);
 	ft_start_minishell(data);
 	printf("si te sales imprimes????\n");
 	ft_free_all(data);
