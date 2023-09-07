@@ -6,11 +6,11 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:46:15 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/04 13:47:48 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/07 10:14:50 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 void	ft_export_list(t_elist **exp_lst, char *var_name)
 {

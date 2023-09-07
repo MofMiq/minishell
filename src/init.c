@@ -6,13 +6,13 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:10:56 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/01 10:44:00 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/07 13:51:32 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-t_data	*ft_init_data(char **env)
+t_data	*ft_init_data(char **env, char **argv)
 {
 	t_data	*data;
 
@@ -22,11 +22,12 @@ t_data	*ft_init_data(char **env)
 	ft_init_env(data->env);
 	data->exp = NULL;
 	data->input = NULL;
-	data->args = NULL;
+	data->args = argv;
+	data->token = NULL;
 	//data->bool_exp = 0;
 	data->argc = 0;
 	//data->env->child = 1;
-	ft_init_sig();
+	//ft_init_sig(); //para poder usar Ctrl + D mientras creo lista token
 	return (data);
 }
 
