@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/07 16:52:50 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/08 11:43:10 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ void	ft_echo(t_data *data);
 
 //builtins.c
 
-int		ft_is_builtin(t_data *data);
-void	ft_do_builtins(t_data *data);
+int		ft_is_builtin(char *str);
+void	ft_do_builtins(t_data *data, char *str);
 
 //main.c
 
