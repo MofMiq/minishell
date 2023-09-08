@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/07 10:14:52 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:26:32 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	ft_check_name(char *name)
 	char	**split;
 
 	i = 0;
+	//meter condicion si split != NULL
 	split = ft_mini_split(name, '=');
 	while (split[0][i] != '\0')
 	{
@@ -65,21 +66,25 @@ void	ft_export(t_data *data)
 		ft_print_list(data->env, data->exp, 2);
 	else
 	{
-		while (data->args[i] && ft_check_name(data->args[i]) == 1)
+		while (data->args[i] /*&& ft_check_name(data->args[i]) == 1*/)
 		{
-			if (ft_strchr(data->args[i], '='))
-			{
-				if (data->exp)
-					if (ft_list_cmp(data->exp, data->args[i]))
-						ft_cmp_and_update(data, data->args[i], 2);
-				ft_cmp_and_update(data, data->args[i], 1);
-			}
+			if (ft_check_name(data->args[i]) == 0)
+				i++;
 			else
 			{
-				if (ft_list_cmp(data->exp, data->args[i]))
-					ft_export_list(&data->exp, data->args[i]);
+				if (ft_strchr(data->args[i], '='))
+				{
+					if (data->exp)
+						if (ft_list_cmp(data->exp, data->args[i]))
+							ft_cmp_and_update(data, data->args[i], 2);
+					ft_cmp_and_update(data, data->args[i], 1);
+				}
+				else
+					if (ft_list_cmp(data->exp, data->args[i])
+						&& ft_list_cmp(data->env, data->args[i]))
+						ft_export_list(&data->exp, data->args[i]);
+				i++;
 			}
-			i++;
 		}
 	}
 }

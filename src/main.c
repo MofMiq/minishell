@@ -26,9 +26,6 @@
 
 void	ft_start_minishell(t_data *data)
 {
-	t_elist	*tmp; //este tmp nos sigue sirviendo??
-
-	tmp = data->env;
 	while (1)
 	{
 		data->input = readline("\x1b[96mPutaShell> \x1b[0m");
@@ -40,26 +37,19 @@ void	ft_start_minishell(t_data *data)
 		if (data->input[0] != '\0')
 		{
 			add_history(data->input);
-			//printf("IMPRIMIENDO EL INPUT QUE TENGO QUE PARSEAR: %s", data->input);
 			ft_init_parse(data);
-			//data->args = ft_split(data->input, ' ');
-			//data->argc = ft_double_pointer_len(data->args);
-			//para que no pete comento
-			/*if (ft_is_builtin(data))
-				ft_do_builtins(data);
-			ft_free_double_pointer(data->args);*/
 			//probablemente esto lo tenga que meter en otra funcion que "redireccione" segun los tipos de los tokens
-			//if (data->token->type == BUILTIN)
-			// 	ft_do_builtins(data, data->token->str);
-			if (data->token->type != BUILTIN && data->args)
+			if (data->token->type == BUILTIN)
+				ft_do_builtins(data, data->token->str);
+			else if (data->token->type != BUILTIN && data->args)
+      {
 				printf("que quiereh\n");
-			ft_free_token(data->token);
-			data->token = NULL;
-			free(data->input);
+				//printf("bash: %s: command not found\n", data->token->str);
+      }
+			ft_free_token(data->token, data);
 		}
 	}
 }
-//printf("ft_start_minishell: data->args: %s / %s\n", data->args[0], data->args[1]);
 
 void	ft_leaks(void)
 {

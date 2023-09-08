@@ -8,5 +8,6 @@ el mini_split, no se si se joderia mucho el OLDPWD con el mini_split??
 
 voy a reorganizar en carpetas los archivos para que no se tanto follon, un poco siguiendo el modelo de javi y mcombeau
 
+¿¿¿que pasa si le pasamos a ft_split un array que solo sea el separador, por ejemplo ft_split("=", "=")??? ->ultra segmentation fault
 
     

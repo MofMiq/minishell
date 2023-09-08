@@ -6,13 +6,13 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 12:26:52 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/07 16:32:22 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:56:18 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	ft_free_list(t_elist *lst)
+void	ft_free_env(t_elist *lst)
 {
 	t_elist	*tmp;
 
@@ -27,7 +27,7 @@ void	ft_free_list(t_elist *lst)
 	}
 }
 
-void	ft_free_token(t_token *lst)
+void	ft_free_token(t_token *lst, t_data *data)
 {
 	t_token	*tmp;
 
@@ -39,16 +39,17 @@ void	ft_free_token(t_token *lst)
 		free(lst);
 		lst = tmp;
 	}
+	data->token = NULL;
+	free(data->input);
+	ft_free_double_pointer(data->args);
 }
 
 void	ft_free_all(t_data *data)
 {
 	printf("ft_free_all-------------\n");
 	clear_history();
-	//ft_free_double_pointer(data->args);
-	free(data->input);
-	ft_free_list(data->env);
-	//ft_free_token(data->token);
-	//free(data->env); //abort
-	//free(data);
+	ft_free_env(data->env);
+	data->env = NULL;
+	if (data->token)
+		ft_free_token(data->token, data);
 }

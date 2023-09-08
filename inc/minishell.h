@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/08 14:07:56 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:04:51 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,8 @@ void	ft_cmp_and_update(t_data *data, char *var_env, int i);
 
 //free.c
 
-void	ft_free_list(t_elist *lst);
-void	ft_free_token(t_token *lst);
+void	ft_free_env(t_elist *lst);
+void	ft_free_token(t_token *lst, t_data *data);
 void	ft_free_all(t_data *data);
 
 //init.c
@@ -156,13 +156,17 @@ char	*ft_dollar_and_equal(char *str, t_elist *lst, char *arg);
 char	*ft_equal_and_dollar(char *str, t_elist *lst, char *arg);
 
 //parser.c
+t_token	*ft_divide_input(t_data *data);
+void	ft_init_parse(t_data *data);
+t_token	*ft_assign_type(t_data *data);
+void	ft_reconvert_token(t_data *data);
+
+//token_utils.c
 t_token	*ft_new_token(char *input, int i, int start);
 t_token	*ft_last_token(t_token *token);
 t_token	*ft_penultimate_token(t_token *token);
 t_token	*ft_add_token(t_token **token, t_token *new);
-t_token	*ft_divide_input(t_data *data);
-void	ft_init_parse(t_data *data);
-t_token	*ft_assign_type(t_data *data);
+t_token	*ft_parse_dollar(t_data *data);
 
 //exec.c
 
