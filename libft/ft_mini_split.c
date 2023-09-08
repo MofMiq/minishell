@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mini_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 17:13:22 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/29 17:05:22 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:42:29 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ int	mini_count_word(char const *s, char c)
 	equal = 0;
 	while (s[i])
 	{
-		if (s[i] != c && w == 0 && (equal == 0 || equal == 1))
-		{
-			w = 1;
-			count = count + 1;
-		}
-		else if (s[i] == c)
+		if (s[i] == c && s[i] != '\0')
 		{
 			w = 0;
 			equal++;
+		}
+		else if (s[i] != c && w == 0 && (equal == 0 || equal == 1))
+		{
+			w = 1;
+			count = count + 1;
 		}
 		i++;
 	}
@@ -101,7 +101,6 @@ static int	mini_w_word(char *s, char **p, int *i, char c)
 			word[k++] = s[*i];
 			*i = *i + 1;
 		}
-		word[k] = '\0';
 		p[q] = word;
 		q = ft_aux_write(q, s, i);
 		wordsize = ft_strlen(&s[*i]);
@@ -117,27 +116,25 @@ static int	mini_w_word(char *s, char **p, int *i, char c)
 
 char	**ft_mini_split(char const *s, char c)
 {
-	int		i;
 	char	**str;
 	int		j;
-	int		error;
 
 	if (!s)
 		return (NULL);
-	i = mini_count_word(s, c);
-	str = (char **)ft_calloc(sizeof(char *), i + 1);
+	str = (char **)ft_calloc(sizeof(char *), mini_count_word(s, c) + 1);
 	if (!str)
 		return (NULL);
 	j = 0;
-	error = mini_w_word((char *)s, str, &j, c);
-	if (error)
+	while (mini_count_word(s, c) == 1 && s[j] == c)
+		j++;
+	if (s[j] == '\0')
+		return (NULL);
+	j = 0;
+	if (mini_w_word((char *)s, str, &j, c))
 	{
 		j = 0;
-		while (str[j])
-		{
+		while (str[j++])
 			free(str[j]);
-			j++;
-		}
 		free(str);
 		return (NULL);
 	}

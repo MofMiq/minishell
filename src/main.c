@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/08 13:28:11 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:42:35 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,11 @@ void	ft_start_minishell(t_data *data)
 			//probablemente esto lo tenga que meter en otra funcion que "redireccione" segun los tipos de los tokens
 			if (data->token->type == BUILTIN)
 				ft_do_builtins(data, data->token->str);
-			else
-				printf("bash: %s: command not found\n", data->token->str);
+			else if (data->token->type != BUILTIN && data->args)
+      {
+				printf("que quiereh\n");
+				//printf("bash: %s: command not found\n", data->token->str);
+      }
 			ft_free_token(data->token, data);
 		}
 	}

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
 /*   Updated: 2023/09/08 17:04:51 by marirodr         ###   ########.fr       */
@@ -46,7 +46,6 @@ typedef struct s_elist
 {
 	char			*name;
 	char			*def;
-//	int				child;
 	struct s_elist	*prev;
 	struct s_elist	*next;
 }	t_elist;
@@ -57,6 +56,7 @@ typedef struct s_data
 	char	**args;
 	//int		bool_exp; ya no sirve para su cometido original, reusable en futuro?
 	int		argc;
+	pid_t	child;
 	t_elist	*env;
 	t_elist	*exp;
 	t_token	*token;
@@ -167,5 +167,9 @@ t_token	*ft_last_token(t_token *token);
 t_token	*ft_penultimate_token(t_token *token);
 t_token	*ft_add_token(t_token **token, t_token *new);
 t_token	*ft_parse_dollar(t_data *data);
+
+//exec.c
+
+void	ft_launch_exec(t_data *data);
 
 #endif
