@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 17:13:22 by marirodr          #+#    #+#             */
-/*   Updated: 2022/10/06 12:43:37 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:38:56 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,16 @@ int	count_word(char const *s, char c)
 	w = 0;
 	while (s[i])
 	{
-		if (s[i] != c && w == 0)
+		if (s[i] == c && s[i] != '\0')
+		{
+			w = 0;
+			i++;
+		}
+		else if (s[i] != c && w == 0)
 		{
 			w = 1;
 			count = count + 1;
 		}
-		else if (s[i] == c)
-			w = 0;
 		i++;
 	}
 	return (count);
@@ -88,7 +91,6 @@ static int	w_word(char *s, char **p, int *i, char c)
 			word[k++] = s[*i];
 			*i = *i + 1;
 		}
-		word[k] = '\0';
 		p[q] = word;
 		q++;
 		wordsize = count_len(s, i, c);
@@ -96,6 +98,9 @@ static int	w_word(char *s, char **p, int *i, char c)
 	p[q] = NULL;
 	return (0);
 }
+	//probar si word[k] se puede dejar sin finalizar
+	//probar si word_size se puede cambiar por la funcion
+
 	//int i;      //nº od 'words'
 	//char **str; //where substr is gonna be allocated.
 	//int j;      //count for an error
@@ -103,29 +108,29 @@ static int	w_word(char *s, char **p, int *i, char c)
 
 char	**ft_split(char const *s, char c)
 {
-	int		i;
 	char	**str;
 	int		j;
-	int		error;
 
 	if (!s)
 		return (NULL);
-	i = count_word(s, c);
-	str = (char **)ft_calloc(sizeof(char *), i + 1);
+	str = (char **)ft_calloc(sizeof(char *), count_word(s, c) + 1);
 	if (!str)
 		return (NULL);
 	j = 0;
-	error = w_word((char *)s, str, &j, c);
-	if (error)
+	while (count_word(s, c) == 1 && s[j] == c)
+		j++;
+	if (s[j] == '\0')
+		return (NULL);
+	j = 0;
+	if (w_word((char *)s, str, &j, c) != 0)
 	{
 		j = 0;
-		while (str[j])
-		{
+		while (str[j++])
 			free(str[j]);
-			j++;
-		}
 		free(str);
 		return (NULL);
 	}
 	return (str);
 }
+//i = count_word directamente en calloc
+// w_word cambiar y sustituir por error
