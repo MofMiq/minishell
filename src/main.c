@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/07 16:29:55 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/08 11:48:53 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ void	ft_start_minishell(t_data *data)
 			/*if (ft_is_builtin(data))
 				ft_do_builtins(data);
 			ft_free_double_pointer(data->args);*/
+			//probablemente esto lo tenga que meter en otra funcion que "redireccione" segun los tipos de los tokens
+			//if (data->token->type == BUILTIN)
+			// 	ft_do_builtins(data, data->token->str);
 			ft_free_token(data->token);
 			data->token = NULL;
 			free(data->input);

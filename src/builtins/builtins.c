@@ -6,38 +6,38 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:43:04 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/07 17:07:12 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/08 11:48:47 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int	ft_is_builtin(t_data *data)
+int	ft_is_builtin(char *str)
 {
-	if ((ft_strcmp(data->token->str, "echo") == 0))
+	if ((ft_strcmp(str, "echo") == 0))
 		return (1);
-	if (ft_strcmp(data->token->str, "cd") == 0)
+	if (ft_strcmp(str, "cd") == 0)
 		return (2);
-	if (ft_strcmp(data->token->str, "pwd") == 0)
+	if (ft_strcmp(str, "pwd") == 0)
 		return (3);
-	if (ft_strcmp(data->token->str, "export") == 0)
+	if (ft_strcmp(str, "export") == 0)
 		return (4);
-	if (ft_strcmp(data->token->str, "unset") == 0)
+	if (ft_strcmp(str, "unset") == 0)
 		return (5);
-	if (ft_strcmp(data->token->str, "env") == 0)
+	if (ft_strcmp(str, "env") == 0)
 		return (6);
-	if (ft_strcmp(data->token->str, "exit") == 0)
+	if (ft_strcmp(str, "exit") == 0)
 		return (7);
-	if (ft_strcmp(data->token->str, "./minishell") == 0)
+	if (ft_strcmp(str, "./minishell") == 0)
 		return (8);
 	return (0);
 }
 
-void	ft_do_builtins(t_data *data)
+void	ft_do_builtins(t_data *data, char *str)
 {
 	int	b;
 
-	b = ft_is_builtin(data);
+	b = ft_is_builtin(str);
 	if (b == 1)
 		ft_echo(data);
 	else if (b == 2)

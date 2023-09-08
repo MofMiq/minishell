@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:17:49 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/07 17:05:48 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/08 11:48:33 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	ft_init_parse(t_data *data)
 {
 	data->token = ft_divide_input(data);
 	data->token = ft_assign_type(data);
-	if (ft_is_builtin(data) != 0)
+	if (ft_is_builtin(data->token->str) != 0)
 		data->token->type = BUILTIN;
 	//ahora deberia ponerme a ejecutar los buitins desde main y adaptar todas la fucniones a token 
 	//comprobar lista token
