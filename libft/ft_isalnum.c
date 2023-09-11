@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 13:39:22 by marirodr          #+#    #+#             */
-/*   Updated: 2022/10/05 14:45:49 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/11 13:59:01 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,15 @@ int	ft_isalnum(int i)
 {
 	if (!((i >= 'a' && i <= 'z')
 			|| (i >= 'A' && i <= 'Z') || (i >= '0' && i <= '9')))
+		return (0);
+	return (1);
+}
+
+int	ft_isalnum_plus(int i)
+{
+	if (!((i >= 'a' && i <= 'z')
+			|| (i >= 'A' && i <= 'Z') || (i >= '0' && i <= '9')
+			|| (i == '_')))
 		return (0);
 	return (1);
 }

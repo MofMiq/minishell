@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/08 17:04:51 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/11 14:03:12 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ void	ft_cmp_and_update(t_data *data, char *var_env, int i);
 void	ft_free_env(t_elist *lst);
 void	ft_free_token(t_token *lst, t_data *data);
 void	ft_free_all(t_data *data);
+int		ft_check_name_print(char *name);
 
 //init.c
 
