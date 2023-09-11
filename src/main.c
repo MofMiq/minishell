@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/08 17:42:35 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/09/11 18:49:35 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,11 @@ void	ft_start_minishell(t_data *data)
 			if (data->token->type == BUILTIN)
 				ft_do_builtins(data, data->token->str);
 			else if (data->token->type != BUILTIN && data->args)
-      {
+      		{
+				//ft_launch_exec(data); Esto todavía no existe, hay que cambiar tipos de parametro
 				printf("que quiereh\n");
 				//printf("bash: %s: command not found\n", data->token->str);
-      }
+      		}
 			ft_free_token(data->token, data);
 		}
 	}

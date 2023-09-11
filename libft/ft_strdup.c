@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 17:52:55 by marirodr          #+#    #+#             */
-/*   Updated: 2023/05/12 17:06:44 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/11 18:33:21 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*ft_strdup(const char *s1)
 {
 	char	*s2;
 
+	if (!s1)
+		return (0);
 	s2 = (char *)malloc(ft_strlen(s1) + 1);
 	if (!s2)
 		return (0);

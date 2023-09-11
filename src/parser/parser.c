@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:17:49 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/11 17:53:22 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/11 18:32:14 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	ft_reconvert_token(t_data *data)
 	//printf("i: %d\n", i);
 	data->argc = i;
 	data->args = (char **)ft_calloc(sizeof(char *), i + 1);
+	if (!data->args)
+		printf("jaja no kapasao\n");
 	tmp = data->token;
 	i = 0;
 	while (tmp)
