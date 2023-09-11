@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:54:01 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/07 10:14:53 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/11 18:50:00 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,20 @@ int	ft_find_pos(t_data *data)
 	return (flag);
 }
 
+/*Hacer función a parte, que compruebe que el argumento que se trata existe
+ *
+ * Seguramente haya que reestructurar todo, porque en el is flag doy por hecho que existe*/
+
 void	ft_echo(t_data *data)
 {
 	int	flag;
 
 	flag = 0;
+	if (ft_check_argc(data) == 4)
+	{
+		if (data->argc == 2)
+			printf("\n");
+	}
 	if (ft_check_argc(data) == 1)
 	{
 		flag = ft_find_pos(data);
