@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/08 16:26:32 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/11 14:03:34 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,27 @@ int	ft_check_name(char *name)
 	int		i;
 	char	**split;
 
-	i = 0;
-	//meter condicion si split != NULL
-	split = ft_mini_split(name, '=');
-	while (split[0][i] != '\0')
+	i = -1;
+	if (name[0] == '=')
+		return (ft_check_name_print(name));
+	else
 	{
-		if ((ft_isalpha(split[0][0]) == 0))
+		split = ft_mini_split(name, '=');
+		while (split[0][++i] != '\0')
 		{
-			printf("bash: export: %s: not a valid identifer\n", name); //perror("export");
-			ft_free_double_pointer(split);
-			return (0);
+			if ((ft_isalpha_plus(split[0][0]) == 0))
+			{
+				ft_free_double_pointer(split);
+				return (ft_check_name_print(name));
+			}
+			else if (ft_isalnum_plus(split[0][i]) == 0)
+			{
+				ft_free_double_pointer(split);
+				return (ft_check_name_print(name));
+			}
 		}
-		else if (ft_isalnum(split[0][i]) == 0/*||split[0][i] == "_"*/) //probar _
-		{
-			printf("bash: export: %s: not a valid identifer\n", name);
-			ft_free_double_pointer(split);
-			return (0);
-		}
-		i++;
+		ft_free_double_pointer(split);
 	}
-	ft_free_double_pointer(split);
 	return (1);
 }
 

@@ -10,4 +10,4 @@ voy a reorganizar en carpetas los archivos para que no se tanto follon, un poco 
 
 ¿¿¿que pasa si le pasamos a ft_split un array que solo sea el separador, por ejemplo ft_split("=", "=")??? ->ultra segmentation fault
 
-    
+si echo $HOE$USE$LES -> token->str = (null) -> segmentation fault -> es decir al echo le llega el token nullo y peta

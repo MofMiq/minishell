@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 12:26:52 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/08 17:56:18 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/11 14:03:06 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,11 @@ void	ft_free_all(t_data *data)
 	data->env = NULL;
 	if (data->token)
 		ft_free_token(data->token, data);
+}
+
+int	ft_check_name_print(char *name)
+{
+	//perror("export");
+	printf("bash: export: %s: not a valid identifer\n", name);
+	return (0);
 }

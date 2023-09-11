@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 10:33:34 by marirodr          #+#    #+#             */
-/*   Updated: 2023/08/29 17:03:20 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/11 14:01:50 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int					ft_isascii(int i);
 int					ft_isprint(int i);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
+int					ft_isalnum_plus(int i);
+int					ft_isalpha_plus(int i);
 
 //lists
 typedef struct s_list
