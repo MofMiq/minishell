@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:54:01 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/11 18:50:00 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/09/12 08:36:15 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,26 @@ int	ft_find_pos(t_data *data)
 void	ft_echo(t_data *data)
 {
 	int	flag;
+	// int	i;
 
+	// i = 0;
 	flag = 0;
-	if (ft_check_argc(data) == 4)
+	// if (data->args[i] && ft_is_flag(data->args[1]))
+	// {
+	// 	flag = 1;
+	// 	i++;
+	// }
+	// while (data->args[i] && ft_is_flag(data->args[i]))
+	// 	i++;
+	// while (data->args[i])
+	// 	ft_print_echo(data, i);
+	// if (flag == 0)
+	// 	printf("\n");
 	{
 		if (data->argc == 2)
 			printf("\n");
 	}
-	if (ft_check_argc(data) == 1)
+		if (ft_check_argc(data) == 1)
 	{
 		flag = ft_find_pos(data);
 		if (flag == 0)
