@@ -39,6 +39,7 @@ SRC			= src/main.c \
 			  src/parser/parser.c \
 			  src/parser/token_utils.c \
 			  src/parser/dollar_parser.c \
+			  #src/exec.c \
 
 OBJ			= $(SRC:.c=.o)
 

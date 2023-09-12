@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:13:55 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/07 10:14:54 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/11 18:40:41 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_is_flag(char *str)
 	int	i;
 
 	i = 1;
-	while (str[i] && str[0] == '-')
+	while (str[i] != '\0' && str[0] == '-')
 	{
 		while (str[i] == 'n' && str[i] != '\0')
 		{
@@ -79,8 +79,15 @@ int	ft_check_argc(t_data *data)
 	{
 		if (data->argc == 1)
 			i = 2;
+		else if (data->argc == 2 && !data->args[1])
+			return (4);
 		else if (data->argc == 2 && ft_is_flag(data->args[1]))
 			i = 3;
+	}
+	else if (data->argc > 2)
+	{
+		if (data->argc == 3 && ft_is_flag(data->args[1]))
+			return (4);
 	}
 	return (i);
 }

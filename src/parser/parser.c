@@ -79,6 +79,8 @@ void	ft_reconvert_token(t_data *data)
 	}
 	data->argc = i;
 	data->args = (char **)ft_calloc(sizeof(char *), i + 1);
+	if (!data->args)
+		printf("jaja no kapasao\n");
 	tmp = data->token;
 	i = 0;
 	while (tmp)
