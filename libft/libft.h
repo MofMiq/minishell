@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 10:33:34 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/11 14:01:50 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/12 12:51:40 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,5 +131,9 @@ int					ft_is_equal(char c);
 int					ft_aux_write(int q, char *s, int *i);
 int					mini_count_word(char const *s, char c);
 char				**ft_mini_split(char const *s, char c);
+
+//old_split
+int					o_count_word(char const *s, char c);
+char				**ft_old_split(char const *s, char c);
 
 #endif

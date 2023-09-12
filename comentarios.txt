@@ -9,5 +9,9 @@ el mini_split, no se si se joderia mucho el OLDPWD con el mini_split??
 voy a reorganizar en carpetas los archivos para que no se tanto follon, un poco siguiendo el modelo de javi y mcombeau
 
 ¿¿¿que pasa si le pasamos a ft_split un array que solo sea el separador, por ejemplo ft_split("=", "=")??? ->ultra segmentation fault
+    |->actualizacion: en ft_cmp_and_update y ft_dollar_epxort: el split que arreglaste el viernes 08/09/23 esta petando y
+    perdiendo la referencia del algunos "splieos". no se porque ocurre ahora mismo, pero al usar el antiguo split todo va
+    rodado y funciona a la perfeccion. asi que de forma provisional he creado un nuevo archivo llamado ft_old_split en
+    donde esta el split orignial y lo estoy usando en esas dos funciones.
 
 si echo $HOE$USE$LES -> token->str = (null) -> segmentation fault -> es decir al echo le llega el token nullo y peta
