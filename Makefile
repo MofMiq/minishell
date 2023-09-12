@@ -6,7 +6,7 @@
 #    By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/21 16:22:32 by marirodr          #+#    #+#              #
-#    Updated: 2023/09/08 13:32:49 by marirodr         ###   ########.fr        #
+#    Updated: 2023/09/12 16:32:14 by marirodr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,9 +36,9 @@ SRC			= src/main.c \
 			  src/signals.c \
 			  src/fork.c \
 			  src/quotes_utils.c \
-			  src/expand_env.c \
 			  src/parser/parser.c \
 			  src/parser/token_utils.c \
+			  src/parser/dollar_parser.c \
 
 OBJ			= $(SRC:.c=.o)
 
