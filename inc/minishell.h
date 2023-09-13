@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/12 17:39:02 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/13 12:36:43 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,11 +161,12 @@ t_token	*ft_new_token(char *input, int i, int start);
 t_token	*ft_last_token(t_token *token);
 t_token	*ft_penultimate_token(t_token *token);
 t_token	*ft_add_token(t_token **token, t_token *new);
-t_token	*ft_parse_dollar(t_data *data);
+//t_token	*ft_first_token(t_token **token); //en pruebas
 
 //dollar_parser.c
 t_token	*ft_parse_dollar(t_data *data);
 void	ft_dollar_aux(t_data *data, int d, t_token **token, char *tmp);
+void	ft_divide_dollar(t_data *data, t_token **token, int *d);
 t_token	*ft_dollar_export(t_data *data);
 char	*ft_sub_env(t_data *data, char *str, int d, int len);
 

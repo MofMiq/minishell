@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:09:16 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/12 17:39:43 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/13 12:36:59 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,9 @@ t_token	*ft_parse_dollar(t_data *data)
 	return (data->token);
 }
 
-/*nominette cuidado*/
-
 char	*ft_sub_env(t_data *data, char *str, int d, int len)
 {
-	char		*tmp;
+	char	*tmp;
 	t_elist	*aux;
 
 	if (ft_strncmp(str, "$", 1) == 0)
@@ -69,10 +67,9 @@ char	*ft_sub_env(t_data *data, char *str, int d, int len)
 		if (ft_list_cmp(data->env, tmp) == 0)
 		{
 			aux = ft_search_node(data->env, tmp);
-			free(str); //dudas aqui
+			free(str); //dudas aqui; parece que chachi
 			free(tmp);
 			str = ft_strdup(aux->def);
-			return (str);
 		}
 	}
 	if (d != len)
@@ -86,12 +83,26 @@ char	*ft_sub_env(t_data *data, char *str, int d, int len)
 	return (str);
 }
 
-/*jaja lol esta funcion xdddd
-mucho mejor pero tengo que seguir haciendo malabares*/
-
-t_token *ft_dollar_export(t_data *data)
+void	ft_divide_dollar(t_data *data, t_token **token, int *d)
 {
-	char	**tmp;
+	char	**split;
+	int		len;
+
+	split = ft_old_split((*token)->str, '=');
+	len = ft_double_pointer_len(split) - 1;
+	free((*token)->str);
+	(*token)->str = NULL;
+	while (split[*d])
+	{
+		split[*d] = ft_sub_env(data, split[*d], *d, len);
+		(*token)->str = ft_strjoin_sl((*token)->str, split[*d]);
+		(*d)++;
+	}
+	ft_free_double_pointer(split);
+}
+
+t_token	*ft_dollar_export(t_data *data)
+{
 	t_token	*first;
 	int		d;
 
@@ -103,18 +114,7 @@ t_token *ft_dollar_export(t_data *data)
 		d = 0;
 		if ((ft_strchr(data->token->str, '$'))
 			&& (ft_strchr(data->token->str, '=')))
-		{
-			tmp = ft_old_split(data->token->str, '=');
-			free(data->token->str);
-			data->token->str = NULL;
-			while (tmp[d])
-			{
-				tmp[d] = ft_sub_env(data, tmp[d], d, (ft_double_pointer_len(tmp) - 1));
-				data->token->str = ft_strjoin_sl(data->token->str, tmp[d]);
-				d++;
-			}
-			ft_free_double_pointer(tmp);
-		}
+			ft_divide_dollar(data, &data->token, &d);
 		data->token = data->token->next;
 	}
 	data->token = first;
