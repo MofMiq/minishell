@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 13:30:15 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/08 16:43:32 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/13 12:31:41 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,16 @@ t_token	*ft_last_token(t_token *token)
 		token = token->next;
 	return (token);
 }
+//en pruebas
+// t_token	*ft_first_token(t_token **token)
+// {
+// 	while ((*token) && (*token)->prev != NULL)
+// 	{
+// 		printf("en ft_first_token: token->str: %s\n", (*token)->str);
+// 		(*token) = (*token)->prev;
+// 	}
+// 	return ((*token));
+// }
 
 t_token	*ft_penultimate_token(t_token *token)
 {

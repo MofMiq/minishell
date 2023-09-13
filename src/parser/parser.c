@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:17:49 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/12 16:32:46 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/13 12:45:02 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	ft_init_parse(t_data *data)
 	if (ft_is_builtin(data->token->str) != 0)
 		data->token->type = BUILTIN;
 	if (ft_is_builtin(data->token->str) == 4
-		|| ft_is_builtin(data->token->str) == 1) //AÑADIR CONDICION PARA QUE SE META SOLO SI EXPORT Y $ + =
+		|| ft_is_builtin(data->token->str) == 1)
 		data->token = ft_dollar_export(data);
 	data->token = ft_parse_dollar(data);
 	ft_reconvert_token(data);

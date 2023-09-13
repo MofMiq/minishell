@@ -15,3 +15,11 @@ voy a reorganizar en carpetas los archivos para que no se tanto follon, un poco 
     donde esta el split orignial y lo estoy usando en esas dos funciones.
 
 si echo $HOE$USE$LES -> token->str = (null) -> segmentation fault -> es decir al echo le llega el token nullo y peta
+
+belensita se que todavia tienes que arreglar el echo, pero pa por si todavia no te habias dado centa, cuando hacemos echo de un
+solo argumento sale un salto de linea extra antes, pero con mas argumentos no ocurre.
+EJ: echo hola
+
+hola
+echo hola adios
+hola adios
