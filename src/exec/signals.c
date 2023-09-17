@@ -6,11 +6,15 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:18:06 by begarijo          #+#    #+#             */
-/*   Updated: 2023/08/31 18:25:12 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/09/17 16:40:08 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
+
+/*setter y getter para poder indicar como funcionan las señales,
+* añadir a este file el "childprocess", que en principio esta
+* dentro de exec.c en la funcion launch*/
 
 void	ft_init_sig(void)
 {
@@ -41,20 +45,3 @@ void	ft_ignore_sigquit(void)
 	sigq.sa_flags = 0;
 	sigaction(SIGQUIT, &sigq, NULL);
 }
-
-// void	ft_init_sig(int sig)
-// {
-// 	struct termios	input;
-
-// 	if (sig == SIGINT)
-// 	{
-// 		printf("\n");
-// 		rl_replace_line("", 0);
-// 		rl_on_new_line();
-// 		rl_redisplay();
-// 		signal(SIGINT, ft_init_sig);
-// 	}
-// 	tcgetattr(STDIN_FILENO, &input);
-// 	//input.c_lflag &= ~ECHOCTL;
-// 	tcsetattr(STDIN_FILENO, TCSANOW, &input);
-// }
