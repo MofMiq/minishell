@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/13 12:36:43 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/17 16:28:49 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,18 +92,13 @@ void	ft_export(t_data *data);
 void	ft_unset(t_elist **env, t_elist **exp, t_data *data);
 void	ft_miniexit(t_data *data);
 
-//echo_utils.c
+//echo.c
 
+void	ft_echo(t_data *data);
 int		ft_is_space(char c);
 void	epur_str(char *str);
 void	ft_print_echo(t_data *data, int pos);
 int		ft_is_flag(char *str);
-int		ft_check_argc(t_data *data);
-
-//echo.c
-
-int		ft_find_pos(t_data *data);
-void	ft_echo(t_data *data);
 
 //builtins.c
 
@@ -173,5 +168,8 @@ char	*ft_sub_env(t_data *data, char *str, int d, int len);
 //exec.c
 
 void	ft_launch_exec(t_data *data);
+void	ft_exec_from_path(t_data *data);
+void	ft_create_path(t_data *data, char *path, char **path_abs);
+char	*ft_get_path(t_data *data);
 
 #endif

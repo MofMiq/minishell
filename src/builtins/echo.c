@@ -6,72 +6,85 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:54:01 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/12 08:36:15 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/09/17 15:57:23 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int	ft_find_pos(t_data *data)
+int	ft_is_space(char c)
 {
-	int	flag;
-	int	i;
-	int	p;
-
-	i = 1;
-	p = i;
-	flag = 0;
-	while (ft_is_flag(data->args[1]))
-	{
-		flag = 1;
-		if (ft_is_flag(data->args[i]) && ft_is_flag(data->args[i + 1]))
-			p = i++;
-		else if (ft_is_flag(data->args[i]) && !ft_is_flag(data->args[i + 1]))
-		{
-			p = i + 1;
-			break ;
-		}
-	}
-	ft_print_echo(data, p);
-	return (flag);
+	if (c == ' ' || c == '\t')
+		return (1);
+	return (0);
 }
 
-/*Hacer función a parte, que compruebe que el argumento que se trata existe
- *
- * Seguramente haya que reestructurar todo, porque en el is flag doy por hecho que existe*/
+void	epur_str(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		while (ft_is_space(str[i]))
+			i++;
+		while (!ft_is_space(str[i]) && str[i] != '\0')
+		{
+			write(1, &str[i], 1);
+			i++;
+		}
+		while (ft_is_space(str[i]) && (ft_is_space(str[i + 1])
+				|| str[i + 1] != '\0'))
+			i++;
+		if (ft_is_space(str[i]) && str[i + 1] != '\0')
+			write(1, " ", 1);
+	}
+}
+
+void	ft_print_echo(t_data *data, int pos)
+{
+	while (data->args[pos] != NULL)
+	{
+		epur_str(data->args[pos]);
+		if (data->args[pos + 1] != NULL)
+			write(1, " ", 1);
+		pos++;
+	}
+}
+
+int	ft_is_flag(char *str)
+{
+	int	i;
+
+	i = 1;
+	while (str[i] != '\0' && str[0] == '-')
+	{
+		while (str[i] == 'n' && str[i] != '\0')
+		{
+			i++;
+			if (str[i - 1] == 'n' && str[i] == '\0')
+				return (1);
+		}
+		return (0);
+	}
+	return (0);
+}
 
 void	ft_echo(t_data *data)
 {
 	int	flag;
-	// int	i;
+	int	i;
 
-	// i = 0;
+	i = 1;
 	flag = 0;
-	// if (data->args[i] && ft_is_flag(data->args[1]))
-	// {
-	// 	flag = 1;
-	// 	i++;
-	// }
-	// while (data->args[i] && ft_is_flag(data->args[i]))
-	// 	i++;
-	// while (data->args[i])
-	// 	ft_print_echo(data, i);
-	// if (flag == 0)
-	// 	printf("\n");
+	if (data->args[i] && ft_is_flag(data->args[i]))
 	{
-		if (data->argc == 2)
-			printf("\n");
+		flag = 1;
+		i++;
 	}
-		if (ft_check_argc(data) == 1)
-	{
-		flag = ft_find_pos(data);
-		if (flag == 0)
-			printf("\n");
-	}
-	else
-	{
-		flag = ft_check_argc(data);
-		if (flag == 2)
-			printf("\n");
-	}
+	while (data->args[i] && ft_is_flag(data->args[i]))
+		i++;
+	ft_print_echo(data, i);
+	if (flag == 0)
+		printf("\n");
 }
