@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 13:30:15 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/13 12:31:41 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:10:02 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_token	*ft_new_token(char *input, int i, int start)
 	t_token	*token;
 
 	tmp = ft_substr(input, start, i - start);
-	//printf ("en ft_new_token: str: %s\n", tmp);
+	//printf ("%sen ft_new_token: str: %s / start: %d / i: %d%s\n", PINK, tmp, start, i, END);
 	token = (t_token *)malloc(sizeof(t_token));
 	if (!token)
 	{

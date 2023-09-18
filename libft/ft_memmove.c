@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:13:29 by marirodr          #+#    #+#             */
-/*   Updated: 2022/10/05 18:23:55 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/18 09:59:52 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ Returns the original valuen of dst.*/
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t	i;
 	char	*s;
 	char	*d;
 
@@ -26,7 +25,6 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	d = (char *)dst;
 	if (!dst && !src)
 		return (0);
-	i = 0;
 	if (d > s)
 		while (len-- > 0)
 			d[len] = s[len];

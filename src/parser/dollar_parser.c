@@ -6,11 +6,27 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:09:16 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/13 12:36:59 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/18 17:41:24 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+int	ft_dollar_count(char *str)
+{
+	int	i;
+	int	c;
+
+	i = 0;
+	c = 0;
+	while (str[i])
+	{
+		if (str[i] == '$')
+			c++;
+		i++;
+	}
+	return (c);
+}
 
 void	ft_dollar_aux(t_data *data, int d, t_token **token, char *tmp)
 {
@@ -40,7 +56,7 @@ t_token	*ft_parse_dollar(t_data *data)
 	while (data->token)
 	{
 		d = 0;
-		if (ft_strchr(data->token->str, '$'))
+		if (ft_strchr(data->token->str, '$') && data->token->type != S_QUOTES)
 		{
 			tmp = ft_split(data->token->str, '$');
 			while (tmp[d])

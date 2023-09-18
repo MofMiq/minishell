@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/17 15:02:33 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:25:37 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-			//Debugeo de mierdas
-			// int i = 0;
-			// while (data->args[i])
-			// {
-			// 	ft_printf("en ft_start_minishell: %s\n", data->args[i]);
-			// 	i++;
-			// }
-			// esta parte la quito ahora mismo para evitar mierdas, despues de parseo adaptamos
-			// if (ft_there_is_quote(data->input) != (int)ft_strlen(data->input))
-			// 	data->input = ft_ignore_quotes(data->input); //aplicar esto aqui rompe el echo de belen, no se si algo mas
-			// ft_find_dollar(data->args, data);
 
 void	ft_start_minishell(t_data *data)
 {
@@ -37,18 +25,23 @@ void	ft_start_minishell(t_data *data)
 		if (data->input[0] != '\0')
 		{
 			add_history(data->input);
-			ft_init_parse(data);
-			//probablemente esto lo tenga que meter en otra funcion que "redireccione" segun los tipos de los tokens
-			if (data->token->type == BUILTIN)
-				ft_do_builtins(data, data->token->str);
-			else if (data->token->type != BUILTIN && data->args)
-      		{
-				ft_launch_exec(data);
-				printf("que quiereh\n");
-				// printf("bash: %s: command not found\n", data->token->str);
-      		}
-			ft_free_token(data->token, data);
+			if (ft_is_closed(data->input) % 2 != 0)
+				printf("No has cerrao comillas chula\n");
+			else
+			{
+				ft_init_parse(data);
+				if (data->token->type == BUILTIN)
+					ft_do_builtins(data, data->token->str);
+				else if (data->token->type != BUILTIN && data->args)
+				{
+					ft_launch_exec(data);
+					printf("que quiereh\n");
+					// printf("bash: %s: command not found\n", data->token->str);
+				}
+				ft_free_token(data->token, data);
+			}
 		}
+		free(data->input); //para evitar leak vacio cuando solo pulsas enter
 	}
 }
 
