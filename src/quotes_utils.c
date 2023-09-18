@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 16:59:13 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/05 15:07:34 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:47:59 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,31 +41,4 @@ int	ft_there_is_quote(char *str)
 	}
 	i -= c;
 	return (i);
-}
-
-char	*ft_ignore_quotes(char *str)
-{
-	char	*copy;
-	int		i;
-	int		c;
-
-	if ((ft_strnstr(str, "echo", 4)) || (ft_strnstr(str, "\"echo\"", 6)))
-		return (str);
-	i = ft_there_is_quote(str);
-	copy = ft_calloc(i, sizeof(char));
-	i = 0;
-	c = 0;
-	while (str[i])
-	{
-		if (ft_is_quote(str[i]) == 1)
-			i++;
-		else
-		{
-			copy[c] = str[i];
-			i++;
-			c++;
-		}
-	}
-	free(str);
-	return (copy);
 }

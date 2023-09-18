@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/17 16:28:49 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:31:22 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,13 @@
 # include <readline/history.h>
 # include <termios.h>
 # include <sys/errno.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 # include "../libft/libft.h"
 // # include "../memory-leaks-master/include/memory_leaks.h"
 
 # define BLUE "\033[0;96m"
+# define PINK "\033[0;95m"
 # define END "\033[0m"
 
 # define BUILTIN	1
@@ -143,13 +146,15 @@ void	ft_childprocess(t_data *data);
 //quotes_utils.c
 int		ft_is_quote(char c);
 int		ft_there_is_quote(char *str);
-char	*ft_ignore_quotes(char *str);
 
 //parser.c
 t_token	*ft_divide_input(t_data *data);
 void	ft_init_parse(t_data *data);
 t_token	*ft_assign_type(t_data *data);
 void	ft_reconvert_token(t_data *data);
+void	ft_quotes(t_data *data, int *i, int *start, char q);
+int		ft_is_closed(char *str);
+void	ft_ignore_quotes(t_data *data);
 
 //token_utils.c
 t_token	*ft_new_token(char *input, int i, int start);

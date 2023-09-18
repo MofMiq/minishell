@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+         #
+#    By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/21 16:22:32 by marirodr          #+#    #+#              #
-#    Updated: 2023/09/17 16:38:47 by begarijo         ###   ########.fr        #
+#    Updated: 2023/09/18 10:33:32 by marirodr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ all:	$(NAME)
 
 $(NAME): $(OBJ)
 	@make -s -C libft
-	$(CC) $(CFLAGS) $(LIBFT) $(RLINE) $(INC) $(OBJ) -o $(NAME) 
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT) $(RLINE) $(INC)
 	@echo "$(GREEN)Minishell ready$(END)"
 
 .c.o:
