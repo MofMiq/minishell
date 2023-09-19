@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/18 15:25:37 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/19 18:47:53 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,16 @@ void	ft_start_minishell(t_data *data)
 		if (data->input[0] != '\0')
 		{
 			add_history(data->input);
-			if (ft_is_closed(data->input) % 2 != 0)
+			if ((ft_is_closed(data->input, '\'') % 2 != 0)
+				|| (ft_is_closed(data->input, '\"') % 2 != 0))
 				printf("No has cerrao comillas chula\n");
 			else
 			{
 				ft_init_parse(data);
 				if (data->token->type == BUILTIN)
 					ft_do_builtins(data, data->token->str);
+				else if (data->token->type == S_QUOTES || data->token->type == D_QUOTES)
+					printf("bash: %s: command not found\n", data->token->str);
 				else if (data->token->type != BUILTIN && data->args)
 				{
 					ft_launch_exec(data);
