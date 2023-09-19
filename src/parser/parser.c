@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:17:49 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/18 17:52:48 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/19 13:32:07 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ void	ft_init_parse(t_data *data)
 		data->token->type = BUILTIN;
 	// if (ft_is_builtin(data->token->str) == 4 //creo que esta condicion sobra en verdad, probar mas y mejor luego con el resto de builtins
 	// 	|| ft_is_builtin(data->token->str) == 1)
-	data->token = ft_dollar_export(data);
+	//data->token = ft_dollar_export(data);
 	data->token = ft_parse_dollar(data);
 	t_token	*tmp;
 	if (data->token)
