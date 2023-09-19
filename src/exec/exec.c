@@ -6,11 +6,15 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 13:47:53 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/17 16:40:00 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/09/19 18:24:33 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+// Arreglar para que al ejecutar de nuevo ./minishell los builtins funcionen
+// además  hay que arreglar esta caca y ponerla en orden, faltan mogollon
+// de cosillas. 
 
 char	*ft_get_path(t_data *data)
 {
@@ -66,6 +70,8 @@ void	ft_exec_from_path(t_data *data)
 	ft_create_path(data, path_aux, path_abs);
 	ft_free_double_pointer(path_abs);
 }
+
+// Comprobar que se sale bien, buscar como hacer bien el priceso
 
 void	ft_launch_exec(t_data *data)
 {

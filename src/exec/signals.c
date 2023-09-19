@@ -6,15 +6,15 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:18:06 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/17 16:40:08 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/09/19 18:23:11 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-/*setter y getter para poder indicar como funcionan las señales,
-* añadir a este file el "childprocess", que en principio esta
-* dentro de exec.c en la funcion launch*/
+// Al ejecutar de nuevo ./minishell, cuando intentas hacer un CTRL + D parece
+// que hay problemas. Ademas no funcionan los builtins en el proceso hijo????
+// Seguramente sea del exec
 
 void	ft_init_sig(void)
 {
