@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:10:56 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/18 15:28:14 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/19 18:19:23 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_data	*ft_init_data(char **env, char **argv)
 	//data->bool_exp = 0;
 	data->argc = 0;
 	//data->env->child = 1;
-	//ft_init_sig(); //para poder usar Ctrl + D mientras creo lista token
+	ft_init_sig();
 	return (data);
 }
 
