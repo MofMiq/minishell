@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/20 12:18:09 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/20 19:03:20 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,9 +153,7 @@ t_token	*ft_divide_input(t_data *data);
 void	ft_init_parse(t_data *data);
 t_token	*ft_assign_type(t_data *data);
 void	ft_reconvert_token(t_data *data);
-void	ft_quotes(t_data *data, int *i, int *start, char q);
-int		ft_is_closed(char *str, char c);
-void	ft_ignore_quotes(t_data *data);
+void	ft_subdivide_input(t_data *data, int *i, int *start);
 
 //token_utils.c
 t_token	*ft_new_token(char *input, int i, int start);
@@ -166,10 +164,15 @@ t_token	*ft_add_token(t_token **token, t_token *new);
 
 //dollar_parser.c
 t_token	*ft_parse_dollar(t_data *data);
-void	ft_dollar_aux(t_token **token, char *nstr, int drop, int take);
-void	ft_divide_dollar(t_data *data, t_token **token, int *d);
-t_token	*ft_dollar_export(t_data *data);
-char	*ft_sub_env(t_data *data, char *str, int d, int len);
+void	ft_dollar_aux(t_data *data, t_token **token, int *i);
+void	ft_change_dollar(t_token **token, char *nstr, int drop, int take);
+
+//quotes.c
+int		ft_is_closed(char *str, char c);
+int		ft_c_quotes(char *str);
+char	*ft_copy_no_quotes(char *token, char *copy, int i, int j);
+void	ft_ignore_quotes(t_data *data);
+void	ft_quotes(t_data *data, int *i, int *start, char q);
 
 //exec.c
 

@@ -6,13 +6,63 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:09:16 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/20 15:56:50 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/20 18:42:57 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	ft_dollar_aux(t_token **token, char *nstr, int drop, int take)
+t_token	*ft_parse_dollar(t_data *data)
+{
+	t_token	*first;
+	int		i;
+
+	first = data->token;
+	while (data->token)
+	{
+		if (data->token->type != S_QUOTES)
+		{
+			while (ft_strchr(data->token->str, '$'))
+			{
+				i = 0;
+				while (data->token->str[i] && data->token->str[i] != '$')
+					i++;
+				if (data->token->str[i] == '$')
+					ft_dollar_aux(data, &data->token, &i);
+			}
+		}
+		data->token = data->token->next;
+	}
+	data->token = first;
+	return (data->token);
+}
+
+void	ft_dollar_aux(t_data *data, t_token **token, int *i)
+{
+	t_elist	*aux;
+	int		s;
+	char	*cenv;
+	char	*cdef;
+
+	(*i)++;
+	s = *i;
+	while ((*token)->str[*i] && (ft_strchr(" $=", (*token)->str[*i]) == NULL))
+		(*i)++;
+	cenv = ft_substr((*token)->str, s, (*i) - s);
+	if (!ft_list_cmp(data->env, cenv))
+	{
+		aux = ft_search_node(data->env, cenv);
+		cdef = ft_strdup(aux->def);
+	}
+	else
+		cdef = "";
+	ft_change_dollar(&data->token, cdef, s - 1, *i);
+	free(cenv);
+	if (cdef[0] != '\0')
+		free(cdef);
+}
+
+void	ft_change_dollar(t_token **token, char *nstr, int drop, int take)
 {
 	char	*copy;
 	int		i;
@@ -36,52 +86,4 @@ void	ft_dollar_aux(t_token **token, char *nstr, int drop, int take)
 	free((*token)->str);
 	(*token)->str = ft_strdup(copy);
 	free(copy);
-}
-
-t_token	*ft_parse_dollar(t_data *data)
-{
-	t_token	*first;
-	t_elist	*aux;
-	char	*cenv;
-	char	*cdef;
-	int		s;
-	int		i;
-
-	first = data->token;
-	// if (data->token->next) //esto lo tengo que controlar en condi
-	//data->token = data->token->next;
-	while (data->token)
-	{
-		if (data->token->type != S_QUOTES)
-		{
-			while (ft_strchr(data->token->str, '$'))
-			{
-				i = 0;
-				while (data->token->str[i] && data->token->str[i] != '$')
-					i++;
-				if (data->token->str[i] == '$')
-				{
-					i++;
-					s = i;
-					while (data->token->str[i] && (ft_strchr(" $=", data->token->str[i]) == NULL))
-						i++;
-					cenv = ft_substr(data->token->str, s, i - s);
-					if (!ft_list_cmp(data->env, cenv))
-					{
-						aux = ft_search_node(data->env, cenv);
-						cdef = ft_strdup(aux->def);
-					}
-					else
-						cdef = "";
-					ft_dollar_aux(&data->token, cdef, s - 1, i);
-					free(cenv);
-					if (cdef[0] != '\0')
-						free(cdef);
-				}
-			}
-		}
-		data->token = data->token->next;
-	}
-	data->token = first;
-	return (data->token);
 }
