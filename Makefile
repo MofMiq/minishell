@@ -6,7 +6,7 @@
 #    By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/21 16:22:32 by marirodr          #+#    #+#              #
-#    Updated: 2023/09/18 10:33:32 by marirodr         ###   ########.fr        #
+#    Updated: 2023/09/20 18:24:19 by marirodr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,10 @@ SRC			= src/main.c \
 			src/exec/exec.c \
 			src/exec/signals.c \
 			src/exec/fork.c \
-			src/quotes_utils.c \
 			src/parser/parser.c \
 			src/parser/token_utils.c \
 			src/parser/dollar_parser.c \
+			src/parser/quotes.c \
 			src/init.c \
 			src/free.c \
 
