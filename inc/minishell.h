@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
 /*   Updated: 2023/09/20 19:03:20 by marirodr         ###   ########.fr       */
@@ -135,14 +135,16 @@ void	ft_init_env(t_elist *elist);
 
 //signals.c
 
-void	ft_init_sig(void);
-void	ft_restart_input(int sig);
+// void	ft_init_sig(void);
+// void	ft_restart_input(int sig);
 void	ft_ignore_sigquit(void);
+
+void	ft_sig_handler(int sig);
 
 //fork.c
 //Unido con signals??
 
-void	ft_childprocess(t_data *data);
+void	ft_child_process(int b);
 
 //quotes_utils.c
 int		ft_is_quote(char c);
