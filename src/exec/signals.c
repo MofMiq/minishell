@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:18:06 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/19 18:23:11 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/09/20 19:00:31 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,30 @@
 // que hay problemas. Ademas no funcionan los builtins en el proceso hijo????
 // Seguramente sea del exec
 
-void	ft_init_sig(void)
-{
-	struct sigaction	sig;
+int	*g_active;
 
-	ft_ignore_sigquit();
-	ft_memset(&sig, 0, sizeof(sig));
-	sig.sa_handler = &ft_restart_input;
-	sigaction(SIGINT, &sig, NULL);
+static int	ft_get_active(void)
+{
+	int	active;
+
+	active = *g_active;
+	return (active);
 }
 
-void	ft_restart_input(int sig)
+void	ft_sig_handler(int sig)
 {
 	(void)sig;
-	printf("\nHas hecho CTRL + C\n");
+	printf("\n");
 	rl_replace_line("", 0);
 	rl_on_new_line();
-	rl_redisplay();
+	if (ft_get_active() == 0)
+		rl_redisplay();
 }
 
-void	ft_ignore_sigquit(void)
+void	ft_child_process(int b)
 {
-	struct sigaction	sigq;
+	static int	active;
 
-	ft_memset(&sigq, 0, sizeof(sigq));
-	sigq.sa_handler = SIG_IGN;
-	sigemptyset(&sigq.sa_mask);
-	sigq.sa_flags = 0;
-	sigaction(SIGQUIT, &sigq, NULL);
+	active = b;
+	g_active = &active;
 }
