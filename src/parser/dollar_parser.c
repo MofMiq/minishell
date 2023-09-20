@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:09:16 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/19 18:49:17 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:56:50 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ t_token	*ft_parse_dollar(t_data *data)
 	char	*cenv;
 	char	*cdef;
 	int		s;
-	int	i;
+	int		i;
 
 	first = data->token;
 	// if (data->token->next) //esto lo tengo que controlar en condi
-	data->token = data->token->next;
+	//data->token = data->token->next;
 	while (data->token)
 	{
 		if (data->token->type != S_QUOTES)
