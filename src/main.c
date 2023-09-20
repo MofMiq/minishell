@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/19 18:47:53 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/20 12:09:28 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	ft_start_minishell(t_data *data)
 					printf("bash: %s: command not found\n", data->token->str);
 				else if (data->token->type != BUILTIN && data->args)
 				{
-					ft_launch_exec(data);
-					printf("que quiereh\n");
-					// printf("bash: %s: command not found\n", data->token->str);
+					//ft_launch_exec(data);
+					//printf("que quiereh\n");
+					printf("bash: %s: command not found\n", data->token->str);
 				}
 				ft_free_token(data->token, data);
 			}

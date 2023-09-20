@@ -6,24 +6,33 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 13:30:15 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/19 12:32:07 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:47:22 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+/*me acabo de hacer aqui una guarrada (32-38) y meto un nodo "vacio" para que
+como en bash imprema un espacio "extra"*/
 
 t_token	*ft_new_token(char *input, int i, int start)
 {
 	char	*tmp;
 	t_token	*token;
 
+	token = NULL;
 	tmp = ft_substr(input, start, i - start);
-	//printf ("%sen ft_new_token: str: %s / start: %d / i: %d%s\n", PINK, tmp, start, i, END);
 	token = (t_token *)malloc(sizeof(t_token));
 	if (!token)
 	{
 		perror("Allocation problem\n");
 		exit(EXIT_FAILURE);
+	}
+	if ((tmp[0] == '\"' && tmp[1] == '\"' && tmp[2] == '\0')
+		|| (tmp[0] == '\'' && tmp[1] == '\'' && tmp[2] == '\0'))
+	{
+		free(tmp);
+		tmp = ft_calloc(1, 1);
 	}
 	token->str = tmp;
 	token->type = -1;

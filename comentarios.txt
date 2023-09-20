@@ -23,3 +23,25 @@ EJ: echo hola
 hola
 echo hola adios
 hola adios
+
+ft_launch_exec: da errores de memoria al intentar salir y no cierra el programa del tiron. Ej:
+PutaShell> $USER pa la
+en ft_init_parse / token->str: marirodr
+en ft_init_parse / token->type: 2
+en ft_init_parse / token->str: pa
+en ft_init_parse / token->type: 2
+en ft_init_parse / token->str: la
+en ft_init_parse / token->type: 2
+PATH: No such file or directory
+que quiereh
+PutaShell> exit
+en ft_init_parse / token->str: exit
+en ft_init_parse / token->type: 1
+exit
+ft_free_all-------------
+minishell(22062,0x1113e7dc0) malloc: *** error for object 0x7fc23dc05f40: pointer being freed was not allocated
+minishell(22062,0x1113e7dc0) malloc: *** set a breakpoint in malloc_error_break to debug
+que quiereh
+
+para las dos: cuidado cuando tenemos "" ó '', porque se crea un nodo vacio en tokens de tipo comillas.
+de esta manera todo bien pero tenemos que aseguranos en los builtins que pasen por completo de un nodo con str vacio.
