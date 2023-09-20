@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:43:04 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/20 12:14:11 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/20 19:00:33 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ void	ft_do_builtins(t_data *data, char *str)
 		ft_env(data, data->args);
 	else if (b == 7)
 		ft_miniexit(data);
-	else if (b == 8)
-		ft_childprocess(data);
+	// else if (b == 8)
+	// 	ft_childprocess(data);
 }
