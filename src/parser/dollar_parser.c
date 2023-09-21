@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:09:16 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/20 18:42:57 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/21 13:13:47 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,24 +42,46 @@ void	ft_dollar_aux(t_data *data, t_token **token, int *i)
 	t_elist	*aux;
 	int		s;
 	char	*cenv;
-	char	*cdef;
+	char	*ndef;
 
 	(*i)++;
 	s = *i;
-	while ((*token)->str[*i] && (ft_strchr(" $=", (*token)->str[*i]) == NULL))
-		(*i)++;
-	cenv = ft_substr((*token)->str, s, (*i) - s);
-	if (!ft_list_cmp(data->env, cenv))
-	{
-		aux = ft_search_node(data->env, cenv);
-		cdef = ft_strdup(aux->def);
-	}
+	if ((*token)->str[s] == '?')
+		ndef = ft_exit_status(i);
 	else
-		cdef = "";
-	ft_change_dollar(&data->token, cdef, s - 1, *i);
-	free(cenv);
-	if (cdef[0] != '\0')
-		free(cdef);
+	{
+		while ((*token)->str[*i] && !ft_strchr(" $=", (*token)->str[*i]))
+			(*i)++;
+		cenv = ft_substr((*token)->str, s, (*i) - s);
+		if (!ft_list_cmp(data->env, cenv))
+		{
+			aux = ft_search_node(data->env, cenv);
+			ndef = ft_strdup(aux->def);
+		}
+		else
+			ndef = "";
+		free(cenv);
+	}
+	ft_change_dollar(&data->token, ndef, s - 1, *i);
+	if (ndef[0] != '\0')
+		free(ndef);
+}
+
+/*a esta funcion hay que pasarle otro numero, que será un codigo de salida
+que no se muy bien de donde lo obtendremos, pero que perfectamente podriamos
+guardar en 'data' para que lo pueda pasar por aqui.*/
+
+/*tengo un puto leak solo en un caso super concreto en cuanto he metido esta
+funcion por la car. el caso es: echo "$USER$?$LE". cualquier otra cosa que
+he probado a ido estupendamente.*/
+
+char	*ft_exit_status(int *i)
+{
+	char	*ndef;
+
+	ndef = ft_itoa(77777); //esto en un valor falso de prueba
+	(*i)++;
+	return (ndef);
 }
 
 void	ft_change_dollar(t_token **token, char *nstr, int drop, int take)
@@ -86,4 +108,6 @@ void	ft_change_dollar(t_token **token, char *nstr, int drop, int take)
 	free((*token)->str);
 	(*token)->str = ft_strdup(copy);
 	free(copy);
+	// if (nstr[0] != '\0')
+	// 	free(nstr);
 }
