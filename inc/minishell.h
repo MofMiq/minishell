@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/20 19:03:20 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/21 12:47:04 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 
 # define BLUE "\033[0;96m"
 # define PINK "\033[0;95m"
+# define RED "\033[0;31m"
 # define END "\033[0m"
 
 # define BUILTIN	1
@@ -112,6 +113,7 @@ void	ft_do_builtins(t_data *data, char *str);
 //main.c
 
 void	ft_start_minishell(t_data *data);
+void	ft_display_banner(void);
 
 //cd.c
 
@@ -167,6 +169,7 @@ t_token	*ft_add_token(t_token **token, t_token *new);
 //dollar_parser.c
 t_token	*ft_parse_dollar(t_data *data);
 void	ft_dollar_aux(t_data *data, t_token **token, int *i);
+char	*ft_exit_status(int *i);
 void	ft_change_dollar(t_token **token, char *nstr, int drop, int take);
 
 //quotes.c
