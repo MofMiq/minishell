@@ -45,3 +45,10 @@ que quiereh
 
 para las dos: cuidado cuando tenemos "" ó '', porque se crea un nodo vacio en tokens de tipo comillas.
 de esta manera todo bien pero tenemos que aseguranos en los builtins que pasen por completo de un nodo con str vacio.
+
+belen: me ha dicho juan que por lo visto el comando 'clear' no va por el path y que hay que escribir algo en un printf.
+ya te lo miraré en condiciones, esto es para que no se me olvide.
+
+BELEN: Comprobar tema señales en condiciones, el ejecutable debe poder ejecutar cualquier cosa sin petar
+        se podría hacer "guarradilla" pa probar, intentarlo con fractol por ejemplo
+        En las señakles, comprobar el ctrl+d cuando hay otro proceso, a ver si saca o te saca de todo del tiron

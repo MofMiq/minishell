@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 13:00:58 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/17 16:40:04 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:19:01 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+// Esto en principio esta como el culo, en exec.c hace practicamente lo mismo
+// data->child creo que ya no me hace falta
 
 void	ft_childprocess(t_data *data)
 {

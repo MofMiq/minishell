@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 13:47:53 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/19 18:24:33 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:18:05 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 // Arreglar para que al ejecutar de nuevo ./minishell los builtins funcionen
 // además  hay que arreglar esta caca y ponerla en orden, faltan mogollon
 // de cosillas. 
+// Control de errores regu, arreglar buscar la salida correcta
 
 char	*ft_get_path(t_data *data)
 {
@@ -71,7 +72,9 @@ void	ft_exec_from_path(t_data *data)
 	ft_free_double_pointer(path_abs);
 }
 
-// Comprobar que se sale bien, buscar como hacer bien el priceso
+// Comprobar que se sale bien, buscar como hacer bien el proceso
+// Cuando se reejecute: SEÑALES? EJECUTABLES 
+// La salida tiene que ir por otro lado, buscar en man WIFEXIT?
 
 void	ft_launch_exec(t_data *data)
 {

@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:18:06 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/20 19:00:31 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:20:43 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-// Al ejecutar de nuevo ./minishell, cuando intentas hacer un CTRL + D parece
-// que hay problemas. Ademas no funcionan los builtins en el proceso hijo????
-// Seguramente sea del exec
+// Variable global, intentar cambiarla por estatica???
 
 int	*g_active;
 

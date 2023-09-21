@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/21 12:47:04 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/21 15:55:30 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,11 @@
 # define NO_QUOTES	2
 # define S_QUOTES	3
 # define D_QUOTES	4
-# define RARE		5
+# define PIPE		5
+# define GREAT		6
+# define LESS		7
+# define D_GREAT	8
+# define D_LESS		9
 
 typedef struct s_token
 {
