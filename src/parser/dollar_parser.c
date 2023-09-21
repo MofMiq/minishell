@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:09:16 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/21 13:13:47 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/21 13:40:14 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ void	ft_dollar_aux(t_data *data, t_token **token, int *i)
 	char	*cenv;
 	char	*ndef;
 
-	(*i)++;
-	s = *i;
+	s = ++(*i);
 	if ((*token)->str[s] == '?')
 		ndef = ft_exit_status(i);
 	else
@@ -72,7 +71,7 @@ que no se muy bien de donde lo obtendremos, pero que perfectamente podriamos
 guardar en 'data' para que lo pueda pasar por aqui.*/
 
 /*tengo un puto leak solo en un caso super concreto en cuanto he metido esta
-funcion por la car. el caso es: echo "$USER$?$LE". cualquier otra cosa que
+funcion por la cara. el caso es: echo "$USER$?$LE". cualquier otra cosa que
 he probado a ido estupendamente.*/
 
 char	*ft_exit_status(int *i)
