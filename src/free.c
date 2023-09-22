@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 12:26:52 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/18 11:55:16 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/22 12:07:54 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	ft_free_token(t_token *lst, t_data *data)
 	}
 	data->token = NULL;
 	//free(data->input);
-	ft_free_double_pointer(data->args);
+	if (data->args)
+		ft_free_double_pointer(data->args);
 }
 
 void	ft_free_all(t_data *data)
