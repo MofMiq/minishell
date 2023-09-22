@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/21 15:55:30 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:34:03 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,10 +152,6 @@ void	ft_sig_handler(int sig);
 
 void	ft_child_process(int b);
 
-//quotes_utils.c
-int		ft_is_quote(char c);
-int		ft_there_is_quote(char *str);
-
 //parser.c
 t_token	*ft_divide_input(t_data *data);
 void	ft_init_parse(t_data *data);
@@ -182,6 +178,11 @@ int		ft_c_quotes(char *str);
 char	*ft_copy_no_quotes(char *token, char *copy, int i, int j);
 void	ft_ignore_quotes(t_data *data);
 void	ft_quotes(t_data *data, int *i, int *start, char q);
+
+//red.c
+void	ft_redirections(t_data *data, int *i, int *start, char c);
+int		ft_bad_redi(t_token *token);
+int		ft_print_bad_red(int n);
 
 //exec.c
 

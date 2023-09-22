@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/21 11:30:05 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:40:38 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ static void	ft_check_type(t_data *data)
 	else
 	{
 		ft_init_parse(data);
-		if (data->token->type == BUILTIN)
+		if (ft_bad_redi(data->token))
+			return (ft_free_token(data->token, data));
+		else if (data->token->type == BUILTIN)
 			ft_do_builtins(data, data->token->str);
 		else if (data->token->type == S_QUOTES || data->token->type == D_QUOTES)
 			printf("bash: %s: command not found\n", data->token->str);
@@ -50,24 +52,6 @@ void	ft_start_minishell(t_data *data)
 		{
 			add_history(data->input);
 			ft_check_type(data);
-			// if ((ft_is_closed(data->input, '\'') % 2 != 0)
-			// 	|| (ft_is_closed(data->input, '\"') % 2 != 0))
-			// 	printf("No has cerrao comillas chula\n");
-			// else
-			// {
-			// 	ft_init_parse(data);
-			// 	if (data->token->type == BUILTIN)
-			// 		ft_do_builtins(data, data->token->str);
-			// 	else if (data->token->type == S_QUOTES || data->token->type == D_QUOTES)
-			// 		printf("bash: %s: command not found\n", data->token->str);
-			// 	else if (data->token->type != BUILTIN && data->args)
-			// 	{
-			// 		//ft_launch_exec(data);
-			// 		//printf("que quiereh\n");
-			// 		printf("bash: %s: command not found\n", data->token->str);
-			// 	}
-			// 	ft_free_token(data->token, data);
-			// }
 		}
 		free(data->input); //para evitar leak vacio cuando solo pulsas enter
 	}

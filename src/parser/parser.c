@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:17:49 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/21 18:27:54 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:16:17 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,6 @@ void	ft_subdivide_input(t_data *data, int *i, int *start)
 	ft_add_token(&data->token, ft_new_token(data->input, *i, *start));
 }
 
-void	ft_redirections(t_data *data, int *i, int *start, char c)
-{
-	printf("en ft_redirections: c: %c\n", c);
-	printf("en ft_redirections: data->input[*i]: %c\n", data->input[*i]);
-	if (c == '|' && data->input[(*i) + 1] != c)
-		(*i)++;
-	else if (c == '<' || c == '>')
-	{
-		while (ft_strchr("<>", data->input[*i]))
-			(*i)++;
-	}
-	ft_add_token(&data->token, ft_new_token(data->input, *i, *start));
-}
-
 t_token	*ft_divide_input(t_data *data)
 {
 	int	i;
@@ -109,58 +95,28 @@ void	ft_reconvert_token(t_data *data)
 	i = 0;
 	while (tmp)
 	{
+		if (tmp->type >= 1 && tmp->type <= 4)
+			i++;
 		tmp = tmp->next;
-		i++;
 	}
 	data->argc = i;
 	data->args = (char **)ft_calloc(sizeof(char *), i + 1);
 	if (!data->args)
-		printf("jaja no kapasao\n");
+		return ;
 	tmp = data->token;
 	i = 0;
 	while (tmp)
 	{
-		data->args[i] = ft_strdup(tmp->str);
-		//printf("en ft_reconvert_token: data->args[%d]: %s\n", i, data->args[i]);
+		if (tmp->type >= 1 && tmp->type <= 4)
+			data->args[i++] = ft_strdup(tmp->str);
 		tmp = tmp->next;
-		i++;
 	}
-}
-
-int	ft_bad_redi(t_token *token)
-{
-	t_token	*aux;
-
-	aux = token;
-	while (aux)
-	{
-		if (aux->type == D_GREAT)
-		{
-			if (ft_strlen(aux->str) == 3)
-			{
-				printf("syntax error near unexpected token `>'\n");
-				return (1); //si las redirecciones bad
-			}
-			else if(ft_strlen(aux->str) > 3)
-			{
-				printf("syntax error near unexpected token `>>'\n");
-				return (1); //si las redirecciones bad
-			}
-		}
-		if (aux->type == D_LESS)
-		{
-			printf("mierda");
-		}
-		aux = aux->next;
-	}
-	return (0); //si las redirecciones good
 }
 
 void	ft_init_parse(t_data *data)
 {
 	data->token = ft_divide_input(data);
 	data->token = ft_assign_type(data);
-	//if (ft_bad_redi(data->token))
 	ft_ignore_quotes(data);
 	if (ft_is_builtin(data->token->str) != 0)
 		data->token->type = BUILTIN;
@@ -180,4 +136,3 @@ void	ft_init_parse(t_data *data)
 	ft_reconvert_token(data);
 }
 	//comprobar lista token
-
