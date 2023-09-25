@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/22 16:40:38 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/25 13:28:30 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static void	ft_check_type(t_data *data)
 		else if (data->token->type != BUILTIN && data->args)
 		{
 			//ft_launch_exec(data);
-			//printf("que quiereh\n");
-			printf("bash: %s: command not found\n", data->token->str);
+			printf("que quiereh\n");
+			//printf("bash: %s: command not found\n", data->token->str);
 		}
 		ft_free_token(data->token, data);
 	}

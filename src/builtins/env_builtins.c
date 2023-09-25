@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/18 09:59:31 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/25 18:22:16 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,25 +109,22 @@ void	ft_unset(t_elist **env, t_elist **exp, t_data *data)
 
 void	ft_miniexit(t_data *data)
 {
-	if ((ft_strcmp(data->args[0], "exit")) == 0)
+	if (data->args[1])
 	{
-		if (data->args[1])
+		if (ft_atoi(data->args[1]) != 0)
 		{
-			if (ft_atoi(data->args[1]) != 0)
-			{
-				printf("%s\n", data->args[0]);
-				ft_free_all(data);
-				exit(EXIT_FAILURE);
-			}
-			if (!ft_isdigit(data->args[1][0]))
-			{
-				printf("bash: %s: %s: numeric argument is required\n", \
-				data->args[0], data->args[1]);
-				exit(EXIT_FAILURE);
-			}
+			printf("%s\n", data->args[0]);
+			ft_free_all(data);
+			exit(EXIT_FAILURE);
 		}
-		printf("%s\n", data->args[0]);
-		ft_free_all(data);
-		exit(EXIT_SUCCESS);
+		if (!ft_isdigit(data->args[1][0]))
+		{
+			printf("bash: %s: %s: numeric argument is required\n", \
+			data->args[0], data->args[1]);
+			exit(EXIT_FAILURE);
+		}
 	}
+	printf("%s\n", data->args[0]);
+	ft_free_all(data);
+	exit(EXIT_SUCCESS);
 }
