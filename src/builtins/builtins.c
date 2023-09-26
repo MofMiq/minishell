@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:43:04 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/25 10:45:36 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:22:56 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_do_builtins(t_data *data, char *str)
 	else if (b == 2)
 		ft_cd(data);
 	else if (b == 3)
-		ft_pwd();
+		ft_pwd(data);
 	else if (b == 4)
 		ft_export(data);
 	else if (b == 5)

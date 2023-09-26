@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:25:39 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/12 13:59:19 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:24:10 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_cd(t_data *data)
 	free(owd);
 }
 
-void	ft_pwd(void)
+void	ft_pwd(t_data *data)
 {
 	char	*cwd;
 
@@ -43,7 +43,11 @@ void	ft_pwd(void)
 	if (cwd == NULL)
 		perror("pwd");
 	else
-		printf("%s\n", cwd);
+	{
+		ft_putstr_fd(cwd, data->fdout);
+		ft_putchar_fd('\n', data->fdout);
+		//printf("%s\n", cwd);
+	}
 	free(cwd);
 }
 

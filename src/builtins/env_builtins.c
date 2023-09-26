@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/25 18:22:16 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:31:16 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_env(t_data *data, char **args)
 {
 	(void)args;
 	if (data->argc == 1)
-		ft_print_list(data->env, NULL, 1);
+		ft_print_list(data, data->env, NULL, 1);
 	else
 	{
 		if (chdir(data->args[1]) == 0)
@@ -61,10 +61,10 @@ void	ft_export(t_data *data)
 
 	i = 1;
 	if (data->argc == 1)
-		ft_print_list(data->env, data->exp, 2);
+		ft_print_list(data, data->env, data->exp, 2);
 	else
 	{
-		while (data->args[i] /*&& ft_check_name(data->args[i]) == 1*/)
+		while (data->args[i])
 		{
 			if (ft_check_name(data->args[i]) == 0)
 				i++;
@@ -119,6 +119,7 @@ void	ft_miniexit(t_data *data)
 		}
 		if (!ft_isdigit(data->args[1][0]))
 		{
+			printf("%s\n", data->args[0]);
 			printf("bash: %s: %s: numeric argument is required\n", \
 			data->args[0], data->args[1]);
 			exit(EXIT_FAILURE);

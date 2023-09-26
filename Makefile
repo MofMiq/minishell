@@ -6,7 +6,7 @@
 #    By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/21 16:22:32 by marirodr          #+#    #+#              #
-#    Updated: 2023/09/22 15:23:39 by marirodr         ###   ########.fr        #
+#    Updated: 2023/09/26 15:49:00 by marirodr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRC			= src/main.c \
 			src/parser/red.c \
 			src/init.c \
 			src/free.c \
+			src/redirections/redirections.c \
 
 OBJ			= $(SRC:.c=.o)
 
@@ -53,7 +54,7 @@ all:	$(NAME)
 
 $(NAME): $(OBJ)
 	@make -s -C libft
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT) $(RLINE) $(INC)
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT) $(RLINE) $(INC)
 	@echo "$(GREEN)Minishell ready$(END)"
 
 .c.o:
@@ -70,4 +71,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all, clean, fclean, re
+.PHONY: all, clean, fclean, re, -n
