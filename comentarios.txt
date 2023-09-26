@@ -52,3 +52,8 @@ ya te lo miraré en condiciones, esto es para que no se me olvide.
 BELEN: Comprobar tema señales en condiciones, el ejecutable debe poder ejecutar cualquier cosa sin petar
         se podría hacer "guarradilla" pa probar, intentarlo con fractol por ejemplo
         En las señakles, comprobar el ctrl+d cuando hay otro proceso, a ver si saca o te saca de todo del tiron
+
+cuando se utiliza un comando externo bien todo va gucci, pero si se introduce uno erroneo se queda pilladisimo
+y deja de funcionar y si metemos el exit sale el mensaje de mallo de que estamos liberando algo no allocado
+
+tentemos que poder meter tabulaciones en el imput y que no muestre lso archivos que hay en la carpeta, si no que los interprete como los espacios

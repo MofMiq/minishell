@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:10:56 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/21 18:22:56 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:13:06 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_data	*ft_init_data(char **env, char **argv)
 	//data->bool_exp = 0;
 	data->argc = 0;
 	data->child = 0;
+	data->fdout = STDOUT_FILENO;
 	ft_child_process(0);
 	//data->env->child = 1;
 	return (data);
