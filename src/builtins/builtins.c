@@ -6,29 +6,31 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:43:04 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/21 18:21:54 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/25 10:45:36 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
+/*que admita aqui la ruta absoluta -> mirar hoja de correciones*/
+
 int	ft_is_builtin(char *str)
 {
-	if ((ft_strcmp(str, "echo") == 0))
+	if (!(ft_strcmp(str, "echo")) || !(ft_strcmp(str, "ECHO")))
 		return (1);
-	if (ft_strcmp(str, "cd") == 0)
+	if (!(ft_strcmp(str, "cd")) || !(ft_strcmp(str, "CD")))
 		return (2);
-	if (ft_strcmp(str, "pwd") == 0)
+	if (!(ft_strcmp(str, "pwd")) || !(ft_strcmp(str, "PWD")))
 		return (3);
-	if (ft_strcmp(str, "export") == 0)
+	if (!(ft_strcmp(str, "export")) || !(ft_strcmp(str, "EXPORT")))
 		return (4);
-	if (ft_strcmp(str, "unset") == 0)
+	if (!(ft_strcmp(str, "unset")) || !(ft_strcmp(str, "UNSET")))
 		return (5);
-	if (ft_strcmp(str, "env") == 0)
+	if (!(ft_strcmp(str, "env")) || !(ft_strcmp(str, "ENV")))
 		return (6);
-	if (ft_strcmp(str, "exit") == 0)
+	if (!(ft_strcmp(str, "exit")) || !(ft_strcmp(str, "EXIT")))
 		return (7);
-	if (ft_strcmp(str, "./minishell") == 0)
+	if (!(ft_strcmp(str, "./minishell")))
 		return (8);
 	return (0);
 }
