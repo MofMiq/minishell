@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:18:06 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/21 18:20:43 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/27 11:04:25 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	ft_get_active(void)
 void	ft_sig_handler(int sig)
 {
 	(void)sig;
-	printf("\n");
+	printf("\n"); //cambiar por ft_putchar_fd pero no se muy bien como porque da error de tipos al compilar
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	if (ft_get_active() == 0)

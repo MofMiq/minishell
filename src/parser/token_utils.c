@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 13:30:15 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/20 15:47:22 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/27 11:08:25 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ t_token	*ft_new_token(char *input, int i, int start)
 	token->type = -1;
 	token->next = NULL;
 	token->prev = NULL;
-	//printf ("%sen ft_new_token: token->str: %s%s\n", PINK, token->str, END);
 	return (token);
 }
 

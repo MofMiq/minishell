@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/26 18:31:16 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/27 11:12:09 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,29 @@ void	ft_env(t_data *data, char **args)
 {
 	(void)args;
 	if (data->argc == 1)
-		ft_print_list(data, data->env, NULL, 1);
+		ft_print_env(data, data->env, 1);
 	else
 	{
+		ft_putstr_fd(args[0], data->fdout);
+		ft_putstr_fd(": ", data->fdout);
+		ft_putstr_fd(args[1], data->fdout);
+		ft_putstr_fd(": ", data->fdout);
 		if (chdir(data->args[1]) == 0)
-			printf("%s: %s: %s\n", args[0], args[1], strerror(EACCES));
+			ft_putstr_fd(strerror(EACCES), data->fdout);
 		else
-			printf("%s: %s: %s\n", args[0], args[1], strerror(ENOENT));
+			ft_putstr_fd(strerror(ENOENT), data->fdout);
+		ft_putchar_fd('\n', data->fdout);
 	}
 }
 
-int	ft_check_name(char *name)
+int	ft_check_name(char *name, t_data *data)
 {
 	int		i;
 	char	**split;
 
 	i = -1;
 	if (name[0] == '=')
-		return (ft_check_name_print(name));
+		return (ft_check_name_print(name, data));
 	else
 	{
 		split = ft_mini_split(name, '=');
@@ -42,12 +47,12 @@ int	ft_check_name(char *name)
 			if ((ft_isalpha_plus(split[0][0]) == 0))
 			{
 				ft_free_double_pointer(split);
-				return (ft_check_name_print(name));
+				return (ft_check_name_print(name, data));
 			}
 			else if (ft_isalnum_plus(split[0][i]) == 0)
 			{
 				ft_free_double_pointer(split);
-				return (ft_check_name_print(name));
+				return (ft_check_name_print(name, data));
 			}
 		}
 		ft_free_double_pointer(split);
@@ -61,12 +66,12 @@ void	ft_export(t_data *data)
 
 	i = 1;
 	if (data->argc == 1)
-		ft_print_list(data, data->env, data->exp, 2);
+		ft_print_env(data, data->env, 2);
 	else
 	{
 		while (data->args[i])
 		{
-			if (ft_check_name(data->args[i]) == 0)
+			if (ft_check_name(data->args[i], data) == 0)
 				i++;
 			else
 			{
@@ -113,19 +118,25 @@ void	ft_miniexit(t_data *data)
 	{
 		if (ft_atoi(data->args[1]) != 0)
 		{
-			printf("%s\n", data->args[0]);
+			ft_putstr_fd(data->args[0], data->fdout);
+			ft_putchar_fd('\n', data->fdout);
 			ft_free_all(data);
 			exit(EXIT_FAILURE);
 		}
 		if (!ft_isdigit(data->args[1][0]))
 		{
-			printf("%s\n", data->args[0]);
-			printf("bash: %s: %s: numeric argument is required\n", \
-			data->args[0], data->args[1]);
+			ft_putstr_fd(data->args[0], data->fdout);
+			ft_putchar_fd('\n', data->fdout);
+			ft_putstr_fd("bash: ", data->fdout);
+			ft_putstr_fd(data->args[0], data->fdout);
+			ft_putstr_fd(": ", data->fdout);
+			ft_putstr_fd(data->args[1], data->fdout);
+			ft_putstr_fd(": numeric argument is required\n", data->fdout);
 			exit(EXIT_FAILURE);
 		}
 	}
-	printf("%s\n", data->args[0]);
+	ft_putstr_fd(data->args[0], data->fdout);
+	ft_putchar_fd('\n', data->fdout);
 	ft_free_all(data);
 	exit(EXIT_SUCCESS);
 }

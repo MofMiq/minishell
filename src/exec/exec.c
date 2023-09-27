@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 13:47:53 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/21 18:18:05 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/27 10:57:10 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_get_path(t_data *data)
 	node = ft_search_node(data->env, "PATH");
 	path = NULL;
 	if (!node)
-		printf("no hay path jejejjeje\n");
+		ft_putstr_fd("no hay path jejejjeje\n", data->fdout);
 	else
 	{
 		path = node->def;
