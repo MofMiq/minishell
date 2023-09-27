@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:49:30 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/26 16:01:15 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/27 11:08:09 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_redirections(t_data *data, int *i, int *start, char c)
 
 /*esta funcion es unaa real mierda*/
 
-int	ft_bad_redi(t_token *token)
+int	ft_bad_redi(t_token *token, int fd)
 {
 	t_token	*aux;
 
@@ -39,12 +39,12 @@ int	ft_bad_redi(t_token *token)
 	{
 		if (aux->type == D_GREAT && ft_strncmp(aux->str, ">>>", 3) == 0)
 		{
-			printf("syntax error near unexpected token\n");
+			ft_putstr_fd("syntax error near unexpected token\n", fd);
 			return (1);
 		}
 		else if (aux->type == D_LESS && ft_strncmp(aux->str, "<<<", 3) == 0)
 		{
-			printf("syntax error near unexpected token\n");
+			ft_putstr_fd("syntax error near unexpected token\n", fd);
 			return (1);
 		}
 		aux = aux->next;
@@ -77,11 +77,11 @@ void	ft_what_redi(t_data *data)
 		if (aux->type == GREAT)
 			ft_redi_output(data, aux);
 		else if (aux->type == D_GREAT)
-			printf("hacer la redireccion del output con append\n");
+			ft_putstr_fd("hacer la redireccion del output con append\n", data->fdout);
 		else if (aux->type == LESS)
-			printf("hacer la redireccion del input\n");
+			ft_putstr_fd("hacer la redireccion del input\n", data->fdout);
 		else if (aux->type == D_LESS)
-			printf("hacer la redireccion del here-document input\n");
+			ft_putstr_fd("hacer la redireccion del here-document input\n", data->fdout);
 		aux = aux->next;
 	}
 }

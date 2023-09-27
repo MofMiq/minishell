@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/26 18:29:06 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/27 11:11:53 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,13 @@ void	ft_remove_if(t_elist *curr, char *str, t_elist **env);
 
 void	ft_export_list(t_elist **exp_lst, char *var_name);
 t_elist	*ft_copy_env(char **env);
-void	ft_print_list(t_data *data, t_elist *env, t_elist *exp, int i);
+void	ft_print_env(t_data *data, t_elist *env, int i);
+void	ft_print_exp(t_data *data, t_elist *exp);
 
 //env_builtins.c
 
 void	ft_env(t_data *data, char **args);
-int		ft_check_name(char *name);
+int		ft_check_name(char *name, t_data *data);
 void	ft_export(t_data *data);
 void	ft_unset(t_elist **env, t_elist **exp, t_data *data);
 void	ft_miniexit(t_data *data);
@@ -133,7 +134,7 @@ void	ft_cmp_and_update(t_data *data, char *var_env, int i);
 void	ft_free_env(t_elist *lst);
 void	ft_free_token(t_token *lst, t_data *data);
 void	ft_free_all(t_data *data);
-int		ft_check_name_print(char *name);
+int		ft_check_name_print(char *name, t_data *data);
 
 //init.c
 
@@ -182,7 +183,7 @@ void	ft_quotes(t_data *data, int *i, int *start, char q);
 
 //red.c
 void	ft_redirections(t_data *data, int *i, int *start, char c);
-int		ft_bad_redi(t_token *token);
+int		ft_bad_redi(t_token *token, int fd);
 int		ft_print_bad_red(int n);
 int		ft_is_redi(t_token *token);
 void	ft_what_redi(t_data *data);

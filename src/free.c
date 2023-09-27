@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 12:26:52 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/22 12:07:54 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/27 11:10:56 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_free_token(t_token *lst, t_data *data)
 
 void	ft_free_all(t_data *data)
 {
-	printf("ft_free_all-------------\n");
+	ft_putstr_fd("ft_free_all-------------\n", data->fdout);
 	clear_history();
 	ft_free_env(data->env);
 	data->env = NULL;
@@ -55,9 +55,11 @@ void	ft_free_all(t_data *data)
 		ft_free_token(data->token, data);
 }
 
-int	ft_check_name_print(char *name)
+int	ft_check_name_print(char *name, t_data *data)
 {
 	//perror("export");
-	printf("bash: export: %s: not a valid identifer\n", name);
+	ft_putstr_fd("bash: export: ", data->fdout);
+	ft_putstr_fd(name, data->fdout);
+	ft_putstr_fd(": not a valid identifer\n", data->fdout);
 	return (0);
 }
