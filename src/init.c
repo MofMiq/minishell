@@ -30,8 +30,7 @@ t_data	*ft_init_data(char **env, char **argv)
 	//data->bool_exp = 0;
 	data->argc = 0;
 	data->child = 0;
-	// ft_sig_setter();
-	// ft_set_active(0);
+	data->fdout = STDOUT_FILENO;
 	return (data);
 }
 

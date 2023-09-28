@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 13:00:58 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/21 18:19:01 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/27 10:57:50 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void	ft_childprocess(t_data *data)
 		waitpid(pid, &status, WUNTRACED);
 	}
 	else
-		printf("Childprocess failed\n");
+		ft_putstr_fd("Childprocess failed\n", data->fdout);
 }

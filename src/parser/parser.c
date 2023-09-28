@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:17:49 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/22 16:16:17 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/27 11:02:08 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,12 @@ void	ft_init_parse(t_data *data)
 	{
 		while (data->token)
 		{
-			printf("en ft_init_parse / token->str: %s\n", data->token->str);
-			printf("en ft_init_parse / token->type: %d\n", data->token->type);
+			ft_putstr_fd("en ft_init_parse / token->str: ", data->fdout);
+			ft_putstr_fd(data->token->str, data->fdout);
+			ft_putchar_fd('\n', data->fdout);
+			ft_putstr_fd("en ft_init_parse / token->type: ", data->fdout);
+			ft_putnbr_fd(data->token->type, data->fdout);
+			ft_putchar_fd('\n', data->fdout);
 			data->token = data->token->next;
 		}
 	}

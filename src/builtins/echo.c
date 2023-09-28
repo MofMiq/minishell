@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:54:01 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/17 15:57:23 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:19:01 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_is_space(char c)
 	return (0);
 }
 
-void	epur_str(char *str)
+void	epur_str(char *str, t_data *data)
 {
 	int	i;
 
@@ -30,14 +30,16 @@ void	epur_str(char *str)
 			i++;
 		while (!ft_is_space(str[i]) && str[i] != '\0')
 		{
-			write(1, &str[i], 1);
+			ft_putchar_fd(str[i], data->fdout);
+			//write(1, &str[i], 1);
 			i++;
 		}
 		while (ft_is_space(str[i]) && (ft_is_space(str[i + 1])
 				|| str[i + 1] != '\0'))
 			i++;
 		if (ft_is_space(str[i]) && str[i + 1] != '\0')
-			write(1, " ", 1);
+			ft_putchar_fd(' ', data->fdout);
+			//write(1, " ", 1);
 	}
 }
 
@@ -45,9 +47,10 @@ void	ft_print_echo(t_data *data, int pos)
 {
 	while (data->args[pos] != NULL)
 	{
-		epur_str(data->args[pos]);
+		epur_str(data->args[pos], data);
 		if (data->args[pos + 1] != NULL)
-			write(1, " ", 1);
+			ft_putchar_fd(' ', data->fdout);
+			//write(1, " ", 1);
 		pos++;
 	}
 }
@@ -86,5 +89,6 @@ void	ft_echo(t_data *data)
 		i++;
 	ft_print_echo(data, i);
 	if (flag == 0)
-		printf("\n");
+		ft_putchar_fd('\n', data->fdout);
+		//printf("\n");
 }

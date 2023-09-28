@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:09:16 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/25 18:26:25 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/09/25 18:43:24 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,16 @@ t_token	*ft_parse_dollar(t_data *data)
 	first = data->token;
 	while (data->token)
 	{
+		i = 0;
 		if (data->token->type != S_QUOTES)
 		{
-			while (ft_strchr(data->token->str, '$'))
+			while (data->token->str[i])
 			{
-				i = 0;
 				while (data->token->str[i] && data->token->str[i] != '$')
 					i++;
-				if (data->token->str[i] && data->token->str[i] == '$' && data->token->str[i + 1] == '\0')
+				if (data->token->str[i] && data->token->str[i] == '$'
+					&& (data->token->str[i + 1] == ' '
+						|| data->token->str[i + 1] == '\0'))
 					i++;
 				if (data->token->str[i] == '$')
 					ft_dollar_aux(data, &data->token, &i);
@@ -60,21 +62,17 @@ void	ft_dollar_aux(t_data *data, t_token **token, int *i)
 			ndef = ft_strdup(aux->def);
 		}
 		else
-			ndef = "";
+			ndef = ft_calloc(1, 1);
 		free(cenv);
 	}
 	ft_change_dollar(&data->token, ndef, s - 1, *i);
-	if (ndef[0] != '\0')
-		free(ndef);
+	(*i) = s - 1;
+	free(ndef);
 }
 
 /*a esta funcion hay que pasarle otro numero, que será un codigo de salida
 que no se muy bien de donde lo obtendremos, pero que perfectamente podriamos
 guardar en 'data' para que lo pueda pasar por aqui.*/
-
-/*tengo un puto leak solo en un caso super concreto en cuanto he metido esta
-funcion por la cara. el caso es: echo "$USER$?$LE". cualquier otra cosa que
-he probado a ido estupendamente.*/
 
 char	*ft_exit_status(int *i)
 {
@@ -109,6 +107,4 @@ void	ft_change_dollar(t_token **token, char *nstr, int drop, int take)
 	free((*token)->str);
 	(*token)->str = ft_strdup(copy);
 	free(copy);
-	// if (nstr[0] != '\0')
-	// 	free(nstr);
 }

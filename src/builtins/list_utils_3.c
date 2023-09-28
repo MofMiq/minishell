@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:46:15 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/07 10:14:50 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/27 10:23:57 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,29 +35,46 @@ t_elist	*ft_copy_env(char **env)
 	return (elist);
 }
 
-void	ft_print_list(t_elist *env, t_elist *exp, int i)
+void	ft_print_env(t_data *data, t_elist *env, int i)
 {
 	t_elist	*tmp;
-	t_elist	*aux;
 
 	tmp = env;
-	aux = exp;
 	while (env)
 	{
 		if (i == 1)
-			printf("%s=%s\n", env->name, env->def);
+		{
+			ft_putstr_fd(env->name, data->fdout);
+			ft_putchar_fd('=', data->fdout);
+			ft_putstr_fd(env->def, data->fdout);
+			ft_putchar_fd('\n', data->fdout);
+		}
 		else if (i == 2)
-			printf("declare -x %s=\"%s\"\n", env->name, env->def);
+		{
+			ft_putstr_fd("declare -x ", data->fdout);
+			ft_putstr_fd(env->name, data->fdout);
+			ft_putchar_fd('=', data->fdout);
+			ft_putstr_fd(env->def, data->fdout);
+			ft_putchar_fd('\n', data->fdout);
+		}
 		env = env->next;
 	}
 	env = tmp;
 	if (i == 2)
+		ft_print_exp(data, data->exp);
+}
+
+void	ft_print_exp(t_data *data, t_elist *exp)
+{
+	t_elist	*aux;
+
+	aux = exp;
+	while (exp)
 	{
-		while (exp)
-		{
-			printf("declare -x %s\n", exp->name);
-			exp = exp->next;
-		}
+		ft_putstr_fd("declare -x ", data->fdout);
+		ft_putstr_fd(exp->name, data->fdout);
+		ft_putchar_fd('\n', data->fdout);
+		exp = exp->next;
 	}
 	exp = aux;
 }
