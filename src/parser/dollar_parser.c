@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_parser.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:09:16 by marirodr          #+#    #+#             */
 /*   Updated: 2023/09/25 18:43:24 by marirodr         ###   ########.fr       */

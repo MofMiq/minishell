@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/27 11:11:53 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/28 19:26:42 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,11 +143,7 @@ void	ft_init_env(t_elist *elist);
 
 //signals.c
 
-// void	ft_init_sig(void);
-// void	ft_restart_input(int sig);
-void	ft_ignore_sigquit(void);
-
-void	ft_sig_handler(int sig);
+void	ft_handler(int sig);
 
 //fork.c
 //Unido con signals??
