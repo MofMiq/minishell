@@ -6,43 +6,51 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:01:57 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/26 18:10:48 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/28 19:36:17 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	ft_redi_output(t_data *data, t_token *token)
+int	ft_count_pipes(t_token *token)
 {
-	(void)data;
-	(void)token;
-	printf("hacer la redireccion del output\n");
-	// char	*name;
-	// int i;
-	// int	fd;
+	int		c;
+	t_token	*tmp;
 
-	// i = 0;
-	// while (token->str[i] == '>' || token->str[i] == ' ')
-	// 	i++;
-	// name = ft_substr(token->str, i, (ft_strlen(token->str) - 1));
-	// printf("en ft_redi_output: token->str: %s y token->type: %d\n", token->str, token->type);
-	// printf("en ft_redi_output: name: %s\n", name);
-	// fd = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	// if (fd == -1)
-	// {
-	// 	perror("fallo en open");
-	// 	exit(EXIT_FAILURE);
-	// }
-	// if (dup2(fd, STDOUT_FILENO) == -1)
-	// {
-	// 	perror("fallo en dup");
-	// 	exit(EXIT_FAILURE);
-	// }
-	// if (close(fd) == -1)
-	// {
-	// 	perror("fallo en close");
-	// 	exit(EXIT_FAILURE);
-	// }
-	// printf("Hello world\n");
-	// free(name);
+	c = 0;
+	tmp = token;
+	while (tmp)
+	{
+		if (tmp->type == PIPE)
+			c++;
+		tmp = tmp->next;
+	}
+	return (c);
+}
+
+void	ft_process_pipeline(t_data *data, int c_pipes)
+{
+	int		i;
+	t_token	*tmp;
+	int		pfd[2];
+
+	i = 0;
+	tmp = data->token;
+	while (i <= c_pipes)
+	{
+		if (pipe(pfd) == -1)
+			perror("pipe");
+		if (c_pipes == i)
+		{
+			printf("tengo que dirigir la ejecucion de los comandos a 1\n");
+			//ft_exe_command(data, data->fdin, data->fdout); //si no hay pipe deja las salidas estandar predefinidas, que ya se hace asi de entrada en init
+		}
+		else
+		{
+			printf("tengo que redirigir las salidas entre procesos\n");
+			//ft_exe_command(data, data->fdin, data->fdout); //aqui hay que cambiar ya las salidas con pipe
+		}
+		close(pfd[0]); //ceramos el fd del padre que no necesitamos , que es la parte "lectora" del pipe, porque eso "será" lo que reciba el proceso hijo de lo que escriba el padre con el fd[1] en el pipe
+		i++;
+	}
 }

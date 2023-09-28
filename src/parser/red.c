@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:49:30 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/27 11:08:09 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/28 17:42:30 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ft_what_redi(t_data *data)
 	while (aux)
 	{
 		if (aux->type == GREAT)
-			ft_redi_output(data, aux);
+			ft_putstr_fd("hacer la redireccion del output con append\n", data->fdout);
 		else if (aux->type == D_GREAT)
 			ft_putstr_fd("hacer la redireccion del output con append\n", data->fdout);
 		else if (aux->type == LESS)

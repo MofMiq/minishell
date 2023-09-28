@@ -6,8 +6,6 @@ el mini_split, no se si se joderia mucho el OLDPWD con el mini_split??
     builtins.c:
     line 18 -> es un parche ahora mismo
 
-voy a reorganizar en carpetas los archivos para que no se tanto follon, un poco siguiendo el modelo de javi y mcombeau
-
 ¿¿¿que pasa si le pasamos a ft_split un array que solo sea el separador, por ejemplo ft_split("=", "=")??? ->ultra segmentation fault
     |->actualizacion: en ft_cmp_and_update y ft_dollar_epxort: el split que arreglaste el viernes 08/09/23 esta petando y
     perdiendo la referencia del algunos "splieos". no se porque ocurre ahora mismo, pero al usar el antiguo split todo va
@@ -57,3 +55,5 @@ cuando se utiliza un comando externo bien todo va gucci, pero si se introduce un
 y deja de funcionar y si metemos el exit sale el mensaje de mallo de que estamos liberando algo no allocado
 
 tentemos que poder meter tabulaciones en el imput y que no muestre lso archivos que hay en la carpeta, si no que los interprete como los espacios
+
+Marina: ¿expandir ~ = "$HOME"? ¿bloquear el unset de $HOME?
