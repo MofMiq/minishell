@@ -66,6 +66,7 @@ typedef struct s_data
 	//int		bool_exp; ya no sirve para su cometido original, reusable en futuro?
 	int		argc;
 	pid_t	child;
+	int		fdin;
 	int		fdout;
 	t_elist	*env;
 	t_elist	*exp;
@@ -185,7 +186,7 @@ int		ft_is_redi(t_token *token);
 void	ft_what_redi(t_data *data);
 
 //redirections.c
-void	ft_redi_output(t_data *data, t_token *token);
+int		ft_count_pipes(t_token *token);
 
 //exec.c
 

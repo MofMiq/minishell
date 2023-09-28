@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/28 19:13:18 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/09/28 19:36:22 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@ static void	ft_check_type(t_data *data)
 	else
 	{
 		ft_init_parse(data);
+		printf("en check_type: hay [%d] pipes\n", ft_count_pipes(data->token));
+		//ft_process_pipeline(data, ft_count_pipes(data->token));
 		if (ft_bad_redi(data->token, data->fdout))
 			return (ft_free_token(data->token, data));
-		else if (ft_is_redi(data->token))
-			ft_what_redi(data);
+		// else if (ft_is_redi(data->token))
+		// 	ft_what_redi(data);
 		else if (data->token->type == BUILTIN)
 			ft_do_builtins(data, data->token->str);
 		else if (data->token->type == S_QUOTES || data->token->type == D_QUOTES)
@@ -46,6 +48,7 @@ void	ft_start_minishell(t_data *data)
 {
 	while (1)
 	{
+		data->fdout = STDOUT_FILENO;
 		data->input = readline("\x1b[96mPutaShell> \x1b[0m");
 		if (data->input == NULL)
 		{
