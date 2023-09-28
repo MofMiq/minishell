@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_parser.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:09:16 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/21 13:40:14 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/25 18:26:25 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ t_token	*ft_parse_dollar(t_data *data)
 			{
 				i = 0;
 				while (data->token->str[i] && data->token->str[i] != '$')
+					i++;
+				if (data->token->str[i] && data->token->str[i] == '$' && data->token->str[i + 1] == '\0')
 					i++;
 				if (data->token->str[i] == '$')
 					ft_dollar_aux(data, &data->token, &i);

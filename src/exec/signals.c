@@ -3,41 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:18:06 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/21 18:20:43 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/28 19:27:19 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-// Variable global, intentar cambiarla por estatica???
+// SIGUE SIN FUNCIONAR PERO TENGO POR FIN UNA PUTA TEORIA
 
-int	*g_active;
-
-static int	ft_get_active(void)
+void	ft_handler(int sig)
 {
-	int	active;
+	pid_t	child;
 
-	active = *g_active;
-	return (active);
-}
-
-void	ft_sig_handler(int sig)
-{
 	(void)sig;
-	printf("\n");
+	child = fork();
+	ft_putstr_fd("\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
-	if (ft_get_active() == 0)
-		rl_redisplay();
+	rl_redisplay();
+	// if (ft_active() == 0)
+	// 	rl_redisplay();
 }
+// #include <signal.h>
+// #include <stdlib.h>
+// #include <stdio.h>
 
-void	ft_child_process(int b)
-{
-	static int	active;
+// static volatile sig_atomic_t keep_running = 1;
 
-	active = b;
-	g_active = &active;
-}
+// static void sig_handler(int _)
+// {
+//     (void)_;
+//     keep_running = 0;
+// }
+
+// int main(void)
+// {
+//     signal(SIGINT, sig_handler);
+
+//     while (keep_running)
+//         puts("Still running...");
+
+//     puts("Stopped by signal `SIGINT'");
+//     return EXIT_SUCCESS;
+// }
