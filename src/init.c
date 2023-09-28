@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:10:56 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/28 18:40:59 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/28 19:12:34 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ t_data	*ft_init_data(char **env, char **argv)
 	data->child = 0;
 	data->fdin = STDIN_FILENO;
 	data->fdout = STDOUT_FILENO;
-	ft_child_process(0);
-	//data->env->child = 1;
 	return (data);
 }
 

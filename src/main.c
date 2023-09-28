@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
 /*   Updated: 2023/09/28 19:36:22 by marirodr         ###   ########.fr       */
@@ -37,6 +37,7 @@ static void	ft_check_type(t_data *data)
 		else if (data->token->type != BUILTIN && data->args)
 		{
 			ft_launch_exec(data);
+			// printf("bash: %s: command not found\n", data->token->str);
 			ft_putstr_fd("que quiereh\n", data->fdout);
 		}
 		ft_free_token(data->token, data);
@@ -45,8 +46,6 @@ static void	ft_check_type(t_data *data)
 
 void	ft_start_minishell(t_data *data)
 {
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, ft_sig_handler);
 	while (1)
 	{
 		data->fdout = STDOUT_FILENO;
@@ -77,6 +76,7 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
+	signal(SIGINT, ft_handler);
 	//ft_display_banner();
 	using_history();
 	data = ft_init_data(env, argv);
