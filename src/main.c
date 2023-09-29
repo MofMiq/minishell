@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/28 19:36:22 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/29 19:00:37 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,35 @@
 
 static void	ft_check_type(t_data *data)
 {	
-	if ((ft_is_closed(data->input, '\'') % 2 != 0)
-		|| (ft_is_closed(data->input, '\"') % 2 != 0))
-		ft_putstr_fd("No has cerrao comillas chula\n", data->fdout);
-	else
+	ft_init_parse(data);
+	//printf("en check_type: hay [%d] pipes\n", ft_count_pipes(data->token));
+	//ft_process_pipeline(data, ft_count_pipes(data->token));
+	if (ft_repaste(data))
+		return (ft_free_token(data->token, data));
+	if (ft_bad_redi(data->token, data->fdout))
+		return (ft_free_token(data->token, data));
+	// else if (ft_is_redi(data->token))
+	// 	ft_what_redi(data);
+	else if (data->token->type == BUILTIN)
+		ft_do_builtins(data, data->token->str);
+	else if (data->token->type == S_QUOTES || data->token->type == D_QUOTES)
 	{
-		ft_init_parse(data);
-		printf("en check_type: hay [%d] pipes\n", ft_count_pipes(data->token));
-		//ft_process_pipeline(data, ft_count_pipes(data->token));
-		if (ft_bad_redi(data->token, data->fdout))
-			return (ft_free_token(data->token, data));
-		// else if (ft_is_redi(data->token))
-		// 	ft_what_redi(data);
-		else if (data->token->type == BUILTIN)
-			ft_do_builtins(data, data->token->str);
-		else if (data->token->type == S_QUOTES || data->token->type == D_QUOTES)
-		{
-			ft_putstr_fd("bash: ", data->fdout);
-			ft_putstr_fd(data->token->str, data->fdout);
-			ft_putstr_fd(": command not found\n", data->fdout);
-		}
-		else if (data->token->type != BUILTIN && data->args)
-		{
-			ft_launch_exec(data);
-			// printf("bash: %s: command not found\n", data->token->str);
-			ft_putstr_fd("que quiereh\n", data->fdout);
-		}
-		ft_free_token(data->token, data);
+		ft_putstr_fd("bash: ", data->fdout);
+		ft_putstr_fd(data->token->str, data->fdout);
+		ft_putstr_fd(": command not found\n", data->fdout);
 	}
+	else if (data->token->type != BUILTIN && data->args)
+	{
+		ft_launch_exec(data);
+		ft_putstr_fd("que quiereh\n", data->fdout);
+	}
+	ft_free_token(data->token, data);
 }
 
 void	ft_start_minishell(t_data *data)
 {
 	while (1)
 	{
-		data->fdout = STDOUT_FILENO;
 		data->input = readline("\x1b[96mPutaShell> \x1b[0m");
 		if (data->input == NULL)
 		{
@@ -58,9 +52,13 @@ void	ft_start_minishell(t_data *data)
 		if (data->input[0] != '\0')
 		{
 			add_history(data->input);
-			ft_check_type(data);
+			if ((ft_is_closed(data->input, '\'') % 2 != 0)
+				|| (ft_is_closed(data->input, '\"') % 2 != 0))
+				ft_putstr_fd("No has cerrao comillas chula\n", data->fdout);
+			else if (!ft_is_all_space(data->input))
+				ft_check_type(data);
 		}
-		free(data->input); //para evitar leak vacio cuando solo pulsas enter
+		free(data->input);
 	}
 }
 
