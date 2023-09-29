@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/28 19:26:42 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/09/29 19:01:09 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ void	ft_init_parse(t_data *data);
 t_token	*ft_assign_type(t_data *data);
 void	ft_reconvert_token(t_data *data);
 void	ft_subdivide_input(t_data *data, int *i, int *start);
+int		ft_repaste(t_data *data);
 
 //token_utils.c
 t_token	*ft_new_token(char *input, int i, int start);
@@ -170,10 +171,11 @@ t_token	*ft_parse_dollar(t_data *data);
 void	ft_dollar_aux(t_data *data, t_token **token, int *i);
 char	*ft_exit_status(int *i);
 void	ft_change_dollar(t_token **token, char *nstr, int drop, int take);
+int		ft_is_all_space(char *input);
 
 //quotes.c
 int		ft_is_closed(char *str, char c);
-int		ft_c_quotes(char *str);
+int		ft_c_quotes(char *str, char q);
 char	*ft_copy_no_quotes(char *token, char *copy, int i, int j);
 void	ft_ignore_quotes(t_data *data);
 void	ft_quotes(t_data *data, int *i, int *start, char q);

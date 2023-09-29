@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_parser.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:09:16 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/25 18:43:24 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/09/29 18:59:56 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+//ft_strchr(" \0\'\"" data->token->str[i + 1])
 
 t_token	*ft_parse_dollar(t_data *data)
 {
@@ -53,7 +55,7 @@ void	ft_dollar_aux(t_data *data, t_token **token, int *i)
 		ndef = ft_exit_status(i);
 	else
 	{
-		while ((*token)->str[*i] && !ft_strchr(" $=", (*token)->str[*i]))
+		while ((*token)->str[*i] && !ft_strchr(" $=\'\"", (*token)->str[*i]))
 			(*i)++;
 		cenv = ft_substr((*token)->str, s, (*i) - s);
 		if (!ft_list_cmp(data->env, cenv))
@@ -107,4 +109,18 @@ void	ft_change_dollar(t_token **token, char *nstr, int drop, int take)
 	free((*token)->str);
 	(*token)->str = ft_strdup(copy);
 	free(copy);
+}
+
+int	ft_is_all_space(char *input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (input[i] != ' ')
+			return (0);
+		i++;
+	}
+	return (1);
 }
