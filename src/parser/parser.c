@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:17:49 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/29 19:10:12 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/02 18:18:27 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_token	*ft_assign_type(t_data *data)
 
 void	ft_subdivide_input(t_data *data, int *i, int *start)
 {
-	while (!(ft_strchr(" '\"''\''|", data->input[*i])) && data->input[*i] != '\0')
+	while (!(ft_strchr(" |'\"''\''", data->input[*i])) && data->input[*i] != '\0')
 		(*i)++;
 	ft_add_token(&data->token, ft_new_token(data->input, *i, *start));
 }
@@ -102,8 +102,8 @@ void	ft_reconvert_token(t_data *data)
 	i = 0;
 	while (tmp)
 	{
-		if (tmp->type >= 1 && tmp->type <= 4)
-			i++;
+		//if (tmp->type >= 1 && tmp->type <= 4)
+		i++;
 		tmp = tmp->next;
 	}
 	data->argc = i;
@@ -114,8 +114,8 @@ void	ft_reconvert_token(t_data *data)
 	i = 0;
 	while (tmp)
 	{
-		if (tmp->type >= 1 && tmp->type <= 4)
-			data->args[i++] = ft_strdup(tmp->str);
+		//if (tmp->type >= 1 && tmp->type <= 4)
+		data->args[i++] = ft_strdup(tmp->str);
 		tmp = tmp->next;
 	}
 }
@@ -131,6 +131,10 @@ void	ft_init_parse(t_data *data)
 	ft_reconvert_token(data);
 }
 	//comprobar lista token
+	// ft_putstr_fd("en ft_init_parse / data->input: ", data->fdout);
+	// ft_putstr_fd(data->input, data->fdout);
+	// ft_putchar_fd('\n', data->fdout);
+
 	// t_token	*tmp;
 	// if (data->token)
 	// tmp = data->token;
@@ -143,35 +147,15 @@ void	ft_init_parse(t_data *data)
 	// 		ft_putstr_fd("en ft_init_parse / token->type: ", data->fdout);
 	// 		ft_putnbr_fd(data->token->type, data->fdout);
 	// 		ft_putchar_fd('\n', data->fdout);
+	// 		ft_putnbr_fd(data->token->join, data->fdout);
+	// 		ft_putchar_fd('\n', data->fdout);
 	// 		data->token = data->token->next;
 	// 	}
 	// }
 	// data->token = tmp;
-	// ft_putstr_fd("en ft_init_parse / data->input: ", data->fdout);
-	// ft_putstr_fd(data->input, data->fdout);
-	// ft_putchar_fd('\n', data->fdout);
-
-/*esta funcion es un simple parche para un problema mas grande.
-en el parseo divido por espacios y tokenizo pero a la hora de imprimir
-creo que vamos a tener un problema porque pierdo la referencias de los
-espacios y ya no sabemos si esas cosas van juntas o no.
-tengo que darle una vuelta.*/
-
-int	ft_repaste(t_data *data)
-{
-	int		len;
-	char	*tmp;
-
-	len = ft_strlen(data->token->str);
-	if (data->input[len] == '\0' || data->input[len] == ' ')
-		return (0);
-	if (ft_strchr("'\''\"", data->token->str[len]))
-	{
-		tmp = ft_strjoin(data->token->str, " ");
-		tmp = ft_strjoin_gnl(tmp, data->token->next->str);
-		printf("bash: %s: command not found\n", tmp);
-		free(tmp);
-		return (1);
-	}
-	return (0);
-}
+	//int i = 0;
+	// while(data->args[i])
+	// {
+	// 	printf("en ft_init_parse: %s\n", data->args[i]);
+	// 	i++;
+	// }
