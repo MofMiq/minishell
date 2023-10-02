@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/02 16:37:43 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/02 19:24:39 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,11 +146,9 @@ void	ft_init_env(t_elist *elist);
 //signals.c
 
 void	ft_handler(int sig);
-
-//fork.c
-//Unido con signals??
-
-void	ft_child_process(int b);
+void	ft_signal(void);
+void	ft_handler_process(int sig);
+void	ft_signal_proc(void);
 
 //parser.c
 t_token	*ft_divide_input(t_data *data);

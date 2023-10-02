@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 13:47:53 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/02 18:08:17 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/02 19:24:33 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,11 @@ void	ft_exec_from_path(t_data *data)
 void	ft_launch_exec(t_data *data)
 {
 	int	stat;
+	int	exit_stat;
 
+	//Falta comprobar que de donde se va a ejecutar existe el archivo, 
+	// para por ejemplo el comando top de bash :)
 	data->child = fork();
-	/*a partir de aqui seria la funcion childprocess*/
 	if (data->child == 0)
 	{
 		ft_exec_from_path(data);
@@ -93,5 +95,12 @@ void	ft_launch_exec(t_data *data)
 	else if (data->child < 0)
 		perror(data->args[0]);
 	else
+	{
 		waitpid(data->child, &stat, WUNTRACED);
+		if (data->child > 0)
+		{
+			if (WIFEXITED(stat))
+				exit_stat = WEXITSTATUS(stat);
+		}
+	}
 }

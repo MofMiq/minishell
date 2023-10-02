@@ -6,46 +6,52 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:18:06 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/28 19:27:19 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/10/02 19:24:37 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-// SIGUE SIN FUNCIONAR PERO TENGO POR FIN UNA PUTA TEORIA
-
 void	ft_handler(int sig)
 {
-	pid_t	child;
-
 	(void)sig;
-	child = fork();
 	ft_putstr_fd("\n", 1);
-	rl_replace_line("", 0);
 	rl_on_new_line();
+	rl_replace_line("", 0);
 	rl_redisplay();
-	// if (ft_active() == 0)
-	// 	rl_redisplay();
 }
-// #include <signal.h>
-// #include <stdlib.h>
-// #include <stdio.h>
 
-// static volatile sig_atomic_t keep_running = 1;
+void	ft_handler_process(int sig)
+{
+	(void)sig;
+	rl_redisplay();
+}
 
-// static void sig_handler(int _)
-// {
-//     (void)_;
-//     keep_running = 0;
-// }
+void	ft_signal_proc(void)
+{
+	struct sigaction	action;
 
-// int main(void)
-// {
-//     signal(SIGINT, sig_handler);
+	ft_memset(&action, 0, sizeof(action));
+	action.sa_handler = &ft_handler_process;
+	sigaction(SIGINT, &action, NULL);
+	sigaction(SIGQUIT, &action, NULL);
+}
 
-//     while (keep_running)
-//         puts("Still running...");
+static void	ft_ignore(void)
+{
+	struct sigaction	action;
 
-//     puts("Stopped by signal `SIGINT'");
-//     return EXIT_SUCCESS;
-// }
+	ft_memset(&action, 0, sizeof(action));
+	action.sa_handler = SIG_IGN;
+	sigaction(SIGQUIT, &action, NULL);
+}
+
+void	ft_signal(void)
+{
+	struct sigaction	action;
+
+	ft_ignore();
+	ft_memset(&action, 0, sizeof(action));
+	action.sa_handler = &ft_handler;
+	sigaction(SIGINT, &action, NULL);
+}
