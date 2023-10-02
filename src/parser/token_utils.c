@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 13:30:15 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/29 17:43:01 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/02 16:35:45 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,28 @@ t_token	*ft_new_token(char *input, int i, int start)
 	char	*tmp;
 	t_token	*token;
 
-	token = NULL;
+	//token = NULL;
 	tmp = ft_substr(input, start, i - start);
+	//printf("%sen ft_new_token: input[%i]: %c\n", PINK, i, input[i]);
 	token = (t_token *)malloc(sizeof(t_token));
 	if (!token)
 	{
 		perror("Allocation problem\n");
 		exit(EXIT_FAILURE);
 	}
-	if ((tmp[0] == '\"' && tmp[1] == '\"' && tmp[2] == '\0')
-		|| (tmp[0] == '\'' && tmp[1] == '\'' && tmp[2] == '\0'))
-	{
-		free(tmp);
-		tmp = ft_calloc(1, 1);
-	}
+	// if ((tmp[0] == '\"' && tmp[1] == '\"' && tmp[2] == '\0')
+	// 	|| (tmp[0] == '\'' && tmp[1] == '\'' && tmp[2] == '\0'))
+	// {
+	// 	free(tmp);
+	// 	tmp = ft_calloc(1, 1);
+	// }
 	token->str = tmp;
 	token->type = -1;
+	if (input[i] == '\0')
+		token->join = 1;
+	else
+		token->join = ft_check_space(input[start - 1]); //0 si hay que hacer join; 1 si separado por espacio, no hacer nada
+	//printf("en ft_new_token: token->join: %i%s\n", token->join, END);
 	token->next = NULL;
 	token->prev = NULL;
 	return (token);
@@ -46,6 +52,15 @@ t_token	*ft_last_token(t_token *token)
 	while (token && token->next != NULL)
 		token = token->next;
 	return (token);
+}
+
+int	ft_check_space(char c)
+{
+	if (c == '\0')
+		return (0);
+	if (c == ' ')
+		return (1);
+	return (0);
 }
 //en pruebas
 // t_token	*ft_first_token(t_token **token)

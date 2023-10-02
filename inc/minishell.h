@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/29 19:01:09 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/02 16:37:43 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_token
 {
 	char			*str;
 	int				type;
+	int				join;
 //	int				child;
 	struct s_token	*prev;
 	struct s_token	*next;
@@ -157,13 +158,13 @@ void	ft_init_parse(t_data *data);
 t_token	*ft_assign_type(t_data *data);
 void	ft_reconvert_token(t_data *data);
 void	ft_subdivide_input(t_data *data, int *i, int *start);
-int		ft_repaste(t_data *data);
 
 //token_utils.c
 t_token	*ft_new_token(char *input, int i, int start);
 t_token	*ft_last_token(t_token *token);
 t_token	*ft_penultimate_token(t_token *token);
 t_token	*ft_add_token(t_token **token, t_token *new);
+int		ft_check_space(char c);
 //t_token	*ft_first_token(t_token **token); //en pruebas
 
 //dollar_parser.c
@@ -186,6 +187,11 @@ int		ft_bad_redi(t_token *token, int fd);
 int		ft_print_bad_red(int n);
 int		ft_is_redi(t_token *token);
 void	ft_what_redi(t_data *data);
+
+//rejoin.c
+void	ft_rejoin(t_token **token);
+void	ft_del_token(t_token *node);
+int		ft_check_join(t_token *token);
 
 //redirections.c
 int		ft_count_pipes(t_token *token);

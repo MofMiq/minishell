@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:54:01 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/26 18:19:01 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:48:59 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,32 @@ void	epur_str(char *str, t_data *data)
 
 void	ft_print_echo(t_data *data, int pos)
 {
+	int		i;
+	t_token	*tmp;
+
+	i = pos - 1;
+	tmp = data->token;
+	while (i >= 0)
+	{
+		tmp = tmp->next;
+		i--;
+	}
+	if (ft_is_flag(tmp->prev->str))
+		tmp->prev->type = BUILTIN;
 	while (data->args[pos] != NULL)
 	{
-		epur_str(data->args[pos], data);
-		if (data->args[pos + 1] != NULL)
-			ft_putchar_fd(' ', data->fdout);
+		//epur_str(data->args[pos], data);
+		// if (data->args[pos + 1] != NULL)
+		// 	ft_putchar_fd(' ', data->fdout);
 			//write(1, " ", 1);
+		if (tmp->type >= NO_QUOTES && tmp->type <= D_QUOTES)
+		{
+			if (tmp->join == 1 && tmp->prev->type != BUILTIN)
+				ft_putchar_fd(' ', data->fdout);
+			ft_putstr_fd(data->args[pos], data->fdout);
+		}
 		pos++;
+		tmp = tmp->next;
 	}
 }
 

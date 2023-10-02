@@ -6,7 +6,7 @@
 #    By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/21 16:22:32 by marirodr          #+#    #+#              #
-#    Updated: 2023/09/26 15:49:00 by marirodr         ###   ########.fr        #
+#    Updated: 2023/10/02 10:56:35 by marirodr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRC			= src/main.c \
 			src/parser/dollar_parser.c \
 			src/parser/quotes.c \
 			src/parser/red.c \
+			src/parser/rejoin.c \
 			src/init.c \
 			src/free.c \
 			src/redirections/redirections.c \
