@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:17:49 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/02 18:18:27 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/03 11:43:36 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,24 @@ void	ft_init_parse(t_data *data)
 	if (ft_is_builtin(data->token->str) != 0)
 		data->token->type = BUILTIN;
 	data->token = ft_parse_dollar(data);
+	t_token	*tmp;
+	if (data->token)
+	tmp = data->token;
+	{
+		while (data->token)
+		{
+			ft_putstr_fd("en ft_init_parse / token->str: ", data->fdout);
+			ft_putstr_fd(data->token->str, data->fdout);
+			ft_putchar_fd('\n', data->fdout);
+			ft_putstr_fd("en ft_init_parse / token->type: ", data->fdout);
+			ft_putnbr_fd(data->token->type, data->fdout);
+			ft_putchar_fd('\n', data->fdout);
+			ft_putnbr_fd(data->token->space, data->fdout);
+			ft_putchar_fd('\n', data->fdout);
+			data->token = data->token->next;
+		}
+	}
+	data->token = tmp;
 	ft_reconvert_token(data);
 }
 	//comprobar lista token
@@ -135,24 +153,6 @@ void	ft_init_parse(t_data *data)
 	// ft_putstr_fd(data->input, data->fdout);
 	// ft_putchar_fd('\n', data->fdout);
 
-	// t_token	*tmp;
-	// if (data->token)
-	// tmp = data->token;
-	// {
-	// 	while (data->token)
-	// 	{
-	// 		ft_putstr_fd("en ft_init_parse / token->str: ", data->fdout);
-	// 		ft_putstr_fd(data->token->str, data->fdout);
-	// 		ft_putchar_fd('\n', data->fdout);
-	// 		ft_putstr_fd("en ft_init_parse / token->type: ", data->fdout);
-	// 		ft_putnbr_fd(data->token->type, data->fdout);
-	// 		ft_putchar_fd('\n', data->fdout);
-	// 		ft_putnbr_fd(data->token->join, data->fdout);
-	// 		ft_putchar_fd('\n', data->fdout);
-	// 		data->token = data->token->next;
-	// 	}
-	// }
-	// data->token = tmp;
 	//int i = 0;
 	// while(data->args[i])
 	// {
