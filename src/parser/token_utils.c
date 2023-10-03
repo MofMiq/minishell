@@ -5,92 +5,52 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/08 13:30:15 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/02 16:35:45 by marirodr         ###   ########.fr       */
+/*   Created: 2023/10/03 11:42:47 by marirodr          #+#    #+#             */
+/*   Updated: 2023/10/03 11:43:38 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-/*me acabo de hacer aqui una guarrada (32-38) y meto un nodo "vacio" para que
-como en bash imprema un espacio "extra"*/
-
-t_token	*ft_new_token(char *input, int i, int start)
+char	*ft_token_cat(t_token *aux, t_token *first, int len, int i)
 {
 	char	*tmp;
-	t_token	*token;
 
-	//token = NULL;
-	tmp = ft_substr(input, start, i - start);
-	//printf("%sen ft_new_token: input[%i]: %c\n", PINK, i, input[i]);
-	token = (t_token *)malloc(sizeof(t_token));
-	if (!token)
+	while (aux && aux->space == 0)
 	{
-		perror("Allocation problem\n");
-		exit(EXIT_FAILURE);
+		len += ft_strlen(aux->str);
+		aux = aux->next;
 	}
-	// if ((tmp[0] == '\"' && tmp[1] == '\"' && tmp[2] == '\0')
-	// 	|| (tmp[0] == '\'' && tmp[1] == '\'' && tmp[2] == '\0'))
-	// {
-	// 	free(tmp);
-	// 	tmp = ft_calloc(1, 1);
-	// }
-	token->str = tmp;
-	token->type = -1;
-	if (input[i] == '\0')
-		token->join = 1;
-	else
-		token->join = ft_check_space(input[start - 1]); //0 si hay que hacer join; 1 si separado por espacio, no hacer nada
-	//printf("en ft_new_token: token->join: %i%s\n", token->join, END);
-	token->next = NULL;
-	token->prev = NULL;
-	return (token);
+	tmp = ft_calloc(len, sizeof(char));
+	while (first && first->space == 0)
+	{
+		len = 0;
+		while (first->str[len])
+			tmp[i++] = first->str[len++];
+		first = first->next;
+	}
+	return (tmp);
 }
+/*mirar con detenimiento*/
 
-t_token	*ft_last_token(t_token *token)
+int	ft_one_bad_arg(t_data *data)
 {
-	while (token && token->next != NULL)
-		token = token->next;
-	return (token);
-}
+	int		len;
+	char	*tmp;
+	t_token	*aux;
+	t_token	*first;
 
-int	ft_check_space(char c)
-{
-	if (c == '\0')
+	len = ft_strlen(data->token->str);
+	aux = data->token;
+	first = data->token;
+	if (data->input[len] == '\0' || data->input[len] == ' ')
 		return (0);
-	if (c == ' ')
-		return (1);
-	return (0);
-}
-//en pruebas
-// t_token	*ft_first_token(t_token **token)
-// {
-// 	while ((*token) && (*token)->prev != NULL)
-// 	{
-// 		printf("en ft_first_token: token->str: %s\n", (*token)->str);
-// 		(*token) = (*token)->prev;
-// 	}
-// 	return ((*token));
-// }
-
-t_token	*ft_penultimate_token(t_token *token)
-{
-	while (token->next->next != NULL)
-		token = token->next;
-	return (token);
-}
-
-t_token	*ft_add_token(t_token **token, t_token *new)
-{
-	if (!new)
-		return (NULL);
-	if (*token == NULL)
-		*token = new;
-	else
+	if (ft_strchr("'\''\"", data->token->str[len]))
 	{
-		ft_last_token(*token)->next = new;
-		if ((*token)->prev == NULL)
-			new->prev = ft_penultimate_token(*token);
+		tmp = ft_token_cat(aux->next, first, len, 0);
+		printf("bash: %s: command not found\n", tmp);
+		free(tmp);
+		return (1);
 	}
-	return (*token);
+	return (0);
 }

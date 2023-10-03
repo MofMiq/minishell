@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/02 19:24:39 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/10/03 11:41:59 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_token
 {
 	char			*str;
 	int				type;
-	int				join;
+	int				space;
 //	int				child;
 	struct s_token	*prev;
 	struct s_token	*next;
@@ -157,7 +157,7 @@ t_token	*ft_assign_type(t_data *data);
 void	ft_reconvert_token(t_data *data);
 void	ft_subdivide_input(t_data *data, int *i, int *start);
 
-//token_utils.c
+//create_token.c
 t_token	*ft_new_token(char *input, int i, int start);
 t_token	*ft_last_token(t_token *token);
 t_token	*ft_penultimate_token(t_token *token);
@@ -179,17 +179,16 @@ char	*ft_copy_no_quotes(char *token, char *copy, int i, int j);
 void	ft_ignore_quotes(t_data *data);
 void	ft_quotes(t_data *data, int *i, int *start, char q);
 
+//token_utils.c
+char	*ft_token_cat(t_token *aux, t_token *first, int len, int i);
+int		ft_one_bad_arg(t_data *data);
+
 //red.c
 void	ft_redirections(t_data *data, int *i, int *start, char c);
 int		ft_bad_redi(t_token *token, int fd);
 int		ft_print_bad_red(int n);
 int		ft_is_redi(t_token *token);
 void	ft_what_redi(t_data *data);
-
-//rejoin.c
-void	ft_rejoin(t_token **token);
-void	ft_del_token(t_token *node);
-int		ft_check_join(t_token *token);
 
 //redirections.c
 int		ft_count_pipes(t_token *token);
