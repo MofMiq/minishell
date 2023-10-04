@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:17:49 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/03 11:43:36 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/04 18:26:17 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ void	ft_init_parse(t_data *data)
 	{
 		while (data->token)
 		{
+			ft_putstr_fd(PINK, data->fdout);
 			ft_putstr_fd("en ft_init_parse / token->str: ", data->fdout);
 			ft_putstr_fd(data->token->str, data->fdout);
 			ft_putchar_fd('\n', data->fdout);
@@ -142,20 +143,20 @@ void	ft_init_parse(t_data *data)
 			ft_putchar_fd('\n', data->fdout);
 			ft_putnbr_fd(data->token->space, data->fdout);
 			ft_putchar_fd('\n', data->fdout);
+			ft_putstr_fd(END, data->fdout);
 			data->token = data->token->next;
 		}
 	}
 	data->token = tmp;
 	ft_reconvert_token(data);
+	int i = 0;
+	while(data->args[i])
+	{
+		printf("%sen ft_init_parsedata->args[%i]: %s%s\n", BLUE, i, data->args[i], END);
+		i++;
+	}
 }
 	//comprobar lista token
 	// ft_putstr_fd("en ft_init_parse / data->input: ", data->fdout);
 	// ft_putstr_fd(data->input, data->fdout);
 	// ft_putchar_fd('\n', data->fdout);
-
-	//int i = 0;
-	// while(data->args[i])
-	// {
-	// 	printf("en ft_init_parse: %s\n", data->args[i]);
-	// 	i++;
-	// }

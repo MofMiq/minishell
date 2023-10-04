@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:54:01 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/02 18:27:25 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/03 13:28:44 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	ft_print_echo(t_data *data, int pos)
 
 	i = pos - 1;
 	tmp = data->token;
+	if (tmp->next == NULL)
+		return ;
 	while (i >= 0)
 	{
 		tmp = tmp->next;
@@ -59,10 +61,6 @@ void	ft_print_echo(t_data *data, int pos)
 		tmp->prev->type = BUILTIN;
 	while (data->args[pos] != NULL)
 	{
-		//epur_str(data->args[pos], data);
-		// if (data->args[pos + 1] != NULL)
-		// 	ft_putchar_fd(' ', data->fdout);
-			//write(1, " ", 1);
 		if (tmp->type >= NO_QUOTES && tmp->type <= D_QUOTES)
 		{
 			if (tmp->space == 1 && tmp->prev->type != BUILTIN)

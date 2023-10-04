@@ -6,7 +6,7 @@
 #    By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/21 16:22:32 by marirodr          #+#    #+#              #
-#    Updated: 2023/10/03 11:44:05 by marirodr         ###   ########.fr        #
+#    Updated: 2023/10/03 11:54:27 by marirodr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,6 @@ SRC			= src/main.c \
 			src/builtins/list_utils_3.c \
 			src/exec/exec.c \
 			src/exec/signals.c \
-			src/exec/fork.c \
 			src/parser/parser.c \
 			src/parser/create_token.c \
 			src/parser/dollar_parser.c \
