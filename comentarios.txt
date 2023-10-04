@@ -54,6 +54,8 @@ BELEN: Comprobar tema señales en condiciones, el ejecutable debe poder ejecutar
 cuando se utiliza un comando externo bien todo va gucci, pero si se introduce uno erroneo se queda pilladisimo
 y deja de funcionar y si metemos el exit sale el mensaje de mallo de que estamos liberando algo no allocado
 
-tentemos que poder meter tabulaciones en el imput y que no muestre lso archivos que hay en la carpeta, si no que los interprete como los espacios
+tentemos que poder meter tabulaciones en el imput y que no muestre lso archivos que hay en la carpeta, si no que los
+interprete como los espacios-> culpa de readline y dificil de cambiar segun me dijo pablo
 
-Marina: ¿expandir ~ = "$HOME"? ¿bloquear el unset de $HOME?
+BELEN: si en el input hay solo un cd debe debe moverse a la carpeta $HOME (/Users/$USER), yo lo he intentado pero
+como no se muy bien como va solo he cambiado las variables de entorno no me he movido de verdad (sorry masen)

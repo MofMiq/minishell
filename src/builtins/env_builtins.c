@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/27 11:12:09 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/04 18:59:33 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	ft_check_name(char *name, t_data *data)
 	i = -1;
 	if (name[0] == '=')
 		return (ft_check_name_print(name, data));
+	if (name[0] == '\0')
+		return (0);
 	else
 	{
 		split = ft_mini_split(name, '=');

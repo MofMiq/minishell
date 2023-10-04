@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:25:39 by begarijo          #+#    #+#             */
-/*   Updated: 2023/09/26 18:24:10 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:03:36 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	ft_cd(t_data *data)
 	owd = getcwd(NULL, 0);
 	if (chdir(data->args[1]) == 0 && data->argc >= 2)
 		ft_change_dir(data, owd);
+	//else if (data->argc == 1)
+		//si solo cd en input hay que cambiar a $HOME
 	else
 		perror("cd");
 	free(owd);
