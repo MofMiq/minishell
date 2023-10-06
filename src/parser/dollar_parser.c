@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:09:16 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/29 18:59:56 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/06 10:33:30 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ void	ft_dollar_aux(t_data *data, t_token **token, int *i)
 
 /*a esta funcion hay que pasarle otro numero, que será un codigo de salida
 que no se muy bien de donde lo obtendremos, pero que perfectamente podriamos
-guardar en 'data' para que lo pueda pasar por aqui.*/
+guardar en 'data' para que lo pueda pasar por aqui.
+añadir data como argumento, o data->exit_status*/
 
 char	*ft_exit_status(int *i)
 {
