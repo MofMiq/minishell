@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/03 11:41:59 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/06 13:01:43 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@
 # define S_QUOTES	3
 # define D_QUOTES	4
 # define PIPE		5
-# define GREAT		6
-# define LESS		7
-# define D_GREAT	8
-# define D_LESS		9
+# define OUT		6
+# define IN			7
+# define APPEDEN	8
+# define HERE_DOC	9
 
 typedef struct s_token
 {
@@ -69,9 +69,11 @@ typedef struct s_data
 	pid_t	child;
 	int		fdin;
 	int		fdout;
+	int		exit_status;
 	t_elist	*env;
 	t_elist	*exp;
 	t_token	*token;
+	t_token	*curr_tkn;
 }	t_data;
 
 //list_utils.c
@@ -184,14 +186,21 @@ char	*ft_token_cat(t_token *aux, t_token *first, int len, int i);
 int		ft_one_bad_arg(t_data *data);
 
 //red.c
-void	ft_redirections(t_data *data, int *i, int *start, char c);
+void	ft_sub_red(t_data *data, int *i, int *start, char c);
 int		ft_bad_redi(t_token *token, int fd);
 int		ft_print_bad_red(int n);
 int		ft_is_redi(t_token *token);
-void	ft_what_redi(t_data *data);
 
 //redirections.c
 int		ft_count_pipes(t_token *token);
+void	ft_process_pipeline(t_data *data, int c_pipes);
+void	ft_begin_redi(t_data *data);
+void	ft_is_buil_or_comm(t_data *data);
+void	ft_what_redi(t_data *data);
+void	ft_out_redi(t_data *data, int flag);
+void	ft_input_redi(t_data *data);
+void	ft_here_doc(t_data *data);
+
 
 //exec.c
 

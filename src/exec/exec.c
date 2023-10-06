@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 13:47:53 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/02 19:24:33 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/10/06 19:16:22 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,12 @@ void	ft_exec_from_path(t_data *data)
 // Cuando se reejecute: SEÑALES? EJECUTABLES 
 // La salida tiene que ir por otro lado, buscar en man WIFEXIT?
 
+/*aqui no estoy reasignado bien los fds de salida cuando hay un 
+pipe, por lo demas funciona como el resto.*/
+
 void	ft_launch_exec(t_data *data)
 {
 	int	stat;
-	int	exit_stat;
 
 	//Falta comprobar que de donde se va a ejecutar existe el archivo, 
 	// para por ejemplo el comando top de bash :)
@@ -87,6 +89,8 @@ void	ft_launch_exec(t_data *data)
 	if (data->child == 0)
 	{
 		ft_exec_from_path(data);
+		dup2(data->fdin, STDIN_FILENO);
+		dup2(data->fdout, STDOUT_FILENO);
 		if (execve(data->args[0], data->args, &data->env->name) == -1)
 			perror("PATH");
 		else
@@ -100,7 +104,15 @@ void	ft_launch_exec(t_data *data)
 		if (data->child > 0)
 		{
 			if (WIFEXITED(stat))
-				exit_stat = WEXITSTATUS(stat);
+				data->exit_status = WEXITSTATUS(stat);
 		}
 	}
 }
+		// printf("-------ESTOY AQUI.mp3\n");
+		// int i = 0;
+		// while (data->args[i])
+		// {
+		// 	printf("%sen ft_launch_exec data->args[%i]: %s%s\n", PINK, i, data->args[i], END);
+		// 	i++;
+		// }
+		// //printf("%sen ft_launch_exec data->cur_token: %s%s\n", PINK, data->curr_tkn->str, END);

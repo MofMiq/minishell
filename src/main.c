@@ -6,17 +6,20 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/03 13:30:14 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/06 19:12:26 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
 static void	ft_check_type(t_data *data)
-{	
+{
+	t_token	*last;
+
 	ft_init_parse(data);
-	//printf("en check_type: hay [%d] pipes\n", ft_count_pipes(data->token));
-	//ft_process_pipeline(data, ft_count_pipes(data->token));
+	last = ft_last_token(data->token);
+	if (last->type == PIPE)
+		return (ft_free_token(data->token, data), ft_putstr_fd("No has cerrao el pipe\n", data->fdout));
 	if (ft_one_bad_arg(data))
 		return (ft_free_token(data->token, data));
 	if (ft_bad_redi(data->token, data->fdout))
@@ -27,15 +30,14 @@ static void	ft_check_type(t_data *data)
 		ft_putstr_fd(data->token->str, data->fdout);
 		ft_putstr_fd(": command not found\n", data->fdout);
 	}
-	// else if (ft_is_redi(data->token))
-	// 	ft_what_redi(data);
-	else if (data->token->type == BUILTIN)
-		ft_do_builtins(data, data->token->str);
-	else if (data->token->type != BUILTIN && data->args)
-	{
-		ft_launch_exec(data);
-		ft_putstr_fd("que quiereh\n", data->fdout);
-	}
+	ft_process_pipeline(data, ft_count_pipes(data->token));
+	// else if (data->token->type == BUILTIN)
+	// 	ft_do_builtins(data, data->token->str);
+	// else if (data->token->type != BUILTIN && data->args)
+	// {
+	// 	ft_launch_exec(data);
+	// 	ft_putstr_fd("que quiereh\n", data->fdout);
+	// }
 	ft_free_token(data->token, data);
 }
 
@@ -43,6 +45,8 @@ void	ft_start_minishell(t_data *data)
 {
 	while (1)
 	{
+		// data->fdin = STDIN_FILENO; //reseat los fds a los standars?;
+		// data->fdout = STDOUT_FILENO;
 		ft_signal();
 		data->input = readline("\x1b[96mPutaShell> \x1b[0m");
 		ft_signal_proc();

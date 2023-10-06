@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:17:49 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/04 18:26:17 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/06 19:05:52 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ t_token	*ft_assign_type(t_data *data)
 		else if (data->token->str[0] == '|')
 			data->token->type = PIPE;
 		else if (data->token->str[0] == '>' && data->token->str[1] == '>')
-			data->token->type = D_GREAT;
+			data->token->type = APPEDEN;
 		else if (data->token->str[0] == '>')
-			data->token->type = GREAT;
+			data->token->type = OUT;
 		else if (data->token->str[0] == '<' && data->token->str[1] == '<')
-			data->token->type = D_LESS;
+			data->token->type = HERE_DOC;
 		else if (data->token->str[0] == '<')
-			data->token->type = LESS;
+			data->token->type = IN;
 		else
 			data->token->type = NO_QUOTES;
 		data->token = data->token->next;
@@ -84,7 +84,7 @@ t_token	*ft_divide_input(t_data *data)
 			&& data->input[i + 1] == '|')
 			break ;
 		else if (data->input[i] && ft_strchr("|<>", data->input[i]))
-			ft_redirections(data, &i, &start, data->input[i]);
+			ft_sub_red(data, &i, &start, data->input[i]);
 		else
 			ft_subdivide_input(data, &i, &start);
 		while (data->input[i] && data->input[i] == ' ')
@@ -98,23 +98,28 @@ void	ft_reconvert_token(t_data *data)
 	t_token	*tmp;
 	int		i;
 
-	tmp = data->token;
+	tmp = data->curr_tkn;
 	i = 0;
 	while (tmp)
 	{
-		//if (tmp->type >= 1 && tmp->type <= 4)
-		i++;
-		tmp = tmp->next;
+		if (tmp->type >= PIPE && tmp->type <= HERE_DOC)
+			break ;
+		else
+		{
+			i++;
+			tmp = tmp->next;
+		}
 	}
 	data->argc = i;
 	data->args = (char **)ft_calloc(sizeof(char *), i + 1);
 	if (!data->args)
 		return ;
-	tmp = data->token;
+	tmp = data->curr_tkn;
 	i = 0;
 	while (tmp)
 	{
-		//if (tmp->type >= 1 && tmp->type <= 4)
+		if (tmp->type >= PIPE && tmp->type <= HERE_DOC)
+			break ;
 		data->args[i++] = ft_strdup(tmp->str);
 		tmp = tmp->next;
 	}
@@ -148,13 +153,6 @@ void	ft_init_parse(t_data *data)
 		}
 	}
 	data->token = tmp;
-	ft_reconvert_token(data);
-	int i = 0;
-	while(data->args[i])
-	{
-		printf("%sen ft_init_parsedata->args[%i]: %s%s\n", BLUE, i, data->args[i], END);
-		i++;
-	}
 }
 	//comprobar lista token
 	// ft_putstr_fd("en ft_init_parse / data->input: ", data->fdout);
