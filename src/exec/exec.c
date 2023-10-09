@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 13:47:53 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/06 19:16:22 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:04:45 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,14 @@ void	ft_exec_from_path(t_data *data)
 // Cuando se reejecute: SEÑALES? EJECUTABLES 
 // La salida tiene que ir por otro lado, buscar en man WIFEXIT?
 
-/*aqui no estoy reasignado bien los fds de salida cuando hay un 
-pipe, por lo demas funciona como el resto.*/
+/*aqui es donde esta la chicha: creamos un proceso hijo donde vamos tanto
+-ahora si- redirigir los fds de entrada y salida al "pipe" y luego ejecutar
+el programa/comando con execve. 
+con dup2() lo que hacemos es duplicar un fd existente en uno especifico
+-el primer parametro en el segundo-, cerrando el segundo primero que todo.
+Desde un punto de vista personal y mas visual vamos hacer que el primer fd
+apunte a donde del segundo, haciendo que que la informacion se transmita
+desde otros sitos (si vamos cerrando fds, claro.)*/
 
 void	ft_launch_exec(t_data *data)
 {
@@ -108,7 +114,7 @@ void	ft_launch_exec(t_data *data)
 		}
 	}
 }
-		// printf("-------ESTOY AQUI.mp3\n");
+
 		// int i = 0;
 		// while (data->args[i])
 		// {
