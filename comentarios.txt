@@ -1,7 +1,3 @@
-Para Belen:
-
-    line 85: por que usar aqui el split y no el mini_split, por las pruebas con env y export me viene mejor
-el mini_split, no se si se joderia mucho el OLDPWD con el mini_split??
 
     builtins.c:
     line 18 -> es un parche ahora mismo
@@ -13,14 +9,6 @@ el mini_split, no se si se joderia mucho el OLDPWD con el mini_split??
     donde esta el split orignial y lo estoy usando en esas dos funciones.
 
 si echo $HOE$USE$LES -> token->str = (null) -> segmentation fault -> es decir al echo le llega el token nullo y peta
-
-belensita se que todavia tienes que arreglar el echo, pero pa por si todavia no te habias dado centa, cuando hacemos echo de un
-solo argumento sale un salto de linea extra antes, pero con mas argumentos no ocurre.
-EJ: echo hola
-
-hola
-echo hola adios
-hola adios
 
 ft_launch_exec: da errores de memoria al intentar salir y no cierra el programa del tiron. Ej:
 PutaShell> $USER pa la
@@ -44,9 +32,6 @@ que quiereh
 para las dos: cuidado cuando tenemos "" ó '', porque se crea un nodo vacio en tokens de tipo comillas.
 de esta manera todo bien pero tenemos que aseguranos en los builtins que pasen por completo de un nodo con str vacio.
 
-belen: me ha dicho juan que por lo visto el comando 'clear' no va por el path y que hay que escribir algo en un printf.
-ya te lo miraré en condiciones, esto es para que no se me olvide.
-
 BELEN: Comprobar tema señales en condiciones, el ejecutable debe poder ejecutar cualquier cosa sin petar
         se podría hacer "guarradilla" pa probar, intentarlo con fractol por ejemplo
         En las señakles, comprobar el ctrl+d cuando hay otro proceso, a ver si saca o te saca de todo del tiron
@@ -57,5 +42,3 @@ y deja de funcionar y si metemos el exit sale el mensaje de mallo de que estamos
 tentemos que poder meter tabulaciones en el imput y que no muestre lso archivos que hay en la carpeta, si no que los
 interprete como los espacios-> culpa de readline y dificil de cambiar segun me dijo pablo
 
-BELEN: si en el input hay solo un cd debe debe moverse a la carpeta $HOME (/Users/$USER), yo lo he intentado pero
-como no se muy bien como va solo he cambiado las variables de entorno no me he movido de verdad (sorry masen)

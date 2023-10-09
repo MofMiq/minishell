@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 13:47:53 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/09 14:04:45 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/09 19:33:32 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_get_path(t_data *data)
 	node = ft_search_node(data->env, "PATH");
 	path = NULL;
 	if (!node)
-		ft_putstr_fd("no hay path jejejjeje\n", data->fdout);
+		ft_putstr_fd("", data->fdout);
 	else
 	{
 		path = node->def;
@@ -44,7 +44,9 @@ void	ft_create_path(t_data *data, char *path, char **path_abs)
 	{
 		path = ft_strjoin(path_abs[i], "/");
 		free(path_abs[i]);
+		printf("PATH AUXILIAR: %s\n", path);
 		path_abs[i] = ft_strjoin(path, data->args[0]);
+		printf("PATH ABSOLUTO: %s", path_abs[i]);
 		free(path);
 		if (access(path_abs[i], F_OK) == 0
 			&& !ft_strnstr(data->args[0], "./", 3))
@@ -53,6 +55,8 @@ void	ft_create_path(t_data *data, char *path, char **path_abs)
 			data->args[0] = ft_strdup(path_abs[i]);
 			break ;
 		}
+		else if (access(path_abs[i], F_OK) != 0)
+			printf("POSNOECISTE\n");
 		i++;
 	}
 }
@@ -72,9 +76,14 @@ void	ft_exec_from_path(t_data *data)
 	ft_free_double_pointer(path_abs);
 }
 
-// Comprobar que se sale bien, buscar como hacer bien el proceso
-// Cuando se reejecute: SEÑALES? EJECUTABLES 
-// La salida tiene que ir por otro lado, buscar en man WIFEXIT?
+void	ft_file_exists(t_data *data)
+{
+	if (access(data->args[0], F_OK) == 0)
+	{
+		if (ft_strnstr(data->args[0], "./", 3) == 0 && ft_strnstr(data->args[0], "/", 2) == 0)
+			ft_putstr_fd("bash : command not found \n", data->fdout);
+	}
+}
 
 /*aqui es donde esta la chicha: creamos un proceso hijo donde vamos tanto
 -ahora si- redirigir los fds de entrada y salida al "pipe" y luego ejecutar
@@ -85,20 +94,21 @@ Desde un punto de vista personal y mas visual vamos hacer que el primer fd
 apunte a donde del segundo, haciendo que que la informacion se transmita
 desde otros sitos (si vamos cerrando fds, claro.)*/
 
+/*CUANDO NO EXISTE UN COMANDO BORRA EL PATH, ¿?¿?¿?¿?¿?¿?¿?¿?¿*/
+
 void	ft_launch_exec(t_data *data)
 {
 	int	stat;
 
-	//Falta comprobar que de donde se va a ejecutar existe el archivo, 
-	// para por ejemplo el comando top de bash :)
 	data->child = fork();
 	if (data->child == 0)
 	{
+		// ft_file_exists(data);
 		ft_exec_from_path(data);
 		dup2(data->fdin, STDIN_FILENO);
 		dup2(data->fdout, STDOUT_FILENO);
 		if (execve(data->args[0], data->args, &data->env->name) == -1)
-			perror("PATH");
+			perror(data->args[0]);
 		else
 			ft_free_all(data);
 	}
