@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/06 13:01:43 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:07:32 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,12 +195,10 @@ int		ft_is_redi(t_token *token);
 int		ft_count_pipes(t_token *token);
 void	ft_process_pipeline(t_data *data, int c_pipes);
 void	ft_begin_redi(t_data *data);
-void	ft_is_buil_or_comm(t_data *data);
 void	ft_what_redi(t_data *data);
 void	ft_out_redi(t_data *data, int flag);
 void	ft_input_redi(t_data *data);
 void	ft_here_doc(t_data *data);
-
 
 //exec.c
 
