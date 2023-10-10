@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:25:39 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/04 14:03:36 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:33:37 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,22 @@ void	ft_change_dir(t_data *data, char *owd)
 void	ft_cd(t_data *data)
 {
 	char	*owd;
+	t_elist	*home;
 
 	owd = getcwd(NULL, 0);
 	if (chdir(data->args[1]) == 0 && data->argc >= 2)
 		ft_change_dir(data, owd);
-	//else if (data->argc == 1)
-		//si solo cd en input hay que cambiar a $HOME
+	else if (data->argc == 1)
+	{
+		if (ft_list_cmp(data->env, "HOME") == 0)
+		{
+			home = ft_search_node(data->env, "HOME");
+			chdir(home->def);
+			ft_change_dir(data, owd);
+		}
+		else
+			ft_putstr_fd("bash: cd: HOME not set\n", data->fdout);
+	}
 	else
 		perror("cd");
 	free(owd);
@@ -48,30 +58,21 @@ void	ft_pwd(t_data *data)
 	{
 		ft_putstr_fd(cwd, data->fdout);
 		ft_putchar_fd('\n', data->fdout);
-		//printf("%s\n", cwd);
 	}
 	free(cwd);
 }
 
 void	ft_oldpwd(t_data *data, char *owd, char *nwd)
 {
-	//char	**old;
 	char	*join;
 
-	//old = NULL;
 	join = NULL;
 	if (ft_strcmp(owd, nwd) != 0)
 	{
 		join = ft_strjoin("OLDPWD=", owd);
 		ft_cmp_and_update(data, join, 1);
-		// old = ft_split(join, '=');
-		// if (ft_list_cmp(data->env, "OLDPWD") == 0)
-		// 	ft_update_list(data->env, owd, "OLDPWD");
-		// else if (ft_list_cmp(data->env, "OLDPWD") != 0)
-		// 	ft_add_back(&data->env, ft_new_node(old));
 		free(join);
 	}
-	//ft_free_double_pointer(old);
 }
 
 /*le he puesto una boleana ha esta funcion para adaptarla a las dos
