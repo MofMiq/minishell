@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 13:47:53 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/10 10:02:53 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/10 18:23:27 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	ft_create_path(t_data *data, char *path, char **path_abs)
 	{
 		path = ft_strjoin(path_abs[i], "/");
 		free(path_abs[i]);
-		printf("PATH AUXILIAR: %s\n", path);
+		//printf("PATH AUXILIAR: %s\n", path);
 		path_abs[i] = ft_strjoin(path, data->args[0]);
-		printf("PATH ABSOLUTO: %s", path_abs[i]);
+		//printf("PATH ABSOLUTO: %s", path_abs[i]);
 		free(path);
 		if (access(path_abs[i], F_OK) == 0
 			&& !ft_strnstr(data->args[0], "./", 3))
@@ -107,14 +107,17 @@ void	ft_launch_exec(t_data *data)
 	{
 		// ft_file_exists(data);
 		ft_exec_from_path(data);
-		int i = 0;
-		while (data->args[i])
-		{
-			printf("%sen ft_launch_exec data->args[%i]: %s%s\n", PINK, i, data->args[i], END);
-			i++;
-		}
+		// int i = 0;
+		// while (data->args[i])
+		// {
+		// 	printf("%sen ft_launch_exec data->args[%i]: %s%s\n", PINK, i, data->args[i], END);
+		// 	i++;
+		// }
 		dup2(data->fdin, STDIN_FILENO);
 		dup2(data->fdout, STDOUT_FILENO);
+		// printf("%sen ft_launch_exec data->fdin: %d / data->fdout: %d%s\n", BLUE, data->fdin, data->fdout, END);
+		// close(data->fdin);
+		// close(data->fdout);
 		if (execve(data->args[0], data->args, &data->env->name) == -1)
 			perror(data->args[0]);
 		else

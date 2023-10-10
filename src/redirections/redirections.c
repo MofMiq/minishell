@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:01:57 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/10 11:38:35 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/10 16:11:36 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,27 +67,29 @@ void	ft_process_pipeline(t_data *data, int c_pipes)
 			perror("pipe");
 		if (c_pipes == i)
 		{
-			printf("en ft_process_pipeline DESDE IF\n");
+			//printf("en ft_process_pipeline DESDE IF\n");
 			data->fdout = STDOUT_FILENO;
-			printf("en ft_process_pipeline no pipe: data->fdin: %d / data->fout: %d\n", data->fdin, data->fdout);
+			//printf("en ft_process_pipeline no pipe: data->fdin: %d / data->fout: %d\n", data->fdin, data->fdout);
 			ft_begin_redi(data);
 			close(fd[0]);
+			if (data->fdout != STDOUT_FILENO) //esto es para evitar que se queden fds de salida abiertos cada vez que hacemos una redireccion y llamamos a open, puede ir al final de la funcion
+				close(data->fdout);
 		}
 		else
 		{
-			printf("en ft_process_pipeline DESDE ELSE\n");
+			//printf("en ft_process_pipeline DESDE ELSE\n");
 			data->fdout = fd[1];
-			printf("en ft_process_pipeline si pipe: data->fdin: %d / data->fout: %d\n", data->fdin, data->fdout);
+			//printf("en ft_process_pipeline si pipe: data->fdin: %d / data->fout: %d\n", data->fdin, data->fdout);
 			ft_begin_redi(data);
 		}
 		close(fd[1]);
 		data->fdin = fd[0];
-		printf("en ft_process_pipeline: data->fdin: %d\n", data->fdin);
+		//printf("--en ft_process_pipeline: data->fdin: %d / data->fout: %d\n", data->fdin, data->fdout);
 		if (data->curr_tkn->next != NULL)
 			data->curr_tkn = data->curr_tkn->next;
 		data->token = data->curr_tkn;
-		printf("en ft_process_pipeline: data->curr_tkn: %s\n", data->curr_tkn->str);
-		printf("en ft_process_pipeline: data->token: %s\n", data->token->str);
+		// printf("en ft_process_pipeline: data->curr_tkn: %s\n", data->curr_tkn->str);
+		// printf("en ft_process_pipeline: data->token: %s\n", data->token->str);
 		ft_free_double_pointer(data->args);
 		i++;
 	}
@@ -121,18 +123,18 @@ void	ft_begin_redi(t_data *data)
 			break ;
 		data->curr_tkn = data->curr_tkn->next;
 	}
-	printf("en ft_begin_redi: data->token->str: %s\n", data->token->str);
-	printf("en ft_begin_redi: data->curr_tkn->str: %s\n", data->curr_tkn->str);
+	// printf("en ft_begin_redi: data->token->str: %s\n", data->token->str);
+	// printf("en ft_begin_redi: data->curr_tkn->str: %s\n", data->curr_tkn->str);
 	if (flag == 1)
 		ft_what_redi(data);
 	if (data->token->type == BUILTIN)
 	{
-		printf("en ft_begin_redi -> nos vamos a ft_do_buitin\n");
+		//printf("en ft_begin_redi -> nos vamos a ft_do_buitin\n");
 		ft_do_builtins(data, data->token->str);
 	}
 	else
 	{
-		printf("en ft_begin_redi -> nos vamos a ft_launch_exec\n");
+		//printf("en ft_begin_redi -> nos vamos a ft_launch_exec\n");
 		ft_launch_exec(data);
 	}
 }
@@ -144,22 +146,22 @@ void	ft_what_redi(t_data *data)
 	aux = data->curr_tkn;
 	if (aux->type == OUT)
 	{
-		printf("en ft_what_redi -> nos vamos a ft_out_redi\n");
+		//printf("en ft_what_redi -> nos vamos a ft_out_redi\n");
 		ft_out_redi(data, 0);
 	}
 	else if (aux->type == APPEND)
 	{
-		printf("en ft_what_redi -> nos vamos a ft_out_redi\n");
+		//printf("en ft_what_redi -> nos vamos a ft_out_redi\n");
 		ft_out_redi(data, 1);
 	}
 	else if (aux->type == IN)
 	{
-		printf("en ft_what_redi -> nos vamos a ft_input_redi\n");
+		//printf("en ft_what_redi -> nos vamos a ft_input_redi\n");
 		ft_input_redi(data);
 	}
 	else if (aux->type == HERE_DOC)
 	{
-		printf("en ft_what_redi -> nos vamos a ft_here_doc\n");
+		//printf("en ft_what_redi -> nos vamos a ft_here_doc\n");
 		ft_here_doc(data);
 	}
 	aux = aux->next;
@@ -172,13 +174,16 @@ void	ft_out_redi(t_data *data, int flag)
 
 	matrix = ft_split(data->curr_tkn->str, ' ');
 	if (flag == 0)
-		new_fd = open(matrix[1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
+		new_fd = open(matrix[1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	else
-		new_fd = open(matrix[1], O_WRONLY | O_CREAT | O_APPEND, 0777);
-	// if (data->fdout != STDOUT_FILENO) //esto es para cuando todavia este en "medio" de la lectura de la pipeline, no haya llegado al final
-	//close(data->fdout);
-	printf("en ft_out_redi: data->fdout: %d\n", data->fdout);
-	printf("en ft_out_redi: newfd: %d\n", new_fd);
+		new_fd = open(matrix[1], O_WRONLY | O_CREAT | O_APPEND, 0666);
+	if (new_fd == -1)
+	{
+		ft_putstr_fd("error opening file from ft_output_redi\n", data->fdout);
+		return ;
+	}
+	// printf("en ft_out_redi: data->fdout: %d\n", data->fdout);
+	// printf("en ft_out_redi: newfd: %d\n", new_fd);
 	data->fdout = new_fd;
 	ft_free_double_pointer(matrix);
 }
@@ -192,7 +197,7 @@ void	ft_input_redi(t_data *data)
 	new_fd = open(matrix[1], O_RDONLY);
 	if (new_fd == -1)
 	{
-		ft_putstr_fd("error opening file from fT_input_redi\n", data->fdout);
+		ft_putstr_fd("error opening file from ft_input_redi\n", data->fdout);
 		return ;
 	}
 	// if (data->fdin != STDIN_FILENO) //esto es para cuando todavia este en "medio" de la lectura de la pipeline, no haya llegado al final
