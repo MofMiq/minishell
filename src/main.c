@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/10 11:20:34 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/10 18:29:16 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	ft_check_type(t_data *data)
 	ft_process_pipeline(data, ft_count_pipes(data->token));
 	while (data->token->prev != NULL)
 		data->token = data->token->prev;
-	printf("%sen ft_check_type despues de prev: data->token: %s%s\n", PINK, data->token->str, END);
+	//printf("%sen ft_check_type despues de prev: data->token: %s%s\n", PINK, data->token->str, END);
 	ft_free_token(data->token, data);
 }
 	//esto es como iba antes del ft_process_pipeline

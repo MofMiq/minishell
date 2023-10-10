@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/10 10:31:42 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/10 18:35:48 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,7 @@ int		ft_one_bad_arg(t_data *data);
 void	ft_sub_red(t_data *data, int *i, int *start, char c);
 int		ft_bad_redi(t_token *token, int fd);
 int		ft_print_bad_red(int n);
-int		ft_is_redi(t_token *token);
+int		ft_bad_syntax(t_token *aux);
 
 //redirections.c
 int		ft_count_pipes(t_token *token);

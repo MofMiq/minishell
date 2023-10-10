@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:17:49 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/10 10:32:15 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/10 15:35:11 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ void	ft_reconvert_token(t_data *data)
 		data->args[i++] = ft_strdup(tmp->str);
 		tmp = tmp->next;
 	}
-	printf("%sen ft_reconvert_token: data->curr_tkn->str: %s%s\n", BLUE, data->curr_tkn->str, END);
 }
 
 void	ft_init_parse(t_data *data)
