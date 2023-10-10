@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 13:47:53 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/09 19:33:32 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/10/10 10:02:53 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 // además  hay que arreglar esta caca y ponerla en orden, faltan mogollon
 // de cosillas. 
 // Control de errores regu, arreglar buscar la salida correcta
+
+//ft_strdup para arreglar los problemas de memoria!!!
 
 char	*ft_get_path(t_data *data)
 {
@@ -105,6 +107,12 @@ void	ft_launch_exec(t_data *data)
 	{
 		// ft_file_exists(data);
 		ft_exec_from_path(data);
+		int i = 0;
+		while (data->args[i])
+		{
+			printf("%sen ft_launch_exec data->args[%i]: %s%s\n", PINK, i, data->args[i], END);
+			i++;
+		}
 		dup2(data->fdin, STDIN_FILENO);
 		dup2(data->fdout, STDOUT_FILENO);
 		if (execve(data->args[0], data->args, &data->env->name) == -1)
@@ -125,10 +133,4 @@ void	ft_launch_exec(t_data *data)
 	}
 }
 
-		// int i = 0;
-		// while (data->args[i])
-		// {
-		// 	printf("%sen ft_launch_exec data->args[%i]: %s%s\n", PINK, i, data->args[i], END);
-		// 	i++;
-		// }
 		// //printf("%sen ft_launch_exec data->cur_token: %s%s\n", PINK, data->curr_tkn->str, END);

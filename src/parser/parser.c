@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:17:49 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/06 19:05:52 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/10 10:32:15 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_token	*ft_assign_type(t_data *data)
 		else if (data->token->str[0] == '|')
 			data->token->type = PIPE;
 		else if (data->token->str[0] == '>' && data->token->str[1] == '>')
-			data->token->type = APPEDEN;
+			data->token->type = APPEND;
 		else if (data->token->str[0] == '>')
 			data->token->type = OUT;
 		else if (data->token->str[0] == '<' && data->token->str[1] == '<')
@@ -123,6 +123,7 @@ void	ft_reconvert_token(t_data *data)
 		data->args[i++] = ft_strdup(tmp->str);
 		tmp = tmp->next;
 	}
+	printf("%sen ft_reconvert_token: data->curr_tkn->str: %s%s\n", BLUE, data->curr_tkn->str, END);
 }
 
 void	ft_init_parse(t_data *data)
@@ -139,16 +140,8 @@ void	ft_init_parse(t_data *data)
 	{
 		while (data->token)
 		{
-			ft_putstr_fd(PINK, data->fdout);
-			ft_putstr_fd("en ft_init_parse / token->str: ", data->fdout);
-			ft_putstr_fd(data->token->str, data->fdout);
-			ft_putchar_fd('\n', data->fdout);
-			ft_putstr_fd("en ft_init_parse / token->type: ", data->fdout);
-			ft_putnbr_fd(data->token->type, data->fdout);
-			ft_putchar_fd('\n', data->fdout);
-			ft_putnbr_fd(data->token->space, data->fdout);
-			ft_putchar_fd('\n', data->fdout);
-			ft_putstr_fd(END, data->fdout);
+			printf("%sen ft_init_parse / token->str: %s\n", PINK, data->token->str);
+			printf("en ft_init_parse / token->type: %d / token->space: %d%s\n", data->token->type, data->token->space, END);
 			data->token = data->token->next;
 		}
 	}
@@ -158,3 +151,14 @@ void	ft_init_parse(t_data *data)
 	// ft_putstr_fd("en ft_init_parse / data->input: ", data->fdout);
 	// ft_putstr_fd(data->input, data->fdout);
 	// ft_putchar_fd('\n', data->fdout);
+
+			// ft_putstr_fd(PINK, data->fdout);
+			// ft_putstr_fd("en ft_init_parse / token->str: ", data->fdout);
+			// ft_putstr_fd(data->token->str, data->fdout);
+			// ft_putchar_fd('\n', data->fdout);
+			// ft_putstr_fd("en ft_init_parse / token->type: ", data->fdout);
+			// ft_putnbr_fd(data->token->type, data->fdout);
+			// ft_putchar_fd('\n', data->fdout);
+			// ft_putnbr_fd(data->token->space, data->fdout);
+			// ft_putchar_fd('\n', data->fdout);
+			// ft_putstr_fd(END, data->fdout);
