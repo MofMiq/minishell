@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 12:26:52 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/06 19:00:09 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:41:39 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_free_token(t_token *lst, t_data *data)
 		lst = tmp;
 	}
 	data->token = NULL;
+	//esta movie la tenemos que mirar bien y ver donde y como peta
 	//free(data->input);
 	// if (data->args)
 	// 	ft_free_double_pointer(data->args);

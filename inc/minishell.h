@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/09 14:07:32 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/10 10:31:42 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define PIPE		5
 # define OUT		6
 # define IN			7
-# define APPEDEN	8
+# define APPEND		8
 # define HERE_DOC	9
 
 typedef struct s_token

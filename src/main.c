@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/09 12:33:56 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/10 11:20:34 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ static void	ft_check_type(t_data *data)
 		ft_putstr_fd(": command not found\n", data->fdout);
 	}
 	ft_process_pipeline(data, ft_count_pipes(data->token));
+	while (data->token->prev != NULL)
+		data->token = data->token->prev;
+	printf("%sen ft_check_type despues de prev: data->token: %s%s\n", PINK, data->token->str, END);
+	ft_free_token(data->token, data);
+}
+	//esto es como iba antes del ft_process_pipeline
 	// else if (data->token->type == BUILTIN)
 	// 	ft_do_builtins(data, data->token->str);
 	// else if (data->token->type != BUILTIN && data->args)
@@ -38,15 +44,11 @@ static void	ft_check_type(t_data *data)
 	// 	ft_launch_exec(data);
 	// 	ft_putstr_fd("que quiereh\n", data->fdout);
 	// }
-	ft_free_token(data->token, data);
-}
 
 void	ft_start_minishell(t_data *data)
 {
 	while (1)
 	{
-		// data->fdin = STDIN_FILENO; //reseat los fds a los standars?;
-		// data->fdout = STDOUT_FILENO;
 		ft_signal();
 		data->input = readline("\x1b[96mPutaShell> \x1b[0m");
 		ft_signal_proc();

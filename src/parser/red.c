@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:49:30 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/06 11:07:08 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/10 11:29:26 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	ft_sub_red(t_data *data, int *i, int *start, char c)
 	ft_add_token(&data->token, ft_new_token(data->input, *i, *start));
 }
 
-/*esta funcion es unaa real mierda*/
+/*esta funcion es unaa real mierda
+Añadir casos como los que me dijo juan: <> ó ><, >   >, <   <,   >  | */
 
 int	ft_bad_redi(t_token *token, int fd)
 {
@@ -37,7 +38,7 @@ int	ft_bad_redi(t_token *token, int fd)
 	aux = token;
 	while (aux)
 	{
-		if (aux->type == APPEDEN && ft_strncmp(aux->str, ">>>", 3) == 0)
+		if (aux->type == APPEND && ft_strncmp(aux->str, ">>>", 3) == 0)
 		{
 			ft_putstr_fd("syntax error near unexpected token\n", fd);
 			return (1);
