@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 13:47:53 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/10 18:23:27 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:50:27 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,9 @@ void	ft_launch_exec(t_data *data)
 		// 	printf("%sen ft_launch_exec data->args[%i]: %s%s\n", PINK, i, data->args[i], END);
 		// 	i++;
 		// }
+		//printf("%sen ft_launch_exec data->fdin: %d / data->fdout: %d%s\n", BLUE, data->fdin, data->fdout, END);
 		dup2(data->fdin, STDIN_FILENO);
 		dup2(data->fdout, STDOUT_FILENO);
-		// printf("%sen ft_launch_exec data->fdin: %d / data->fdout: %d%s\n", BLUE, data->fdin, data->fdout, END);
-		// close(data->fdin);
-		// close(data->fdout);
 		if (execve(data->args[0], data->args, &data->env->name) == -1)
 			perror(data->args[0]);
 		else
