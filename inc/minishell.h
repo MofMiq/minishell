@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/10 18:35:48 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/11 19:03:28 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,8 +204,6 @@ void	ft_here_doc(t_data *data);
 
 void	ft_launch_exec(t_data *data);
 void	ft_exec_from_path(t_data *data);
-void	ft_create_path(t_data *data, char *path, char **path_abs);
 char	*ft_get_path(t_data *data);
-void	ft_file_exists(t_data *data);
 
 #endif
