@@ -8,8 +8,6 @@
     rodado y funciona a la perfeccion. asi que de forma provisional he creado un nuevo archivo llamado ft_old_split en
     donde esta el split orignial y lo estoy usando en esas dos funciones.
 
-si echo $HOE$USE$LES -> token->str = (null) -> segmentation fault -> es decir al echo le llega el token nullo y peta
-
 ft_launch_exec: da errores de memoria al intentar salir y no cierra el programa del tiron. Ej:
 PutaShell> $USER pa la
 en ft_init_parse / token->str: marirodr
