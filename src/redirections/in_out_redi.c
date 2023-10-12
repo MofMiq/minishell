@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 14:12:08 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/12 11:50:45 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/12 18:13:14 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,29 +79,42 @@ void	ft_here_doc(t_data *data)
 {
 	int		here_doc;
 	char	**split;
-	char	*write;
+	char	*str;
+	char	*dlm;
 
 	split = ft_split(data->curr_tkn->str, ' ');
-	write = NULL;
-	here_doc = open(".tmp", O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	str = NULL;
+	here_doc = open(".tmp", O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	dlm = ft_strjoin(split[1], "\n");
 	if (here_doc == -1)
 	{
 		ft_putstr_fd("error opening file from ft_output_redi\n", data->fdout);
 		return ;
 	}
 	data->fdout = here_doc;
-	// while (write != split[1])
-	// {
-	write = get_next_line(0);
-	ft_putstr_fd(write, data->fdout);
-	free(write);
-	//}
-	ft_putstr_fd("hola desde .tmp\n", data->fdout);
-	ft_putstr_fd("HERE_DOC / data->fdin:", 1);
-	ft_putnbr_fd(data->fdin, 1);
-	ft_putchar_fd('\n', 1);
+	ft_putstr_fd("> ", 1);
+	str = get_next_line(0);
+	while (ft_strcmp(str, dlm) != 0)
+	{
+		ft_putstr_fd("> ", 1);
+		ft_putstr_fd(str, data->fdout);
+		free(str);
+		str = get_next_line(0);
+	}
 	close(here_doc);
-	//free(write);
-	//unlink(".tmp");
-	return ;
+	free(str);
+	free(dlm);
+	free(data->curr_tkn->str); 	//data->curr_tkn->str = NULL;
+	data->curr_tkn->str = ft_strdup(".tmp");
+	data->curr_tkn->type = NO_QUOTES;
+	data->here_doc = 1;
+	if (data->curr_tkn->prev != NULL)
+	{
+		data->curr_tkn = data->curr_tkn->prev;
+		ft_free_double_pointer(data->args);
+		ft_reconvert_token(data);
+	}
+	else
+		data->here_doc = 2;
+	ft_free_double_pointer(split);
 }

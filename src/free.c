@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 12:26:52 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/09 14:41:39 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/12 18:12:16 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	ft_free_token(t_token *lst, t_data *data)
 void	ft_free_all(t_data *data)
 {
 	ft_putstr_fd("ft_free_all-------------\n", data->fdout);
+	if (data->here_doc >= 1)
+		unlink(".tmp");
 	clear_history();
 	ft_free_env(data->env);
 	data->env = NULL;
