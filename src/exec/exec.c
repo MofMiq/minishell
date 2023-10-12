@@ -111,5 +111,4 @@ void	ft_launch_exec(t_data *data)
 		}
 	}
 }
-
-		// //printf("%sen ft_launch_exec data->cur_token: %s%s\n", PINK, data->curr_tkn->str, END);
+	//printf("%sen ft_launch_exec data->cur_token: %s%s\n", PINK, data->curr_tkn->str, END);
