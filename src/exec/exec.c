@@ -89,7 +89,7 @@ void	ft_launch_exec(t_data *data)
 		// int i = 0;
 		// while (data->args[i])
 		// {
-		// 	printf("%sen ft_launch_exec data->args[%i]: %s%s\n", PINK, i, data->args[i], END);
+		// 	printf("%sen ft_launch_exec data->args[%i]: %s%s\n", BLUE, i, data->args[i], END);
 		// 	i++;
 		// }
 		//printf("%sen ft_launch_exec data->fdin: %d / data->fdout: %d%s\n", BLUE, data->fdin, data->fdout, END);
@@ -111,4 +111,3 @@ void	ft_launch_exec(t_data *data)
 		}
 	}
 }
-	//printf("%sen ft_launch_exec data->cur_token: %s%s\n", PINK, data->curr_tkn->str, END);

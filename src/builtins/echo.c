@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:54:01 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/03 13:28:44 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/12 18:41:35 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	epur_str(char *str, t_data *data)
 		while (!ft_is_space(str[i]) && str[i] != '\0')
 		{
 			ft_putchar_fd(str[i], data->fdout);
-			//write(1, &str[i], 1);
+			//write(1, &str[i], 1); //borrar estas dos funciones
 			i++;
 		}
 		while (ft_is_space(str[i]) && (ft_is_space(str[i + 1])
@@ -61,8 +61,9 @@ void	ft_print_echo(t_data *data, int pos)
 		tmp->prev->type = BUILTIN;
 	while (data->args[pos] != NULL)
 	{
-		if (tmp->type >= NO_QUOTES && tmp->type <= D_QUOTES)
+		if ((tmp->type >= NO_QUOTES && tmp->type <= D_QUOTES))
 		{
+			//printf("%s\n", data->args[pos]); //.tmp
 			if (tmp->space == 1 && tmp->prev->type != BUILTIN)
 				ft_putchar_fd(' ', data->fdout);
 			ft_putstr_fd(data->args[pos], data->fdout);

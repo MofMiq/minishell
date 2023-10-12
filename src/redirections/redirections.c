@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:01:57 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/11 18:33:14 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/12 18:14:38 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	ft_begin_redi(t_data *data)
 	{
 		ft_do_builtins(data, data->token->str);
 	}
-	else
+	else if (data->here_doc != 2)
 	{
 		ft_launch_exec(data);
 	}

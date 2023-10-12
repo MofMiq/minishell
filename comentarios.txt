@@ -40,3 +40,4 @@ y deja de funcionar y si metemos el exit sale el mensaje de mallo de que estamos
 tentemos que poder meter tabulaciones en el imput y que no muestre lso archivos que hay en la carpeta, si no que los
 interprete como los espacios-> culpa de readline y dificil de cambiar segun me dijo pablo
 
+procesos y señales: permision denied mirar
