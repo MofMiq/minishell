@@ -6,27 +6,11 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:01:57 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/11 13:49:53 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/12 18:14:38 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-int	ft_count_pipes(t_token *token)
-{
-	int		c;
-	t_token	*tmp;
-
-	c = 0;
-	tmp = token;
-	while (tmp)
-	{
-		if (tmp->type == PIPE)
-			c++;
-		tmp = tmp->next;
-	}
-	return (c);
-}
 
 /*aqui vamos a ver si en el input existe un pipe/redireccion o no y decidir
 a cuales fds tenemos que redirigir tanto la extrada como la salida de datos.
@@ -49,34 +33,7 @@ el nuevo fd de escritura (fd[1]) para que no se quede esperando a recibir mas
 datos por otro lado (desde el teclado). si eso ocurriera tendriamos que enviar
 señal y ya funcionaria regu.
 redirgimos por si acaso no volvemos a entrar aqui nuestra variable al nuevo fd
-lector(fd[0]) y que el proceso lea desde ahi y nos desde el teclado.
-*/
-		//debugeo
-
-/*cuidado con esta funcion porque esta cerrando todos los fd cuando se llama
-al final de ft_process_pipeline, es decir una vez ya hemos terminado de leer
-el input por completo. ademas se resetan los valores de data->fdin y
-data->fdout a los valores originales, 0 y 1 respectivamente. petará esta
-mierda si queremos abrir y mantener un programa abierto tal como so_long o
-fractol???? */
-
-void	ft_close_fds(t_data *data, int limit)
-{
-	if (data->fdin == STDIN_FILENO && data->fdout == STDOUT_FILENO)
-		return ;
-	while (data->fdin >= limit)
-	{
-		close(data->fdin);
-		data->fdin--;
-	}
-	data->fdin = STDIN_FILENO; //quizas cambiar esto de sitio?
-	while (data->fdout >= limit)
-	{
-		close(data->fdout);
-		data->fdout--;
-	}
-	data->fdout = STDOUT_FILENO; //quizas cambiar esto de sitio?
-}
+lector(fd[0]) y que el proceso lea desde ahi y nos desde el teclado.*/
 
 void	ft_process_pipeline(t_data *data, int c_pipes)
 {
@@ -111,7 +68,7 @@ void	ft_process_pipeline(t_data *data, int c_pipes)
 	ft_close_fds(data, 3); //podria cambiar esta linea al final de ft_check type para ahorra
 }
 
-//printf("en ft_process_launch exit_status: %d\n", data->exit_status);
+	//printf("en ft_process_launch exit_status: %d\n", data->exit_status);
 
 /*en esta funcion basicamente vamos a buscar si hay una redireccion o no en el
 input, independientemente de si hay pipe o no. vamos a coger todos los tokens
@@ -144,73 +101,51 @@ void	ft_begin_redi(t_data *data)
 	{
 		ft_do_builtins(data, data->token->str);
 	}
-	else
+	else if (data->here_doc != 2)
 	{
 		ft_launch_exec(data);
 	}
 }
 
-void	ft_what_redi(t_data *data)
+/*cuidado con esta funcion porque esta cerrando todos los fd cuando se llama
+al final de ft_process_pipeline, es decir una vez ya hemos terminado de leer
+el input por completo. ademas se resetan los valores de data->fdin y
+data->fdout a los valores originales, 0 y 1 respectivamente. petará esta
+mierda si queremos abrir y mantener un programa abierto tal como so_long o
+fractol???? */
+
+void	ft_close_fds(t_data *data, int limit)
 {
-	t_token	*aux;
-
-	aux = data->curr_tkn;
-	if (aux->type == OUT)
-	{
-		ft_out_redi(data, 0);
-	}
-	else if (aux->type == APPEND)
-	{
-		ft_out_redi(data, 1);
-	}
-	else if (aux->type == IN)
-	{
-		ft_input_redi(data);
-	}
-	else if (aux->type == HERE_DOC)
-	{
-		ft_here_doc(data);
-	}
-	aux = aux->next;
-}
-
-void	ft_out_redi(t_data *data, int flag)
-{
-	int		new_fd;
-	char	**matrix;
-
-	matrix = ft_split(data->curr_tkn->str, ' ');
-	if (flag == 0)
-		new_fd = open(matrix[1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	else
-		new_fd = open(matrix[1], O_WRONLY | O_CREAT | O_APPEND, 0666);
-	if (new_fd == -1)
-	{
-		ft_putstr_fd("error opening file from ft_output_redi\n", data->fdout);
+	if (data->fdin == STDIN_FILENO && data->fdout == STDOUT_FILENO)
 		return ;
-	}
-	data->fdout = new_fd;
-	ft_free_double_pointer(matrix);
-}
-
-void	ft_input_redi(t_data *data)
-{
-	int		new_fd;
-	char	**matrix;
-
-	matrix = ft_split(data->curr_tkn->str, ' ');
-	new_fd = open(matrix[1], O_RDONLY);
-	if (new_fd == -1)
+	while (data->fdin >= limit)
 	{
-		ft_putstr_fd("error opening file from ft_input_redi\n", data->fdout);
-		return ;
+		close(data->fdin);
+		data->fdin--;
 	}
-	data->fdin = new_fd;
-	ft_free_double_pointer(matrix);
+	data->fdin = STDIN_FILENO; //quizas cambiar esto de sitio?
+	while (data->fdout >= limit)
+	{
+		close(data->fdout);
+		data->fdout--;
+	}
+	data->fdout = STDOUT_FILENO; //quizas cambiar esto de sitio?
 }
 
-void	ft_here_doc(t_data *data)
+/*Returns the number of pipe in the input, without being between quotes*/
+
+int	ft_count_pipes(t_token *token)
 {
-	ft_putstr_fd("ni puta idea todavia de que va esto exactamente\n", data->fdout);
-	return ;
+	int		c;
+	t_token	*tmp;
+
+	c = 0;
+	tmp = token;
+	while (tmp)
+	{
+		if (tmp->type == PIPE)
+			c++;
+		tmp = tmp->next;
+	}
+	return (c);
 }

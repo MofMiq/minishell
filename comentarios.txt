@@ -37,4 +37,7 @@ BELEN: Comprobar tema señales en condiciones, el ejecutable debe poder ejecutar
 tentemos que poder meter tabulaciones en el imput y que no muestre lso archivos que hay en la carpeta, si no que los
 interprete como los espacios-> culpa de readline y dificil de cambiar segun me dijo pablo
 
-para cuando subamos el proyecto revisar archivos ocultos .dsstore .git colors.txt etc 
+
+para cuando subamos el proyecto revisar archivos ocultos .dsstore .git colors.txt etc
+
+procesos y señales: permision denied mirar

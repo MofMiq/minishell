@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
 /*   Updated: 2023/10/12 18:26:51 by begarijo         ###   ########.fr       */
@@ -70,6 +70,7 @@ typedef struct s_data
 	int		fdin;
 	int		fdout;
 	int		exit_status;
+	int		here_doc;
 	t_elist	*env;
 	t_elist	*exp;
 	t_token	*token;
@@ -187,7 +188,7 @@ void	ft_quotes(t_data *data, int *i, int *start, char q);
 char	*ft_token_cat(t_token *aux, t_token *first, int len, int i);
 int		ft_one_bad_arg(t_data *data);
 
-//red.c
+//redi_parser.c
 void	ft_sub_red(t_data *data, int *i, int *start, char c);
 int		ft_bad_redi(t_token *token, int fd);
 int		ft_print_bad_red(int n);
@@ -195,8 +196,11 @@ int		ft_bad_syntax(t_token *aux);
 
 //redirections.c
 int		ft_count_pipes(t_token *token);
+void	ft_close_fds(t_data *data, int limit);
 void	ft_process_pipeline(t_data *data, int c_pipes);
 void	ft_begin_redi(t_data *data);
+
+//in_out_redi.c
 void	ft_what_redi(t_data *data);
 void	ft_out_redi(t_data *data, int flag);
 void	ft_input_redi(t_data *data);

@@ -6,7 +6,7 @@
 #    By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/21 16:22:32 by marirodr          #+#    #+#              #
-#    Updated: 2023/10/03 11:54:27 by marirodr         ###   ########.fr        #
+#    Updated: 2023/10/11 14:17:48 by marirodr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,10 +37,11 @@ SRC			= src/main.c \
 			src/parser/dollar_parser.c \
 			src/parser/quotes.c \
 			src/parser/token_utils.c \
-			src/parser/red.c \
+			src/parser/redi_parser.c \
 			src/init.c \
 			src/free.c \
 			src/redirections/redirections.c \
+			src/redirections/in_out_redi.c \
 
 OBJ			= $(SRC:.c=.o)
 
