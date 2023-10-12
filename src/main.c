@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
 /*   Updated: 2023/10/12 18:12:16 by marirodr         ###   ########.fr       */
@@ -31,6 +31,7 @@ static void	ft_check_type(t_data *data)
 		ft_putstr_fd(": command not found\n", data->fdout);
 	}
 	ft_process_pipeline(data, ft_count_pipes(data->token));
+	
 	while (data->token->prev != NULL)
 		data->token = data->token->prev;
 	ft_free_token(data->token, data);

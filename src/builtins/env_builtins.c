@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_builtins.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/04 18:59:33 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/12 13:47:59 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void	ft_unset(t_elist **env, t_elist **exp, t_data *data)
 
 void	ft_miniexit(t_data *data)
 {
+	printf("DATA LEVEL ANTES DE SALIR%d\n", data->lvl);
 	if (data->args[1])
 	{
 		if (ft_atoi(data->args[1]) != 0)
@@ -137,8 +138,15 @@ void	ft_miniexit(t_data *data)
 			exit(EXIT_FAILURE);
 		}
 	}
-	ft_putstr_fd(data->args[0], data->fdout);
-	ft_putchar_fd('\n', data->fdout);
-	ft_free_all(data);
-	exit(EXIT_SUCCESS);
+	if (data->lvl != 1)
+	{
+		ft_putstr_fd("exit", data->fdout);
+		data->lvl -= 1;
+	}
+	else
+	{
+		ft_putchar_fd('\n', data->fdout);
+		ft_free_all(data);
+		exit(EXIT_SUCCESS);
+	}
 }

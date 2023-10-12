@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/12 17:25:40 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/12 18:26:51 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef struct s_token
 	char			*str;
 	int				type;
 	int				space;
-//	int				child;
 	struct s_token	*prev;
 	struct s_token	*next;
 }	t_token;
@@ -66,6 +65,7 @@ typedef struct s_data
 	char	**args;
 	//int		bool_exp; ya no sirve para su cometido original, reusable en futuro?
 	int		argc;
+	int		lvl;
 	pid_t	child;
 	int		fdin;
 	int		fdout;
@@ -107,6 +107,7 @@ int		ft_check_name(char *name, t_data *data);
 void	ft_export(t_data *data);
 void	ft_unset(t_elist **env, t_elist **exp, t_data *data);
 void	ft_miniexit(t_data *data);
+int		ft_choose_lvl(t_data *data);
 
 //echo.c
 
@@ -145,6 +146,7 @@ int		ft_check_name_print(char *name, t_data *data);
 
 t_data	*ft_init_data(char **env, char **argv);
 void	ft_init_env(t_elist *elist);
+void	ft_update_env(t_data *data);
 
 //signals.c
 
@@ -209,5 +211,6 @@ void	ft_here_doc(t_data *data);
 void	ft_launch_exec(t_data *data);
 void	ft_exec_from_path(t_data *data);
 char	*ft_get_path(t_data *data);
+char	**ft_reconvert_env(t_elist *elist);
 
 #endif
