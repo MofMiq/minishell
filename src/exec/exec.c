@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
+/*                       	                                 :::      ::::::::*/
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 13:47:53 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/11 17:46:36 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/11 18:50:49 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,37 +30,11 @@ char	*ft_get_path(t_data *data)
 		ft_putstr_fd("", data->fdout);
 	else
 	{
-		path = node->def;
+		path = ft_strdup(node->def);
 		if (path == NULL)
 			return ("");
 	}
 	return (path);
-}
-
-void	ft_create_path(t_data *data, char *path, char **path_abs)
-{
-	int	i;
-
-	i = 0;
-	while (path_abs[i] && ft_strcmp(path_abs[i], "") != 0)
-	{
-		path = ft_strjoin(path_abs[i], "/");
-		free(path_abs[i]);
-		//printf("PATH AUXILIAR: %s\n", path);
-		path_abs[i] = ft_strjoin(path, data->args[0]);
-		//printf("PATH ABSOLUTO: %s", path_abs[i]);
-		free(path);
-		if (access(path_abs[i], F_OK) == 0
-			&& !ft_strnstr(data->args[0], "./", 3))
-		{
-			free(data->args[0]);
-			data->args[0] = ft_strdup(path_abs[i]);
-			break ;
-		}
-		else if (access(path_abs[i], F_OK) != 0)
-			printf("POSNOECISTE\n");
-		i++;
-	}
 }
 
 void	ft_exec_from_path(t_data *data)
@@ -74,17 +48,23 @@ void	ft_exec_from_path(t_data *data)
 	i = 0;
 	if (ft_strcmp(path_aux, "") != 0)
 		free(path_aux);
-	ft_create_path(data, path_aux, path_abs);
-	ft_free_double_pointer(path_abs);
-}
-
-void	ft_file_exists(t_data *data)
-{
-	if (access(data->args[0], F_OK) == 0)
+	while (path_abs[i] && ft_strcmp(path_abs[i], "") != 0)
 	{
-		if (ft_strnstr(data->args[0], "./", 3) == 0 && ft_strnstr(data->args[0], "/", 2) == 0)
-			ft_putstr_fd("bash : command not found \n", data->fdout);
+		path_aux = ft_strjoin(path_abs[i], "/");
+		free(path_abs[i]);
+		//printf("PATH AUXILIAR: %s\n", path);
+		path_abs[i] = ft_strjoin(path_aux, data->args[0]);
+		//printf("PATH ABSOLUTO: %s", path_abs[i]);
+		free(path_aux);
+		if (access(path_abs[i], F_OK) == 0 && !ft_strnstr(data->args[0], "./", 3))
+		{
+			free(data->args[0]);
+			data->args[0] = ft_strdup(path_abs[i]);
+			break ;
+		}
+		i++;
 	}
+	ft_free_double_pointer(path_abs);
 }
 
 /*aqui es donde esta la chicha: creamos un proceso hijo donde vamos tanto
@@ -105,7 +85,6 @@ void	ft_launch_exec(t_data *data)
 	data->child = fork();
 	if (data->child == 0)
 	{
-		// ft_file_exists(data);
 		ft_exec_from_path(data);
 		// int i = 0;
 		// while (data->args[i])
@@ -118,8 +97,7 @@ void	ft_launch_exec(t_data *data)
 		dup2(data->fdout, STDOUT_FILENO);
 		if (execve(data->args[0], data->args, &data->env->name) == -1)
 			perror(data->args[0]);
-		else
-			ft_free_all(data);
+		exit(127);
 	}
 	else if (data->child < 0)
 		perror(data->args[0]);
