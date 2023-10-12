@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/11 11:58:37 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/12 14:15:49 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void	ft_check_type(t_data *data)
 		ft_putstr_fd(": command not found\n", data->fdout);
 	}
 	ft_process_pipeline(data, ft_count_pipes(data->token));
+	
 	while (data->token->prev != NULL)
 		data->token = data->token->prev;
 	//printf("%sen ft_check_type despues de prev: data->token: %s%s\n", PINK, data->token->str, END);
@@ -77,7 +78,7 @@ void	ft_leaks(void)
 
 int	main(int argc, char **argv, char **env)
 {
-	//atexit(ft_leaks);
+	// atexit(ft_leaks);
 	t_data	*data;
 
 	(void)argc;
