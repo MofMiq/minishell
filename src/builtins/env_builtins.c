@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/12 13:47:59 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:44:24 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ void	ft_unset(t_elist **env, t_elist **exp, t_data *data)
 
 void	ft_miniexit(t_data *data)
 {
-	printf("DATA LEVEL ANTES DE SALIR%d\n", data->lvl);
 	if (data->args[1])
 	{
 		if (ft_atoi(data->args[1]) != 0)
@@ -138,7 +137,7 @@ void	ft_miniexit(t_data *data)
 			exit(EXIT_FAILURE);
 		}
 	}
-	if (data->lvl != 1)
+	if (data->lvl > 1)
 	{
 		ft_putstr_fd("exit", data->fdout);
 		data->lvl -= 1;
