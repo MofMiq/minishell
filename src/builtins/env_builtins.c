@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_builtins.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/12 13:47:59 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/10/13 12:00:03 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ void	ft_miniexit(t_data *data)
 			exit(EXIT_FAILURE);
 		}
 	}
-	if (data->lvl != 1)
+	if (data->lvl > 1)
 	{
 		ft_putstr_fd("exit", data->fdout);
 		data->lvl -= 1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:17:49 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/12 13:48:47 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/10/13 11:07:40 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,8 +139,8 @@ void	ft_init_parse(t_data *data)
 	{
 		while (data->token)
 		{
-			// printf("%sen ft_init_parse / token->str: %s\n", PINK, data->token->str);
-			// printf("en ft_init_parse / token->type: %d / token->space: %d%s\n", data->token->type, data->token->space, END);
+			printf("%sen ft_init_parse / token->str: %s\n", PINK, data->token->str);
+			printf("en ft_init_parse / token->type: %d / token->space: %d%s\n", data->token->type, data->token->space, END);
 			data->token = data->token->next;
 		}
 	}

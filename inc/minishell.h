@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/12 18:26:51 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/10/13 11:26:17 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,7 @@ void	ft_what_redi(t_data *data);
 void	ft_out_redi(t_data *data, int flag);
 void	ft_input_redi(t_data *data);
 void	ft_here_doc(t_data *data);
+void	ft_open_and_write_hd(t_data *data, char *dlm);
 
 //exec.c
 

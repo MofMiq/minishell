@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/12 18:12:16 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/13 13:35:56 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@ static void	ft_check_type(t_data *data)
 
 	ft_init_parse(data);
 	last = ft_last_token(data->token);
+	if (data->token->type >= PIPE && data->token->type <= APPEND && !data->token->next)
+		return (ft_free_token(data->token, data), \
+		ft_putstr_fd("bash: syntax error near unexpected token\n", data->fdout));
 	if (last->type == PIPE)
-		return (ft_free_token(data->token, data), ft_putstr_fd("No has cerrao el pipe\n", data->fdout));
+		return (ft_free_token(data->token, data), \
+		ft_putstr_fd("No has cerrao el pipe\n", data->fdout));
 	if (ft_one_bad_arg(data))
 		return (ft_free_token(data->token, data));
 	if (ft_bad_redi(data->token, data->fdout))
@@ -31,7 +35,6 @@ static void	ft_check_type(t_data *data)
 		ft_putstr_fd(": command not found\n", data->fdout);
 	}
 	ft_process_pipeline(data, ft_count_pipes(data->token));
-	
 	while (data->token->prev != NULL)
 		data->token = data->token->prev;
 	ft_free_token(data->token, data);

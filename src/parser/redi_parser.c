@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   red.c                                              :+:      :+:    :+:   */
+/*   redi_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:49:30 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/11 14:10:03 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:54:57 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,27 @@ int	ft_bad_syntax(t_token *aux)
 	return (0);
 }
 
+int	ft_check_syntax(t_token *aux) // en pruebas
+{
+	int	i;
+
+	i = 0;
+	printf("--llego a fT_check_syntack--y aux:_str: %s\n", aux->str);
+	if ((aux->type >= OUT && aux->type <= APPEND) && (aux->next->type == PIPE))
+	{
+		while (aux->str[i])
+		{
+			printf("--salgo de fT_check_syntack\n");
+			if (ft_isalpha_plus(aux->str[i]) == 1) //al reves
+				return (1);
+			i++;
+		}
+	}
+	return (0);
+}
+
+/*mirar esto con mas detenimiento cuando se arregle mas cosas de pipeline*/
+
 int	ft_bad_redi(t_token *token, int fd)
 {
 	t_token	*aux;
@@ -52,9 +73,12 @@ int	ft_bad_redi(t_token *token, int fd)
 	aux = token;
 	while (aux)
 	{
-		if ((aux->type >= PIPE && aux->type <= HERE_DOC)
-			&& (aux->next && aux->next->type >= PIPE
-				&& aux->next->type <= HERE_DOC))
+		// if (((aux->type >= PIPE && aux->type <= HERE_DOC) && (aux->next && aux->next->type >= PIPE && aux->next->type <= HERE_DOC)))
+		// {
+		// 	ft_putstr_fd("syntax ERROR near unexpected token\n", fd);
+		// 	return (1);
+		// }
+		if (aux->type == PIPE && (aux->next && aux->next->type >= PIPE && aux->next->type <= HERE_DOC))
 		{
 			ft_putstr_fd("syntax ERROR near unexpected token\n", fd);
 			return (1);
