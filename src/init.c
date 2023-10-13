@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:10:56 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/12 18:42:17 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:44:22 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_data	*ft_init_data(char **env, char **argv)
 	//data->bool_exp = 0;
 	data->argc = 0;
 	data->child = 1;
-	// data->lvl += 1;
+	data->lvl += 1;
 	data->fdin = STDIN_FILENO;
 	data->fdout = STDOUT_FILENO;
 	data->exit_status = -1;
@@ -67,7 +67,7 @@ void	ft_update_env(t_data *data)
 	ft_update_list(data->env, path_lvl, "SHELL");
 	free(path_lvl);
 	node = ft_search_node(data->env, "SHLVL");
-	path_lvl = ft_itoa(data->lvl + 1);
+	path_lvl = ft_itoa(ft_atoi(node->def - 1) + 1);
 	ft_update_list(data->env, path_lvl, "SHLVL");
 	free(path_lvl);
 }
