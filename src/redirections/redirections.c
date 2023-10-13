@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:01:57 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/12 18:14:38 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:54:09 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ datos por otro lado (desde el teclado). si eso ocurriera tendriamos que enviar
 señal y ya funcionaria regu.
 redirgimos por si acaso no volvemos a entrar aqui nuestra variable al nuevo fd
 lector(fd[0]) y que el proceso lea desde ahi y nos desde el teclado.*/
+
+/*buscar segmentation fault si comando echo hola > file | wc*/
 
 void	ft_process_pipeline(t_data *data, int c_pipes)
 {
