@@ -107,7 +107,3 @@ void	ft_cmp_and_update(t_data *data, char *var_env, int i)
 		ft_free_double_pointer(splitted);
 	}
 }
-
-//El PATH sale como /Users/begarijo.. etc.
-//Hay que cambiarlo por MiniShell, para que con estos dos
-//solo salga a partir de ahí, pero aún así busque bien.
