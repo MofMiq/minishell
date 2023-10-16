@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:54:01 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/12 18:41:35 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/13 10:47:50 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	ft_print_echo(t_data *data, int pos)
 	{
 		if ((tmp->type >= NO_QUOTES && tmp->type <= D_QUOTES))
 		{
-			//printf("%s\n", data->args[pos]); //.tmp
 			if (tmp->space == 1 && tmp->prev->type != BUILTIN)
 				ft_putchar_fd(' ', data->fdout);
 			ft_putstr_fd(data->args[pos], data->fdout);
