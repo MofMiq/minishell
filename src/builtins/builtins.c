@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:43:04 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/12 18:41:18 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/10/16 18:44:01 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	ft_is_builtin(char *str)
 		return (6);
 	if (!(ft_strcmp(str, "exit")) || !(ft_strcmp(str, "EXIT")))
 		return (7);
-	// if (!(ft_strcmp(str, "./minishell")))
-	// 	return (8);
+	if (!(ft_strcmp(str, "./minishell")))
+		return (8);
 	return (0);
 }
 
@@ -58,7 +58,8 @@ void	ft_do_builtins(t_data *data, char *str)
 		ft_env(data, data->args);
 	else if (b == 7)
 		ft_miniexit(data);
-	// else if (b == 8)
+	else if (b == 8)
+		data->lvl += 1;
 	// {
 	// 	ft_launch_exec(data);
 	// 	printf("DATA LEVEL AL ENTRAR EN MINISHELL AGAIN %d\n", data->lvl);
