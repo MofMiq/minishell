@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 14:12:08 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/13 13:47:18 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/16 11:52:22 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ void	ft_out_redi(t_data *data, int flag)
 		return ;
 	}
 	data->fdout = new_fd;
+	ft_putstr_fd("en ft_out redi: data->fdout: \n", 1);
+	ft_putnbr_fd(data->fdout, 1);
+	ft_putchar_fd('\n', 1);
 	ft_free_double_pointer(split);
 }
 
