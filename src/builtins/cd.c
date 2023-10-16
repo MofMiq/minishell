@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:25:39 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/13 16:53:30 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:55:19 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,3 @@ void	ft_cmp_and_update(t_data *data, char *var_env, int i)
 		ft_free_double_pointer(splitted);
 	}
 }
-
-//El PATH sale como /Users/begarijo.. etc.
-//Hay que cambiarlo por MiniShell, para que con estos dos
-//solo salga a partir de ahí, pero aún así busque bien.
