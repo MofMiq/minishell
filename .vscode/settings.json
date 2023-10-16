@@ -9,6 +9,7 @@
         "readline.h": "c",
         "history.h": "c",
         "libft.h": "c",
-        "typeinfo": "c"
+        "typeinfo": "c",
+        "sstream": "c"
     }
 }

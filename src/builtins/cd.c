@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:25:39 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/13 16:55:19 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/10/16 18:07:41 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ void	ft_cd(t_data *data)
 		}
 		else
 			ft_putstr_fd("bash: cd: HOME not set\n", data->fdout);
+			data->exit_status = 127;
 	}
 	else
 	{
-		ft_putstr_fd("bash: cd: misuse of builtins");
+		ft_putstr_fd("bash: cd: misuse of builtins\n", data->fdout);
 		data->exit_status = 2;
 	}
 	free(owd);

@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:01:57 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/12 18:14:38 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/16 12:34:15 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ señal y ya funcionaria regu.
 redirgimos por si acaso no volvemos a entrar aqui nuestra variable al nuevo fd
 lector(fd[0]) y que el proceso lea desde ahi y nos desde el teclado.*/
 
+/*buscar segmentation fault si comando echo hola > file | wc.. SOLUCIONADO*/
+
 void	ft_process_pipeline(t_data *data, int c_pipes)
 {
 	int		i;
@@ -49,16 +51,20 @@ void	ft_process_pipeline(t_data *data, int c_pipes)
 		if (c_pipes == i)
 		{
 			data->fdout = STDOUT_FILENO;
+			//printf("----ft_process_pipeline--if---fdin: %d / fdout: %d\n", data->fdin, data->fdout);
 			ft_begin_redi(data);
 			close(fd[0]);
 		}
 		else
 		{
+			//printf("----ft_process_pipeline--else---fdin: %d / fdout: %d\n", data->fdin, data->fdout);
 			data->fdout = fd[1];
+			//printf("----ft_process_pipeline--else---fdin: %d / fdout: %d\n", data->fdin, data->fdout);
 			ft_begin_redi(data);
 		}
 		close(fd[1]);
 		data->fdin = fd[0];
+		//printf("----ft_process_pipeline--final---fdin: %d / fdout: %d\n", data->fdin, data->fdout);
 		if (data->curr_tkn->next != NULL)
 			data->curr_tkn = data->curr_tkn->next;
 		data->token = data->curr_tkn;
@@ -83,6 +89,11 @@ void	ft_begin_redi(t_data *data)
 	int	flag;
 
 	flag = 0;
+	if (data->curr_tkn->type == PIPE)
+	{
+		data->curr_tkn = data->curr_tkn->next;
+		data->token = data->curr_tkn;
+	}
 	ft_reconvert_token(data);
 	while (data->curr_tkn && data->curr_tkn->type != PIPE)
 	{
@@ -99,10 +110,16 @@ void	ft_begin_redi(t_data *data)
 		ft_what_redi(data);
 	if (data->token->type == BUILTIN)
 	{
+		// printf("%s----ft_begin_redi----cur_tkn->str: %s%s\n", BLUE, data->curr_tkn->str, END);
+		// printf("%s----ft_begin_redi----toke->str: %s%s\n", BLUE, data->token->str, END);
 		ft_do_builtins(data, data->token->str);
 	}
 	else if (data->here_doc != 2)
 	{
+		// printf("%s----ft_begin_redi----cur_tkn->str: %s%s\n", BLUE, data->curr_tkn->str, END);
+		// printf("%s----ft_begin_redi----toke->str: %s%s\n", BLUE, data->token->str, END);
+		// printf("%s----ft_begin_redi----args[0]: %s%s\n", BLUE, data->args[0], END);
+		printf("----ft_begin_redi--else---fdin: %d / fdout: %d\n", data->fdin, data->fdout);
 		ft_launch_exec(data);
 	}
 }
