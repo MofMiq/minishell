@@ -41,3 +41,11 @@ interprete como los espacios-> culpa de readline y dificil de cambiar segun me d
 para cuando subamos el proyecto revisar archivos ocultos .dsstore .git colors.txt etc
 
 procesos y señales: permision denied mirar
+
+BELEN: mirar en un teclado americano o cambiando la config lo del ctrl+\, por aca que no pete o haga cosas raras
+
+echo hola > file | wc -> primero que todo segmentation fault solucionado a priori (le estaba mandando a excve un arg
+nulo y jajan't). esto no quita que a lo mejor pete si probamos mas cosas en la pipeline, osea que hacer pruebas raras a ver.
+en segundo lugar: el viernes llegamos a la conclusion de que era como si los pipes tuvieran prioridad sobre el 
+resto de redirreciones o que los procesos se estuvieran ejecutando a la vez (teoria de murillo pero a mi no me curadraba),
+sin embargo probando y buscando he caido que creo casi seguro que es por los fds + argumentos que requiere un programa.

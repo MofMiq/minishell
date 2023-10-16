@@ -120,12 +120,12 @@ void	ft_launch_exec(t_data *data)
 	if (data->child == 0)
 	{
 		ft_exec_from_path(data);
-		int i = 0;
-		while (data->args[i])
-		{
-			printf("%sen ft_launch_exec data->args[%i]: %s%s\n", BLUE, i, data->args[i], END);
-			i++;
-		}
+		// int i = 0;
+		// while (data->args[i])
+		// {
+		// 	printf("%sen ft_launch_exec data->args[%i]: %s%s\n", BLUE, i, data->args[i], END);
+		// 	i++;
+		// }
 		//printf("%sen ft_launch_exec data->fdin: %d / data->fdout: %d%s\n", BLUE, data->fdin, data->fdout, END);
 		dup2(data->fdin, STDIN_FILENO);
 		dup2(data->fdout, STDOUT_FILENO);
