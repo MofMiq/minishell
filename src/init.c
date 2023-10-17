@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:10:56 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/17 15:59:38 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:29:57 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_data	*ft_init_data(char **env, char **argv)
 	data->args = argv;
 	data->token = NULL;
 	data->curr_tkn = NULL;
-	//data->bool_exp = 0;
 	data->argc = 0;
 	data->child = 1;
 	data->lvl = 1;

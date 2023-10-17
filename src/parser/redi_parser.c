@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:49:30 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/16 14:22:10 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:20:46 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,40 +45,6 @@ int	ft_bad_syntax(t_token *aux)
 	return (0);
 }
 
-int	ft_check_syntax(t_token *aux) // en pruebas/ no se usa
-{
-	int	i;
-
-	i = 0;
-	printf("--llego a fT_check_syntack--y aux:_str: %s\n", aux->str);
-	if ((aux->type >= OUT && aux->type <= APPEND) && (aux->next->type == PIPE))
-	{
-		while (aux->str[i])
-		{
-			printf("--salgo de fT_check_syntack\n");
-			if (ft_isalpha_plus(aux->str[i]) == 1) //al reves
-				return (1);
-			i++;
-		}
-	}
-	return (0);
-}
-
-/*mirar esto con mas detenimiento cuando se arregle mas cosas de pipeline.
-lo que hay comentado creo que ya no sirve.
-mas o menos todos los casos de sintaxis creo que estan?? algina prueba mas*/
-// if (((aux->type >= PIPE && aux->type <= HERE_DOC) && (aux->next && aux->next->type >= PIPE && aux->next->type <= HERE_DOC)))
-// {
-// 	ft_putstr_fd("syntax ERROR near unexpected token\n", fd); 
-// 	return (1);
-// }
-
-/*esta mierda la tengo que mirar bien porque me esta dando problemas
-ej: cat << EOF > file2
- || (last->type >= OUT && last->type <= APPEND)
-no funciona si es el ultimo pero si esta "mal escrito" -> dale vuelta
- */
-
 int	ft_bad_redi(t_token *token, int fd)
 {
 	t_token	*aux;
@@ -88,7 +54,8 @@ int	ft_bad_redi(t_token *token, int fd)
 	last = ft_last_token(token);
 	while (aux)
 	{
-		if (aux->type == PIPE && (aux->next && aux->next->type >= PIPE && aux->next->type <= HERE_DOC))
+		if (aux->type == PIPE && (aux->next && aux->next->type >= PIPE
+				&& aux->next->type <= HERE_DOC))
 		{
 			ft_putstr_fd("syntax ERROR near unexpected token\n", fd);
 			return (1);

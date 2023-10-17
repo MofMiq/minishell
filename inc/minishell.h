@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/17 15:59:31 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:29:48 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ typedef struct s_data
 {
 	char	*input;
 	char	**args;
-	//int		bool_exp; ya no sirve para su cometido original, reusable en futuro?
 	int		argc;
 	int		lvl;
 	pid_t	child;
@@ -172,7 +171,7 @@ int		ft_check_space(char c);
 //dollar_parser.c
 t_token	*ft_parse_dollar(t_data *data);
 void	ft_dollar_aux(t_data *data, t_token **token, int *i);
-char	*ft_exit_status(int *i);
+char	*ft_exit_status(int exit_estatus, int *i);
 void	ft_change_dollar(t_token **token, char *nstr, int drop, int take);
 int		ft_is_all_space(char *input);
 
@@ -189,9 +188,8 @@ int		ft_one_bad_arg(t_data *data);
 
 //redi_parser.c
 void	ft_sub_red(t_data *data, int *i, int *start, char c);
-int		ft_bad_redi(t_token *token, int fd);
-int		ft_print_bad_red(int n);
 int		ft_bad_syntax(t_token *aux);
+int		ft_bad_redi(t_token *token, int fd);
 void	ft_add_space(t_data *data);
 
 //redirections.c

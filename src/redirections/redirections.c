@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:01:57 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/17 15:59:51 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:48:36 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,13 +107,9 @@ void	ft_begin_redi(t_data *data)
 	if (data->args[0] == NULL)
 		return ;
 	if (data->token->type == BUILTIN)
-	{
 		ft_do_builtins(data, data->token->str);
-	}
 	else
-	{
 		ft_launch_exec(data);
-	}
 }
 
 /*cuidado con esta funcion porque esta cerrando todos los fd cuando se llama
