@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:17:49 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/16 11:20:26 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/16 13:48:25 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,14 @@ t_token	*ft_assign_type(t_data *data)
 
 void	ft_subdivide_input(t_data *data, int *i, int *start)
 {
-	while (!(ft_strchr(" |'\"''\''", data->input[*i])) && data->input[*i] != '\0')
+	while (!(ft_strchr(" |'\"''\''<>", data->input[*i])) && data->input[*i] != '\0')
 		(*i)++;
 	ft_add_token(&data->token, ft_new_token(data->input, *i, *start));
 }
 		// if (data->input[i] && ft_strchr("'\"''\''", data->input[i]))
 		// 	i++;
 
-t_token	*ft_divide_input(t_data *data)
+t_token	*ft_divide_input(t_data *data) //puedo arrejuntar ft_subdivide_input???
 {
 	int	i;
 	int	start;
@@ -133,6 +133,7 @@ void	ft_init_parse(t_data *data)
 	if (ft_is_builtin(data->token->str) != 0)
 		data->token->type = BUILTIN;
 	data->token = ft_parse_dollar(data);
+	ft_add_space(data);
 	t_token	*tmp;
 	if (data->token)
 	tmp = data->token;

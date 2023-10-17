@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:49:30 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/13 16:54:57 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/16 14:22:10 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_bad_syntax(t_token *aux)
 	return (0);
 }
 
-int	ft_check_syntax(t_token *aux) // en pruebas
+int	ft_check_syntax(t_token *aux) // en pruebas/ no se usa
 {
 	int	i;
 
@@ -64,20 +64,30 @@ int	ft_check_syntax(t_token *aux) // en pruebas
 	return (0);
 }
 
-/*mirar esto con mas detenimiento cuando se arregle mas cosas de pipeline*/
+/*mirar esto con mas detenimiento cuando se arregle mas cosas de pipeline.
+lo que hay comentado creo que ya no sirve.
+mas o menos todos los casos de sintaxis creo que estan?? algina prueba mas*/
+// if (((aux->type >= PIPE && aux->type <= HERE_DOC) && (aux->next && aux->next->type >= PIPE && aux->next->type <= HERE_DOC)))
+// {
+// 	ft_putstr_fd("syntax ERROR near unexpected token\n", fd); 
+// 	return (1);
+// }
+
+/*esta mierda la tengo que mirar bien porque me esta dando problemas
+ej: cat << EOF > file2
+ || (last->type >= OUT && last->type <= APPEND)
+no funciona si es el ultimo pero si esta "mal escrito" -> dale vuelta
+ */
 
 int	ft_bad_redi(t_token *token, int fd)
 {
 	t_token	*aux;
+	t_token	*last;
 
 	aux = token;
+	last = ft_last_token(token);
 	while (aux)
 	{
-		// if (((aux->type >= PIPE && aux->type <= HERE_DOC) && (aux->next && aux->next->type >= PIPE && aux->next->type <= HERE_DOC)))
-		// {
-		// 	ft_putstr_fd("syntax ERROR near unexpected token\n", fd);
-		// 	return (1);
-		// }
 		if (aux->type == PIPE && (aux->next && aux->next->type >= PIPE && aux->next->type <= HERE_DOC))
 		{
 			ft_putstr_fd("syntax ERROR near unexpected token\n", fd);
@@ -93,4 +103,33 @@ int	ft_bad_redi(t_token *token, int fd)
 		aux = aux->next;
 	}
 	return (0);
+}
+
+void	ft_add_space(t_data *data)
+{
+	t_token	*tmp;
+	int		i;
+	char	*space;
+
+	tmp = data->token;
+	while (data->token)
+	{
+		if (data->token->type >= OUT && data->token->type <= HERE_DOC)
+		{
+			if (!ft_strchr(data->token->str, ' '))
+			{
+				i = -1;
+				space = (char *)ft_calloc(ft_strlen(data->token->str) + 1, 1);
+				while (ft_strchr("<>", data->token->str[++i]))
+					space[i] = data->token->str[i];
+				space[i] = ' ';
+				while (space[i++])
+					space[i] = data->token->str[i - 1];
+				free(data->token->str);
+				data->token->str = space;
+			}
+		}
+		data->token = data->token->next;
+	}
+	data->token = tmp;
 }

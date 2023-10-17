@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 14:12:08 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/16 11:52:22 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:33:44 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,21 @@ void	ft_what_redi(t_data *data)
 
 	aux = data->curr_tkn;
 	if (aux->type == OUT)
-	{
 		ft_out_redi(data, 0);
-	}
 	else if (aux->type == APPEND)
-	{
 		ft_out_redi(data, 1);
-	}
 	else if (aux->type == IN)
-	{
 		ft_input_redi(data);
-	}
 	else if (aux->type == HERE_DOC)
-	{
 		ft_here_doc(data);
+	if (aux->next && (aux->next->type >= OUT && aux->next->type <= HERE_DOC))
+	{
+		aux = aux->next;
+		data->curr_tkn = aux;
+		ft_what_redi(data);
 	}
-	aux = aux->next;
+	if (aux->next)
+		aux = aux->next;
 }
 
 void	ft_out_redi(t_data *data, int flag)
@@ -52,9 +51,6 @@ void	ft_out_redi(t_data *data, int flag)
 		return ;
 	}
 	data->fdout = new_fd;
-	ft_putstr_fd("en ft_out redi: data->fdout: \n", 1);
-	ft_putnbr_fd(data->fdout, 1);
-	ft_putchar_fd('\n', 1);
 	ft_free_double_pointer(split);
 }
 
@@ -82,27 +78,21 @@ void	ft_here_doc(t_data *data)
 {
 	char	**split;
 	char	*dlm;
+	int		new_fd;
 
 	split = ft_split(data->curr_tkn->str, ' ');
 	if (split[1] == NULL)
 	{
 		ft_free_double_pointer(split);
-		data->here_doc = 2;
 		ft_putstr_fd("bash: syntax error near unexpected token\n", data->fdout);
 		return ;
 	}
 	dlm = ft_strjoin(split[1], "\n");
 	ft_open_and_write_hd(data, dlm);
 	free(dlm);
-	if (data->curr_tkn->prev != NULL)
-	{
-		data->curr_tkn = data->curr_tkn->prev;
-		ft_free_double_pointer(data->args);
-		ft_reconvert_token(data);
-	}
-	else
-		data->here_doc = 2;
 	ft_free_double_pointer(split);
+	new_fd = open(".tmp", O_RDONLY);
+	data->fdin = new_fd;
 }
 
 void	ft_open_and_write_hd(t_data *data, char *dlm)
@@ -110,26 +100,21 @@ void	ft_open_and_write_hd(t_data *data, char *dlm)
 	int		h_d;
 	char	*str;
 
-	h_d = open(".tmp", O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	h_d = open(".tmp", O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	if (h_d == -1)
 	{
 		ft_putstr_fd("error opening file from ft_output_redi\n", data->fdout);
 		return ;
 	}
-	data->fdout = h_d;
 	ft_putstr_fd("> ", 1);
 	str = get_next_line(0);
 	while (ft_strcmp(str, dlm) != 0)
 	{
 		ft_putstr_fd("> ", 1);
-		ft_putstr_fd(str, data->fdout);
+		ft_putstr_fd(str, h_d);
 		free(str);
 		str = get_next_line(0);
 	}
 	close(h_d);
 	free(str);
-	free(data->curr_tkn->str); 	//data->curr_tkn->str = NULL;
-	data->curr_tkn->str = ft_strdup(".tmp");
-	data->curr_tkn->type = NO_QUOTES;
-	data->here_doc = 1;
 }
