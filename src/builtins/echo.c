@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:54:01 by begarijo          #+#    #+#             */
 /*   Updated: 2023/10/17 12:42:14 by marirodr         ###   ########.fr       */
@@ -31,7 +31,6 @@ void	epur_str(char *str, t_data *data)
 		while (!ft_is_space(str[i]) && str[i] != '\0')
 		{
 			ft_putchar_fd(str[i], data->fdout);
-			//write(1, &str[i], 1); //borrar estas dos funciones
 			i++;
 		}
 		while (ft_is_space(str[i]) && (ft_is_space(str[i + 1])
@@ -39,7 +38,6 @@ void	epur_str(char *str, t_data *data)
 			i++;
 		if (ft_is_space(str[i]) && str[i + 1] != '\0')
 			ft_putchar_fd(' ', data->fdout);
-			//write(1, " ", 1);
 	}
 }
 

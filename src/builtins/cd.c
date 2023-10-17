@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:25:39 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/16 10:46:58 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/16 18:10:26 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	ft_cd(t_data *data)
 		}
 		else
 			ft_putstr_fd("bash: cd: HOME not set\n", data->fdout);
+			data->exit_status = 127;
 	}
 	else
 	{
@@ -107,7 +108,3 @@ void	ft_cmp_and_update(t_data *data, char *var_env, int i)
 		ft_free_double_pointer(splitted);
 	}
 }
-
-//El PATH sale como /Users/begarijo.. etc.
-//Hay que cambiarlo por MiniShell, para que con estos dos
-//solo salga a partir de ahí, pero aún así busque bien.

@@ -29,7 +29,7 @@ t_data	*ft_init_data(char **env, char **argv)
 	//data->bool_exp = 0;
 	data->argc = 0;
 	data->child = 1;
-	data->lvl += 1;
+	data->lvl = 1;
 	data->fdin = STDIN_FILENO;
 	data->fdout = STDOUT_FILENO;
 	data->exit_status = -1;
@@ -54,6 +54,9 @@ void	ft_init_env(t_elist *elist)
 	elist = tmp;
 }
 
+/*No sé por qué no funciona lo del SHLVL, parece que va siempre uno por encima,
+ o si no, no se suma*/
+
 void	ft_update_env(t_data *data)
 {
 	t_elist	*node;
@@ -66,7 +69,7 @@ void	ft_update_env(t_data *data)
 	ft_update_list(data->env, path_lvl, "SHELL");
 	free(path_lvl);
 	node = ft_search_node(data->env, "SHLVL");
-	path_lvl = ft_itoa(ft_atoi(node->def - 1) + 1);
-	ft_update_list(data->env, path_lvl, "SHLVL");
+	path_lvl = ft_itoa(ft_atoi(node->def) + 1);
+	ft_update_list(data->env, path_lvl + 6, "SHLVL");
 	free(path_lvl);
 }
