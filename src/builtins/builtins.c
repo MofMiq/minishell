@@ -6,13 +6,11 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:43:04 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/17 12:34:04 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:25:06 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-/*que admita aqui la ruta absoluta -> mirar hoja de correciones*/
 
 int	ft_is_builtin(char *str)
 {

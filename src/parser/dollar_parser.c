@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:09:16 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/06 10:33:30 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:31:55 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_dollar_aux(t_data *data, t_token **token, int *i)
 
 	s = ++(*i);
 	if ((*token)->str[s] == '?')
-		ndef = ft_exit_status(i);
+		ndef = ft_exit_status(data->exit_status, i);
 	else
 	{
 		while ((*token)->str[*i] && !ft_strchr(" $=\'\"", (*token)->str[*i]))
@@ -75,12 +75,15 @@ void	ft_dollar_aux(t_data *data, t_token **token, int *i)
 /*a esta funcion hay que pasarle otro numero, que será un codigo de salida
 que no se muy bien de donde lo obtendremos, pero que perfectamente podriamos
 guardar en 'data' para que lo pueda pasar por aqui.
-añadir data como argumento, o data->exit_status*/
+añadir data como argumento, o data->exit_status
 
-char	*ft_exit_status(int *i)
+$? solo en la linea de comando, abre un proceso nuevo?*/
+
+char	*ft_exit_status(int exit_status, int *i)
 {
 	char	*ndef;
 
+	(void)exit_status;
 	ndef = ft_itoa(77777); //esto en un valor falso de prueba
 	(*i)++;
 	return (ndef);

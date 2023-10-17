@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/17 16:26:09 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:19:19 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,12 @@
 
 static void	ft_check_type(t_data *data)
 {
-	t_token	*last;
-
+	if (ft_strchr("<>|", data->input[(int)ft_strlen(data->input) - 1]))
+	{
+		ft_putstr_fd("bash: syntax error near unexpected token\n", data->fdout);
+		return ;
+	}
 	ft_init_parse(data);
-	last = ft_last_token(data->token);
-	if (data->token->type >= PIPE && data->token->type <= APPEND && !data->token->next)
-		return (ft_free_token(data->token, data), \
-		ft_putstr_fd("bash: syntax error NEAR unexpected token\n", data->fdout));
-	if (last->type == PIPE)
-		return (ft_free_token(data->token, data), \
-		ft_putstr_fd("No has cerrao el pipe\n", data->fdout));
 	if (ft_one_bad_arg(data))
 		return (ft_free_token(data->token, data));
 	if (ft_bad_redi(data->token, data->fdout))

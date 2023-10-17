@@ -1,34 +1,9 @@
-
-    builtins.c:
-    line 18 -> es un parche ahora mismo
-
 ¿¿¿que pasa si le pasamos a ft_split un array que solo sea el separador, por ejemplo ft_split("=", "=")??? ->ultra segmentation fault
     |->actualizacion: en ft_cmp_and_update y ft_dollar_epxort: el split que arreglaste el viernes 08/09/23 esta petando y
     perdiendo la referencia del algunos "splieos". no se porque ocurre ahora mismo, pero al usar el antiguo split todo va
     rodado y funciona a la perfeccion. asi que de forma provisional he creado un nuevo archivo llamado ft_old_split en
     donde esta el split orignial y lo estoy usando en esas dos funciones.
 
-ft_launch_exec: da errores de memoria al intentar salir y no cierra el programa del tiron. Ej:
-PutaShell> $USER pa la
-en ft_init_parse / token->str: marirodr
-en ft_init_parse / token->type: 2
-en ft_init_parse / token->str: pa
-en ft_init_parse / token->type: 2
-en ft_init_parse / token->str: la
-en ft_init_parse / token->type: 2
-PATH: No such file or directory
-que quiereh
-PutaShell> exit
-en ft_init_parse / token->str: exit
-en ft_init_parse / token->type: 1
-exit
-ft_free_all-------------
-minishell(22062,0x1113e7dc0) malloc: *** error for object 0x7fc23dc05f40: pointer being freed was not allocated
-minishell(22062,0x1113e7dc0) malloc: *** set a breakpoint in malloc_error_break to debug
-que quiereh
-
-para las dos: cuidado cuando tenemos "" ó '', porque se crea un nodo vacio en tokens de tipo comillas.
-de esta manera todo bien pero tenemos que aseguranos en los builtins que pasen por completo de un nodo con str vacio.
 
 BELEN: Comprobar tema señales en condiciones, el ejecutable debe poder ejecutar cualquier cosa sin petar
         se podría hacer "guarradilla" pa probar, intentarlo con fractol por ejemplo
@@ -49,3 +24,5 @@ nulo y jajan't). esto no quita que a lo mejor pete si probamos mas cosas en la p
 en segundo lugar: el viernes llegamos a la conclusion de que era como si los pipes tuvieran prioridad sobre el 
 resto de redirreciones o que los procesos se estuvieran ejecutando a la vez (teoria de murillo pero a mi no me curadraba),
 sin embargo probando y buscando he caido que creo casi seguro que es por los fds + argumentos que requiere un programa.
+
+epxort a=caca=lala=jaja -> nuestro minishell saca a=caca y deberia sacar a=caca=lala=jaja. cd.c, linea 96
