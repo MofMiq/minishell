@@ -144,6 +144,7 @@ void	ft_miniexit(t_data *data)
 	}
 	else
 	{
+		//ft_putstr_fd("exit", data->fdout); //belen habiass borrado esta linea? te daba por culo en algun lado?? o despiste?
 		ft_putchar_fd('\n', data->fdout);
 		ft_free_all(data);
 		exit(EXIT_SUCCESS);
