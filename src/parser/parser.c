@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:17:49 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/16 13:48:25 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/18 19:13:42 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,91 @@ void	ft_reconvert_token(t_data *data)
 	}
 }
 
+void	ft_remove_if_token(t_token *curr, char *cstr, t_token **token)
+{
+	while (curr)
+	{
+		if (ft_strcmp(curr->str, cstr) == 0)
+		{
+			if (curr->prev == NULL)
+			{
+				*token = curr->next;
+				if (*token)
+					(*token)->prev = NULL;
+			}
+			else
+			{
+				curr->prev->next = curr->next;
+				if (curr->next)
+				{
+					curr->next->prev = curr->prev;
+				}
+			}
+			free(curr->str);
+			free(curr);
+		}
+		curr = curr->next;
+	}
+}
+
+t_token	*ft_join_quotes(t_data *data)
+{
+	t_token	*tmp;
+	t_token	*curr;
+
+	if (data->token->next != NULL)
+	{
+		tmp = data->token;
+		data->token = data->token->next;
+		while (data->token)
+		{
+			if ((data->token->type >= BUILTIN && data->token->type <= D_QUOTES) && data->token->space == 0) //no_quotes y builtins tambien en realidad tambien
+			{
+				printf("----vamos al lio----ft_join_quotes: data->token->str: %s\n", data->token->str);
+				data->token->prev->str = ft_strjoin_gnl(data->token->prev->str, data->token->str);
+				// if (data->token->prev->type && data->token->prev->type != NO_QUOTES) //esto no porque no respetaria el typo del primero
+				// 	data->token->prev->type = NO_QUOTES;
+				curr = data->token;
+				printf("ft_join_quotes: curr->str: %s\n", curr->str);
+				ft_remove_if_token(curr, curr->str, &data->token);
+			}	
+			data->token = data->token->next;
+		}
+		data->token = tmp;
+	}
+	return (data->token);
+}
+	//char *join_str;
+	// free(data->token->prev->str);
+	// data->token->prev->str = ft_strdup(join_str);
+	// free(join_str);
+	// tmp = data->token;
+	// if (data->token->next == NULL)
+	// 	return (data->token);
+	// else
+	// 	data->token = data->token->next;
+	// while (data->token)
+	// {
+	// 	if ((data->token->type >= BUILTIN && data->token->type <= D_QUOTES) && data->token->space == 0) //no_quotes y builtins tambien en realidad tambien
+	// 	{
+	// 		printf("----vamos al lio----ft_join_quotes: data->token->str: %s\n", data->token->str);
+	// 		data->token->prev->str = ft_strjoin_gnl(data->token->prev->str, data->token->str);
+	// 		if (data->token->prev->type && data->token->prev->type != NO_QUOTES)
+	// 			data->token->prev->type = NO_QUOTES;
+	// 		curr = data->token;
+	// 		printf("ft_join_quotes: curr->str: %s\n", curr->str);
+	// 		// free(data->token->prev->str);
+	// 		// data->token->prev->str = ft_strdup(join_str);
+	// 		// free(join_str);
+	// 		ft_remove_if_token(curr, curr->str, &data->token);
+	// 	}	
+	// 	data->token = data->token->next;
+	// }
+	// data->token = tmp;
+	// return (data->token);
+
+//tener en cuenta los camos type y space
+
 void	ft_init_parse(t_data *data)
 {
 	data->token = ft_divide_input(data);
@@ -140,8 +225,20 @@ void	ft_init_parse(t_data *data)
 	{
 		while (data->token)
 		{
-			printf("%sen ft_init_parse / token->str: %s\n", PINK, data->token->str);
-			printf("en ft_init_parse / token->type: %d / token->space: %d%s\n", data->token->type, data->token->space, END);
+			printf("%sen ft_init_parse antes join / token->str: %s\n", BLUE, data->token->str);
+			printf("en ft_init_parse antes join / token->type: %d / token->space: %d%s\n", data->token->type, data->token->space, END);
+			data->token = data->token->next;
+		}
+	}
+	data->token = tmp;
+	data->token = ft_join_quotes(data);
+	if (data->token)
+	tmp = data->token;
+	{
+		while (data->token)
+		{
+			printf("%sen ft_init_parse RESULTADO / token->str: %s\n", PINK, data->token->str);
+			printf("en ft_init_parse RESULTADO / token->type: %d / token->space: %d%s\n", data->token->type, data->token->space, END);
 			data->token = data->token->next;
 		}
 	}
