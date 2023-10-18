@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:54:01 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/17 12:42:14 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/18 19:13:15 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+/*eliminar ft_is_space y epur*/
 
 int	ft_is_space(char c)
 {
@@ -41,6 +43,8 @@ void	epur_str(char *str, t_data *data)
 	}
 }
 
+/*repasar esta funcion para ver si se puede dejar mas limpia y reducida?*/
+
 void	ft_print_echo(t_data *data, int pos)
 {
 	int		i;
@@ -59,7 +63,7 @@ void	ft_print_echo(t_data *data, int pos)
 		tmp->prev->type = BUILTIN;
 	while (data->args[pos] != NULL)
 	{
-		if ((tmp->type >= NO_QUOTES && tmp->type <= D_QUOTES))
+		if ((tmp->type >= NO_QUOTES && tmp->type <= D_QUOTES)) //cambiar estas cosas porque ya no serian necesarias
 		{
 			if (tmp->space == 1 && tmp->prev->type != BUILTIN)
 				ft_putchar_fd(' ', data->fdout);
