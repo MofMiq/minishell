@@ -6,62 +6,64 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:47 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/05 18:09:53 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/19 15:05:46 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-char	*ft_token_cat(t_token *aux, t_token *first, int len, int i)
+void	ft_join_glued_tokes(t_data *data)
 {
-	char	*tmp;
+	t_token	*tmp;
+	t_token	*curr;
 
-	while (aux && aux->space == 0)
+	tmp = data->token;
+	data->token = data->token->next;
+	while (data->token)
 	{
-		len += ft_strlen(aux->str);
-		aux = aux->next;
+		if ((data->token->type >= 1 && data->token->type <= 4)
+			&& data->token->space == 0
+			&& (data->token->prev->type >= 1 && data->token->prev->type <= 4))
+		{
+			data->token->prev->str = ft_strjoin_gnl(data->token->prev->str, \
+			data->token->str);
+			if (!data->token->prev->prev && data->token->prev->type == BUILTIN)
+				data->token->type = NO_QUOTES;
+			curr = data->token;
+			ft_remove_if_token(curr, curr->str, &data->token);
+		}	
+		data->token = data->token->next;
 	}
-	tmp = ft_calloc(len, sizeof(char));
-	while (first && first->space == 0)
-	{
-		len = 0;
-		while (first->str[len])
-			tmp[i++] = first->str[len++];
-		first = first->next;
-	}
-	return (tmp);
+	data->token = tmp;
+	if (!ft_is_builtin(data->token->str))
+		data->token->type = NO_QUOTES;
+	else
+		data->token->type = BUILTIN;
 }
 
-/*hago esta mierda despues de quitar comillas y de expandir
-el dolar para que salga de puta madre cuando hay error.
-quizas otra idea mas "segura" podría ser quitar los espacios de delante del
-input. lo dejo aqui por si acaso.*/
-
-int	ft_one_bad_arg(t_data *data)
+void	ft_remove_if_token(t_token *curr, char *cstr, t_token **token)
 {
-	int		sp;
-	int		len;
-	char	*tmp;
-	t_token	*aux;
-
-	len = ft_strlen(data->token->str);
-	aux = data->token;
-	sp = 0;
-	while (ft_check_space(data->input[sp]))
-		sp++;
-	if (sp > 0) // la estaré liando mucho aqui? a lo mejor me da problemas en otro sitio?
-		data->token->space = 0;
-	if (data->input[len + sp] == '\0' || data->input[len + sp] == ' '
-		|| aux->type == S_QUOTES || aux->type == D_QUOTES)
-		return (0);
-	if (ft_strchr("'\''\"", data->input[len + sp]))
+	while (curr)
 	{
-		tmp = ft_token_cat(aux->next, aux, len, 0);
-		ft_putstr_fd("bash: ", data->fdout);
-		ft_putstr_fd(tmp, data->fdout);
-		ft_putstr_fd(": command not found\n", data->fdout);
-		free(tmp);
-		return (1);
+		if (ft_strcmp(curr->str, cstr) == 0)
+		{
+			if (curr->prev == NULL)
+			{
+				*token = curr->next;
+				if (*token)
+					(*token)->prev = NULL;
+			}
+			else
+			{
+				curr->prev->next = curr->next;
+				if (curr->next)
+				{
+					curr->next->prev = curr->prev;
+				}
+			}
+			free(curr->str);
+			free(curr);
+		}
+		curr = curr->next;
 	}
-	return (0);
 }

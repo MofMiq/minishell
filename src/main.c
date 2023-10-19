@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/18 19:13:27 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/19 12:03:46 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ static void	ft_check_type(t_data *data)
 		return ;
 	}
 	ft_init_parse(data);
-	// if (ft_one_bad_arg(data)) //esto creo que ya no lo necesitaria -> eliminar funcion y asociadas
-	// 	return (ft_free_token(data->token, data));
 	if (ft_bad_redi(data->token, data->fdout))
 		return (ft_free_token(data->token, data));
 	else if (data->token->type == S_QUOTES || data->token->type == D_QUOTES)

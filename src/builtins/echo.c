@@ -6,44 +6,11 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:54:01 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/18 19:13:15 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/19 11:51:31 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-/*eliminar ft_is_space y epur*/
-
-int	ft_is_space(char c)
-{
-	if (c == ' ' || c == '\t')
-		return (1);
-	return (0);
-}
-
-void	epur_str(char *str, t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		while (ft_is_space(str[i]))
-			i++;
-		while (!ft_is_space(str[i]) && str[i] != '\0')
-		{
-			ft_putchar_fd(str[i], data->fdout);
-			i++;
-		}
-		while (ft_is_space(str[i]) && (ft_is_space(str[i + 1])
-				|| str[i + 1] != '\0'))
-			i++;
-		if (ft_is_space(str[i]) && str[i + 1] != '\0')
-			ft_putchar_fd(' ', data->fdout);
-	}
-}
-
-/*repasar esta funcion para ver si se puede dejar mas limpia y reducida?*/
 
 void	ft_print_echo(t_data *data, int pos)
 {
@@ -59,16 +26,11 @@ void	ft_print_echo(t_data *data, int pos)
 		tmp = tmp->next;
 		i--;
 	}
-	if (ft_is_flag(tmp->prev->str))
-		tmp->prev->type = BUILTIN;
 	while (data->args[pos] != NULL)
 	{
-		if ((tmp->type >= NO_QUOTES && tmp->type <= D_QUOTES)) //cambiar estas cosas porque ya no serian necesarias
-		{
-			if (tmp->space == 1 && tmp->prev->type != BUILTIN)
-				ft_putchar_fd(' ', data->fdout);
-			ft_putstr_fd(data->args[pos], data->fdout);
-		}
+		ft_putstr_fd(data->args[pos], data->fdout);
+		if (data->args[pos + 1] != NULL)
+			ft_putchar_fd(' ', data->fdout);
 		pos++;
 		tmp = tmp->next;
 	}
