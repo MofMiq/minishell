@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 13:30:15 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/03 11:44:26 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/19 16:19:58 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 /*me acabo de hacer aqui una guarrada (32-38) y meto un nodo "vacio" para que
 como en bash imprema un espacio "extra"*/
+//1 si hay que imprimir un espcacio; 0 si va junto
 
 t_token	*ft_new_token(char *input, int i, int start)
 {
@@ -29,7 +30,7 @@ t_token	*ft_new_token(char *input, int i, int start)
 	}
 	token->str = tmp;
 	token->type = -1;
-	token->space = ft_check_space(input[start - 1]); //1 si hay que imprimir un espcacio; 0 si va junto
+	token->space = ft_check_space(input[start - 1]);
 	token->next = NULL;
 	token->prev = NULL;
 	return (token);
@@ -41,23 +42,6 @@ t_token	*ft_last_token(t_token *token)
 		token = token->next;
 	return (token);
 }
-
-int	ft_check_space(char c)
-{
-	if (c != ' ')
-		return (0);
-	return (1);
-}
-//en pruebas
-// t_token	*ft_first_token(t_token **token)
-// {
-// 	while ((*token) && (*token)->prev != NULL)
-// 	{
-// 		printf("en ft_first_token: token->str: %s\n", (*token)->str);
-// 		(*token) = (*token)->prev;
-// 	}
-// 	return ((*token));
-// }
 
 t_token	*ft_penultimate_token(t_token *token)
 {
@@ -79,4 +63,11 @@ t_token	*ft_add_token(t_token **token, t_token *new)
 			new->prev = ft_penultimate_token(*token);
 	}
 	return (*token);
+}
+
+int	ft_check_space(char c)
+{
+	if (c != ' ')
+		return (0);
+	return (1);
 }

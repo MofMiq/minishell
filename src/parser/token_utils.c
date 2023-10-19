@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:47 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/19 15:05:46 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/19 16:18:12 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,22 @@ void	ft_remove_if_token(t_token *curr, char *cstr, t_token **token)
 		}
 		curr = curr->next;
 	}
+}
+
+/*Returns the number of pipe in the input, without being between quotes*/
+
+int	ft_count_pipes(t_token *token)
+{
+	int		c;
+	t_token	*tmp;
+
+	c = 0;
+	tmp = token;
+	while (tmp)
+	{
+		if (tmp->type == PIPE)
+			c++;
+		tmp = tmp->next;
+	}
+	return (c);
 }
