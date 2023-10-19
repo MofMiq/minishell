@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/19 12:58:08 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/19 15:50:15 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ void	ft_miniexit(t_data *data)
 	}
 	else
 	{
-		//ft_putstr_fd("exit", data->fdout); //belen habiass borrado esta linea? te daba por culo en algun lado?? o despiste?
+		ft_putstr_fd("exit", data->fdout); //belen habiass borrado esta linea? te daba por culo en algun lado?? o despiste?
 		ft_putchar_fd('\n', data->fdout);
 		ft_free_all(data);
 		exit(EXIT_SUCCESS);

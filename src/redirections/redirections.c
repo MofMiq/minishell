@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:01:57 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/17 16:48:36 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/19 16:20:33 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,43 +35,45 @@ señal y ya funcionaria regu.
 redirgimos por si acaso no volvemos a entrar aqui nuestra variable al nuevo fd
 lector(fd[0]) y que el proceso lea desde ahi y nos desde el teclado.*/
 
-/*buscar segmentation fault si comando echo hola > file | wc.. SOLUCIONADO*/
 
 void	ft_process_pipeline(t_data *data, int c_pipes)
 {
 	int		i;
-	int		fd[2];
 
 	i = 0;
 	data->curr_tkn = data->token;
 	while (i <= c_pipes && data->curr_tkn)
 	{
-		if (pipe(fd) == -1)
-			perror("pipe");
-		if (c_pipes == i)
-		{
-			data->fdout = STDOUT_FILENO;
-			ft_begin_redi(data);
-			close(fd[0]);
-		}
-		else
-		{
-			data->fdout = fd[1];
-			ft_begin_redi(data);
-		}
-		close(fd[1]);
-		data->fdin = fd[0];
+		ft_change_pipes_fds(data, i, c_pipes);
 		if (data->curr_tkn->next != NULL)
 			data->curr_tkn = data->curr_tkn->next;
 		data->token = data->curr_tkn;
 		ft_free_double_pointer(data->args);
 		i++;
 	}
-	ft_close_fds(data, 3); //podria cambiar esta linea al final de ft_check type para ahorra
+	ft_close_fds(data, 3);
 }
 
-	//printf("en ft_process_launch exit_status: %d\n", data->exit_status);
+void	ft_change_pipes_fds(t_data *data, int i, int c_pipes)
+{
+	int	fd[2];
 
+	if (pipe(fd) == -1)
+		perror("pipe");
+	if (c_pipes == i)
+	{
+		data->fdout = STDOUT_FILENO;
+		ft_begin_redi(data);
+		close(fd[0]);
+	}
+	else
+	{
+		data->fdout = fd[1];
+		ft_begin_redi(data);
+	}
+	close(fd[1]);
+	data->fdin = fd[0];
+}
 /*en esta funcion basicamente vamos a buscar si hay una redireccion o no en el
 input, independientemente de si hay pipe o no. vamos a coger todos los tokens
 hasta una nueva redireccion y en ese caso parar ahi para que solo reconvertamos
@@ -81,6 +83,21 @@ cual se y luego ejecutar su movida. en otro caso, comprobamos si los tokens
 son builtin o no para ir a segun que sito.*/
 
 void	ft_begin_redi(t_data *data)
+{
+	int	flag;
+
+	flag = ft_advance_n_reconvert(data);
+	if (flag == 1)
+		ft_what_redi(data);
+	if (data->args[0] == NULL)
+		return ;
+	if (data->token->type == BUILTIN)
+		ft_do_builtins(data, data->token->str);
+	else
+		ft_launch_exec(data);
+}
+
+int	ft_advance_n_reconvert(t_data *data)
 {
 	int	flag;
 
@@ -102,14 +119,7 @@ void	ft_begin_redi(t_data *data)
 			break ;
 		data->curr_tkn = data->curr_tkn->next;
 	}
-	if (flag == 1)
-		ft_what_redi(data);
-	if (data->args[0] == NULL)
-		return ;
-	if (data->token->type == BUILTIN)
-		ft_do_builtins(data, data->token->str);
-	else
-		ft_launch_exec(data);
+	return (flag);
 }
 
 /*cuidado con esta funcion porque esta cerrando todos los fd cuando se llama
@@ -128,29 +138,11 @@ void	ft_close_fds(t_data *data, int limit)
 		close(data->fdin);
 		data->fdin--;
 	}
-	data->fdin = STDIN_FILENO; //quizas cambiar esto de sitio?
+	data->fdin = STDIN_FILENO;
 	while (data->fdout >= limit)
 	{
 		close(data->fdout);
 		data->fdout--;
 	}
-	data->fdout = STDOUT_FILENO; //quizas cambiar esto de sitio?
-}
-
-/*Returns the number of pipe in the input, without being between quotes*/
-
-int	ft_count_pipes(t_token *token)
-{
-	int		c;
-	t_token	*tmp;
-
-	c = 0;
-	tmp = token;
-	while (tmp)
-	{
-		if (tmp->type == PIPE)
-			c++;
-		tmp = tmp->next;
-	}
-	return (c);
+	data->fdout = STDOUT_FILENO;
 }
