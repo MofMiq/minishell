@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:49:30 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/17 17:20:46 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/19 13:31:42 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	ft_bad_redi(t_token *token, int fd)
 		}
 		if ((aux->type == APPEND && ft_strncmp(aux->str, ">>>", 3) == 0)
 			|| (aux->type == HERE_DOC && ft_strncmp(aux->str, "<<<", 3) == 0)
-			|| ft_bad_syntax(aux))
+			|| (ft_bad_syntax(aux) && (aux->type >= 6 && aux->type <= 9)))
 		{
 			ft_putstr_fd("syntax error near unexpected token\n", fd);
 			return (1);

@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:09:16 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/17 17:31:55 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/19 11:39:52 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_dollar_aux(t_data *data, t_token **token, int *i)
 		ndef = ft_exit_status(data->exit_status, i);
 	else
 	{
-		while ((*token)->str[*i] && !ft_strchr(" $=\'\"", (*token)->str[*i]))
+		while ((*token)->str[*i] && !ft_strchr(" $=/-\'\"", (*token)->str[*i]))
 			(*i)++;
 		cenv = ft_substr((*token)->str, s, (*i) - s);
 		if (!ft_list_cmp(data->env, cenv))
@@ -84,7 +84,7 @@ char	*ft_exit_status(int exit_status, int *i)
 	char	*ndef;
 
 	(void)exit_status;
-	ndef = ft_itoa(77777); //esto en un valor falso de prueba
+	ndef = ft_itoa(exit_status); //esto en un valor falso de prueba
 	(*i)++;
 	return (ndef);
 }

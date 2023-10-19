@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/17 17:29:48 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/19 15:05:54 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,11 +154,11 @@ void	ft_handler_process(int sig);
 void	ft_signal_proc(void);
 
 //parser.c
-t_token	*ft_divide_input(t_data *data);
-void	ft_init_parse(t_data *data);
 t_token	*ft_assign_type(t_data *data);
-void	ft_reconvert_token(t_data *data);
 void	ft_subdivide_input(t_data *data, int *i, int *start);
+t_token	*ft_divide_input(t_data *data);
+void	ft_reconvert_token(t_data *data);
+void	ft_init_parse(t_data *data);
 
 //create_token.c
 t_token	*ft_new_token(char *input, int i, int start);
@@ -183,8 +183,8 @@ void	ft_ignore_quotes(t_data *data);
 void	ft_quotes(t_data *data, int *i, int *start, char q);
 
 //token_utils.c
-char	*ft_token_cat(t_token *aux, t_token *first, int len, int i);
-int		ft_one_bad_arg(t_data *data);
+void	ft_join_glued_tokes(t_data *data);
+void	ft_remove_if_token(t_token *curr, char *cstr, t_token **token);
 
 //redi_parser.c
 void	ft_sub_red(t_data *data, int *i, int *start, char c);
