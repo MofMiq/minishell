@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:25:39 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/19 13:01:14 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/19 18:04:47 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	ft_cd(t_data *data)
 			home = ft_search_node(data->env, "HOME");
 			chdir(home->def);
 			ft_change_dir(data, owd);
+			data->exit_status = 0;
 		}
 		else
 			ft_putstr_fd("bash: cd: HOME not set\n", data->fdout);
@@ -62,6 +63,7 @@ void	ft_pwd(t_data *data)
 	{
 		ft_putstr_fd(cwd, data->fdout);
 		ft_putchar_fd('\n', data->fdout);
+		data->exit_status = 0;
 	}
 	free(cwd);
 }

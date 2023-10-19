@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redi_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:49:30 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/19 13:31:42 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/19 19:02:24 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_bad_syntax(t_token *aux)
 	return (0);
 }
 
-int	ft_bad_redi(t_token *token, int fd)
+int	ft_bad_redi(t_token *token, int fd, t_data *data)
 {
 	t_token	*aux;
 	t_token	*last;
@@ -57,7 +57,8 @@ int	ft_bad_redi(t_token *token, int fd)
 		if (aux->type == PIPE && (aux->next && aux->next->type >= PIPE
 				&& aux->next->type <= HERE_DOC))
 		{
-			ft_putstr_fd("syntax ERROR near unexpected token\n", fd);
+			ft_putstr_fd("syntax error near unexpected token\n", fd);
+			data->exit_status = 1;
 			return (1);
 		}
 		if ((aux->type == APPEND && ft_strncmp(aux->str, ">>>", 3) == 0)
@@ -65,6 +66,7 @@ int	ft_bad_redi(t_token *token, int fd)
 			|| (ft_bad_syntax(aux) && (aux->type >= 6 && aux->type <= 9)))
 		{
 			ft_putstr_fd("syntax error near unexpected token\n", fd);
+			data->exit_status = 1;
 			return (1);
 		}
 		aux = aux->next;

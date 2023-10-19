@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:01:57 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/19 16:20:33 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/19 18:56:35 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,24 @@ void	ft_process_pipeline(t_data *data, int c_pipes)
 	data->curr_tkn = data->token;
 	while (i <= c_pipes && data->curr_tkn)
 	{
+		if (pipe(fd) == -1)
+		{
+			perror("pipe");
+			data->exit_status = 1;
+		}
+		if (c_pipes == i)
+		{
+			data->fdout = STDOUT_FILENO;
+			ft_begin_redi(data);
+			close(fd[0]);
+		}
+		else
+		{
+			data->fdout = fd[1];
+			ft_begin_redi(data);
+		}
+		close(fd[1]);
+		data->fdin = fd[0];
 		ft_change_pipes_fds(data, i, c_pipes);
 		if (data->curr_tkn->next != NULL)
 			data->curr_tkn = data->curr_tkn->next;

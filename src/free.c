@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 12:26:52 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/19 15:49:53 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/19 19:06:04 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ void	ft_free_all(t_data *data)
 
 int	ft_check_name_print(char *name, t_data *data)
 {
-	//perror("export");
 	ft_putstr_fd("bash: export: ", data->fdout);
 	ft_putstr_fd(name, data->fdout);
 	ft_putstr_fd(": not a valid identifer\n", data->fdout);
+	data->exit_status = 1;
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:54:01 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/19 11:51:31 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/19 18:06:43 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,5 @@ void	ft_echo(t_data *data)
 	ft_print_echo(data, i);
 	if (flag == 0)
 		ft_putchar_fd('\n', data->fdout);
+	data->exit_status = 0;
 }

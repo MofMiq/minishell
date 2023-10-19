@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   in_out_redi.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 14:12:08 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/17 16:33:44 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/19 19:06:41 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	ft_out_redi(t_data *data, int flag)
 	if (new_fd == -1)
 	{
 		ft_putstr_fd("error opening file from ft_output_redi\n", data->fdout);
+		data->exit_status = 1;
 		return ;
 	}
 	data->fdout = new_fd;
@@ -64,6 +65,7 @@ void	ft_input_redi(t_data *data)
 	if (new_fd == -1)
 	{
 		ft_putstr_fd("error opening file from ft_input_redi\n", data->fdout);
+		data->exit_status = 1;
 		return ;
 	}
 	data->fdin = new_fd;
@@ -85,6 +87,7 @@ void	ft_here_doc(t_data *data)
 	{
 		ft_free_double_pointer(split);
 		ft_putstr_fd("bash: syntax error near unexpected token\n", data->fdout);
+		data->exit_status = 1;
 		return ;
 	}
 	dlm = ft_strjoin(split[1], "\n");
@@ -104,6 +107,7 @@ void	ft_open_and_write_hd(t_data *data, char *dlm)
 	if (h_d == -1)
 	{
 		ft_putstr_fd("error opening file from ft_output_redi\n", data->fdout);
+		data->exit_status = 1;
 		return ;
 	}
 	ft_putstr_fd("> ", 1);

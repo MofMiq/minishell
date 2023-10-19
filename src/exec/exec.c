@@ -110,9 +110,6 @@ char	**ft_reconvert_env(t_elist *elist)
 	return (res);
 }
 
-/*problema: si ponemos en el input un comando mal, crea un proceso y nos pide
-explicitamente salir de el.*/
-
 void	ft_launch_exec(t_data *data)
 {
 	int	stat;
@@ -123,21 +120,19 @@ void	ft_launch_exec(t_data *data)
 	if (data->child == 0)
 	{
 		ft_exec_from_path(data);
-		int i = 0;
-		while (data->args[i])
-		{
-			printf("%sen ft_launch_exec data->args[%i]: %s%s\n", BLUE, i, data->args[i], END);
-			i++;
-		}
-		// printf("%sen ft_launch_exec data->fdin: %d / data->fdout: %d%s\n", BLUE, data->fdin, data->fdout, END);
 		dup2(data->fdin, STDIN_FILENO);
 		dup2(data->fdout, STDOUT_FILENO);
 		if (execve(data->args[0], data->args, ft_reconvert_env(data->env)) == -1)
-			perror(data->args[0]);
+		{
+			ft_putstr_fd("bash: ", data->fdout);
+			ft_putstr_fd(data->args[0], data->fdout);
+			ft_putstr_fd(": command not found\n", data->fdout);
+			data->exit_status = 127;
+		}
 		exit(127);
 	}
 	else if (data->child < 0)
-		perror(data->args[0]);
+		data->exit_status = 1;
 	else
 	{
 		waitpid(data->child, &stat, WUNTRACED);
