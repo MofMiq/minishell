@@ -16,7 +16,6 @@ t_data	*ft_init_data(char **env, char **argv)
 {
 	t_data	*data;
 
-	(void)env;
 	data = (t_data *)malloc(sizeof(t_data));
 	data->env = ft_copy_env(env);
 	ft_init_env(data->env);
@@ -52,6 +51,21 @@ void	ft_init_env(t_elist *elist)
 	}
 	elist = tmp;
 }
+
+// void	ft_graphic(t_data *data)
+// {
+// 	char	*matrix[2];
+// 	t_elist	*aux;
+
+// 	//matrix = (char **)ft_calloc(2, sizeof(char *));
+// 	aux = ft_search_node(data->env, "USER");
+// 	if (ft_strcmp(aux->def, "marirodr"))
+// 	{
+// 		matrix[0] = "GRAPHIC";
+// 		matrix[1] = "/Users/marirodr/./graphic_script";
+// 		ft_add_back(&data->env, ft_new_node(matrix));
+// 	}
+// }
 
 /*No sé por qué no funciona lo del SHLVL, parece que va siempre uno por encima,
  o si no, no se suma*/

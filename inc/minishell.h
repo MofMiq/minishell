@@ -185,6 +185,7 @@ void	ft_quotes(t_data *data, int *i, int *start, char q);
 //token_utils.c
 void	ft_join_glued_tokes(t_data *data);
 void	ft_remove_if_token(t_token *curr, char *cstr, t_token **token);
+int		ft_count_pipes(t_token *token);
 
 //redi_parser.c
 void	ft_sub_red(t_data *data, int *i, int *start, char c);
@@ -193,10 +194,11 @@ int		ft_bad_redi(t_token *token, int fd, t_data *data);
 void	ft_add_space(t_data *data);
 
 //redirections.c
-int		ft_count_pipes(t_token *token);
-void	ft_close_fds(t_data *data, int limit);
 void	ft_process_pipeline(t_data *data, int c_pipes);
+void	ft_change_pipes_fds(t_data *data, int i, int c_pipes);
 void	ft_begin_redi(t_data *data);
+int		ft_advance_n_reconvert(t_data *data);
+void	ft_close_fds(t_data *data, int limit);
 
 //in_out_redi.c
 void	ft_what_redi(t_data *data);
