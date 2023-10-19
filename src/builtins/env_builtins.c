@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_builtins.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/19 12:58:08 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/19 18:30:59 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 void	ft_env(t_data *data, char **args)
 {
 	if (data->argc == 1)
+	{
 		ft_print_env(data, data->env, 1);
+		data->exit_status = 0;
+	}
 	else
 	{
 		ft_putstr_fd(args[0], data->fdout);
@@ -23,9 +26,15 @@ void	ft_env(t_data *data, char **args)
 		ft_putstr_fd(args[1], data->fdout);
 		ft_putstr_fd(": ", data->fdout);
 		if (chdir(data->args[1]) == 0)
+		{
+			data->exit_status = 126;
 			ft_putstr_fd(strerror(EACCES), data->fdout);
+		}
 		else
+		{
+			data->exit_status = 1;
 			ft_putstr_fd(strerror(ENOENT), data->fdout);
+		}
 		ft_putchar_fd('\n', data->fdout);
 	}
 }
@@ -39,7 +48,10 @@ int	ft_check_name(char *name, t_data *data)
 	if (name[0] == '=')
 		return (ft_check_name_print(name, data));
 	if (name[0] == '\0')
+	{
 		return (0);
+		data->exit_status = 1;
+	}
 	else
 	{
 		split = ft_mini_split(name, '=');
@@ -66,6 +78,7 @@ void	ft_export(t_data *data)
 	int		i;
 
 	i = 1;
+	data->exit_status = 0;
 	if (data->argc == 1)
 		ft_print_env(data, data->env, 2);
 	else
@@ -111,6 +124,7 @@ void	ft_unset(t_elist **env, t_elist **exp, t_data *data)
 			i++;
 		}
 	}
+	data->exit_status = 0;
 }
 
 void	ft_miniexit(t_data *data)
@@ -143,7 +157,7 @@ void	ft_miniexit(t_data *data)
 	}
 	else
 	{
-		//ft_putstr_fd("exit", data->fdout); //belen habiass borrado esta linea? te daba por culo en algun lado?? o despiste?
+		ft_putstr_fd("exit", data->fdout);
 		ft_putchar_fd('\n', data->fdout);
 		ft_free_all(data);
 		exit(EXIT_SUCCESS);

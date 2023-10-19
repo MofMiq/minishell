@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:43:04 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/17 17:25:06 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/19 18:54:32 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,4 @@ void	ft_do_builtins(t_data *data, char *str)
 		ft_miniexit(data);
 	else if (b == 8)
 		data->lvl += 1;
-	// {
-	// 	ft_launch_exec(data);
-	// 	printf("DATA LEVEL AL ENTRAR EN MINISHELL AGAIN %d\n", data->lvl);
-	// }
 }

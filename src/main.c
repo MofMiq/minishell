@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/19 12:03:46 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/19 19:02:14 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,21 @@ static void	ft_check_type(t_data *data)
 	if (ft_strchr("<>|", data->input[(int)ft_strlen(data->input) - 1]))
 	{
 		ft_putstr_fd("bash: syntax error near unexpected token\n", data->fdout);
+		data->exit_status = 1;
 		return ;
 	}
 	ft_init_parse(data);
-	if (ft_bad_redi(data->token, data->fdout))
+	if (ft_bad_redi(data->token, data->fdout, data))
+	{
+		data->exit_status = 1;
 		return (ft_free_token(data->token, data));
+	}
 	else if (data->token->type == S_QUOTES || data->token->type == D_QUOTES)
 	{
 		ft_putstr_fd("bash: ", data->fdout);
 		ft_putstr_fd(data->token->str, data->fdout);
 		ft_putstr_fd(": command not found\n", data->fdout);
+		data->exit_status = 1;
 	}
 	ft_process_pipeline(data, ft_count_pipes(data->token));
 	while (data->token->prev != NULL)
@@ -66,7 +71,7 @@ void	ft_leaks(void)
 
 int	main(int argc, char **argv, char **env)
 {
-	atexit(ft_leaks);
+	// atexit(ft_leaks);
 	t_data	*data;
 
 	(void)argc;

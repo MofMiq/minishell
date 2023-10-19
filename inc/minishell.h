@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/19 15:05:54 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/19 19:02:10 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,7 @@ void	ft_remove_if_token(t_token *curr, char *cstr, t_token **token);
 //redi_parser.c
 void	ft_sub_red(t_data *data, int *i, int *start, char c);
 int		ft_bad_syntax(t_token *aux);
-int		ft_bad_redi(t_token *token, int fd);
+int		ft_bad_redi(t_token *token, int fd, t_data *data);
 void	ft_add_space(t_data *data);
 
 //redirections.c

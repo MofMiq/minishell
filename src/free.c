@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 12:26:52 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/16 12:49:37 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/19 19:06:04 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,11 @@ void	ft_free_token(t_token *lst, t_data *data)
 		lst = tmp;
 	}
 	data->token = NULL;
-	//esta movie la tenemos que mirar bien y ver donde y como peta
-	//free(data->input);
-	// if (data->args)
-	// 	ft_free_double_pointer(data->args);
 }
 
 void	ft_free_all(t_data *data)
 {
-	ft_putstr_fd("ft_free_all-------------\n", data->fdout);
-	unlink(".tmp"); //creo que no hay que proteger esta mierda
+	unlink(".tmp");
 	clear_history();
 	ft_free_env(data->env);
 	data->env = NULL;
@@ -59,9 +54,9 @@ void	ft_free_all(t_data *data)
 
 int	ft_check_name_print(char *name, t_data *data)
 {
-	//perror("export");
 	ft_putstr_fd("bash: export: ", data->fdout);
 	ft_putstr_fd(name, data->fdout);
 	ft_putstr_fd(": not a valid identifer\n", data->fdout);
+	data->exit_status = 1;
 	return (0);
 }
