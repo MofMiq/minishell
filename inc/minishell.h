@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/19 19:02:10 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/10/20 12:40:25 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ int		ft_check_name_print(char *name, t_data *data);
 t_data	*ft_init_data(char **env, char **argv);
 void	ft_init_env(t_elist *elist);
 void	ft_update_env(t_data *data);
+void	ft_graphic(t_data *data);
 
 //signals.c
 
