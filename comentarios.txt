@@ -25,4 +25,9 @@ en segundo lugar: el viernes llegamos a la conclusion de que era como si los pip
 resto de redirreciones o que los procesos se estuvieran ejecutando a la vez (teoria de murillo pero a mi no me curadraba),
 sin embargo probando y buscando he caido que creo casi seguro que es por los fds + argumentos que requiere un programa.
 
-epxort a=caca=lala=jaja -> nuestro minishell saca a=caca y deberia sacar a=caca=lala=jaja. cd.c, linea 96
+export a=caca=lala=jaja -> nuestro minishell saca a=caca y deberia sacar a=caca=lala=jaja. cd.c, linea 96
+
+BELEN: signal.c -> nos pasa una cosa un pelin rara con readline y no se si puede ser por el redisplay que haces por el tema señales. lo vemos -> (si en la terminal ecribimos una linea super larga)
+otra cosa respecto a readline: si escribes input en readline y enter -> luego vas para arriba pero en vez de ejecutar
+vuleves a ir hacia abajo -> se queda pillado. con un simple enter vuelve a funcionar pero nos puede pasar esto por lo del redisplay de signals??
+esto pasa sobre todo cuando sort colors.txt | uniq, como que contras cosas no pasa o eso creo.

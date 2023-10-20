@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/20 12:40:25 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/20 17:08:31 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,17 +101,22 @@ void	ft_print_exp(t_data *data, t_elist *exp);
 //env_builtins.c
 
 void	ft_env(t_data *data, char **args);
+void	ft_unset(t_elist **env, t_elist **exp, t_data *data);
+int		ft_env_size(t_elist *elist);
+
+//export.c
 int		ft_check_name(char *name, t_data *data);
 void	ft_export(t_data *data);
-void	ft_unset(t_elist **env, t_elist **exp, t_data *data);
+char	**ft_no_char_in_split(char **matrix, char *str);
+char	**ft_alt_split(char *str, char c);
+
+//exit.c
 void	ft_miniexit(t_data *data);
-int		ft_choose_lvl(t_data *data);
+void	ft_check_exit_args(t_data *data);
 
 //echo.c
 
 void	ft_echo(t_data *data);
-int		ft_is_space(char c);
-void	epur_str(char *str, t_data *data);
 void	ft_print_echo(t_data *data, int pos);
 int		ft_is_flag(char *str);
 
@@ -155,11 +160,10 @@ void	ft_handler_process(int sig);
 void	ft_signal_proc(void);
 
 //parser.c
-t_token	*ft_assign_type(t_data *data);
-void	ft_subdivide_input(t_data *data, int *i, int *start);
-t_token	*ft_divide_input(t_data *data);
-void	ft_reconvert_token(t_data *data);
 void	ft_init_parse(t_data *data);
+t_token	*ft_divide_input(t_data *data);
+void	ft_subdivide_input(t_data *data, int *i, int *start);
+void	ft_assign_type(t_data *data);
 
 //create_token.c
 t_token	*ft_new_token(char *input, int i, int start);
@@ -167,7 +171,6 @@ t_token	*ft_last_token(t_token *token);
 t_token	*ft_penultimate_token(t_token *token);
 t_token	*ft_add_token(t_token **token, t_token *new);
 int		ft_check_space(char c);
-//t_token	*ft_first_token(t_token **token); //en pruebas
 
 //dollar_parser.c
 t_token	*ft_parse_dollar(t_data *data);
@@ -186,6 +189,8 @@ void	ft_quotes(t_data *data, int *i, int *start, char q);
 //token_utils.c
 void	ft_join_glued_tokes(t_data *data);
 void	ft_remove_if_token(t_token *curr, char *cstr, t_token **token);
+void	ft_reconvert_token(t_data *data);
+int		ft_token_size(t_data *data);
 int		ft_count_pipes(t_token *token);
 
 //redi_parser.c
@@ -211,6 +216,7 @@ void	ft_open_and_write_hd(t_data *data, char *dlm);
 //exec.c
 
 void	ft_launch_exec(t_data *data);
+void	ft_running_exec(t_data *data);
 void	ft_exec_from_path(t_data *data);
 char	*ft_get_path(t_data *data);
 char	**ft_reconvert_env(t_elist *elist);

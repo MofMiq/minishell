@@ -6,13 +6,13 @@
 #    By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/21 16:22:32 by marirodr          #+#    #+#              #
-#    Updated: 2023/10/11 14:17:48 by marirodr         ###   ########.fr        #
+#    Updated: 2023/10/20 15:56:30 by marirodr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= minishell
 
-CC 			= gcc -g #quitar -g
+CC 			= gcc
 
 CFLAGS 		= -Wall -Wextra -Werror 
 
@@ -26,7 +26,9 @@ SRC			= src/main.c \
 			src/builtins/builtins.c \
 			src/builtins/echo.c \
 			src/builtins/cd.c \
-			src/builtins/env_builtins.c \
+			src/builtins/env_unset.c \
+			src/builtins/exit.c \
+			src/builtins/export.c \
 			src/builtins/list_utils.c \
 			src/builtins/list_utils_2.c \
 			src/builtins/list_utils_3.c \
