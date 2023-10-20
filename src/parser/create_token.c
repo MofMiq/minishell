@@ -6,14 +6,12 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 13:30:15 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/19 16:19:58 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/20 13:40:48 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-/*me acabo de hacer aqui una guarrada (32-38) y meto un nodo "vacio" para que
-como en bash imprema un espacio "extra"*/
 //1 si hay que imprimir un espcacio; 0 si va junto
 
 t_token	*ft_new_token(char *input, int i, int start)

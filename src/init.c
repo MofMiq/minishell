@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:10:56 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/19 18:30:29 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/10/20 12:40:41 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_data	*ft_init_data(char **env, char **argv)
 	data = (t_data *)malloc(sizeof(t_data));
 	data->env = ft_copy_env(env);
 	ft_init_env(data->env);
+	ft_graphic(data);
 	ft_update_env(data);
 	data->exp = NULL;
 	data->input = NULL;
@@ -52,21 +53,6 @@ void	ft_init_env(t_elist *elist)
 	elist = tmp;
 }
 
-// void	ft_graphic(t_data *data)
-// {
-// 	char	*matrix[2];
-// 	t_elist	*aux;
-
-// 	//matrix = (char **)ft_calloc(2, sizeof(char *));
-// 	aux = ft_search_node(data->env, "USER");
-// 	if (ft_strcmp(aux->def, "marirodr"))
-// 	{
-// 		matrix[0] = "GRAPHIC";
-// 		matrix[1] = "/Users/marirodr/./graphic_script";
-// 		ft_add_back(&data->env, ft_new_node(matrix));
-// 	}
-// }
-
 /*No sé por qué no funciona lo del SHLVL, parece que va siempre uno por encima,
  o si no, no se suma*/
 
@@ -85,4 +71,18 @@ void	ft_update_env(t_data *data)
 	path_lvl = ft_itoa(ft_atoi(node->def) + 1);
 	ft_update_list(data->env, path_lvl, "SHLVL");
 	free(path_lvl);
+}
+
+void	ft_graphic(t_data *data)
+{
+	char	*matrix[2];
+	t_elist	*aux;
+
+	aux = ft_search_node(data->env, "USER");
+	matrix[0] = "GRAPHIC";
+	if (ft_strcmp(aux->def, "marirodr") == 0)
+		matrix[1] = "/Users/marirodr/graphic";
+	else
+		matrix[1] = "RUTA_DE_BELEN";
+	ft_add_back(&data->env, ft_new_node(matrix));
 }

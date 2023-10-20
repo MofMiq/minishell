@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 17:13:22 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/12 12:43:56 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/20 17:18:12 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ static int	w_word(char *s, char **p, int *i, char c)
 	q = 0;
 	while (wordsize != 0)
 	{
-		//printf("en w_WORD: wordsize: %d\n", wordsize);
 		word = (char *)ft_calloc(sizeof(char), (wordsize + 1));
 		if (!word)
 			return (1);
@@ -92,21 +91,11 @@ static int	w_word(char *s, char **p, int *i, char c)
 			word[k++] = s[*i];
 			*i = *i + 1;
 		}
-		//printf("en w_WORD: word: %s\n", word);
 		p[q] = word;
-		//printf("en w_WORD: p[%d]: %s\n", q, p[q]);
 		q++;
 		wordsize = count_len(s, i, c);
 	}
-	//printf("en w_WORD: q: %d\n", q);
 	p[q] = NULL;
-	//printf("en w_WORD p[q] = NULL: p[%d]: %s\n", q, p[q]);
-	// q = 0;
-	// while (p[q])
-	// {
-	// 	printf("en w_WORD al final: p[%d]: %s\n", q, p[q]);
-	// 	q++;
-	// }
 	return (0);
 }
 	//probar si word[k] se puede dejar sin finalizar
@@ -136,18 +125,11 @@ char	**ft_split(char const *s, char c)
 	if (w_word((char *)s, str, &j, c) != 0)
 	{
 		j = 0;
-		//printf("en ft_split bucle w_word: str[%d]: %s\n", j, str[j]);
 		while (str[j++])
 			free(str[j]);
 		free(str);
 		return (NULL);
 	}
-	// j = 0;
-	// while (str[j])
-	// {
-	// 	printf("en ft_split: str[%d]: %s\n", j, str[j]);
-	// 	j++;
-	// }
 	return (str);
 }
 //i = count_word directamente en calloc

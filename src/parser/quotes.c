@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 18:19:45 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/29 17:42:32 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/20 13:42:18 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	ft_ignore_quotes(t_data *data)
 		{
 			i = 0;
 			j = 0;
-			len = (ft_strlen(data->token->str) - ft_c_quotes(data->token->str, data->token->str[0]));
+			len = (ft_strlen(data->token->str) - \
+			ft_c_quotes(data->token->str, data->token->str[0]));
 			copy = ft_calloc(len + 1, sizeof(char));
 			copy = ft_copy_no_quotes(data->token->str, copy, i, j);
 			free(data->token->str);

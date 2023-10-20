@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:25:39 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/19 18:04:47 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/10/20 16:02:03 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,9 @@ void	ft_cmp_and_update(t_data *data, char *var_env, int i)
 
 	if (i == 1)
 	{
+		//alt_plit
 		//splitted = ft_old_split(var_env, '='); //por que usar aqui el split y no el mini_split, por las pruebas con env y export me viene mejor el mini_split, no se si se joderia mucho el OLDPWD con el mini_split?? // nuevo conflico entre tres versiones de split diferentes xddddd
-		splitted = ft_mini_split(var_env, '='); // nuevo conflico entre tres versiones de split diferentes xddddd
+		splitted = ft_alt_split(var_env, '='); // nuevo conflico entre tres versiones de split diferentes xddddd
 		if (ft_list_cmp(data->env, splitted[0]) == 0)
 			ft_update_list(data->env, splitted[1], splitted[0]);
 		else if (ft_list_cmp(data->env, splitted[0]) != 0)
@@ -106,7 +107,7 @@ void	ft_cmp_and_update(t_data *data, char *var_env, int i)
 	else if (i == 2)
 	{
 		tmp = data->exp;
-		splitted = ft_mini_split(var_env, '=');
+		splitted = ft_alt_split(var_env, '=');
 		ft_remove_if(tmp, splitted[0], &data->exp);
 		ft_free_double_pointer(splitted);
 	}

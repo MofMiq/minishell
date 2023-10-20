@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:43:04 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/19 18:54:32 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/10/20 16:47:18 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,6 @@ int	ft_is_builtin(char *str)
 	return (0);
 }
 
-// El childprocess parece que no hace falta???
-// Habría que mirarlo de otra forma, no con ./minishell sino
-// cualquier otro ejecutable tipo so_long o fractol
-
 void	ft_do_builtins(t_data *data, char *str)
 {
 	int	b;
@@ -49,7 +45,12 @@ void	ft_do_builtins(t_data *data, char *str)
 	else if (b == 3)
 		ft_pwd(data);
 	else if (b == 4)
+	{
+		data->exit_status = 0;
+		if (data->argc == 1)
+			ft_print_env(data, data->env, 2);
 		ft_export(data);
+	}
 	else if (b == 5)
 		ft_unset(&data->env, &data->exp, data);
 	else if (b == 6)
