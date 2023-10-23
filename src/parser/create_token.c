@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 13:30:15 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/20 13:40:48 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/23 17:25:43 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ t_token	*ft_new_token(char *input, int i, int start)
 	t_token	*token;
 
 	tmp = ft_substr(input, start, i - start);
+	if (!ft_strcmp(tmp, "\"\"") || !ft_strcmp(tmp, "\'\'"))
+	{
+		free(tmp);
+		return (NULL);
+	}
 	token = (t_token *)malloc(sizeof(t_token));
 	if (!token)
 	{

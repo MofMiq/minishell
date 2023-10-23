@@ -31,3 +31,7 @@ BELEN: signal.c -> nos pasa una cosa un pelin rara con readline y no se si puede
 otra cosa respecto a readline: si escribes input en readline y enter -> luego vas para arriba pero en vez de ejecutar
 vuleves a ir hacia abajo -> se queda pillado. con un simple enter vuelve a funcionar pero nos puede pasar esto por lo del redisplay de signals??
 esto pasa sobre todo cuando sort colors.txt | uniq, como que contras cosas no pasa o eso creo.
+
+expr $? + $? -> no va
+Establece $PATH para varios directorios (directorio1:directorio2) y valida que los directorios se comprueban
+de izquierda a derecha. ?????
