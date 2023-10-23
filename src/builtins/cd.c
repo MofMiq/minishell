@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:25:39 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/20 16:02:03 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/23 19:47:30 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+/*función stat !!!!!!!!!*/
 
 void	ft_change_dir(t_data *data, char *owd)
 {
@@ -44,9 +46,9 @@ void	ft_cd(t_data *data)
 			ft_putstr_fd("bash: cd: HOME not set\n", data->fdout);
 			data->exit_status = 127;
 	}
-	else
+	else if (chdir(data->args[1]) != 0)
 	{
-		ft_putstr_fd("bash: cd: misuse of builtins\n", data->fdout);
+		ft_putstr_fd("bash: cd: permission denied\n", data->fdout);
 		data->exit_status = 2;
 	}
 	free(owd);
