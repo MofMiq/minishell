@@ -1,17 +1,3 @@
-¿¿¿que pasa si le pasamos a ft_split un array que solo sea el separador, por ejemplo ft_split("=", "=")??? ->ultra segmentation fault
-    |->actualizacion: en ft_cmp_and_update y ft_dollar_epxort: el split que arreglaste el viernes 08/09/23 esta petando y
-    perdiendo la referencia del algunos "splieos". no se porque ocurre ahora mismo, pero al usar el antiguo split todo va
-    rodado y funciona a la perfeccion. asi que de forma provisional he creado un nuevo archivo llamado ft_old_split en
-    donde esta el split orignial y lo estoy usando en esas dos funciones.
-
-
-BELEN: Comprobar tema señales en condiciones, el ejecutable debe poder ejecutar cualquier cosa sin petar
-        se podría hacer "guarradilla" pa probar, intentarlo con fractol por ejemplo
-        En las señakles, comprobar el ctrl+d cuando hay otro proceso, a ver si saca o te saca de todo del tiron
-
-tentemos que poder meter tabulaciones en el imput y que no muestre lso archivos que hay en la carpeta, si no que los
-interprete como los espacios-> culpa de readline y dificil de cambiar segun me dijo pablo
-
 
 para cuando subamos el proyecto revisar archivos ocultos .dsstore .git colors.txt etc
 
@@ -25,13 +11,9 @@ en segundo lugar: el viernes llegamos a la conclusion de que era como si los pip
 resto de redirreciones o que los procesos se estuvieran ejecutando a la vez (teoria de murillo pero a mi no me curadraba),
 sin embargo probando y buscando he caido que creo casi seguro que es por los fds + argumentos que requiere un programa.
 
-export a=caca=lala=jaja -> nuestro minishell saca a=caca y deberia sacar a=caca=lala=jaja. cd.c, linea 96
-
-BELEN: signal.c -> nos pasa una cosa un pelin rara con readline y no se si puede ser por el redisplay que haces por el tema señales. lo vemos -> (si en la terminal ecribimos una linea super larga)
-otra cosa respecto a readline: si escribes input en readline y enter -> luego vas para arriba pero en vez de ejecutar
-vuleves a ir hacia abajo -> se queda pillado. con un simple enter vuelve a funcionar pero nos puede pasar esto por lo del redisplay de signals??
-esto pasa sobre todo cuando sort colors.txt | uniq, como que contras cosas no pasa o eso creo.
-
-expr $? + $? -> no va
 Establece $PATH para varios directorios (directorio1:directorio2) y valida que los directorios se comprueban
 de izquierda a derecha. ?????
+
+función stat para CD PERMISOS
+
+$PATH reescribir directorio1:directorio2 comprobar lectura izq derecha, ir borrando y probando mierdas

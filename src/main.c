@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/23 17:23:49 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:27:25 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void	ft_start_minishell(t_data *data)
 	while (1)
 	{
 		ft_signal();
-		data->input = readline("\x1b[96mPutaShell> \x1b[0m");
+		// data->input = readline("\x1b[96mPutaShell> \x1b[0m");
+		data->input = readline("PutaShell> ");
 		ft_signal_proc();
 		if (data->input == NULL)
 		{
