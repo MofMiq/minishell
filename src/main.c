@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/23 18:27:25 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:10:16 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ static void	ft_check_type(t_data *data)
 	ft_free_token(data->token, data);
 }
 
+// data->input = readline("\x1b[96mPutaShell> \x1b[0m");
 void	ft_start_minishell(t_data *data)
 {
 	while (1)
 	{
 		ft_signal();
-		// data->input = readline("\x1b[96mPutaShell> \x1b[0m");
 		data->input = readline("PutaShell> ");
 		ft_signal_proc();
 		if (data->input == NULL)
@@ -72,7 +72,7 @@ void	ft_leaks(void)
 
 int	main(int argc, char **argv, char **env)
 {
-	atexit(ft_leaks);
+	//atexit(ft_leaks);
 	t_data	*data;
 
 	(void)argc;

@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 13:30:15 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/23 17:25:43 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:49:04 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //1 si hay que imprimir un espcacio; 0 si va junto
 
-t_token	*ft_new_token(char *input, int i, int start)
+t_token	*ft_new_token(char *input, int i, int start, t_data *data)
 {
 	char	*tmp;
 	t_token	*token;
@@ -23,6 +23,8 @@ t_token	*ft_new_token(char *input, int i, int start)
 	if (!ft_strcmp(tmp, "\"\"") || !ft_strcmp(tmp, "\'\'"))
 	{
 		free(tmp);
+		if (input[start - 1] == ' ')
+			data->aux_space = 1;
 		return (NULL);
 	}
 	token = (t_token *)malloc(sizeof(t_token));
@@ -33,10 +35,12 @@ t_token	*ft_new_token(char *input, int i, int start)
 	}
 	token->str = tmp;
 	token->type = -1;
-	token->space = ft_check_space(input[start - 1]);
-	token->next = NULL;
-	token->prev = NULL;
-	return (token);
+	if (data->aux_space == 1)
+		token->space = 1;
+	else
+		token->space = ft_check_space(input[start - 1]);
+	data->aux_space = -1;
+	return (token->next = NULL, token->prev = NULL, token);
 }
 
 t_token	*ft_last_token(t_token *token)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redi_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:49:30 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/19 19:02:24 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/10/24 13:11:08 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_sub_red(t_data *data, int *i, int *start, char c)
 		while (data->input[*i] != ' ' && data->input[*i])
 			(*i)++;
 	}
-	ft_add_token(&data->token, ft_new_token(data->input, *i, *start));
+	ft_add_token(&data->token, ft_new_token(data->input, *i, *start, data));
 }
 
 int	ft_bad_syntax(t_token *aux)

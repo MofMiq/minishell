@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 18:19:45 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/20 13:42:18 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/24 13:10:52 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_quotes(t_data *data, int *i, int *start, char q)
 		(*i)++;
 	while (data->input[*i] && data->input[*i] != q)
 		(*i)++;
-	ft_add_token(&data->token, ft_new_token(data->input, ++(*i), *start));
+	ft_add_token(&data->token, ft_new_token(data->input, ++(*i), *start, data));
 }
 
 void	ft_ignore_quotes(t_data *data)
