@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/24 17:09:57 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/25 19:28:40 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include <sys/errno.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include "../libft/libft.h"
-// # include "../memory-leaks-master/include/memory_leaks.h"
 
 # define BLUE "\033[0;96m"
 # define PINK "\033[0;95m"
