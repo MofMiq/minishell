@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:10:56 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/20 12:40:41 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/24 13:14:28 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_data	*ft_init_data(char **env, char **argv)
 	data->fdin = STDIN_FILENO;
 	data->fdout = STDOUT_FILENO;
 	data->exit_status = 0;
+	data->aux_space = -1;
 	return (data);
 }
 
