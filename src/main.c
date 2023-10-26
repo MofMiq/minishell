@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/26 16:24:16 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/26 18:03:29 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,15 @@ void	ft_start_minishell(t_data *data)
 	}
 }
 
-void	ft_leaks(void)
-{
-	system("leaks -q minishell");
-}
+// void	ft_leaks(void)
+// {
+// 	system("leaks -q minishell");
+// }
 
 int	main(int argc, char **argv, char **env)
 {
-	atexit(ft_leaks);
 	t_data	*data;
+	// atexit(ft_leaks);
 
 	(void)argc;
 	(void)argv;

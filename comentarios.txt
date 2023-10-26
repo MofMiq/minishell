@@ -1,6 +1,7 @@
 
 para cuando subamos el proyecto revisar archivos ocultos .dsstore .git colors.txt etc && NORMINETTE!!!!!!
 
+
 procesos y señales: permision denied mirar
 
 echo hola > file | wc -> primero que todo segmentation fault solucionado a priori (le estaba mandando a excve un arg
