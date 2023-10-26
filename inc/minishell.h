@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/20 17:08:31 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/26 13:25:56 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include <sys/errno.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include "../libft/libft.h"
-// # include "../memory-leaks-master/include/memory_leaks.h"
 
 # define BLUE "\033[0;96m"
 # define PINK "\033[0;95m"
@@ -69,6 +69,8 @@ typedef struct s_data
 	int		fdin;
 	int		fdout;
 	int		exit_status;
+	int		aux_space;
+	int		go;
 	t_elist	*env;
 	t_elist	*exp;
 	t_token	*token;
@@ -124,6 +126,7 @@ int		ft_is_flag(char *str);
 
 int		ft_is_builtin(char *str);
 void	ft_do_builtins(t_data *data, char *str);
+int		ft_special_dir(t_data *data);
 
 //main.c
 
@@ -166,7 +169,7 @@ void	ft_subdivide_input(t_data *data, int *i, int *start);
 void	ft_assign_type(t_data *data);
 
 //create_token.c
-t_token	*ft_new_token(char *input, int i, int start);
+t_token	*ft_new_token(char *input, int i, int start, t_data *data);
 t_token	*ft_last_token(t_token *token);
 t_token	*ft_penultimate_token(t_token *token);
 t_token	*ft_add_token(t_token **token, t_token *new);
@@ -188,7 +191,7 @@ void	ft_quotes(t_data *data, int *i, int *start, char q);
 
 //token_utils.c
 void	ft_join_glued_tokes(t_data *data);
-void	ft_remove_if_token(t_token *curr, char *cstr, t_token **token);
+void	ft_remove_if_token(t_token *curr, char *cstr, t_token **token, int i);
 void	ft_reconvert_token(t_data *data);
 int		ft_token_size(t_data *data);
 int		ft_count_pipes(t_token *token);

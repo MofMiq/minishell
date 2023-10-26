@@ -6,7 +6,7 @@
 #    By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/21 16:22:32 by marirodr          #+#    #+#              #
-#    Updated: 2023/10/20 15:56:30 by marirodr         ###   ########.fr        #
+#    Updated: 2023/10/26 16:33:57 by marirodr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,4 +74,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all, clean, fclean, re, -n
+.PHONY: all, clean, fclean, re

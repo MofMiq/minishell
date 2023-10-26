@@ -1,9 +1,8 @@
 
-para cuando subamos el proyecto revisar archivos ocultos .dsstore .git colors.txt etc
+para cuando subamos el proyecto revisar archivos ocultos .dsstore .git colors.txt etc && NORMINETTE!!!!!!
+
 
 procesos y señales: permision denied mirar
-
-BELEN: mirar en un teclado americano o cambiando la config lo del ctrl+\, por aca que no pete o haga cosas raras
 
 echo hola > file | wc -> primero que todo segmentation fault solucionado a priori (le estaba mandando a excve un arg
 nulo y jajan't). esto no quita que a lo mejor pete si probamos mas cosas en la pipeline, osea que hacer pruebas raras a ver.
@@ -11,9 +10,12 @@ en segundo lugar: el viernes llegamos a la conclusion de que era como si los pip
 resto de redirreciones o que los procesos se estuvieran ejecutando a la vez (teoria de murillo pero a mi no me curadraba),
 sin embargo probando y buscando he caido que creo casi seguro que es por los fds + argumentos que requiere un programa.
 
-Establece $PATH para varios directorios (directorio1:directorio2) y valida que los directorios se comprueban
-de izquierda a derecha. ?????
+función stat para CD PERMISOS -> listo
 
-función stat para CD PERMISOS
+$PATH reescribir directorio1:directorio2 comprobar lectura izq derecha, ir borrando y probando mierdas ->listo, nos vamos al codigo y ya
 
-$PATH reescribir directorio1:directorio2 comprobar lectura izq derecha, ir borrando y probando mierdas
+cat << hola << que << tal << maricarmen ->listo
+
+echo ""uhjkhnkj"hjbmb"'''' defdjhfkjb "iujiouhj"f'f'f'f'f''f'f'f'f'f'f' ->listo
+
+repetir pruebas porque que metí lo de arriba ^

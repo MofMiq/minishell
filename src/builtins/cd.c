@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:25:39 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/23 19:47:30 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/10/26 18:06:46 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void	ft_change_dir(t_data *data, char *owd)
 {
-	char	*nwd;
+	char		*nwd;
 
 	nwd = getcwd(NULL, 0);
 	if (ft_list_cmp(data->env, "PWD") == 0)
@@ -44,7 +44,7 @@ void	ft_cd(t_data *data)
 		}
 		else
 			ft_putstr_fd("bash: cd: HOME not set\n", data->fdout);
-			data->exit_status = 127;
+			data->exit_status = 127; //que haces aqui no deberia est entre parentesis o identado
 	}
 	else if (chdir(data->args[1]) != 0)
 	{
@@ -97,9 +97,7 @@ void	ft_cmp_and_update(t_data *data, char *var_env, int i)
 
 	if (i == 1)
 	{
-		//alt_plit
-		//splitted = ft_old_split(var_env, '='); //por que usar aqui el split y no el mini_split, por las pruebas con env y export me viene mejor el mini_split, no se si se joderia mucho el OLDPWD con el mini_split?? // nuevo conflico entre tres versiones de split diferentes xddddd
-		splitted = ft_alt_split(var_env, '='); // nuevo conflico entre tres versiones de split diferentes xddddd
+		splitted = ft_alt_split(var_env, '=');
 		if (ft_list_cmp(data->env, splitted[0]) == 0)
 			ft_update_list(data->env, splitted[1], splitted[0]);
 		else if (ft_list_cmp(data->env, splitted[0]) != 0)

@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:10:56 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/20 12:40:41 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/26 16:28:33 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ t_data	*ft_init_data(char **env, char **argv)
 	data->fdin = STDIN_FILENO;
 	data->fdout = STDOUT_FILENO;
 	data->exit_status = 0;
+	data->aux_space = -1;
+	data->go = 0;
 	return (data);
 }
 
@@ -52,9 +54,6 @@ void	ft_init_env(t_elist *elist)
 	}
 	elist = tmp;
 }
-
-/*No sé por qué no funciona lo del SHLVL, parece que va siempre uno por encima,
- o si no, no se suma*/
 
 void	ft_update_env(t_data *data)
 {

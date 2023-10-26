@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:17:49 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/23 17:26:32 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/26 16:31:17 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,7 @@ void	ft_init_parse(t_data *data)
 	ft_add_space(data);
 	if (data->token->next != NULL)
 		ft_join_glued_tokes(data);
-	// t_token *tmp;
-	// if (data->token)
-	// tmp = data->token;
-	// {
-	// 	while (data->token)
-	// 	{
-	// 		printf("%sen ft_init_parse token->str: %s\n", PINK, data->token->str);
-	// 		printf("en ft_init_parse token->type: %d / token->space: %d%s\n", data->token->type, data->token->space, END);
-	// 		if (data->token->str[0] == '\0')
-	// 			printf("HOLAAAAAA\n");
-	// 		data->token = data->token->next;
-	// 	}
-	// }
-	// data->token = tmp;
 }
-
-	//debug
 
 t_token	*ft_divide_input(t_data *data)
 {
@@ -72,17 +56,9 @@ void	ft_subdivide_input(t_data *data, int *i, int *start)
 	while (!(ft_strchr(" |'\"''\''<>", data->input[*i]))
 		&& data->input[*i] != '\0')
 		(*i)++;
-	ft_add_token(&data->token, ft_new_token(data->input, *i, *start));
+	ft_add_token(&data->token, ft_new_token(data->input, *i, *start, data));
 }
 
-/*
-no me acuerdo exactamente por qué motivo puse esta condicion para amabs comillas
-asi pero ahora me esta dando problemas en otro sitios, asi que voy a cambiar la
-codicion pero la dejo aqui por si acaso en un futuro la lio y esto me da una
-pista
-if (data->token->str[0] == '\'' || (data->token->str[0] != '\'' &&
-ft_strchr(data->token->str, '\'')))
-*/
 void	ft_assign_type(t_data *data)
 {
 	t_token	*tmp;

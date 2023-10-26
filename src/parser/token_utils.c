@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:47 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/23 17:26:03 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/26 16:31:33 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	ft_join_glued_tokes(t_data *data)
 			if (!data->token->prev->prev && data->token->prev->type == BUILTIN)
 				data->token->type = NO_QUOTES;
 			curr = data->token;
-			ft_remove_if_token(curr, curr->str, &data->token);
-		}	
+			ft_remove_if_token(curr, curr->str, &data->token, 1);
+		}
 		data->token = data->token->next;
 	}
 	data->token = tmp;
@@ -40,8 +40,10 @@ void	ft_join_glued_tokes(t_data *data)
 	else
 		data->token->type = BUILTIN;
 }
+/*i = 0; elimina toda la lista, todas la coincidencias &&
+i = 1 elimina solo un nodo y salte*/
 
-void	ft_remove_if_token(t_token *curr, char *cstr, t_token **token)
+void	ft_remove_if_token(t_token *curr, char *cstr, t_token **token, int i)
 {
 	while (curr)
 	{
@@ -57,14 +59,15 @@ void	ft_remove_if_token(t_token *curr, char *cstr, t_token **token)
 			{
 				curr->prev->next = curr->next;
 				if (curr->next)
-				{
 					curr->next->prev = curr->prev;
-				}
 			}
 			free(curr->str);
 			free(curr);
 		}
-		curr = curr->next;
+		if (i == 0)
+			curr = curr->next;
+		if (i == 1)
+			return ;
 	}
 }
 

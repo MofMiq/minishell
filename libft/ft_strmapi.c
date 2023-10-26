@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 12:01:31 by marirodr          #+#    #+#             */
-/*   Updated: 2022/10/06 13:42:13 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/26 16:27:10 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	i = 0;
 	while (s[i])
 	{
-			nstr[i] = f(i, s[i]);
-			i++;
+		nstr[i] = f(i, s[i]);
+		i++;
 	}
 	nstr[i] = '\0';
 	return (nstr);
