@@ -6,13 +6,11 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:25:39 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/26 18:06:46 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/10/26 18:39:22 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-/*función stat !!!!!!!!!*/
 
 void	ft_change_dir(t_data *data, char *owd)
 {
@@ -22,12 +20,12 @@ void	ft_change_dir(t_data *data, char *owd)
 	if (ft_list_cmp(data->env, "PWD") == 0)
 		ft_update_list(data->env, nwd, "PWD");
 	ft_oldpwd(data, owd, nwd);
+	data->exit_status = 0;
 	free(nwd);
 }
 
-void	ft_cd(t_data *data)
+void	ft_cd(t_data *data, char *owd)
 {
-	char	*owd;
 	t_elist	*home;
 
 	owd = getcwd(NULL, 0);
@@ -40,11 +38,12 @@ void	ft_cd(t_data *data)
 			home = ft_search_node(data->env, "HOME");
 			chdir(home->def);
 			ft_change_dir(data, owd);
-			data->exit_status = 0;
 		}
 		else
+		{
 			ft_putstr_fd("bash: cd: HOME not set\n", data->fdout);
-			data->exit_status = 127; //que haces aqui no deberia est entre parentesis o identado
+			data->exit_status = 127;
+		}
 	}
 	else if (chdir(data->args[1]) != 0)
 	{

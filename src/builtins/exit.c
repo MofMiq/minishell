@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 13:50:18 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/20 13:51:06 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/26 18:54:32 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_miniexit(t_data *data)
 	if (data->lvl > 1)
 	{
 		ft_putstr_fd("exit", data->fdout);
+		ft_display_banner_bye();
 		data->lvl -= 1;
 	}
 	else
@@ -26,6 +27,7 @@ void	ft_miniexit(t_data *data)
 		ft_putstr_fd("exit", data->fdout);
 		ft_putchar_fd('\n', data->fdout);
 		ft_free_all(data);
+		ft_display_banner_bye();
 		exit(EXIT_SUCCESS);
 	}
 }
@@ -37,6 +39,7 @@ void	ft_check_exit_args(t_data *data)
 		ft_putstr_fd(data->args[0], data->fdout);
 		ft_putchar_fd('\n', data->fdout);
 		ft_free_all(data);
+		ft_display_banner_bye();
 		exit(EXIT_FAILURE);
 	}
 	if (!ft_isdigit(data->args[1][0]))
@@ -48,6 +51,7 @@ void	ft_check_exit_args(t_data *data)
 		ft_putstr_fd(": ", data->fdout);
 		ft_putstr_fd(data->args[1], data->fdout);
 		ft_putstr_fd(": numeric argument is required\n", data->fdout);
+		ft_display_banner_bye();
 		exit(EXIT_FAILURE);
 	}
 }
