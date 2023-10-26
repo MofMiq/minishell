@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/26 13:25:56 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/26 18:53:24 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,10 +132,11 @@ int		ft_special_dir(t_data *data);
 
 void	ft_start_minishell(t_data *data);
 void	ft_display_banner(void);
+void	ft_display_banner_bye(void);
 
 //cd.c
 
-void	ft_cd(t_data *data);
+void	ft_cd(t_data *data, char *owd);
 void	ft_change_dir(t_data *data, char *owd);
 void	ft_pwd(t_data *data);
 void	ft_oldpwd(t_data *data, char *owd, char *nwd);
