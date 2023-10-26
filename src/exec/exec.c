@@ -20,12 +20,6 @@ con dup2() lo que hacemos es duplicar un fd existente en uno especifico
 Desde un punto de vista personal y mas visual vamos hacer que el primer fd
 apunte a donde del segundo, haciendo que que la informacion se transmita
 desde otros sitos (si vamos cerrando fds, claro.)*/
-		// int i = 0;
-		// while (data->args[i])
-		// {
-		// 	printf("en ft_launch exec: data->argd[%i]: %s\n", i, data->args[i]);
-		// 	i++;
-		// }
 
 void	ft_launch_exec(t_data *data)
 {

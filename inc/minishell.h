@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/25 19:28:40 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/26 13:25:56 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_data
 	int		fdout;
 	int		exit_status;
 	int		aux_space;
+	int		go;
 	t_elist	*env;
 	t_elist	*exp;
 	t_token	*token;
@@ -125,6 +126,7 @@ int		ft_is_flag(char *str);
 
 int		ft_is_builtin(char *str);
 void	ft_do_builtins(t_data *data, char *str);
+int		ft_special_dir(t_data *data);
 
 //main.c
 

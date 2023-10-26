@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   in_out_redi.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 14:12:08 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/19 19:06:41 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/10/26 13:27:22 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ void	ft_out_redi(t_data *data, int flag)
 		new_fd = open(split[1], O_WRONLY | O_CREAT | O_APPEND, 0666);
 	if (new_fd == -1)
 	{
-		ft_putstr_fd("error opening file from ft_output_redi\n", data->fdout);
+		ft_free_double_pointer(split);
+		ft_putstr_fd("Error opening file\n", data->fdout);
 		data->exit_status = 1;
+		data->go = 1;
 		return ;
 	}
 	data->fdout = new_fd;
@@ -64,8 +66,10 @@ void	ft_input_redi(t_data *data)
 	new_fd = open(split[1], O_RDONLY);
 	if (new_fd == -1)
 	{
-		ft_putstr_fd("error opening file from ft_input_redi\n", data->fdout);
+		ft_free_double_pointer(split);
+		ft_putstr_fd("Error opening file\n", data->fdout);
 		data->exit_status = 1;
+		data->go = 1;
 		return ;
 	}
 	data->fdin = new_fd;
@@ -108,6 +112,7 @@ void	ft_open_and_write_hd(t_data *data, char *dlm)
 	{
 		ft_putstr_fd("error opening file from ft_output_redi\n", data->fdout);
 		data->exit_status = 1;
+		data->go = 1;
 		return ;
 	}
 	ft_putstr_fd("> ", 1);

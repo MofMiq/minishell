@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/25 18:57:24 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/26 16:24:16 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	ft_check_type(t_data *data)
 		ft_putstr_fd(data->token->str, data->fdout);
 		ft_putstr_fd(": command not found\n", data->fdout);
 		data->exit_status = 1;
+		return (ft_free_token(data->token, data));
 	}
 	ft_process_pipeline(data, ft_count_pipes(data->token));
 	while (data->token->prev != NULL)
@@ -77,7 +78,7 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
-	//ft_display_banner();
+	ft_display_banner();
 	using_history();
 	data = ft_init_data(env, argv);
 	ft_start_minishell(data);

@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:43:04 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/20 16:47:18 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/26 15:49:37 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_do_builtins(t_data *data, char *str)
 	b = ft_is_builtin(str);
 	if (b == 1)
 		ft_echo(data);
-	else if (b == 2)
+	else if (b == 2 && ft_special_dir(data) == 0)
 		ft_cd(data);
 	else if (b == 3)
 		ft_pwd(data);
@@ -59,4 +59,22 @@ void	ft_do_builtins(t_data *data, char *str)
 		ft_miniexit(data);
 	else if (b == 8)
 		data->lvl += 1;
+}
+
+int	ft_special_dir(t_data *data)
+{
+	struct stat	file_st;
+	int			per;
+
+	lstat(data->args[1], &file_st);
+	per = file_st.st_mode;
+	//printf("file_st->en decimal: %d / en octal: %o\n", file_st.st_mode, file_st.st_mode);
+	if (per == 16448 || per == 16449 || per == 16456 || per == 16457
+		|| per == 16576 || per == 16600 || per == 16603)
+	{
+		ft_putstr_fd("BASH: cd: permission denied\n", data->fdout); //bash en minusculas por favor
+		data->exit_status = 2;
+		return (1);
+	}
+	return (0);
 }

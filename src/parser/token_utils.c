@@ -6,16 +6,11 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:47 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/24 16:44:12 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/26 16:31:33 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-//esta mierda es una alternativa que no se si realmente lo necesitamo
-// free(data->token->prev->str);
-// data->token->prev->str = ft_strdup(join);
-// free(join);
 
 void	ft_join_glued_tokes(t_data *data)
 {
@@ -36,7 +31,7 @@ void	ft_join_glued_tokes(t_data *data)
 				data->token->type = NO_QUOTES;
 			curr = data->token;
 			ft_remove_if_token(curr, curr->str, &data->token, 1);
-		}	
+		}
 		data->token = data->token->next;
 	}
 	data->token = tmp;
