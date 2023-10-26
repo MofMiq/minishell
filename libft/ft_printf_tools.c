@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:12:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/03/30 16:57:15 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/26 16:27:27 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_printstr(char *str, int *count)
 			ft_printchar(str[i], count);
 			i++;
 		}
-	}		
+	}
 }
 
 void	ft_printnbr(int nb, int *count)

@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:01:57 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/20 12:14:12 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/26 16:29:42 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	ft_process_pipeline(t_data *data, int c_pipes)
 			data->curr_tkn = data->curr_tkn->next;
 		data->token = data->curr_tkn;
 		ft_free_double_pointer(data->args);
+		data->go = 0;
 		i++;
 	}
 	ft_close_fds(data, 3);
@@ -91,7 +92,7 @@ void	ft_begin_redi(t_data *data)
 	flag = ft_advance_n_reconvert(data);
 	if (flag == 1)
 		ft_what_redi(data);
-	if (data->args[0] == NULL)
+	if (data->args[0] == NULL || data->go == 1)
 		return ;
 	if (data->token->type == BUILTIN)
 		ft_do_builtins(data, data->token->str);
@@ -124,12 +125,10 @@ int	ft_advance_n_reconvert(t_data *data)
 	return (flag);
 }
 
-/*cuidado con esta funcion porque esta cerrando todos los fd cuando se llama
-al final de ft_process_pipeline, es decir una vez ya hemos terminado de leer
-el input por completo. ademas se resetan los valores de data->fdin y
-data->fdout a los valores originales, 0 y 1 respectivamente. petará esta
-mierda si queremos abrir y mantener un programa abierto tal como so_long o
-fractol???? */
+/*esta funcion cierra todos los fd cuando se llama al final de
+ft_process_pipeline, es decir una vez ya hemos terminado de leer el input por
+completo. ademas se resetan los valores de data->fdin y data->fdout a los
+valores originales, 0 y 1 respectivamente.*/
 
 void	ft_close_fds(t_data *data, int limit)
 {

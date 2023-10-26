@@ -6,34 +6,11 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:25:39 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/25 19:31:29 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/26 11:47:51 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-/*función stat !!!!!!!!!*/
-//printf("prueba a imprimir st_mode aver que pasa\n");
-
-int	ft_special_dir(t_data *data)
-{
-	struct stat	file_st;
-	int			per;
-
-	lstat(data->args[1], &file_st);
-	per = file_st.st_mode;
-	//printf("file_st->en decimal: %d / en octal: %o\n", file_st.st_mode, file_st.st_mode);
-	//esta funcion hay que meterla en otro sito
-	// o llamarla desde builtins!!!!
-	if (per == 16448 || per == 16449 || per == 16456 || per == 16457
-		|| per == 16576 || per == 16600 || per == 16603)
-	{
-		ft_putstr_fd("bash: cd: permission denied\n", data->fdout);
-		data->exit_status = 2;
-		return (1);
-	}
-	return (0);
-}
 
 void	ft_change_dir(t_data *data, char *owd)
 {
@@ -51,8 +28,6 @@ void	ft_cd(t_data *data)
 	char	*owd;
 	t_elist	*home;
 
-	if (ft_special_dir(data) == 0)
-		return ;
 	owd = getcwd(NULL, 0);
 	if (chdir(data->args[1]) == 0 && data->argc >= 2)
 		ft_change_dir(data, owd);

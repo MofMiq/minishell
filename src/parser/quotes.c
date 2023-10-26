@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 18:19:45 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/24 13:10:52 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/26 13:32:08 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*ft_copy_no_quotes(char *token, char *copy, int i, int j)
 	while (token[i])
 	{
 		if (token[i] != c)
-				copy[j++] = token[i++];
+			copy[j++] = token[i++];
 		else
 			i++;
 	}

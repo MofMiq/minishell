@@ -6,13 +6,11 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:09:16 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/20 12:37:51 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/26 16:30:55 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-//ft_strchr(" \0\'\"" data->token->str[i + 1])
 
 t_token	*ft_parse_dollar(t_data *data)
 {
@@ -71,13 +69,6 @@ void	ft_dollar_aux(t_data *data, t_token **token, int *i)
 	(*i) = s - 1;
 	free(ndef);
 }
-
-/*a esta funcion hay que pasarle otro numero, que será un codigo de salida
-que no se muy bien de donde lo obtendremos, pero que perfectamente podriamos
-guardar en 'data' para que lo pueda pasar por aqui.
-añadir data como argumento, o data->exit_status
-
-$? solo en la linea de comando, abre un proceso nuevo?*/
 
 char	*ft_exit_status(int exit_status, int *i)
 {

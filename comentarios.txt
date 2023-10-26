@@ -1,5 +1,5 @@
 
-para cuando subamos el proyecto revisar archivos ocultos .dsstore .git colors.txt etc
+para cuando subamos el proyecto revisar archivos ocultos .dsstore .git colors.txt etc && NORMINETTE!!!!!!
 
 procesos y señales: permision denied mirar
 
@@ -9,10 +9,7 @@ en segundo lugar: el viernes llegamos a la conclusion de que era como si los pip
 resto de redirreciones o que los procesos se estuvieran ejecutando a la vez (teoria de murillo pero a mi no me curadraba),
 sin embargo probando y buscando he caido que creo casi seguro que es por los fds + argumentos que requiere un programa.
 
-Establece $PATH para varios directorios (directorio1:directorio2) y valida que los directorios se comprueban
-de izquierda a derecha. ?????
-
-función stat para CD PERMISOS
+función stat para CD PERMISOS -> listo
 
 $PATH reescribir directorio1:directorio2 comprobar lectura izq derecha, ir borrando y probando mierdas ->listo, nos vamos al codigo y ya
 
