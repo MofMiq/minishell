@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_utils_3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:46:15 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/12 13:44:10 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/10/30 12:00:31 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ void	ft_export_list(t_elist **exp_lst, char *var_name)
 {
 	ft_add_back(exp_lst, ft_new_node(&var_name));
 }
+
+/*At the beginning of the program, we copy all the environmental variables with
+this funcion. We split them from the equal sign in order to store the name and 
+the definition separately in our linked list 'env', which makes it easier for
+us to search and change them throughout the program's execution.*/
 
 t_elist	*ft_copy_env(char **env)
 {

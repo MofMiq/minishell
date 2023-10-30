@@ -6,7 +6,7 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/26 18:53:24 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/10/30 12:33:31 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ t_token	*ft_parse_dollar(t_data *data);
 void	ft_dollar_aux(t_data *data, t_token **token, int *i);
 char	*ft_exit_status(int exit_estatus, int *i);
 void	ft_change_dollar(t_token **token, char *nstr, int drop, int take);
-int		ft_is_all_space(char *input);
+int		ft_is_all_space(char *input, t_data *data);
 
 //quotes.c
 int		ft_is_closed(char *str, char c);

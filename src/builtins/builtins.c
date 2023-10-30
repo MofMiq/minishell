@@ -6,11 +6,17 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:43:04 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/26 19:05:32 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/10/30 15:42:50 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+/*With this funtion, we achieve two things: first, to determine if a token
+previously assigned as a NO_QUOTES type is a built-in and the reassigne it; 
+and second, when we finally get to execute a command, knowing whether its one of
+our builti-ins or its a command that we have to search in PATH and execute with
+execve() function.*/
 
 int	ft_is_builtin(char *str)
 {
@@ -32,6 +38,16 @@ int	ft_is_builtin(char *str)
 		return (8);
 	return (0);
 }
+
+/*This function simply redirect our program to other functions where we have
+implemented the mandatory built-ins.
+
+In the case of 'cd' and 'export' we have added some code here, because of 42
+norm, instead of having them there, which makes more sense.
+	- cd: apart from check the name, we also check with ft_special_dir if the
+		directory has the correct permissions to enter.
+	- export: when 'export' is the only argument, we just print environmental
+		variables.*/
 
 void	ft_do_builtins(t_data *data, char *str)
 {
@@ -61,19 +77,28 @@ void	ft_do_builtins(t_data *data, char *str)
 		data->lvl += 1;
 }
 
+/*This function checks the permissions of the directories using the stat()
+function and its stat strcuture. The ones from the first line only have execution
+perimissions and the ones in the second, have both execution and write
+permission. For all of them, we print one error message and avoid executing 'cd.
+*/
+
 int	ft_special_dir(t_data *data)
 {
 	struct stat	file_st;
 	int			per;
 
-	lstat(data->args[1], &file_st);
-	per = file_st.st_mode;
-	if (per == 16448 || per == 16449 || per == 16456 || per == 16457
-		|| per == 16576 || per == 16600 || per == 16603)
+	if (data->args[1])
 	{
-		ft_putstr_fd("bash: cd: permission denied\n", data->fdout);
-		data->exit_status = 2;
-		return (1);
+		lstat(data->args[1], &file_st);
+		per = file_st.st_mode;
+		if (per == 16448 || per == 16449 || per == 16456 || per == 16457
+			|| per == 16576 || per == 16600 || per == 16603)
+		{
+			ft_putstr_fd("bash: cd: permission denied\n", data->fdout);
+			data->exit_status = 2;
+			return (1);
+		}
 	}
 	return (0);
 }

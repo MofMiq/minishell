@@ -6,11 +6,16 @@
 /*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/26 19:05:10 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/10/30 12:42:25 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+/*This function checks some errors, especially related to syntax, and we call
+two other really important functions if the input is well-written: ft_init_parse
+and ft_process_pipeline. Briefly, the first 'translates' the input and the later
+checks for pipes or redirectios to change the default file descriptors.*/
 
 static void	ft_check_type(t_data *data)
 {
@@ -41,6 +46,19 @@ static void	ft_check_type(t_data *data)
 }
 
 // data->input = readline("\x1b[96mPutaShell> \x1b[0m");
+/*This function is the one that keeps the program running indefinitely until
+the user decides to close the shell, either executing the exit builtin or
+with a signal.
+
+As mentioned in previous comments, readline() is the function with which we
+name our shell and the one that allow the user to input commands, which we
+save in our main structure for future manipulation. We also use add_history()
+to save all the previously written inputs.
+
+Before we begin parsing the input, we check some few things that doesn't make
+our shell work like the case the user don't close a quote or when the input
+consist of all spaces. If everything is okey, we go to ft_check type :)*/
+
 void	ft_start_minishell(t_data *data)
 {
 	while (1)
@@ -58,8 +76,11 @@ void	ft_start_minishell(t_data *data)
 			add_history(data->input);
 			if ((ft_is_closed(data->input, '\'') % 2 != 0)
 				|| (ft_is_closed(data->input, '\"') % 2 != 0))
+			{
 				ft_putstr_fd("No has cerrao comillas chula\n", data->fdout);
-			else if (!ft_is_all_space(data->input))
+				data->exit_status = 1;
+			}
+			else if (!ft_is_all_space(data->input, data))
 				ft_check_type(data);
 		}
 		free(data->input);
@@ -71,6 +92,11 @@ void	ft_start_minishell(t_data *data)
 // 	system("leaks -q minishell");
 // }
 // 	atexit(ft_leaks);
+
+/*We begin out shell displaying a banner for fun :), initializing our main
+data structure and calling using_history(). This is one of the funcion of
+readline library, that are used when making a shell because is a more
+advanced console line input manipulation than simply using scanf or gets.*/
 
 int	main(int argc, char **argv, char **env)
 {

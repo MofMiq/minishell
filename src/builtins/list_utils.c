@@ -6,11 +6,17 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 12:38:14 by marirodr          #+#    #+#             */
-/*   Updated: 2023/09/07 10:13:00 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/30 12:00:25 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+/*With this function we create a linked list to store the environmental
+variables of our shell. We have two fields, one for the name and other for
+its definition, in case it exists.
+
+All the functions in this file are for the creation of the list.*/
 
 t_elist	*ft_new_node(char **splited)
 {
