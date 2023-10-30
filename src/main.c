@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
 /*   Updated: 2023/10/30 12:42:25 by marirodr         ###   ########.fr       */
@@ -87,10 +87,11 @@ void	ft_start_minishell(t_data *data)
 	}
 }
 
-void	ft_leaks(void)
-{
-	system("leaks -q minishell");
-}
+// void	ft_leaks(void)
+// {
+// 	system("leaks -q minishell");
+// }
+// 	atexit(ft_leaks);
 
 /*We begin out shell displaying a banner for fun :), initializing our main
 data structure and calling using_history(). This is one of the funcion of
@@ -99,7 +100,6 @@ advanced console line input manipulation than simply using scanf or gets.*/
 
 int	main(int argc, char **argv, char **env)
 {
-	atexit(ft_leaks);
 	t_data	*data;
 
 	(void)argc;
@@ -110,6 +110,7 @@ int	main(int argc, char **argv, char **env)
 	ft_start_minishell(data);
 	ft_free_all(data);
 	free(data);
+	ft_display_banner_bye();
 	return (0);
 }
 
@@ -133,4 +134,30 @@ void	ft_display_banner(void)
 			%s\n", RED, END);
 	ft_printf("\t%s       ░    ░           ░  ░        ░   ░  ░  ░   ░  ░    ░  ░    ░  ░\
 			%s\n\n", RED, END);
+}
+
+void	ft_display_banner_bye(void)
+{
+	ft_printf("%s                        888                                \n"\
+	, BLUE);
+	ft_printf("                        888                                \n");
+	ft_printf("                        888                                \n");
+	ft_printf("888  888        8888b.  88888b.   .d88b.  888d888  8888b.  \n");
+	printf("888  888           \"88b 888 \"88b d88\"\"88b 888P\"       \"88b\
+	\n");
+	ft_printf("888  888       .d888888 888  888 888  888 888     .d888888 \n");
+	ft_printf("Y88b 888       888  888 888  888 Y88..88P 888     888  888 \n");
+	printf(" \"Y88888       \"Y888888 888  888  \"Y88P\"  888     \"Y888888\n");
+	ft_printf("     888                                                   \n");
+	ft_printf("Y8b d88P                                                   \n");
+	ft_printf(" \"Y88P\"                                                  \n");
+	ft_printf("            Y88b   d88P        d8888  .d88888b.            \n");
+	ft_printf("             Y88b d88P        d88888 d88P\" \"Y88b         \n");
+	ft_printf("              Y88o88P        d88P888 888     888           \n");
+	ft_printf("               Y888P        d88P 888 888     888           \n");
+	ft_printf("               d888b       d88P  888 888     888           \n");
+	ft_printf("              d88888b     d88P   888 888     888           \n");
+	ft_printf("             d88P Y88b   d8888888888 Y88b. .d88P           \n");
+	ft_printf("           d88P   Y88b d88P     888  \"Y88888P\"            %s\n"\
+	, END);
 }

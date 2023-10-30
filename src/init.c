@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:10:56 by begarijo          #+#    #+#             */
 /*   Updated: 2023/10/30 12:16:43 by marirodr         ###   ########.fr       */
@@ -97,6 +97,6 @@ void	ft_graphic(t_data *data)
 	if (ft_strcmp(aux->def, "marirodr") == 0)
 		matrix[1] = "/Users/marirodr/graphic";
 	else
-		matrix[1] = "RUTA_DE_BELEN";
+		matrix[1] = "/Users/begarijo/graphic_script.sh";
 	ft_add_back(&data->env, ft_new_node(matrix));
 }
