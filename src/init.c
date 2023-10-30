@@ -6,11 +6,13 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:10:56 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/26 16:28:33 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/30 12:16:43 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+/*We allocate memory for our data structure and initialize our variables*/
 
 t_data	*ft_init_data(char **env, char **argv)
 {
@@ -37,6 +39,10 @@ t_data	*ft_init_data(char **env, char **argv)
 	return (data);
 }
 
+/*This function is used change or remove those environmental variables that
+doesn't make sense to have in our shell, at least initially, because they have
+to be adecuate at our own shell.*/
+
 void	ft_init_env(t_elist *elist)
 {
 	t_elist	*tmp;
@@ -55,6 +61,11 @@ void	ft_init_env(t_elist *elist)
 	elist = tmp;
 }
 
+/*This function is used to update two environmental variables that may change
+their definition throughout the execution of the program. For example, SHLVL
+because its value increases when we execute our shell whitin our shell and
+decreases when we exit from our shell.*/
+
 void	ft_update_env(t_data *data)
 {
 	t_elist	*node;
@@ -71,6 +82,10 @@ void	ft_update_env(t_data *data)
 	ft_update_list(data->env, path_lvl, "SHLVL");
 	free(path_lvl);
 }
+
+/*This function is completely useless,actually, because all it does
+it create an environmental variable that tun a script to execute our
+graphic projects. Just for fun really.*/
 
 void	ft_graphic(t_data *data)
 {

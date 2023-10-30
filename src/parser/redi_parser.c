@@ -6,11 +6,15 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:49:30 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/24 13:11:08 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/30 13:56:04 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+/* As ft_quotes(), this function is a part of ft_divide_input(), but for the
+parts we consider as redirection, that is the simbol (><) and the following
+text, or the pipe (|), which is saved separately.*/
 
 void	ft_sub_red(t_data *data, int *i, int *start, char c)
 {
