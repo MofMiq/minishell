@@ -22,5 +22,6 @@
     - Export a b=$LESS $USER $HOME=la $COLORTERM=pa c=d
 
 # cd
-    - cd -
-    - cd ~
+    - cd - = $OLDPWD
+    - cd ~ = $HOME
+    - cd $HOME si $HOME no existe

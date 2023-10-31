@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 13:50:18 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/31 11:15:06 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/31 17:26:10 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	ft_check_exit_args(t_data *data)
 		ft_putstr_fd(data->args[1], data->fdout);
 		ft_putstr_fd(": numeric argument is required\n", data->fdout);
 		ft_display_banner_bye();
+		ft_free_all(data);
 		exit(EXIT_FAILURE);
 	}
 }
