@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:53 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/30 12:33:31 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/31 18:25:00 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,7 @@ void	ft_init_parse(t_data *data);
 t_token	*ft_divide_input(t_data *data);
 void	ft_subdivide_input(t_data *data, int *i, int *start);
 void	ft_assign_type(t_data *data);
+void	ft_change_symbols(t_data *data);
 
 //create_token.c
 t_token	*ft_new_token(char *input, int i, int start, t_data *data);

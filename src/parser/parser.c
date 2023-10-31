@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:17:49 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/30 14:17:05 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/31 18:24:24 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	ft_init_parse(t_data *data)
 	ft_add_space(data);
 	if (data->token->next != NULL)
 		ft_join_glued_tokes(data);
+	ft_change_symbols(data);
 }
 
 /* ft_divide_input and ft_subdivide_input work as a single fucntion but they're 
@@ -131,4 +132,31 @@ void	ft_assign_type(t_data *data)
 		tmp = tmp->next;
 	}
 	tmp = data->token;
+}
+
+void	ft_change_symbols(t_data *data)
+{
+	t_elist	*tmp;
+
+	if (data->token->next && ft_strcmp(data->token->str, "cd") == 0)
+	{
+		if (ft_strcmp(data->token->next->str, "-") == 0)
+		{
+			if (ft_list_cmp(data->env, "OLDPWD") == 0)
+			{
+				tmp = ft_search_node(data->env, "OLDPWD");
+				free(data->token->next->str);
+				data->token->next->str = ft_strdup(tmp->def);
+			}
+		}
+		if (ft_strcmp(data->token->next->str, "~") == 0)
+		{
+			if (ft_list_cmp(data->env, "HOME") == 0)
+			{
+				tmp = ft_search_node(data->env, "HOME");
+				free(data->token->next->str);
+				data->token->next->str = ft_strdup(tmp->def);
+			}
+		}
+	}
 }
