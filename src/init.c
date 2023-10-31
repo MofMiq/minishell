@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 12:10:56 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/30 12:16:43 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/31 15:30:34 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_update_env(t_data *data)
 	char	*aux;
 
 	aux = getcwd(NULL, 0);
-	path_lvl = ft_strjoin(aux, "/minishell");
+	path_lvl = ft_strjoin(aux, "./minishell");
 	free(aux);
 	ft_update_list(data->env, path_lvl, "SHELL");
 	free(path_lvl);

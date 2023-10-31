@@ -1,0 +1,26 @@
+# Test for minishell
+
+# Export
+    - a=b
+    - b=papa
+    - b=lala
+    - c=lala=kaka
+    - a
+    - a=
+    - a= b=o
+    - a===
+    - a3=l
+    - 2a=lala
+    - !a=ma
+    - $USER=la
+    - $USER=$TERM
+    - $USER=$TERM$HOME
+    - $USER=$TERM$HOM
+    - $HOME=$USER
+    - Export
+    - Export ""
+    - Export a b=$LESS $USER $HOME=la $COLORTERM=pa c=d
+
+# cd
+    - cd -
+    - cd ~

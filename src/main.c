@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/30 12:42:25 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/31 16:26:39 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,10 @@ void	ft_start_minishell(t_data *data)
 	}
 }
 
-// void	ft_leaks(void)
-// {
-// 	system("leaks -q minishell");
-// }
-// 	atexit(ft_leaks);
+void	ft_leaks(void)
+{
+	system("leaks -q minishell");
+}
 
 /*We begin out shell displaying a banner for fun :), initializing our main
 data structure and calling using_history(). This is one of the funcion of
@@ -100,17 +99,18 @@ advanced console line input manipulation than simply using scanf or gets.*/
 
 int	main(int argc, char **argv, char **env)
 {
+	atexit(ft_leaks);
 	t_data	*data;
 
 	(void)argc;
 	(void)argv;
-	ft_display_banner();
+	//ft_display_banner();
 	using_history();
 	data = ft_init_data(env, argv);
 	ft_start_minishell(data);
 	ft_free_all(data);
 	free(data);
-	ft_display_banner_bye();
+	//ft_display_banner_bye();
 	return (0);
 }
 

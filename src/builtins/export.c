@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 15:52:56 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/26 16:22:38 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/31 16:21:31 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_check_name(char *name, t_data *data)
 	}
 	else
 	{
-		split = ft_split(name, '=');
+		split = ft_old_split(name, '=');
 		while (split[0][++i] != '\0')
 		{
 			if (ft_isalnum_plus(split[0][i]) == 0)
