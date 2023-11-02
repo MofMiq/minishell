@@ -6,11 +6,15 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:14:05 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/20 17:06:25 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:04:16 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+/*This function replicates the 'env' command, which prints all environment
+variables. All we do is print linked list env with a single '=' between the
+name and its value.*/
 
 void	ft_env(t_data *data, char **args)
 {
@@ -39,6 +43,10 @@ void	ft_env(t_data *data, char **args)
 	}
 }
 
+/*This function replicates the 'unset' command, which deletes one or more
+environmental variables. We delete the node from both linked list env
+and exp in case we first find them with the function ft_remove_if().*/
+
 void	ft_unset(t_elist **env, t_elist **exp, t_data *data)
 {
 	t_elist	*curr;
@@ -59,6 +67,8 @@ void	ft_unset(t_elist **env, t_elist **exp, t_data *data)
 	}
 	data->exit_status = 0;
 }
+
+/*This functions returns the size of a t_elist list.*/
 
 int	ft_env_size(t_elist *elist)
 {

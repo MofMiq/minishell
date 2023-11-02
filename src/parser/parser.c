@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:17:49 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/31 18:24:24 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/11/02 10:57:59 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ This entire process is divided into:
 		text aren't separated by spaces for proper processing.
 	6. Combine the string of tokens that weren't separated by spaces in the
 		original input.
+	7. Recently added a new function to expand - and ~ symbols for 'cd' built-in
 */
 
 void	ft_init_parse(t_data *data)
@@ -133,6 +134,8 @@ void	ft_assign_type(t_data *data)
 	}
 	tmp = data->token;
 }
+
+/*This fucntion is to expand - and ~symbols for the 'cd' built-in.*/
 
 void	ft_change_symbols(t_data *data)
 {

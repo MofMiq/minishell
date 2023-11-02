@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 13:50:18 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/31 17:26:10 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/31 18:43:14 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_miniexit(t_data *data)
 		ft_putstr_fd("exit", data->fdout);
 		ft_putchar_fd('\n', data->fdout);
 		ft_free_all(data);
-		//ft_display_banner_bye();
+		ft_display_banner_bye();
 		exit(EXIT_SUCCESS);
 	}
 }

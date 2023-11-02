@@ -1,5 +1,11 @@
 # Test for minishell
 
+# Echo
+    - $?hcudshfuewrf ew  wr 4ew""""
+    - ""uhjkhnkj"hjbmb"'''' defdjhfkjb "iujiouhj"f'f'f'f'f''f'f'f'f'f'f'
+    - ""uhjkhnkj"hjbmb"'''' defdjhfkjb "iujiouhj"f'f'a'j'o''i'w'q''q
+    - ""aaaaaaaa"bbbbb"'''' ccccccccc "dddddddd"e'e'e
+
 # Export
     - a=b
     - b=papa
@@ -22,6 +28,7 @@
     - Export a b=$LESS $USER $HOME=la $COLORTERM=pa c=d
 
 # cd
+    - cd
     - cd - = $OLDPWD
     - cd ~ = $HOME
     - cd $HOME si $HOME no existe

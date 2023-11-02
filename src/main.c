@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/31 16:26:39 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/10/31 18:43:24 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,13 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
-	//ft_display_banner();
+	ft_display_banner();
 	using_history();
 	data = ft_init_data(env, argv);
 	ft_start_minishell(data);
 	ft_free_all(data);
 	free(data);
-	//ft_display_banner_bye();
+	ft_display_banner_bye();
 	return (0);
 }
 
