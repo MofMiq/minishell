@@ -6,11 +6,21 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:47 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/26 16:31:33 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:30:47 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+/*This function is used to rejoin two tokens that have been previously separated
+for proper assignment and parsing, especially in the case of the quoted tokens.
+The structure field 'space' determine whether a token should be joined or not.
+
+An example: echo "hello"'world'.
+	1 - First, the input is divided in three tokens: echo, "hello" and 'world'.
+	2 - We assign a type to each one and expand dollar sign based on its type.
+	3 - Finally, because "hello" and 'world' aren't separated by a space, we
+		join both tokens because they are in fact one argument.*/
 
 void	ft_join_glued_tokes(t_data *data)
 {
@@ -40,8 +50,10 @@ void	ft_join_glued_tokes(t_data *data)
 	else
 		data->token->type = BUILTIN;
 }
-/*i = 0; elimina toda la lista, todas la coincidencias &&
-i = 1 elimina solo un nodo y salte*/
+/*This function deletess a node of the linked list t_token if 'cstr' matches
+the string of the token and properly links the previous and next node.
+If i is equal to  0, it done for all the matches in the list; if is equal to
+1 it's done only once.*/
 
 void	ft_remove_if_token(t_token *curr, char *cstr, t_token **token, int i)
 {

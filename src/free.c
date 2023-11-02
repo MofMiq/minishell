@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 12:26:52 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/19 19:06:04 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/11/02 12:12:06 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+/*In this file, we have memory deallocation functions, for both linked lists and
+one in general.*/
 
 void	ft_free_env(t_elist *lst)
 {
@@ -51,6 +54,9 @@ void	ft_free_all(t_data *data)
 	if (data->token)
 		ft_free_token(data->token, data);
 }
+
+/*This funtions is separated from ft_check_name() just because
+42 norm of 25 lines. :(*/
 
 int	ft_check_name_print(char *name, t_data *data)
 {

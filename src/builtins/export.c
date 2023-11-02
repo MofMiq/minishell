@@ -6,11 +6,21 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 15:52:56 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/31 16:21:31 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:25:24 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+/*This function replicates the 'export' command, which creates or modifies
+environmental variables. We first check if the format is correct with 
+ft_check_name(). Then, we check if the argument contains an '=' in it or not.
+If it contains '=', we add it to 'env.' If it doesn't, we add it to 'exp.'
+We have create two separated list for each one.
+This is because the 'env' command prints all environmental variables, but
+'export' prints only those that have been explicitly marked for export. Next, we
+search in the linked list 'env' to check if the variable already exists or not.
+If it exists, we modify its value; if not, we create it.*/
 
 void	ft_export(t_data *data)
 {
@@ -41,6 +51,11 @@ void	ft_export(t_data *data)
 	}
 }
 
+/*With this function, we check if the name of the environmental variable we want
+to export has the correct grammatical format: the first character can only be a
+letter or underscore (_), and the rest of its characters can also be numbers. No
+other 'special' characters are allowed.*/
+
 int	ft_check_name(char *name, t_data *data)
 {
 	int		i;
@@ -69,6 +84,11 @@ int	ft_check_name(char *name, t_data *data)
 	}
 	return (1);
 }
+
+/*This function is used to split the environmental variables at the firs
+occurrence of an equal sign (=) into an array. We do this to separate them into
+two strings: their name and their value, so we can save them independently in
+the env list.*/
 
 char	**ft_alt_split(char *str, char c)
 {

@@ -6,11 +6,13 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:46:15 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/30 12:00:31 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:35:19 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+/*This function is used to create a new node in a exp linked list.*/
 
 void	ft_export_list(t_elist **exp_lst, char *var_name)
 {
@@ -39,6 +41,9 @@ t_elist	*ft_copy_env(char **env)
 	}
 	return (elist);
 }
+
+/*This function is used to print all the environmental variables.
+If i = 1, we print as the command 'env'; if i = 2, we print as command 'exp'.*/
 
 void	ft_print_env(t_data *data, t_elist *env, int i)
 {

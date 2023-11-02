@@ -6,34 +6,41 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:01:57 by marirodr          #+#    #+#             */
-/*   Updated: 2023/10/26 16:29:42 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/11/02 13:46:28 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-/*aqui vamos a ver si en el input existe un pipe/redireccion o no y decidir
-a cuales fds tenemos que redirigir tanto la extrada como la salida de datos.
-al iniciar el programa (ft_init) las todo esta en los valores predefinidos.
-una vez entramos aqui por primera vez -cada vez que tengamos un nuevo input-
-redasignamos la entrada al valor predeterminado (teclado) por si acaso de una
-vez anterior la hemos "cambiado" de sitio o cerrado.
-luego ejecutamos pipe, que lo que va ga hacer es coger dos fds libres y para
-que tengamos una nueva parte lectora y otra escritora -ojo no desde la pers-
-pectiva del pipe, sino desde los procesos; hacia dode debe estribir un proceso
-y desde donde debe leer otro.-
-1) tanto si no hay pipe como si hemos llegado al ultimo comando de la pipline
-reasignamos nuestra variable a la salida estandar (STDOUT_FILENO / 1) y cerra-
-mos la parte lectora por que ya habremos recibido la info desde x y asi evita-
-petar los fds.
-2) si hay pipe reasignamos la salida a la nueva que hemos creado (fdout->fd[1])
-a esa parte donde hemos "guardado" el resultado del anterior comando.
-cuando "volvemos" a esta funcion despues de haber hecho toda la vaina, cerramos
-el nuevo fd de escritura (fd[1]) para que no se quede esperando a recibir mas
-datos por otro lado (desde el teclado). si eso ocurriera tendriamos que enviar
-señal y ya funcionaria regu.
-redirgimos por si acaso no volvemos a entrar aqui nuestra variable al nuevo fd
-lector(fd[0]) y que el proceso lea desde ahi y nos desde el teclado.*/
+/* This comment is for both ft_process_pipeline() and ft_change_pipes_fd()
+functions because they were together in one before.
+
+Here we will check whether there is a pipe/redirection in the input or not,
+and decide which file descriptors (fds) we need to redirect both input and
+output data to.
+
+When the program starts (in 'ft_init'), everything is set to the default
+values (0, 1, 2). Once we enter this part for the first time - every time we
+have a new input - we reset the input to the default value (keyboard) just in
+case we changed it from a previous input or closed it. Then we execute the pipe,
+which will find two available fds to create a new reader and writer - not from
+the perspective of the pipe, but from the processes; where one process should
+write and another should read.
+	1 - Whether there is no pipe or we have reached the last command of the
+	pipeline, we reset our variable to the standard output (STDOUT_FILENO / 1)
+	and close the reader part because we have already received the information
+	from 'x,' thus avoiding conflicts with fds.
+	2 - If there is a pipe, we reset the output to the new one we've created
+	(fdout->fd[1]), where we 'store' the result of the previous command.
+
+When we 'return' to this function after completing the entire process, we close
+the new write fd (fd[1]) to prevent it from waiting for more data from another
+source (from the keyboard). If that were to happen, we would need to send a
+signal, and then it would work fine.
+
+In case we don't return to this function, we redirect our variable to the new
+read fd (fd[0]), so the process reads from there instead of from the
+keyboard.*/
 
 void	ft_process_pipeline(t_data *data, int c_pipes)
 {
@@ -77,13 +84,13 @@ void	ft_change_pipes_fds(t_data *data, int i, int c_pipes)
 	close(fd[1]);
 	data->fdin = fd[0];
 }
-/*en esta funcion basicamente vamos a buscar si hay una redireccion o no en el
-input, independientemente de si hay pipe o no. vamos a coger todos los tokens
-hasta una nueva redireccion y en ese caso parar ahi para que solo reconvertamos
-los  token previos en char ** . en caso de que haya redireccion vamos a ir a
-una funcion que que vuelva a redirigir las salidas o entradas en funcion de 
-cual se y luego ejecutar su movida. en otro caso, comprobamos si los tokens
-son builtin o no para ir a segun que sito.*/
+/*In this function, we're basically going to search for whether there is a
+redirection in the input, regardless of whether there is a pipe or not. We'll
+call ft_advance_n_reconvert() function to convert some tokens to 'char **.'
+If there is a redirection, we'll proceed to a function that will redirect the
+input or output based on which one it is and then execute its action. Otherwise,
+we'll check if the tokens are built-in or not to go to different places
+accordingly.*/
 
 void	ft_begin_redi(t_data *data)
 {
@@ -99,6 +106,10 @@ void	ft_begin_redi(t_data *data)
 	else
 		ft_launch_exec(data);
 }
+
+/*This fucntion is used to convert all the tokens until a new redirection
+is found, and in that case, we'll stop there to convert only the previous
+tokens into 'char **.*/
 
 int	ft_advance_n_reconvert(t_data *data)
 {
@@ -125,10 +136,10 @@ int	ft_advance_n_reconvert(t_data *data)
 	return (flag);
 }
 
-/*esta funcion cierra todos los fd cuando se llama al final de
-ft_process_pipeline, es decir una vez ya hemos terminado de leer el input por
-completo. ademas se resetan los valores de data->fdin y data->fdout a los
-valores originales, 0 y 1 respectivamente.*/
+/*This function closes all file descriptors (fd) when it is called at the end
+of 'ft_process_pipeline,' which means once we have finished reading the entire
+input. Additionally, the values of 'data->fdin' and 'data->fdout' are reset to
+their original values, 0 and 1, respectively.*/
 
 void	ft_close_fds(t_data *data, int limit)
 {

@@ -12,14 +12,16 @@
 
 #include "../../inc/minishell.h"
 
-/*aqui es donde esta la chicha: creamos un proceso hijo donde vamos tanto
--ahora si- redirigir los fds de entrada y salida al "pipe" y luego ejecutar
-el programa/comando con execve. 
-con dup2() lo que hacemos es duplicar un fd existente en uno especifico
--el primer parametro en el segundo-, cerrando el segundo primero que todo.
-Desde un punto de vista personal y mas visual vamos hacer que el primer fd
-apunte a donde del segundo, haciendo que que la informacion se transmita
-desde otros sitos (si vamos cerrando fds, claro.)*/
+/*In this function, we execute external commands from the PATH environment
+variable. To do this, we create a child process where we redirect both the input
+and output file descriptors to the 'pipe' and then execute the program/command
+with 'execve()' while the parent process waits for it to finish.
+
+With 'dup2(),' we duplicate an existing file descriptor into a specific one,
+closing the second one first. From a personal and more visual perspective, we
+make the first file descriptor point to where the second one does, allowing
+information to be transmitted from other sources (if we are closing file
+descriptors, of course).*/
 
 void	ft_launch_exec(t_data *data)
 {
@@ -45,6 +47,11 @@ void	ft_launch_exec(t_data *data)
 		}
 	}
 }
+
+/*This function compares the argument from the input with all the paths in the
+PATH environment variable. If it is found, we replace that argument with the full
+path so that we can execute it successfully with 'execve().'
+For example:  > ls => /bin/ls */
 
 void	ft_exec_from_path(t_data *data)
 {
@@ -74,6 +81,9 @@ void	ft_exec_from_path(t_data *data)
 	}
 	ft_free_double_pointer(path_abs);
 }
+
+/*With this function, we retrieve the PATH environmental variable and copy
+its contents into a string.*/
 
 char	*ft_get_path(t_data *data)
 {
@@ -110,6 +120,9 @@ void	ft_running_exec(t_data *data)
 	}
 	exit(127);
 }
+
+/*This function reconvert the linked list of environmental variables to
+** char because we need that format for execve().*/
 
 char	**ft_reconvert_env(t_elist *elist)
 {

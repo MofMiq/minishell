@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:43:04 by begarijo          #+#    #+#             */
-/*   Updated: 2023/10/31 17:24:42 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:37:26 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_do_builtins(t_data *data, char *str)
 	b = ft_is_builtin(str);
 	if (b == 1)
 		ft_echo(data);
-	else if (b == 2/* && ft_special_dir(data) == 0*/)
+	else if (b == 2 && ft_special_dir(data) == 0)
 		ft_cd(data, NULL);
 	else if (b == 3)
 		ft_pwd(data);
@@ -74,7 +74,11 @@ void	ft_do_builtins(t_data *data, char *str)
 	else if (b == 7)
 		ft_miniexit(data);
 	else if (b == 8)
+	{
 		data->lvl += 1;
+		//printf("data->lvl: %d\n", data->lvl); //
+		//ft_update_env(data);
+	}
 }
 
 /*This function checks the permissions of the directories using the stat()
