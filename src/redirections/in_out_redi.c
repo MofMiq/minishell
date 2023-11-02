@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   in_out_redi.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 14:12:08 by marirodr          #+#    #+#             */
-/*   Updated: 2023/11/02 16:20:09 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/11/02 19:09:36 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,8 @@ void	ft_open_and_write_hd(t_data *data, char *dlm)
 	str = get_next_line(0);
 	while (ft_strcmp(str, dlm) != 0)
 	{
+		if (ft_strcmp(str, dlm) == 0)
+			break ;
 		ft_putstr_fd("> ", 1);
 		ft_putstr_fd(str, h_d);
 		free(str);
