@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:55:48 by marirodr          #+#    #+#             */
-/*   Updated: 2023/03/30 16:52:11 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/11/02 18:53:41 by begarijo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	*ft_read_line(int fd, char *buffer)
 
 	tmp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	n = 1;
-	while (n != 0 && !ft_strchr(buffer, '\n'))
+	while (n != 0 && !ft_strchr_gnl(buffer, '\n'))
 	{
 		n = read(fd, tmp, BUFFER_SIZE);
 		if (n == -1)
@@ -117,20 +117,22 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-/*int	main(void)
-{
-	int	fd;
+// int	main(void)
+// {
+// 	int		fd;
+// 	char	*str;
 
-	fd = open("prueba.txt", O_RDONLY);
-	if (fd == -1)
-	{
-		perror ("open");
-		exit(EXIT_FAILURE);
-	}
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	close(fd);
-	return (0);
-}
-*/
+// 	fd = 0;
+// 	if (fd == -1)
+// 	{
+// 		perror ("open");
+// 		exit(EXIT_FAILURE);
+// 	}
+// 	str = get_next_line(fd);
+// 	while (ft_strcmp(str, "EOF\n") != 0)
+// 	{
+// 		printf("%s", str);
+// 	}
+// 	close(fd);
+// 	return (0);
+// }
