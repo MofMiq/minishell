@@ -1,10 +1,28 @@
 # Test for minishell
 
 # Echo
+    - hola
+    - -n hola
+    - -n -n hola
+    - -n -nh -n hola
+    - -nnnnnnnnn hola
     - $?hcudshfuewrf ew  wr 4ew""""
     - ""uhjkhnkj"hjbmb"'''' defdjhfkjb "iujiouhj"f'f'f'f'f''f'f'f'f'f'f'
     - ""uhjkhnkj"hjbmb"'''' defdjhfkjb "iujiouhj"f'f'a'j'o''i'w'q''q
     - ""aaaaaaaa"bbbbb"'''' ccccccccc "dddddddd"e'e'e
+    - "ho   $USER"  'la   $LESS'   $USER$TERM
+    - "ho   $USER"'la   $LESS'$USER$TERM
+    - echo"ho   $USER"
+    - "echo ho   $USER"
+    - "echo" "ho   $USER"
+    - e"cho" "ho   $USER"
+    -        echo "ho   $USER"
+    - "$HOME '$LESS' $USER"
+    - '$HOME "$LESS" $USER'
+    - "$HOME '$LESS "pa $TERM" na' $USER"
+    - '$HOME "$LESS 'pa $TERM' na" $USER'
+    - '$'"HOME"
+
 
 # Export
     - a=b
@@ -23,12 +41,57 @@
     - $USER=$TERM$HOME
     - $USER=$TERM$HOM
     - $HOME=$USER
+    - $USER$SHLVL
     - Export
+    -            Export
     - Export ""
     - Export a b=$LESS $USER $HOME=la $COLORTERM=pa c=d
 
 # cd
+    - directorio existe
+    - directorio no existe
+    - file existe
+    - file no existe
     - cd
+    -            cd
     - cd - = $OLDPWD
     - cd ~ = $HOME
     - cd $HOME si $HOME no existe
+    - cd directorio con distintos permisos
+
+# Env
+    - env
+    - env lalal
+    - env directorio
+
+# pwd
+    - con y sin argumentos
+
+# unset
+    - con y sin argumentos
+    - varios argumentos
+
+# pipe
+    - ls | wc
+    - sort colors.txt | uniq | sort -r | wc
+    - ls || wc
+    - ls |   | wc
+    - ls |   >/>>/</<< wc
+    - ls | wc |
+    - | ls | wc
+# redirecciones
+    - echo hola >>>>>>> file
+    - echo hola <<<<<<< file
+    - echo hola </<</>/>>   </<</>/>> file
+    - echo hola </<</>/>>   | file
+    - echo hola > file </<</>/>>
+    - echo hola > file
+    - echo hola > file > file2 > file3
+    - echo hola > file > file2 > file3 | ls
+    - wc < colors.txt
+    - cat colors.txt | wc
+# miscelania
+    - enter en input -> vacio
+    - solo espacios
+    - comillas sin cerrar
+    - 
