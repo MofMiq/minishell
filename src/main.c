@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:53:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/11/02 19:10:19 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/11/14 11:42:50 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_start_minishell(t_data *data)
 	while (1)
 	{
 		ft_signal();
-		data->input = readline("PutaShell> ");
+		data->input = readline("\x1b[96mPutaShell> \x1b[0m");
 		ft_signal_proc();
 		if (data->input == NULL)
 		{
@@ -87,10 +87,11 @@ void	ft_start_minishell(t_data *data)
 	}
 }
 
-void	ft_leaks(void)
-{
-	system("leaks -q minishell");
-}
+// void	ft_leaks(void)
+// {
+// 	system("leaks -q minishell");
+// }
+//atexit(ft_leaks);
 
 /*We begin out shell displaying a banner for fun :), initializing our main
 data structure and calling using_history(). This is one of the funcion of
@@ -99,7 +100,6 @@ advanced console line input manipulation than simply using scanf or gets.*/
 
 int	main(int argc, char **argv, char **env)
 {
-	atexit(ft_leaks);
 	t_data	*data;
 
 	(void)argc;
