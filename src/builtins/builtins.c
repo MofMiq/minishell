@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:43:04 by begarijo          #+#    #+#             */
-/*   Updated: 2023/11/02 19:13:04 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/11/14 11:41:03 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,10 @@ void	ft_do_builtins(t_data *data, char *str)
 	else if (b == 7)
 		ft_miniexit(data);
 	else if (b == 8)
-	{
 		data->lvl += 1;
+}
 		//printf("data->lvl: %d\n", data->lvl); //
 		//ft_update_env(data);
-	}
-}
 
 /*This function checks the permissions of the directories using the stat()
 function and its stat strcuture. The ones from the first line only have execution

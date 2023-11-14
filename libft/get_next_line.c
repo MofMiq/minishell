@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: begarijo <begarijo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:55:48 by marirodr          #+#    #+#             */
-/*   Updated: 2023/11/02 18:53:41 by begarijo         ###   ########.fr       */
+/*   Updated: 2023/11/14 11:39:17 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_line(char *buffer)
 		return (NULL);
 	while (buffer[i] != '\0' && buffer[i] != '\n')
 		i++;
-	line = ft_calloc(i + 2, sizeof(char));
+	line = ft_calloc_gnl(i + 2, sizeof(char));
 	i = 0;
 	while (buffer[i] != '\0' && buffer[i] != '\n')
 	{
@@ -55,7 +55,7 @@ char	*ft_next_line(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
-	leftover = ft_calloc(ft_strlen(buffer) - i + 1, sizeof(char));
+	leftover = ft_calloc_gnl(ft_strlen(buffer) - i + 1, sizeof(char));
 	i++;
 	j = 0;
 	while (buffer[i] != '\0')
@@ -80,7 +80,7 @@ char	*ft_read_line(int fd, char *buffer)
 	char	*tmp;
 	int		n;
 
-	tmp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	tmp = ft_calloc_gnl(BUFFER_SIZE + 1, sizeof(char));
 	n = 1;
 	while (n != 0 && !ft_strchr_gnl(buffer, '\n'))
 	{

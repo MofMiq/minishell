@@ -6,7 +6,7 @@
 /*   By: marirodr <marirodr@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:10:27 by marirodr          #+#    #+#             */
-/*   Updated: 2023/03/30 16:52:06 by marirodr         ###   ########.fr       */
+/*   Updated: 2023/11/14 11:40:06 by marirodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 	size_t	len_s1;
 	size_t	len_s2;
 
-	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
-	new = ft_calloc((len_s1 + len_s2 + 1), sizeof(char));
+	len_s1 = ft_strlen_gnl(s1);
+	len_s2 = ft_strlen_gnl(s2);
+	new = ft_calloc_gnl((len_s1 + len_s2 + 1), sizeof(char));
 	i = 0;
 	j = 0;
 	if (new == NULL)
