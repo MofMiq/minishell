@@ -6,6 +6,10 @@ The main goal is to have a good understanding of process creation and synchronis
 This was probably the biggest project I've done so far, as well as the first one I did as a group -Investigating and working with Git is a must-.
 This is a core project on our path as students within the 42 methodology, as it encompasses many different implementations and concepts, testing the knowledge we have acquired up to this point.
 
+<div align="center">
+  <img src="https://github.com/MofMiq/minishell/blob/main/imgs/builtins.gif" width="600"/>
+</div>
+
 ### How to use it
 
 Using ``make`` will create the ``minishell`` executable.
@@ -21,7 +25,15 @@ Simply run it with :
 
 2. Minishell runs executables from an absolute, relative or environment **PATH** (``/bin/ls`` or ``ls``), including arguments or options. ``'`` and ``"`` work the same as bash, except for multiline commands.
 
+<div align="center">
+  <img src="https://github.com/MofMiq/minishell/blob/main/imgs/quotes.png" width="600"/>
+</div>
+
 3. You must redone **redirections** ``>`` ``>>`` ``<`` ``<<`` and pipes ``|``.
+
+<div align="center">
+  <img src="https://github.com/MofMiq/minishell/blob/main/imgs/redirections.png" width="600"/>
+</div>
 
 4. **Environment** variables are handled, like ``$HOME``, including the return code ``$?``.
 
@@ -42,6 +54,9 @@ Simply run it with :
 ### What Is Bash and How Does It Work?
 The shell is a program that the user can use to interact with an operating system's services. Bash is the GNU shell, and is currently the most common shell program. We took the challenge of recreating bash very literally, so the first thing we did was learn how bash actually works with the help of [this article](https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf). Essentially it breaks down the process into 4 steps: lexer → parser → expander → executor, which we replicated in our project.
 
+<div align="center">
+  <img src="https://github.com/MofMiq/minishell/blob/main/imgs/bash.png" width="600"/>
+</div>
 
 I'll delve further into each step in the implementation section bellow.
 
@@ -53,8 +68,8 @@ The lexer, also called the tokenizer, takes as the entered line as input. It the
 typedef struct s_token
 {
 	char			*str;
-	int				type;
-	int				space;
+	int			type;
+	int			space;
 	struct s_token	*prev;
 	struct s_token	*next;
 }	t_token;
@@ -66,6 +81,10 @@ The lexer then gets sent to the parser which then groups the different nodes tog
 
 #### Executor
 When the parser returns the tokens list back to the main loop and a simple check is done to determine how many commands there are, as they are handled by different functions. However, with the exception of a few builtins, the commands are ultimately executed by the function `execve`, which finds, and if successful, executes the command.
+
+<div align="center">
+  <img src="https://github.com/MofMiq/minishell/blob/main/imgs/exec.png" width="600"/>
+</div>
 
 ### Credit
 
